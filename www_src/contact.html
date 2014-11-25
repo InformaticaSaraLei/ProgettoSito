@@ -27,12 +27,17 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-</head>
-
-<body>
-
 <!-- Navigation -->
- <?php include("navigation_bar.html");?>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script> 
+$(function(){
+  $("#navigation_bar").load("navigation_bar.html"); 
+  $("#footer").load("footer.html"); 
+});
+</script> 
+</head>
+<body>
+<div id="navigation_bar"></div> <!--- Inserimento navbar ---->
 
 <!-- Page Content -->
 <div class="container">
