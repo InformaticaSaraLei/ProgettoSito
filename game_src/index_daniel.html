@@ -245,6 +245,8 @@
 				pos_pers_colonna = pos_teortica_pers_colonna;
 				pos_personaggio = pos_teortica_pers_riga + sep_rig_col + pos_teortica_pers_colonna;
 			}
+
+			completato_livello(pos_personaggio);
 			
 			return (pos_teortica_pers_riga + sep_rig_col + pos_teortica_pers_colonna);
 		  
@@ -396,8 +398,17 @@
 			return false;
 		  }
 		  
-		  function completato_livello(){//verifica se completato livello
-		  
+		  function completato_livello(coordinate){//verifica se completato livello
+		  	alert("chiamata");
+		  	var html_immagine = $("#"+coordinate).html();
+		  	html_immagine.replace("</td>","");
+		  	html_immagine.replace("<td id=\""+coordinate+"\">","");
+		  	if (html_immagine == exit_img){
+		  		alert("livello completato");
+		  		return true;
+		  	} else {
+		  		return false;
+		  	}		  
 		  }
           
           function raggiunto_obbiettivo_completato_liv(pos_personaggio){//Verifica se la posizione raggiunta corrisponde ad un obbiettivo
