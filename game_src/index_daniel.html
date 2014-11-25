@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+            .col-md-12 {
+                border: 2px solid black;
+                border-radius: 10px 10px 10px 10px;
+                margin: 5px;
+            }
+            .center {
+                text-align: center;
+            }
+            .campo {
+              margin-bottom: 25px;
+              background-color: #ffcc00;
+              padding: 1px;
+              height: 515px;
+            }
+            .campo img {position: relative; float: left }
+            .table-no-border>thead>tr>th, 
+            .table-no-border>tbody>tr>th, 
+            .table-no-border>tfoot>tr>th, 
+            .table-no-border>thead>tr>td, 
+            .table-no-border>tbody>tr>td, 
+            .table-no-border>tfoot>tr>td {
+              border-top: none;
+              border-spacing: 0px; 
+              border-collapse: collapse;
+            }
+            .marginpadding {
+              margin: 0;
+              padding: 0;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Alla scoperta dell'informatica</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row"><h1 class="center"> <img id="personaggio" src="http://icons.iconarchive.com/icons/dapino/callcenter-girls/128/callcenter-girls-glasses-icon.png" style="margin: 0; padding: 0;"> Alla scoperta dell'informatica</h1></div>
+      <div class="row" id="campo_totale">
+        <div class="col-md-12 marginpadding" id="contenitore_campo_console">
+          <div class="col-md-8">
+            <h2 class="center">Campo di gioco</h2>
+            <div class="campo">
+            </div>
+          </div>
+          <div class="col-md-4">  
+            <h2 class="center">Console</h2>
+            <p>Inserisci comando</p>
+            <p class="center"><input type="text" class="form-control" id="comando"> <br /> <a class="btn btn-default" href="#" role="button" onclick="esegui_comando()">Esegui</a> <a class="btn btn-default" href="#" role="button" onclick="pulisci_comando()">Cancella</a></p>
+            <p><h2 class="center">Log eventi</h2><div id="log_eventi" style="height: 310px; overflow: scroll;"><p>campo spiegazione errori</p></div></p>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Caroti Rubens e Daniel Vedovato 2014</p>
+      </footer>
+    </div> <!-- /container -->        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+        <script>window.jQuery || document.write('<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"><\/script>')</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script src="js/main.js"></script>
+
+        <script>
+          
+		  /*posizioni*/{
+			  //personaggio*/
+			  var pers_riga = 0;
+			  var pers_colonna = 0;
+			  pos_personaggio = "";
+		  }
+		  
+		  /*campo*/{
+		      var codice_campo_console = $('#campo_totale').html();
+		      
+			  var sep_rig_col = "_";//attenzione a caratteri accettati per id
+			  
+			  //dimensioni:
+			  var num_righe = 8;//ex16
+			  var num_colonne = 14;
+			  
+			  //sfondo
+			  var background_color_campo = 'black' /*'#ffcc00'*/;
+		  }
+		  
+		  /*sprite*/{
+			//personaggio:
+			var personaggio_img = '<img id="personaggio" src="http://icons.iconarchive.com/icons/itzikgur/my-seven/32/Girls-Blue-Dress-icon.png" style="margin: 0; padding: 0;">';
+			var exit_img = '<img src="http://icons.iconarchive.com/icons/iconsmind/outline/32/Door-icon.png" id="uscita" style="margin: 0; padding: 0;" class="libero">';
+          }
+		  
+		  /*Obbiettivi*/{
+		    var num_obbiettivi = 0;
+			var livello  = 1;
+			var mappa = 1
+		  }
+		  
+		  /*Log:*/{
+			  //orario avvio:
+			  data_avvio_gioco = new Date();
+			  
+			  //Log:
+			  var var_log = ((data_avvio_gioco.toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Start</b><br />";
+		  }
+		  
+		  //Funzioni:
+		  function presentazione_gioco(){
+		    //log:
+			var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Presentazione Gioco</b><br />";
+		  
+		    //bottoni:
+			var bottone_avvia_gioco = '<a class="btn btn-default" href="#" role="button" onclick="avvia_gioco()">Avvia il gioco</a>';
+			var bottone_pres_regole = '<a class="btn btn-default" href="#" role="button" onclick="presentazione_regole()">Presentazione delle regole</a>';
+			
+			$('#contenitore_campo_console').html('<div id="div_regole" style="background-color: blue; height: 500px; width: 100%; display: none;" class="center"><b><u><h1 class="center marginpadding">Presentazione del gioco</h1></u></b><p><p></p><p style="padding: 10;" id="descrizione_gioco">Questo gioco nasce con la finalità di ...<p><p>'+bottone_avvia_gioco+'   '+bottone_pres_regole+'</p></div>');
+            $('#div_regole').fadeIn(3500);
+		  }
+		  
+		  function presentazione_regole(){
+		    //log:
+			var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Presentazione Regole</b><br />";
+		  
+			//bottoni:
+			var bottone_avvia_gioco = '<a class="btn btn-default" href="#" role="button" onclick="avvia_gioco()">Avvia il gioco</a>';
+		    
+			$('#contenitore_campo_console').html('<div id="div_regole" style="background-color: red; height: 500px; width: 100%; display: none;" class="center"><h1 class="center marginpadding">descrizione regole gioco</h1><p style="padding: 10;">Testo delle regole<p><p>'+bottone_avvia_gioco+'</p></div>');
+            $('#div_regole').fadeIn(3500);
+		  }
+
+		  function avvia_gioco(){
+            $('#campo_totale').html(codice_campo_console);
+            crea_campo_gioco();
+			carica_livello(livello, mappa);
+			carica_personaggio();
+			carica_uscita();
+			
+			//scrive nel log:
+            $("#log_eventi").append(""
+			    + var_log
+			    + (((new Date()).toTimeString()).split(' ')[0]) 
+				+ " : <b style='color: green;'>"
+				+" [" + pos_personaggio + "] : "
+                + "  Avvio Gioco"
+				+"</b><br />"
+			  );
+          }
+
+		  function crea_campo_gioco(){
+		    //crea il campo da gioco
+		    content = '<div class="table-responsive"><table id="tabella_campo" class="table table-no-border marginpadding">';
+			
+			for (i = 0; i < num_righe; i++) {
+              content += "<tr></tr>";
+              for (j = 0; j < num_colonne; j++) {			  
+                content += "<td id='" + i + sep_rig_col + j + "'><b style='color: " + background_color_campo + ";'>xxxx<p>xxxx</b></td>";
+              };
+            };
+            content += "</table></div>";
+            $('.campo').append(content);
+		  }
+		  
+		  function spostamento_personaggio(azione, spostamento, simula){
+		    
+			var pos_teortica_pers_riga    = pos_pers_riga;
+			var pos_teortica_pers_colonna = pos_pers_colonna;
+			
+			//calcola le nuove coordinate
+			switch(azione){
+				   case "Nord"       :
+				   case "Su"         :						   
+									   pos_teortica_pers_riga -= spostamento; 
+						break;
+				   case "Sud"        :
+				   case "Giu"        :						   
+									   pos_teortica_pers_riga += spostamento; 
+						break;
+				   case "Est"        :
+				   case "Destra"     :
+									   pos_teortica_pers_colonna += spostamento; 
+						break;
+				   case "Ovest"      :
+				   case "Sinistra"   :						   
+									   pos_teortica_pers_colonna -= spostamento; 
+						break;
+				   case "Nord-Ovest" :
+									   pos_teortica_pers_riga -= spostamento;
+									   pos_teortica_pers_colonna -= spostamento;
+						break;
+				   case "Sud-Ovest"  : 
+									   pos_teortica_pers_riga += spostamento;
+									   pos_teortica_pers_colonna -= spostamento;
+						break;
+				   case "Nord-Est"   :
+									   pos_teortica_pers_riga -= spostamento;
+									   pos_teortica_pers_colonna += spostamento;
+						break;
+				   case "Sud-Est"    : 
+									   pos_teortica_pers_riga += spostamento;
+									   pos_teortica_pers_colonna += spostamento;
+						break;
+			}
+			
+			//effettua la variazione delle coordinate
+			if (simula != "si"){
+				pos_pers_riga = pos_teortica_pers_riga;
+				pos_pers_colonna = pos_teortica_pers_colonna;
+				pos_personaggio = pos_teortica_pers_riga + sep_rig_col + pos_teortica_pers_colonna;
+			}
+			
+			return (pos_teortica_pers_riga + sep_rig_col + pos_teortica_pers_colonna);
+		  
+		  }
+		  
+          function carica_personaggio(){
+            //genero random la posizione
+            //righe
+            pos_pers_riga = Math.floor(Math.random(1) * (num_righe - 1)) + 0;
+            //colonne
+            pos_pers_colonna = Math.floor(Math.random(5) * (num_colonne - 1)) + 0;
+			
+            pos_personaggio = pos_pers_riga + sep_rig_col + pos_pers_colonna;
+
+            $("#"+pos_personaggio).html(personaggio_img);
+          }
+
+          function carica_uscita(){
+          	//genero random la posizione
+            //righe
+            pos_uscita_riga = Math.floor(Math.random(6) * (num_righe - 1)) + 0;
+            //colonne
+            pos_uscita_colonna = Math.floor(Math.random(13) * (num_colonne - 1)) + 0;
+			
+            pos_uscita = pos_uscita_riga + sep_rig_col + pos_uscita_colonna;
+            
+            while(checkPresenzaSprite(pos_uscita) == true){
+            	carica_uscita();
+            }
+
+            $("#"+pos_uscita).html(exit_img);
+          }
+		    
+		  function verifica_comando(comando, azione, passi){
+		    return (    sintassi_comando_errata(comando, azione, passi)
+					 || spostamento_comando_non_valido(comando, azione, passi)
+					 || ostacoli_nel_tragitto(comando, azione, passi)
+			       );    
+		  }
+		  	  
+		  function spostamento_comando_non_valido(comando, azione, passi){//spostamento valido
+		    
+			if (passi > 0) { 
+			        //calcola posizione
+			        var sim_agg_pos = spostamento_personaggio(azione, passi, 'si');
+					
+					//riga
+					var sim_riga_pers = sim_agg_pos.substring(0,sim_agg_pos.indexOf(sep_rig_col));
+					
+					//colonna
+					var sim_colonna_pers = sim_agg_pos.substring(sim_agg_pos.indexOf(sep_rig_col)+1);
+			    }
+				
+			return (     //valore negativo
+			             (passi < 1)
+			          || //riga
+						 ( sim_riga_pers < 0 || sim_riga_pers > (num_righe -1) )
+						 //colonna
+					  || ( sim_colonna_pers < 0 || sim_colonna_pers > (num_colonne -1) )
+			        );
+		  }
+		  
+		  function sintassi_comando_errata(comando, azione, passi){//sintassi comando valida
+			return (//comando validi:
+						(azione != "Nord")        && (azione != "Su")
+					 && (azione != "Nord-Est") 
+					 && (azione != "Nord-Ovest") 
+					 
+					 && (azione != "Sud")         && (azione != "Giu")
+					 && (azione != "Sud-Est") 
+					 && (azione != "Sud-Ovest")
+					 
+					 && (azione != "Est")         && (azione != "Destra")   
+					 && (azione != "Ovest")       && (azione != "Sinistra")
+					);
+		  }
+		  
+          function esegui_comando(){
+		  
+            var comando = $("#comando").val();
+            comando = $.trim(comando);
+            
+			if (comando!=""){
+			
+				var azione = comando.substring(0,comando.indexOf("("));
+				var passi = parseInt(comando.substring(comando.indexOf("(")+1,comando.indexOf(")")));
+				
+				//per log indica orario comando:
+				var data_ora = new Date();
+				var date_ora_text = (data_ora.toTimeString()).split(' ')[0];
+				
+				//tempo trascorso:
+				var tempo_elapsed_text = "";//" [" + (data_avvio_gioco - data_ora) +"]";
+				
+				//log:
+				var temp_log ="";
+				
+				if (verifica_comando(comando, azione, passi)) 
+				       {//comando errato
+						//temp log:
+						temp_log =   ""
+								   + date_ora_text 
+								   + tempo_elapsed_text
+								   + " : <b style='color: red;'>"
+								   + "<u>"   
+								   + comando
+								   + " <BIG>*</BIG>"
+								   + "</u>"
+								   + "</b><br />";
+					   } 
+				  else {//comando valido
+						for (shift = 0; shift < passi; shift++) {
+							//nasconde personaggio
+							$("#personaggio").fadeOut(1500);
+							//evidenzia percorso
+							$("#"+pos_personaggio).html("*");
+							//aggiorna riferimenti personaggio
+							spostamento_personaggio(azione, 1, 'no');
+                            //rivisualizza il personaggio
+							$("#"+pos_personaggio).html(personaggio_img).fadeIn(1000);
+						}
+						
+						//temp log:
+						temp_log =   ""
+								   + date_ora_text 
+								   + tempo_elapsed_text
+								   + " : <b style='color: blue;'>"
+								   +" [" + pos_personaggio + "] : "
+								   + comando
+								   +"</b><br />";
+					   }
+				  
+				//aggiorna log:
+				var_log += temp_log;
+				$("#log_eventi").append(temp_log);
+			}
+          }
+
+          function carica_div_preload(){
+            presentazione_gioco();
+          }
+		  
+          $(document).ready(function() {
+            carica_div_preload();
+          });
+        
+		  //Da implementare:
+		  function ostacoli_nel_tragitto(comando, azione, passi){//verifica presenza ostacoli lungo il tragitto
+			return false;
+		  }
+		  
+		  function completato_livello(){//verifica se completato livello
+		  
+		  }
+          
+          function raggiunto_obbiettivo_completato_liv(pos_personaggio){//Verifica se la posizione raggiunta corrisponde ad un obbiettivo
+
+		  }
+		  
+		  function carica_livello(livello, mappa){//carica il livello
+		  
+		  }
+
+		  function getContenuto(id_da_modificare, id_da_passare){ //id da modificare identifica l'elemento html, mentre id da passare è l'id inserito in db es id1 è il testo delle regole, ecc..
+		  	var request = $.ajax({
+			  url: "interroga_db.php",
+			  type: "POST",
+			  data: {tipo_tabella : 0, id: id_da_passare},
+			  dataType: "html"
+			});
+
+			request.done(function(msg) {
+			  xmlDoc = $.parseXML(msg),
+  			  $xml = $(xmlDoc),
+  			  $valore = $xml.find("contenuto");
+			  $("#"+id_da_modificare).html($valore.text());
+			});
+
+			request.fail(function(jqXHR, textStatus) {
+			  alert( "Request failed: " + textStatus );
+			});
+		  }
+
+		  function getDescrizione(id_da_modificare, id_da_passare){ //id da modificare identifica l'elemento html, mentre id da passare è l'id inserito in db es id1 è la descrizione della nazione, ecc..
+		  	var request = $.ajax({
+			  url: "interroga_db.php",
+			  type: "POST",
+			  data: {tipo_tabella : 1, id: id_da_passare},
+			  dataType: "html"
+			});
+
+			request.done(function(msg) {
+			  xmlDoc = $.parseXML(msg),
+  			  $xml = $(xmlDoc),
+  			  $valore = $xml.find("descrizione");
+			  $("#"+id_da_modificare).html($valore.text());
+			});
+
+			request.fail(function(jqXHR, textStatus) {
+			  alert( "Request failed: " + textStatus );
+			});
+		  }
+
+		  function getTesto(id_da_modificare, id_da_passare, parametro1, parametro2){ //id da modificare identifica l'elemento html, mentre id da passare è l'id inserito in db es id1 è il contenuto, parametro1 è la fk tipo contenuto, parametro2 è la fk nazione
+		  	var request = $.ajax({
+			  url: "interroga_db.php",
+			  type: "POST",
+			  data: {tipo_tabella : 2, id: id_da_passare, fk_tipo_contenuto: parametro1, fk_nazione: parametro2},
+			  dataType: "html"
+			});
+
+			request.done(function(msg) {
+			  xmlDoc = $.parseXML(msg),
+  			  $xml = $(xmlDoc),
+  			  $valore = $xml.find("testo");
+			  $("#"+id_da_modificare).html($valore.text());
+			});
+
+			request.fail(function(jqXHR, textStatus) {
+			  alert( "Request failed: " + textStatus );
+			});
+		  }
+
+		  function getSchema(id_da_modificare, id_da_passare, parametro1, parametro2){ //id da modificare identifica l'elemento html, mentre id da passare è l'id inserito in db es id1 è il contenuto, parametro1 è il livello, parametro2 è il sottolivello
+		  	var request = $.ajax({
+			  url: "interroga_db.php",
+			  type: "POST",
+			  data: {tipo_tabella : 3, id: id_da_passare, livello: parametro1, sottolivello: parametro2},
+			  dataType: "html"
+			});
+
+			request.done(function(msg) {
+			  xmlDoc = $.parseXML(msg),
+  			  $xml = $(xmlDoc),
+  			  $valore = $xml.find("schema");
+			  $("#"+id_da_modificare).html($valore.text());
+			});
+
+			request.fail(function(jqXHR, textStatus) {
+			  alert( "Request failed: " + textStatus );
+			});
+		  }		  
+
+		  function checkPresenzaSprite(coordinate){
+		  	var html_immagine = $("#"+coordinate).html();
+		  	html_immagine.replace("</td>","");
+		  	html_immagine.replace("<td id=\""+coordinate+"\">","");
+		  	if (html_immagine == personaggio_img){
+		  		return true;
+		  	} else {
+		  		return false;
+		  	}
+		  }
+
+		  function pulisci_comando(){
+		  	$("#comando").val("");
+		  }
+		  
+		</script>
+    </body>
+</html>
