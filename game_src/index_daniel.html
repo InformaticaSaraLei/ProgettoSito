@@ -170,8 +170,9 @@
             $('#campo_totale').html(codice_campo_console);
             crea_campo_gioco();
 			carica_livello(livello, mappa);
-			carica_personaggio();
-			carica_uscita();
+			//carica_personaggio();
+			//carica_uscita();
+            carica_mappa();
 			
 			//scrive nel log:
             $("#log_eventi").append(""
@@ -245,8 +246,6 @@
 				pos_pers_colonna = pos_teortica_pers_colonna;
 				pos_personaggio = pos_teortica_pers_riga + sep_rig_col + pos_teortica_pers_colonna;
 			}
-
-			completato_livello(pos_personaggio);
 			
 			return (pos_teortica_pers_riga + sep_rig_col + pos_teortica_pers_colonna);
 		  
@@ -365,8 +364,13 @@
 							$("#"+pos_personaggio).html("*");
 							//aggiorna riferimenti personaggio
 							spostamento_personaggio(azione, 1, 'no');
+							//verifica se è arrivato all'uscita!
+							var esito = completato_livello(pos_personaggio);
                             //rivisualizza il personaggio
 							$("#"+pos_personaggio).html(personaggio_img).fadeIn(1000);
+							if (esito) {
+								alert("livello completato");
+							}
 						}
 						
 						//temp log:
@@ -399,12 +403,10 @@
 		  }
 		  
 		  function completato_livello(coordinate){//verifica se completato livello
-		  	alert("chiamata");
 		  	var html_immagine = $("#"+coordinate).html();
 		  	html_immagine.replace("</td>","");
 		  	html_immagine.replace("<td id=\""+coordinate+"\">","");
 		  	if (html_immagine == exit_img){
-		  		alert("livello completato");
 		  		return true;
 		  	} else {
 		  		return false;
@@ -512,6 +514,33 @@
 
 		  function pulisci_comando(){
 		  	$("#comando").val("");
+		  }
+
+		  function carica_mappa(){
+		  //leggi mappa
+		  	var test_mappa = "|B| | |B|B|B|B| |O| | |O|B|B|%|B| | |B|B|B|B| |O| | |O|B|B|%|B| | |B|B|B|B| |O| | |O|B|B|%|B| | |B|B|B|B| |O| | |O|B|B|%|B| | |B|B|B|B| |O| | |O|B|B|%|B|U| |B|B|B|B| |O| | |O|B|B|%|B| | |B|B|B|B| |O| | |O|B|B|%|B| | |B|B|B|B|P|O| | |O|B|B|%";
+
+		  	i = 0;
+		  	j = 0;
+		  	pos = 0;
+
+		  	var array_mappa = test_mappa.split('');
+
+		  	while (pos < array_mappa.length){
+		  		if (array_mappa[pos] == "|"){
+		  			j++;
+		  		}
+		  		if (array_mappa[pos] == "%"){
+		  			i++;
+		  		}
+		  		if (j == num_colonne){
+		  			j = 0;
+		  		}
+		  		alert("#"+i+"-"+j);
+		  		$("#"+i+"-"+j).html(array_mappa[pos]);
+		  		pos++;
+		  	}
+
 		  }
 		  
 		</script>

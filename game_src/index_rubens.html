@@ -102,62 +102,86 @@
         <script src="js/main.js"></script>
 
         <script>
-          
-		  /*posizioni*/{
-			  //personaggio*/
-			  var pers_riga = 0;
-			  var pers_colonna = 0;
-			  pos_personaggio = "";
+		  /*Variabili*/{
+			  /*Debug*/{
+				  var var_debug = false;
+				  var var_griglia = true;
+				  var avvio_rapido = true;
+			  }
 			  
-			  //uscita*/
-			  var exit_riga = 0;
-			  var exit_colonna = 0;
-			  pos_exit = "";
+			  /*posizioni*/{
+				  //array posizioni
+				  var posizioni = 
+					[
+					// {coordinate:"", oggetto:"Personaggio", number:0, riga:0, colonna:0}, //personaggio
+					// {coordinate:"", oggetto:"Exit",        number:0, riga:0, colonna:0}, //exit
+					 {coordinate:"0_0", oggetto:'Ostacolo',    number:0, riga:0, colonna:0}  //ostacolo
+					];
+			  }
+			  
+			  /*campo*/{
+				  var codice_campo_console = $('#campo_totale').html();
+				  
+				  //sfondo
+				  var background_color_campo = var_griglia ? 'black' : '#ffcc00';
+				  
+				  var sep_rig_col = "_"; //attenzione a caratteri accettati per id
+				  
+				  //marcatore celle vuote
+				  var pos_vuota        =   "xxxx"
+				                         + "<p>"
+										 + "xxxx";
+				  //marcatore celle attraversate
+				  var pos_attraversata =   "<b style='color: " + background_color_campo + ";'>...</b>*<b style='color: " + background_color_campo + ";'>...</b>"
+				                         + "<p>"
+										 + "<b style='color: " + background_color_campo + ";'>...</b>*<b style='color: " + background_color_campo + ";'>...</b>";
+
+				  //dimensioni:
+				  var num_righe = 8;//ex16
+				  var num_colonne = 14;
+				  
+				  
+			  }
+			  
+			  /*sprite*/{
+				//personaggio:
+				var personaggio_img = 
+				   //'<img id="personaggio_01" src="http://icons.iconarchive.com/icons/itzikgur/my-seven/32/Girls-Blue-Dress-icon.png" style="margin: 0; padding: 0;">';
+				   '<img id="personaggio_02" src="http://icons.iconarchive.com/icons/raindropmemory/harmonia-pastelis/32/hp-girl-icon.png" style="margin: 0; padding: 0;">';
+			  
+				//uscita:
+				var exit_img = 
+				   '<img id="exit_01" src="http://icons.iconarchive.com/icons/iconsmind/outline/32/Door-icon.png" style="margin: 0; padding: 0;">';
+			  
+			  }
+		  
+			  /*Obbiettivi*/{
+				var num_obbiettivi = 0;
+				var livello = 1;
+				var mappa = 1
+			  }
+			  
+			  /*Log:*/{
+				  //orario avvio:
+				  data_avvio_gioco = new Date();
+				  
+				  //Log:
+				  var var_log = ((data_avvio_gioco.toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Start</b><br />";
+			  }
+          }  
+		  
+		  /*MAIN:*/{
+		  $(document).ready(function(){
+            avvio_rapido ? avvia_gioco() : carica_div_preload();
+          });
 		  }
 		  
-		  /*campo*/{
-		      var codice_campo_console = $('#campo_totale').html();
-		      
-			  var sep_rig_col = "_";//attenzione a caratteri accettati per id
-			  var pos_vuota = "xxxx<p>xxxx"; //marcatore celle vuote
-			  
-			  
-			  //dimensioni:
-			  var num_righe = 8;//ex16
-			  var num_colonne = 14;
-			  
-			  //sfondo
-			  var background_color_campo = 'black' /*'#ffcc00'*/;
-		  }
+		  /*Funzioni:*/{
+		  function carica_div_preload(){
+            presentazione_gioco();
+          }
 		  
-		  /*sprite*/{
-			//personaggio:
-			var personaggio_img = 
-			   //'<img id="personaggio_01" src="http://icons.iconarchive.com/icons/itzikgur/my-seven/32/Girls-Blue-Dress-icon.png" style="margin: 0; padding: 0;">';
-               '<img id="personaggio_02" src="http://icons.iconarchive.com/icons/raindropmemory/harmonia-pastelis/32/hp-girl-icon.png" style="margin: 0; padding: 0;">';
-		  
-		    //uscita:
-			var exit_img = 
-			   '<img id="exit_01" src="http://icons.iconarchive.com/icons/iconsmind/outline/32/Door-icon.png" style="margin: 0; padding: 0;">';
-		  
-		  }
-		  
-		  /*Obbiettivi*/{
-		    var num_obbiettivi = 0;
-			var livello  = 1;
-			var mappa = 1
-		  }
-		  
-		  /*Log:*/{
-			  //orario avvio:
-			  data_avvio_gioco = new Date();
-			  
-			  //Log:
-			  var var_log = ((data_avvio_gioco.toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Start</b><br />";
-		  }
-		  
-		  //Funzioni:
-		  function presentazione_gioco(){
+		  function presentazione_gioco(){//presentazione gioco
 		    //log:
 			var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Presentazione Gioco</b><br />";
 		  
@@ -169,7 +193,7 @@
             $('#div_regole').fadeIn(3500);
 		  }
 		  
-		  function presentazione_regole(){
+		  function presentazione_regole(){//presentazione regole
 		    //log:
 			var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Presentazione Regole</b><br />";
 		  
@@ -180,24 +204,48 @@
             $('#div_regole').fadeIn(3500);
 		  }
 
-		  function avvia_gioco(){
-            $('#campo_totale').html(codice_campo_console);
-            crea_campo_gioco();
+		  function avvia_gioco(){//avvia gioco
+            //crea il campo
+			$('#campo_totale').html(codice_campo_console);
+			crea_campo_gioco();
+			 
+			//carica la mappa
 			carica_livello(livello, mappa);
-			carica_personaggio();
-			
-			//scrive nel log:
+			 
+			//Carica oggetti
+			carica_sprite("Personaggio", 0, personaggio_img);//personaggio
+			carica_sprite("Exit", 0, exit_img);//exit
+		     
+			/*scrive nel log:*/{
             $("#log_eventi").append(""
 			    + var_log
 			    + (((new Date()).toTimeString()).split(' ')[0]) 
 				+ " : <b style='color: green;'>"
-				+" [" + pos_personaggio + "] : "
                 + "  Avvio Gioco"
-				+"</b><br />"
+				+ "</b><br />                 { " 
+				+ "Personaggio [" + (posizioni[0].coordinate) + "] - "
+				+ "Exit [" + (posizioni[1].coordinate) + "]"
+				+" }"
+				+"<br />"
 			  );
+			}
+			
+			if(var_debug){//Debug
+				alert("Personaggio " + "\n"
+					  + "pos: " + posizioni[0].coordinate + "\n"
+					  + "riga: " + posizioni[0].riga + "\n"
+					  + "colonna: " + posizioni[0].colonna + "\n"
+                      
+					  +"\nExit " + "\n"
+					  + "pos: " + posizioni[1].coordinate + "\n"
+					  + "riga: " + posizioni[1].riga + "\n"
+					  + "colonna: " + posizioni[1].colonna + "\n"
+					 );
+			}
+			
           }
 
-		  function crea_campo_gioco(){
+		  function crea_campo_gioco(){//crea la griglia del campo
 		    //crea il campo da gioco
 		    content = '<div class="table-responsive"><table id="tabella_campo" class="table table-no-border marginpadding">';
 			
@@ -207,103 +255,12 @@
                 content += "<td id='" + i + sep_rig_col + j + "'><b style='color: " + background_color_campo + ";'>" + pos_vuota + "</b></td>";
               };
             };
+			
             content += "</table></div>";
             $('.campo').append(content);
 		  }
-		  
-		  function spostamento_personaggio(azione, spostamento, simula){
-		    
-			var pos_teortica_pers_riga    = pos_pers_riga;
-			var pos_teortica_pers_colonna = pos_pers_colonna;
-			
-			//calcola le nuove coordinate
-			switch(azione){
-				   case "Nord"       :
-				   case "Su"         :						   
-									   pos_teortica_pers_riga -= spostamento; 
-						break;
-				   case "Sud"        :
-				   case "Giu"        :						   
-									   pos_teortica_pers_riga += spostamento; 
-						break;
-				   case "Est"        :
-				   case "Destra"     :
-									   pos_teortica_pers_colonna += spostamento; 
-						break;
-				   case "Ovest"      :
-				   case "Sinistra"   :						   
-									   pos_teortica_pers_colonna -= spostamento; 
-						break;
-				   case "Nord-Ovest" :
-									   pos_teortica_pers_riga -= spostamento;
-									   pos_teortica_pers_colonna -= spostamento;
-						break;
-				   case "Sud-Ovest"  : 
-									   pos_teortica_pers_riga += spostamento;
-									   pos_teortica_pers_colonna -= spostamento;
-						break;
-				   case "Nord-Est"   :
-									   pos_teortica_pers_riga -= spostamento;
-									   pos_teortica_pers_colonna += spostamento;
-						break;
-				   case "Sud-Est"    : 
-									   pos_teortica_pers_riga += spostamento;
-									   pos_teortica_pers_colonna += spostamento;
-						break;
-			}
-			
-			//effettua la variazione delle coordinate
-			if (simula != "si"){
-				pos_pers_riga = pos_teortica_pers_riga;
-				pos_pers_colonna = pos_teortica_pers_colonna;
-				pos_personaggio = pos_teortica_pers_riga + sep_rig_col + pos_teortica_pers_colonna;
-			}
-			
-			return (pos_teortica_pers_riga + sep_rig_col + pos_teortica_pers_colonna);
-		  
-		  }
-		  
-          function carica_personaggio(){
-            pos_personaggio = carica_oggetto(personaggio_img);
-		  
-            pos_pers_riga = pos_personaggio.substring(0,pos_personaggio.indexOf(sep_rig_col));
-            //colonne
-            pos_pers_colonna = pos_personaggio.substring(pos_personaggio.indexOf(sep_rig_col)+1);
-			
-			}
-		   
-		  
-		  function carica_oggetto(sprite){
-		    var temp_posizione = "";
-			//genera posizioni finche ne trova una vuota:
-			while(
-                    ($("#"+(temp_posizione = random_posizione())).html()).split('>')[1]                    			
-			/*
-			        (($("#"+(temp_posizione = random_posizione())).html())
-			           .substring(($("#"+(temp_posizione = random_posizione())).html()).indexOf("\">")+1,
-			                      ($("#"+(temp_posizione = random_posizione())).html()).indexOf("<")
-								 )
-					)
-				*/				 
-			     != pos_vuota.substring(pos_vuota.indexOf("\">")+1, pos_vuota.indexOf("<"))){
-			alert("while: "+temp_posizione
-			      +"\nId "+$("#"+temp_posizione).html()
-			      +"\nvuoto: "+pos_vuota
-				  +"\n"+($("#"+(temp_posizione = random_posizione())).html())
-				  +"\n\n\n"($("#"+(temp_posizione = random_posizione())).html()).split('>')[1]
-					)
-				  )
-			};
-			
-			//carica sprite
-			$("#"+temp_posizione).html(sprite);
-			
-			//ritorna la posizione utilizzata
-			return temp_posizione;
-		  }
-		   
-		  function random_posizione(){
-            //genero random la posizione
+
+		  function random_posizione(){//genera random una posizione
             //righe
             var temp_pos_riga = Math.floor(Math.random() * (num_righe - 1)) + 0;
             //colonne
@@ -311,8 +268,121 @@
 			
             return temp_pos_riga + sep_rig_col + temp_pos_colonna;
           }
+		  
+		  function posizione_personaggio_array(){
+		    //memorizza l'indice della posizione del personaggio
+			var loc_arr_pos = 0;
+			//trova la posizione del personaggio nell'array
+			
+			while ((posizioni[loc_arr_pos].oggetto) != "Personaggio"){
+			   
+			   if (var_debug) {//Debug
+			      alert("Posizione: " + loc_arr_pos + " Valore: " + posizioni[loc_arr_pos].oggetto);
+			   }  			   
+			   
+			   loc_arr_pos += 1;
+			};
+			
+		    return loc_arr_pos;
+		  }
+		  
+		  function spostamento_personaggio(azione, spostamento, simula){//simula o effettua lo spostamento del msg	    
+			
+			var loc_arr_pos = posizione_personaggio_array();
+			
+			var pos_teorica_pers_riga    = posizioni[loc_arr_pos].riga;
+			var pos_teorica_pers_colonna = posizioni[loc_arr_pos].colonna;
+			
+			if(var_debug){//debug
+				alert("Spost_Pers \n"
+					  + azione +", "+ spostamento +", "+ simula + "\n"
+					  + "pers.riga: "    + posizioni[loc_arr_pos].riga + " | " + pos_teorica_pers_riga + "\n"
+					  + "pers.colonna: " + posizioni[loc_arr_pos].colonna + " | " + pos_teorica_pers_colonna
+					 );
+			}
+			
+			switch(azione){//calcola le nuove coordinate
+				   case "Nord"       :
+				   case "Su"         :						   
+									   pos_teorica_pers_riga -= spostamento; 
+						break;
+				   case "Sud"        :
+				   case "Giu"        :						   
+									   pos_teorica_pers_riga += spostamento; 
+						break;
+				   case "Est"        :
+				   case "Destra"     :
+									   pos_teorica_pers_colonna += spostamento; 
+						break;
+				   case "Ovest"      :
+				   case "Sinistra"   :						   
+									   pos_teorica_pers_colonna -= spostamento; 
+						break;
+				   case "Nord-Ovest" :
+									   pos_teorica_pers_riga -= spostamento;
+									   pos_teorica_pers_colonna -= spostamento;
+						break;
+				   case "Sud-Ovest"  : 
+									   pos_teorica_pers_riga += spostamento;
+									   pos_teorica_pers_colonna -= spostamento;
+						break;
+				   case "Nord-Est"   :
+									   pos_teorica_pers_riga -= spostamento;
+									   pos_teorica_pers_colonna += spostamento;
+						break;
+				   case "Sud-Est"    : 
+									   pos_teorica_pers_riga += spostamento;
+									   pos_teorica_pers_colonna += spostamento;
+						break;
+			}
+			
+			if (simula != "si"){//effettua la variazione delle coordinate del personaggio
+				posizioni[loc_arr_pos].riga = pos_teorica_pers_riga;
+				posizioni[loc_arr_pos].colonna = pos_teorica_pers_colonna;
+				posizioni[loc_arr_pos].coordinate = pos_teorica_pers_riga + sep_rig_col + pos_teorica_pers_colonna;
+			}
+			
+			if(var_debug){//debug
+				alert("Sim spost Personaggio " + "\n"
+					  + "pos: " + posizioni[loc_arr_pos].coordinate + "|" + pos_teorica_pers_riga + sep_rig_col + pos_teorica_pers_colonna + "\n"
+					  + "riga: " + posizioni[loc_arr_pos].riga + " | " + pos_teorica_pers_riga + "\n"
+					  + "colonna: " + posizioni[loc_arr_pos].colonna + " | " + pos_teorica_pers_colonna + "\n"
+					 );
+			}
+			
+			return (pos_teorica_pers_riga + sep_rig_col + pos_teorica_pers_colonna);
+		  
+		  }
+		  		  
+		  function carica_sprite(var_oggetto, var_number, sprite){//carica l'oggetto
+		    var temp_posizione = "";
+			
+			while (posizione_utilizzata(temp_posizione = random_posizione()));//cicla finche non trova una posizione valida
+			
+			//carica sprite
+			$("#"+temp_posizione).html(sprite);
+            
+			//posizione nell'array:
+            var temp_pos_vettore = posizioni.length;
+			
+			//temp_posizione:
+			var temp_riga = parseInt(temp_posizione.substring(temp_posizione, temp_posizione.indexOf(sep_rig_col)));
+			var temp_colonna = parseInt(temp_posizione.substring(temp_posizione.indexOf(sep_rig_col) + 1));
+			
+			//aggiungo elemento all'array
+			posizioni[temp_pos_vettore]= {coordinate:temp_posizione, oggetto: var_oggetto, number: var_number, riga: temp_riga, colonna: temp_colonna};
+			
+			if(var_debug){//Debug
+					   alert("Array agg:" + "\n"
+							  + posizioni[temp_pos_vettore]
+							 );
+					 }
+			
+			//ritorna la posizione utilizzata
+			return temp_posizione;
+		  }
  
-		  function verifica_comando(comando, azione, passi){
+		  function verifica_comando(comando, azione, passi){//verifica validità comando
 		    return (    sintassi_comando_errata(comando, azione, passi)
 					 || spostamento_comando_non_valido(comando, azione, passi)
 					 || ostacoli_nel_tragitto(comando, azione, passi)
@@ -356,8 +426,8 @@
 					);
 		  }
 		  
-          function esegui_comando(){
-		  
+          function esegui_comando(){//esegue lo spostamento
+			
             var comando = $("#comando").val();
             comando = $.trim(comando);
             
@@ -378,7 +448,7 @@
 				
 				if (verifica_comando(comando, azione, passi)) 
 				       {//comando errato
-						//temp log:
+						/*temp log:*/{
 						temp_log =   ""
 								   + date_ora_text 
 								   + tempo_elapsed_text
@@ -388,27 +458,31 @@
 								   + " <BIG>*</BIG>"
 								   + "</u>"
 								   + "</b><br />";
+					    }
 					   } 
 				  else {//comando valido
+						var loc_arr_pos = posizione_personaggio_array();
+					
 						for (shift = 0; shift < passi; shift++) {
 							//nasconde personaggio
 							$("#personaggio").fadeOut(1500);
 							//evidenzia percorso
-							$("#"+pos_personaggio).html("*");
+							$("#"+(posizioni[loc_arr_pos].coordinate)).html(pos_attraversata);
 							//aggiorna riferimenti personaggio
 							spostamento_personaggio(azione, 1, 'no');
                             //rivisualizza il personaggio
-							$("#"+pos_personaggio).html(personaggio_img).fadeIn(1000);
+							$("#"+posizioni[loc_arr_pos].coordinate).html(personaggio_img).fadeIn(1000);
 						}
 						
-						//temp log:
+						/*temp log:*/{
 						temp_log =   ""
 								   + date_ora_text 
 								   + tempo_elapsed_text
 								   + " : <b style='color: blue;'>"
-								   +" [" + pos_personaggio + "] : "
+								   +" [" + (posizioni[loc_arr_pos].coordinate) + "] : "
 								   + comando
 								   +"</b><br />";
+					    }
 					   }
 				  
 				//aggiorna log:
@@ -416,29 +490,75 @@
 				$("#log_eventi").append(temp_log);
 			}
           }
-
-          function carica_div_preload(){
-            presentazione_gioco();
-          }
 		  
-          $(document).ready(function() {
-            carica_div_preload();
-          });
-        
-		  //Da implementare:
-		  function ostacoli_nel_tragitto(comando, azione, passi){//verifica presenza ostacoli lungo il tragitto
-			return false;
+		  function posizione_utilizzata(test_posizione){
+		    //controllo ciclo
+			posizione_occupata = false;	
+		  
+		    for (i = 0; i < posizioni.length; i++){
+				if (posizioni[i].coordinate == test_posizione) {
+					posizione_occupata = true;
+				}
+				
+				if(var_debug){//Debug
+					alert("Ver posizione" + "\n"
+						  + "utilizzata: " + posizioni[i].coordinate 
+						  + " | " 
+						  + "proposta:   " + test_posizione
+						 );
+				}
+			}
+			
+			return posizione_occupata;
 		  }
 		  
+		  function ostacolo_nella_posizione(test_posizione){//verifica ostacolo nella posizione
+		    //controllo ciclo
+			ostacolo_presente = false;	
+		  
+		    for (i = 0; i < posizioni.length; i++){
+				if ((posizioni[i].coordinate == test_posizione) && (posizioni[i].oggetto =='Ostacolo')) {
+					ostacolo_presente = true;
+				}
+				
+				if(true){//var_debug){//Debug
+					alert("Ver posizione Ostacolo" + "\n"
+						  + "utilizzata: " + posizioni[i].coordinate  
+						  + " | "  + "tipo: " + posizioni[i].oggetto + "\n"
+						  + "proposta:   " + test_posizione
+						 );
+				}
+			}
+			
+			return ostacolo_presente;
+		  }
+		  
+		  function ostacoli_nel_tragitto(comando, azione, passi){//verifica presenza ostacoli lungo il tragitto
+			/*
+			for (i = 0; i < passi; i++){
+				ostacolo_nella_posizione(spostamento_personaggio(azione, 1, "si"));
+			}
+			*/
+			return false;
+		  }
+
+		  }
+		  
+		  /*Da implementare:*/{
 		  function completato_livello(){//verifica se completato livello
 		  
 		  }
           
-          function raggiunto_obbiettivo_completato_liv(pos_personaggio){//Verifica se la posizione raggiunta corrisponde ad un obbiettivo
+          function raggiunto_obbiettivo_completato_liv(pos_personaggio){//verifica se la posizione raggiunta corrisponde ad un obbiettivo
 
 		  }
 		  
 		  function carica_livello(livello, mappa){//carica il livello
+		    /*
+			  deve leggere la mappa e caricare nelle posizioni corrette gli sprite con 
+			  carica_sprite(var_oggetto, var_number, sprite)
+			*/
+		  }
 		  
 		  }
 		  
