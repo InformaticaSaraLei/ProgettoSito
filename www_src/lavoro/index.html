@@ -39,7 +39,7 @@
 			'start' => $_SESSION["start"],
 			'limit' => $_SESSION["limit"],
 			'sort' => 'date'
-			
+			 
 		));
 		// print_r($output->results);
 		
@@ -58,7 +58,7 @@
 		<br>
 			<div class=\"panel panel-default\">
 				<div class=\"panel-heading\">
-					<h3 class=\"panel-title\"><b>".$jobOpportunity->jobtitle." <small>(".$jobOpportunity->formattedRelativeTime.")</small></b></h3>
+					<h3 class=\"panel-title\"><b>".$jobOpportunity->jobtitle." <small style=\"color: #ffffff;\">(".$jobOpportunity->formattedRelativeTime.")</small></b></h3>
 				</div>
 				<div class=\"panel-body\">
 					<h4>".strtoupper($jobOpportunity->company)."<br>". $jobOpportunity->formattedLocation."</h4><br>
@@ -144,12 +144,7 @@
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
                 </li>
-<<<<<<< HEAD
                 <li class="active">Lavoro</li>
-=======
-                <li class="active">Opportunità</li>
-                <li>Lavoro</li>
->>>>>>> origin/master
             </ol>
         </div>
     </div>
@@ -184,7 +179,15 @@
 			<?php echo $webListResult; ?>
 	    </div>
 	</div>	
-
+	 <!-- /.row -->
+	<!-- Content Row -->
+	<div class="row">
+        <div class="col-lg-12">		
+			
+	    </div>
+	</div>	
+	 <!-- /.row -->	
+	
 	<!-- .Share Icons -->
 	<span class='st_sharethis_large pull-right' displayText='ShareThis'></span>
 	<span class='st_facebook_large pull-right' displayText='Facebook'></span>
@@ -197,14 +200,14 @@
 	<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 	<script type="text/javascript">stLight.options({publisher: "ur-e18a4005-e3c7-d8a0-fb82-de08e68896d1", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 	<!-- /.Share Icons -->
-	 <!-- /.row -->
+
 <br>	
 
 	<hr>
 
     <!-- Footer -->
     <div id="footer"></div>
-    <!-- Inserimento navbar -->
+    <!--- Inserimento navbar ---->
 
     <!-- End Footer -->
 
