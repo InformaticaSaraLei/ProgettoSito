@@ -5654,8 +5654,8 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 }
 
 .panel-default > .panel-heading {
-    color: #ff6ca4;
-    background-color: #232323;
+    color: #fff;
+    background-color: #fc4b8e;
     border-color: #ddd
 }
 
