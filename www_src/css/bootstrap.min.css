@@ -6794,3 +6794,8 @@ button.close {
     padding-left: 40%;
     text-align: left;
 }
+
+.footer-style {
+    margin: 0;
+    background-color: #d8d8d8;
+}
