@@ -13,6 +13,7 @@
 .fa {
     display: inline-block;
     font-family: FontAwesome;
+    font-size: 30px;            /*ho aggiunto questa riga*/
     font-style: normal;
     font-weight: normal;
     line-height: 1;
