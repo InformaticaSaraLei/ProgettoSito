@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Informatica sarà Lei!</title>
+    <title>Informatica sarà lei!</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -27,17 +27,18 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<!-- Navigation -->
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script> 
-$(function(){
-  $("#navigation_bar").load("navigation_bar.html"); 
-  $("#footer").load("footer.html"); 
-});
-</script> 
+    <!-- Navigation -->
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+        $(function () {
+            $("#navigation_bar").load("navigation_bar.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
 </head>
 <body>
-<div id="navigation_bar"></div> <!--- Inserimento navbar ---->
+<div id="navigation_bar"></div>
+<!--- Inserimento navbar ---->
 
 
 <!-- Header Carousel -->
@@ -47,6 +48,8 @@ $(function(){
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
     </ol>
 
     <!-- Wrapper for slides -->
@@ -60,15 +63,35 @@ $(function(){
         <div class="item">
             <div class="fill" style="background-image:url('img/Slide2.png');"></div>
             <div class="carousel-caption">
-                <h2>Nome argomento</h2>
+                <h2>FORUM</h2>
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Progetti');"></div>
-            <div class="carousel-caption">
-                <h2>Nome argomento</h2>
-            </div>
+            <!-- <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Progetti');"></div>-->
+            <a href="./progetti/">
+                <div class="fill" style="background-image:url('img/Slide3.png');"></div>
+                <div class="carousel-caption">
+                    <h2>PROGETTI</h2>
+                </div>
+            </a>
         </div>
+        <div class="item">
+            <a href="./studio/">
+                <div class="fill" style="background-image:url('img/Slide4.png');"></div>
+                <div class="carousel-caption">
+                    <h2>STUDIO</h2>
+                </div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="./lavoro/">
+                <div class="fill" style="background-image:url('img/Slide5.png');"></div>
+                <div class="carousel-caption">
+                    <h2>LAVORO</h2>
+                </div>
+            </a>
+        </div>
+
     </div>
 
     <!-- Controls -->
@@ -87,7 +110,7 @@ $(function(){
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Benvenute nel sito Informatica sarà Lei!
+                Benvenute nel sito Informatica sarà lei!
             </h1>
         </div>
         <div class="col-md-4">
@@ -99,7 +122,7 @@ $(function(){
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla
                         aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus
                         eveniet incidunt dicta nostrum quod?</p>
-                    <a href="#" class="btn btn-default">Accedi al Forum!</a>
+                    <a href="404.html" class="btn btn-default">Accedi al Forum!</a>
                 </div>
             </div>
         </div>
@@ -112,7 +135,7 @@ $(function(){
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla
                         aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus
                         eveniet incidunt dicta nostrum quod?</p>
-                    <a href="#" class="btn btn-default">Leggi le News!</a>
+                    <a href="/servizi/" class="btn btn-default">Leggi le News!</a>
                 </div>
             </div>
         </div>
@@ -125,7 +148,7 @@ $(function(){
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla
                         aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus
                         eveniet incidunt dicta nostrum quod?</p>
-                    <a href="#" class="btn btn-default">Scopri i Progetti!</a>
+                    <a href="/progetti/" class="btn btn-default">Scopri i Progetti!</a>
                 </div>
             </div>
         </div>
@@ -153,11 +176,12 @@ $(function(){
             <br>
 
             <div class="col-md-4">
-                <a class="btn btn-lg btn-default btn-block" href="#">Accedi al gioco!</a>
-            </div><br>
+                <a class="btn btn-lg btn-default btn-block" href="/game/">Accedi al gioco!</a>
+            </div>
+            <br>
         </div>
         <div class="col-md-6">
-            <img class="img-responsive" src="http://placehold.it/700x450&text=Gioco" alt="">
+            <img class="img-responsive" src="http://placehold.it/700x450/fed54d/ca9bc7&text=Gioco" alt="">
         </div>
     </div>
     <!-- /.row -->
@@ -186,10 +210,11 @@ $(function(){
 
             <div class="col-md-4">
                 <a class="btn btn-lg btn-default btn-block" href="#">Scarica l'App!</a>
-            </div><br>
+            </div>
+            <br>
         </div>
         <div class="col-md-6">
-            <img class="img-responsive" src="http://placehold.it/700x450&text=App" alt="">
+            <img class="img-responsive" src="http://placehold.it/700x450/ca9bc7/fed54d&text=App" alt="">
         </div>
     </div>
     <!-- /.row -->
@@ -197,7 +222,8 @@ $(function(){
     <hr>
 
     <!-- Footer -->
-    <div id="footer"></div> <!--- Inserimento navbar ---->
+    <div id="footer"></div>
+    <!--- Inserimento navbar ---->
 
     <!-- End Footer -->
 

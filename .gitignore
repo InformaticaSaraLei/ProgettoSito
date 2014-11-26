@@ -2,3 +2,5 @@
 #Per indicazioni sul suo funzionamento rimandiamo a https://help.github.com/articles/ignoring-files/
 
 .idea
+.DS_Store
+*/.DS_Store
