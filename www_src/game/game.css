@@ -1,0 +1,33 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+.col-md-12 {
+    border: 2px solid black;
+    border-radius: 10px 10px 10px 10px;
+    margin: 5px;
+}
+.center {
+    text-align: center;
+}
+.campo {
+    margin-bottom: 25px;
+    background-color: #ffcc00;
+    padding: 1px;
+    height: 515px;
+}
+.campo img {position: relative; float: left }
+.table-no-border>thead>tr>th,
+.table-no-border>tbody>tr>th,
+.table-no-border>tfoot>tr>th,
+.table-no-border>thead>tr>td,
+.table-no-border>tbody>tr>td,
+.table-no-border>tfoot>tr>td {
+    border-top: none;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+.marginpadding {
+    margin: 0;
+    padding: 0;
+}
