@@ -25,61 +25,77 @@
 		//print_r($output);
 		if($_SESSION["limit"]=="") $_SESSION["limit"]=10; 
 		if($_SESSION["start"]=="") $_SESSION["start"]=0; 
-		if($_SESSION["q"]==""){ $_SESSION["q"]="developer"; $q_placeholder="Professione, parole chiave o società"; } else {$q_placeholder="";}
-		if($_SESSION["l"]==""){ $_SESSION["l"]="Venezia"; $l_placeholder="città, regione o codice postale";} else {$l_placeholder="";}
+		if($_SESSION["q"]==""){ $_SESSION["q"]="Informatica"; $q_placeholder="Professione, parole chiave o società"; } else {}
+		if($_SESSION["l"]==""){ $_SESSION["l"]="Venezia"; $l_placeholder="città, regione o codice postale";} else {}
 		if($_POST["limit"]!="") $_SESSION["limit"]=$_POST["limit"]+0;
-		if($_GET["start"]!="") $_SESSION["start"]=$_POST["start"]+0;
+		if($_GET["start"]!="") $_SESSION["start"]=$_GET["start"]+0;
 		if($_POST["q"]!="") $_SESSION["q"]=$_POST["q"];
 		if($_POST["l"]!="") $_SESSION["l"]=$_POST["l"];
-		// print_r($_POST);
-		// Pass in more options
-		$output = $indeedAPI->query(array(
-			'q' => ''.$_SESSION["q"].'',
-			'l' => ''.$_SESSION["l"].'',
-			'start' => $_SESSION["start"],
-			'limit' => $_SESSION["limit"],
-			'sort' => 'date'
-			 
-		));
-		// print_r($output);
-		/* ----- INDEED CALL ----- */
-		$client = new IndeedAPI2("6703735145249700");
-		$params = array(
-							"jobkeys" => array($jobOpportunity->jobkey)
-						);
-		$results = $client->jobs($params);
-		/* ----- /INDEED CALL ----- */
-		/* ----- PAGINATION ----- */
-		$totalResults=$output->totalResults;
-		$paginationPages=ceil($totalResults/$_SESSION["limit"]);
-		for($page=1;$page<=$paginationPages;$page++){
-			$pagination.="<li><a href=\"index.html?start=".($i*$_SESSION["limit"])."\">".$page."</a></li>";
-		
-		}
-		/* ----- /PAGINATION ----- */
 		
 		
-		foreach($output->results as $jobOpportunity){
-			$webListResult.="
-		<br>
-			<div class=\"panel panel-default\">
-				<div class=\"panel-heading\">
-					<h3 class=\"panel-title\"><b>".$jobOpportunity->jobtitle." <small style=\"color: #ffffff;\">(".$jobOpportunity->formattedRelativeTime.")</small></b></h3>
-				</div>
-				<div class=\"panel-body\">
-					<h4>".strtoupper($jobOpportunity->company)."<br>". $jobOpportunity->formattedLocation."</h4><br>
-					".$jobOpportunity->snippet."
-					<br><br>
-					 <a href=\"index.html?mode=detail&jobkey=".$jobOpportunity->jobkey."\" class=\"btn btn-info pull-left\" role=\"button\">Vedi Dettaglio Annuncio</a><a href=\"".$jobOpportunity->url."\" class=\"btn btn-default pull-right\" role=\"button\">Vedi Annuncio Originale</a>
-				</div>
+		switch($_GET["mode"]){
+			case "detail"; $content="detail";
+						   $pagination="";
+						   break;
+						   
+			default:
+				// print_r($_POST);
+				// Pass in more options
+				$output = $indeedAPI->query(array(
+					'q' => ''.$_SESSION["q"].'',
+					'l' => ''.$_SESSION["l"].'',
+					'start' => $_SESSION["start"],
+					'limit' => $_SESSION["limit"],
+					'sort' => 'date'
+					 
+				));
+				// print_r($output);
+				/* ----- INDEED CALL ----- */
+				$client = new IndeedAPI2("6703735145249700");
+				$params = array(
+									"jobkeys" => array($jobOpportunity->jobkey)
+								);
+				$results = $client->jobs($params);
+				/* ----- /INDEED CALL ----- */
+				/* ----- PAGINATION ----- */
+				$totalResults=$output->totalResults;
+				$paginationPages=ceil($totalResults/$_SESSION["limit"]);
+				$currentPage=$_SESSION["start"]/$_SESSION["limit"];
 				
-	
-	
-			</div>
-			";
-
+				for($page=1;$page<=$paginationPages;$page++){
+					if($currentPage==($page-1))
+						$pagination.="<li class=\"active\"><a href=\"index.php?start=".(($page-1)*$_SESSION["limit"])."#navigation_bar\">".$page."</a></li>";
+					else	
+						$pagination.="<li><a href=\"index.php?start=".(($page-1)*$_SESSION["limit"])."#navigation_bar\">".$page."</a></li>";
+				}
+				$paginationBlock="
+				
+				";
+				/* ----- /PAGINATION ----- */
+				
+				
+				foreach($output->results as $jobOpportunity){
+					$content.="
+				<br>
+					<div class=\"panel panel-default\">
+						<div class=\"panel-heading\">
+							<h3 class=\"panel-title\"><b>".$jobOpportunity->jobtitle." <small style=\"color: #ffffff;\">(".$jobOpportunity->formattedRelativeTime.")</small></b></h3>
+						</div>
+						<div class=\"panel-body\">
+							<h4>".strtoupper($jobOpportunity->company)."<br>". $jobOpportunity->formattedLocation."</h4><br>
+							".$jobOpportunity->snippet."
+							<br><br>
+							 <a href=\"index.php?mode=detail&jobkey=".$jobOpportunity->jobkey."\" class=\"btn btn-info pull-left\" role=\"button\">Vedi Dettaglio Annuncio</a><a href=\"".$jobOpportunity->url."\" class=\"btn btn-default pull-right\" role=\"button\">Vedi Annuncio Originale</a>
+						</div>
+						
 			
-		}
+			
+					</div>
+					";
+				}
+			break;
+		}	
+			
 
 	/* ------------- INDEED --------------- */		
     }
@@ -146,7 +162,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Lavoro
-                <small>Sottotitolo</small>
+                <small>Opportunità e annunci a portata di mano ...</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
@@ -173,30 +189,48 @@
     <div class="row">
         <div class="col-lg-12">
 			<ul class="nav nav-tabs">
-				<li role="presentation" <?php echo $class["local"]; ?>><a href="index.html?odl_from=local">Opportunità dalla nostra redazione</a></li>
-				<li role="presentation" <?php echo $class["web"]; ?>><a href="index.html?odl_from=web">Opportunità dal web</a></li>
+				<li role="presentation" <?php echo $class["local"]; ?>><a href="index.php?odl_from=local">Opportunità dalla nostra redazione</a></li>
+				<li role="presentation" <?php echo $class["web"]; ?>><a href="index.php?odl_from=web">Opportunità dal web</a></li>
 			</ul>
         </div>
     </div>
     <!-- /.row -->
 	<!-- Content Row -->
 	<div class="row">
+        <div  id="pagination"  class="col-lg-12 text-center">		
+			<?php if($pagination!="") : ?>
+			<ul class="pagination pagination-sm">
+			  <li><a href="index.php?start=0#navigation_bar"><span class="glyphicon glyphicon-fast-backward"></span></a></li>
+			  <li><a href="<?php if($currentPage>1) echo "index.php?start=".($currentPage-1)*$_SESSION["limit"]; ?>"><span class="glyphicon glyphicon-step-backward"></span></a></li>
+			  <?php echo $pagination; ?>
+			  <li><a href="<?php if($currentPage<($paginationPages-1)) echo "index.php?start=".($currentPage+1)*$_SESSION["limit"]; ?>#navigation_bar"><span class="glyphicon glyphicon-step-forward"></span></a></li>
+			  <li><a href="index.php?start=<?php echo ($paginationPages-1)*$_SESSION["limit"] ?>#navigation_bar"><span class="glyphicon glyphicon-fast-forward"></span></a></li>
+			</ul>
+			<?php endif; ?>	
+	    </div>
+	</div>	
+	 <!-- /.row -->	
+	<!-- Content Row -->
+	<div class="row">
         <div class="col-lg-12">		
-			<?php echo $webListResult; ?>
+			<?php echo $content; ?>
 	    </div>
 	</div>	
 	 <!-- /.row -->
 	<!-- Content Row -->
 	<div class="row">
-        <div class="col-lg-12 text-center">		
-			<ul class="pagination">
-			  <li><a href="#"><span class="glyphicon glyphicon-fast-backward"></span></a></li>
-			  <li><a href="#"><span class="glyphicon glyphicon-step-backward"></span></a></li>
+        <div  id="pagination2"  class="col-lg-12 text-center">	
+			<?php if($pagination!="") : ?>
+			<ul class="pagination pagination-sm">
+			  <li><a href="index.php?start=0#navigation_bar"><span class="glyphicon glyphicon-fast-backward"></span></a></li>
+			  <li><a href="<?php if($currentPage>1) echo "index.php?start=".($currentPage-1)*$_SESSION["limit"]; ?>"><span class="glyphicon glyphicon-step-backward"></span></a></li>
 			  <?php echo $pagination; ?>
-			  <li><a href="#"><span class="glyphicon glyphicon-step-forward"></span></a></li>
-			  <li><a href="#"><span class="glyphicon glyphicon-fast-forward"></span></a></li>
+			  <li><a href="<?php if($currentPage<($paginationPages-1)) echo "index.php?start=".($currentPage+1)*$_SESSION["limit"]; ?>#navigation_bar"><span class="glyphicon glyphicon-step-forward"></span></a></li>
+			  <li><a href="index.php?start=<?php echo ($paginationPages-1)*$_SESSION["limit"] ?>#navigation_bar"><span class="glyphicon glyphicon-fast-forward"></span></a></li>
 			</ul>
+			<?php endif; ?>	
 	    </div>
+	
 	</div>	
 	 <!-- /.row -->	
 	<br>
