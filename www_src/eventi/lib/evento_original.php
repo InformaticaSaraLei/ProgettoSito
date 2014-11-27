@@ -82,18 +82,33 @@
       if(isEmpty($da))
         $da = 1;
       if(isEmpty($a))
-        $a = 1000000
+        $a = 1000000;
       $risultati = array();
       $this->conn->connetti();
       $res = $this->conn->query(EventiManager::$queryOttieniEventi,array($da, $a));
       foreach($res as $record) {
         e = new Evento($record['ID_AGENDA_EVENTI'],$record['TITOLO'],$record['DESCRIZIONE'],$record['CONTENUTO'],$record['INIZIO'],$record['ORA_INIZIO'],$record['FINE'],$record['ORA_FINE'],$record['PROVINCIA'],$record['COMUNE'],$record['INDIRIZZO'],$record['IMG_NOMEFILE'],$record['ID_UTENTE']));
-        $risultati[] = e
+        $risultati[] = e;
       }
       $this->conn->disconnetti();
-      return $risultati
+      return $risultati;
     }
-
+    /*
+    * Ottieni gli eventi (ordinati per data decrescente) nei limiti indicati.
+     * Restituisce un array di array associativi degli eventi.
+    */
+    public function getEventiAssoc($da, $a) {
+          if(isEmpty($da))
+             $da = 1;
+          if(isEmpty($a))
+             $a = 1000000;
+          $risultati = array();
+          $this->conn->connetti();
+          $res = $this->conn->query(EventiManager::$queryOttieniEventi,array($da, $a));
+          $this->conn->disconnetti();
+          return $res;
+    }
+    
     /*
      * Cerca gli eventi attivi nella specifica data.
      * Restituisce un array di eventi.
