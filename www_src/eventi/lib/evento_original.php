@@ -107,7 +107,7 @@
           $assoc_array['start']=$evento->inizio;
           $assoc_array['end']=$evento->fine;
           $assoc_array['url']="evento.php?id=".$evento->id;
-          $out_array[]=$assoc_array;
+          array_push($out_array,$assoc_array);
         }
         return $out_array
     }
