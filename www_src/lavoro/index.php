@@ -53,7 +53,7 @@
 		$totalResults=$output->totalResults;
 		$paginationPages=ceil($totalResults/$_SESSION["limit"]);
 		for($page=1;$page<=$paginationPages;$page++){
-			$pagination.="<li class="active"><a href=\"index.html?start=".($i*$_SESSION["limit"])."\">".$i."</a></li>";
+			$pagination.="<li class=\"active\"><a href=\"index.html?start=".($i*$_SESSION["limit"])."\">".$i."</a></li>";
 		
 		}
 		/* ----- /PAGINATION ----- */
