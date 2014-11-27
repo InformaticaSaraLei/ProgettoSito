@@ -94,19 +94,22 @@
       return $risultati;
     }
     /*
-    * Ottieni gli eventi (ordinati per data decrescente) nei limiti indicati.
-     * Restituisce un array di array associativi degli eventi.
+    * Ottieni gli eventi (ordinati per data decrescente).
+     * Restituisce un array di array associativi degli eventi per il calendario.
     */
-    public function getEventiAssoc($da, $a) {
-          if(isEmpty($da))
-             $da = 1;
-          if(isEmpty($a))
-             $a = 1000000;
-          $risultati = array();
-          $this->conn->connetti();
-          $res = $this->conn->query(EventiManager::$queryOttieniEventi,array($da, $a));
-          $this->conn->disconnetti();
-          return $res;
+    public function getEventiAssoc() {
+        $eventi=$this->getEventi(1,1000000);
+        $out_array=array();
+        foreach($eventi as $evento){
+          $assoc_array=array();
+          $assoc_array['id']=$evento->id;
+          $assoc_array['title']=$evento->titolo;
+          $assoc_array['start']=$evento->inizio;
+          $assoc_array['end']=$evento->fine;
+          $assoc_array['url']="evento.php?id=".$evento->id;
+          $out_array[]=$assoc_array;
+        }
+        return $out_array
     }
     
     /*
