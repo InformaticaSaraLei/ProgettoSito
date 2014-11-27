@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
-    <head>
- <meta charset="utf-8">
+<head>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -27,32 +27,32 @@
 
     <!-- Navigation -->
     <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
-        
-        <script type="text/javascript" src="../js/jquery.mixitup.min.js"></script>
-    
-        <script type="text/javascript">
-        
-            /* 
-            *   We would normally recommend that all JavaScript is kept in a seperate .js file,
-            *   but we have included it in the document head for convenience.
-            */
-            
-            // INSTANTIATE MIXITUP
-        
-            $(function(){
-                $('#Grid').mixitup();
-            });
-            
-        </script>
-            <script>
-		        $(function () {
-		            $("#navigation_bar").load("../../navigation_bar.html");
-		            $("#footer").load("../../footer.html");
-		        });
+
+    <script type="text/javascript" src="../js/jquery.mixitup.min.js"></script>
+
+    <script type="text/javascript">
+
+        /*
+         *   We would normally recommend that all JavaScript is kept in a seperate .js file,
+         *   but we have included it in the document head for convenience.
+         */
+
+        // INSTANTIATE MIXITUP
+
+        $(function () {
+            $('#Grid').mixitup();
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $("#navigation_bar").load("../../navigation_bar.html");
+            $("#footer").load("../../footer.html");
+        });
     </script>
 </head>
-    <body>
-        <div id="navigation_bar"></div>
+<body>
+<div id="navigation_bar"></div>
 <!--- Inserimento navbar ---->
 
 <!-- Page Content -->
@@ -74,48 +74,85 @@
         </div>
     </div>
     <!-- /.row -->
-    
+
     <hr>
 
-            
-            <!-- FILTER CONTROLS -->
 
-              <div class="row mixitup-wrapper">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-lg filter" data-filter="all">Tutte le università</button>
-                    <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#" class="filter" data-filter="category_1">Venezia</a></li>
-                      <li><a href="#" class="filter" data-filter="category_2">Padova</a></li>
-                      <li><a href="#" class="filter" data-filter="category_3">Verona</a></li>
-                    </ul>
-                  </div>
-                </div>
+    <!-- FILTER CONTROLS -->
 
-              </div>
-              
-              
-              <!-- GRID -->
-              <div class="container">
-                    <div id="Grid" class="row mixitup-wrapper">
-                        <ul>
-                          <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_1" data-cat="1"><div><img class="img-responsive" src="../img/unive.gif" alt=""><h1><a>Venezia</a></h1><p>Informatica</p></div></li>
-                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1"><div><img class="img-responsive" src="../img/unipd.jpg" alt=""><h1><a>Padova</a></h1><p>Informatica</p></div></li>
-                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1"><div><img class="img-responsive" src="../img/unipd.jpg" alt=""><h1><a>Padova</a></h1><p>Ingegneria dell'informazione</p></div></li>
-                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1"><div><img class="img-responsive" src="../img/unipd.jpg" alt=""><h1><a>Padova</a></h1><p>Ingegneria informatica</p></div></li>
-                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_3" data-cat="1"><div><img class="img-responsive" src="../img/univr.jpg" alt=""><h1><a>Verona</a></h1><p>Bioinformatica</p></div></li>
-                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_3" data-cat="1"><div><img class="img-responsive" src="../img/univr.jpg" alt=""><h1><a>Verona</a></h1><p>Informatica</p></div></li>
-                        </ul>
+    <div class="row mixitup-wrapper">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-lg filter" data-filter="all">Tutte le università
+                </button>
+                <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#" class="filter" data-filter="category_1">Venezia</a></li>
+                    <li><a href="#" class="filter" data-filter="category_2">Padova</a></li>
+                    <li><a href="#" class="filter" data-filter="category_3">Verona</a></li>
+                </ul>
+            </div>
+        </div>
 
-                      
-                    </div>
-                </div>
-        
+    </div>
 
-<hr>
+
+    <!-- GRID -->
+    <div class="container">
+        <div id="Grid" class="row mixitup-wrapper">
+            <ul>
+                <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_1" data-cat="1">
+                    <div><img class="img-responsive" src="../img/unive.gif" alt="">
+
+                        <h1><a href="#" class="filter" data-filter="category_1">Venezia</a></h1>
+
+                        <p>Informatica</p></div>
+                </li>
+                <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1">
+                    <div><img class="img-responsive" src="../img/unipd.jpg" alt="">
+
+                        <h1><a href="#" class="filter" data-filter="category_2">Padova</a></h1>
+
+                        <p><a href="informaticapadova.html"> Informatica</a></p></div>
+                </li>
+                <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1">
+                    <div><img class="img-responsive" src="../img/unipd.jpg" alt="">
+
+                        <h1><a href="#" class="filter" data-filter="category_2">Padova</a></h1>
+
+                        <p>Ingegneria dell'informazione</p></div>
+                </li>
+                <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1">
+                    <div><img class="img-responsive" src="../img/unipd.jpg" alt="">
+
+                        <h1><a href="#" class="filter" data-filter="category_2">Padova</a></h1>
+
+                        <p>Ingegneria informatica</p></div>
+                </li>
+                <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_3" data-cat="1">
+                    <div><img class="img-responsive" src="../img/univr.jpg" alt="">
+
+                        <h1><a href="#" class="filter" data-filter="category_3">Verona</a></h1>
+
+                        <p>Bioinformatica</p></div>
+                </li>
+                <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_3" data-cat="1">
+                    <div><img class="img-responsive" src="../img/univr.jpg" alt="">
+
+                        <h1><a href="#" class="filter" data-filter="category_3">Verona</a></h1>
+
+                        <p>Informatica</p></div>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+
+
+    <hr>
 
 </div>
 <!-- /.container -->
