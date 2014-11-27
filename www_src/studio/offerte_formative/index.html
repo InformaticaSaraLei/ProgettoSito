@@ -26,13 +26,7 @@
     <![endif]-->
 
     <!-- Navigation -->
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script>
-        $(function () {
-            $("#navigation_bar").load("../../navigation_bar.html");
-            $("#footer").load("../../footer.html");
-        });
-    </script>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
         
         <script type="text/javascript" src="../js/jquery.mixitup.min.js"></script>
     
@@ -50,6 +44,12 @@
             });
             
         </script>
+            <script>
+		        $(function () {
+		            $("#navigation_bar").load("../../navigation_bar.html");
+		            $("#footer").load("../../footer.html");
+		        });
+    </script>
 </head>
     <body>
         <div id="navigation_bar"></div>
@@ -62,7 +62,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Offerte Formative
-                <small>congronta tutte le offerte delle università!</small>
+                <small>confronta tutte le offerte delle università!</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
@@ -102,12 +102,12 @@
               <div class="container">
                     <div id="Grid" class="row mixitup-wrapper">
                         <ul>
-                          <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_1" data-cat="1"><div><img class="img-responsive" src="img/unive.gif" alt=""><h1><a>Venezia</a></h1><p>descrizione università</p></div></li>
-                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1"><div><img class="img-responsive" src="img/unipd.jpg" alt=""><h1><a>Padova</a></h1><p>descrizione università</p></div></li>
-                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1"><div><img class="img-responsive" src="img/unipd.jpg" alt=""><h1><a>Padova</a></h1><p>descrizione università</p></div></li>
-                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1"><div><img class="img-responsive" src="img/unipd.jpg" alt=""><h1><a>Padova</a></h1><p>descrizione università</p></div></li>
-                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_3" data-cat="1"><div><img class="img-responsive" src="img/univr.jpg" alt=""><h1><a>Verona</a></h1><p>descrizione università</p></div></li>
-                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_3" data-cat="1"><div><img class="img-responsive" src="img/univr.jpg" alt=""><h1><a>Verona</a></h1><p>descrizione università</p></div></li>
+                          <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_1" data-cat="1"><div><img class="img-responsive" src="../img/unive.gif" alt=""><h1><a>Venezia</a></h1><p>Informatica</p></div></li>
+                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1"><div><img class="img-responsive" src="../img/unipd.jpg" alt=""><h1><a>Padova</a></h1><p>Informatica</p></div></li>
+                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1"><div><img class="img-responsive" src="../img/unipd.jpg" alt=""><h1><a>Padova</a></h1><p>Ingegneria dell'informazione</p></div></li>
+                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1"><div><img class="img-responsive" src="../img/unipd.jpg" alt=""><h1><a>Padova</a></h1><p>Ingegneria informatica</p></div></li>
+                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_3" data-cat="1"><div><img class="img-responsive" src="../img/univr.jpg" alt=""><h1><a>Verona</a></h1><p>Bioinformatica</p></div></li>
+                            <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_3" data-cat="1"><div><img class="img-responsive" src="../img/univr.jpg" alt=""><h1><a>Verona</a></h1><p>Informatica</p></div></li>
                         </ul>
 
                       
@@ -125,9 +125,6 @@
 <!--- Inserimento navbar ---->
 
 <!-- End Footer -->
-
-<!-- jQuery -->
-<script src="../../js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="../../js/bootstrap.min.js"></script>
