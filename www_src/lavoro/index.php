@@ -22,13 +22,13 @@
 
 		// Pass a basic query
 		// $output = $indeedAPI->query('web developer');
-		// print_r($output);
+		//print_r($output);
 		if($_SESSION["limit"]=="") $_SESSION["limit"]=10; 
 		if($_SESSION["start"]=="") $_SESSION["start"]=0; 
 		if($_SESSION["q"]==""){ $_SESSION["q"]="developer"; $q_placeholder="Professione, parole chiave o società"; } else {$q_placeholder="";}
 		if($_SESSION["l"]==""){ $_SESSION["l"]="Venezia"; $l_placeholder="città, regione o codice postale";} else {$l_placeholder="";}
 		if($_POST["limit"]!="") $_SESSION["limit"]=$_POST["limit"]+0;
-		if($_POST["start"]!="") $_SESSION["start"]=$_POST["start"]+0;
+		if($_GET["start"]!="") $_SESSION["start"]=$_POST["start"]+0;
 		if($_POST["q"]!="") $_SESSION["q"]=$_POST["q"];
 		if($_POST["l"]!="") $_SESSION["l"]=$_POST["l"];
 		// print_r($_POST);
@@ -41,20 +41,26 @@
 			'sort' => 'date'
 			 
 		));
-		// print_r($output->results);
+		print_r($output);
+		/* ----- INDEED CALL ----- */
+		$client = new IndeedAPI2("6703735145249700");
+		$params = array(
+							"jobkeys" => array($jobOpportunity->jobkey)
+						);
+		$results = $client->jobs($params);
+		/* ----- /INDEED CALL ----- */
+		/* ----- PAGINATION ----- */
+		$totalResults=$output->totalResults;
+		$paginationPages=ceil($totalResults/$_SESSION["limit"]);
+		for($page=1;$page<=$paginationPages;$page++){
+			$pagination.="<li class="active"><a href=\"index.html?start=".($i*$_SESSION["limit"])."\">".$i."</a></li>";
 		
-			$client = new IndeedAPI2("6703735145249700");
-				$params = array(
-					"jobkeys" => array($jobOpportunity->jobkey)
-				);
-				$results = $client->jobs($params);
+		}
+		/* ----- /PAGINATION ----- */
 		
 		
 		foreach($output->results as $jobOpportunity){
-			
-			
-		
-		$webListResult.="
+			$webListResult.="
 		<br>
 			<div class=\"panel panel-default\">
 				<div class=\"panel-heading\">
@@ -70,8 +76,9 @@
 	
 	
 			</div>
-		";
-		
+			";
+
+			
 		}
 
 	/* ------------- INDEED --------------- */		
