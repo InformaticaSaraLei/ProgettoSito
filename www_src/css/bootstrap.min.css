@@ -3389,7 +3389,7 @@ textarea.input-lg, textarea.form-group-lg .form-control, select[multiple].input-
 
 .btn-block {
     display: block;
-    width: 100%
+    width: 200px;
 }
 
 .btn-block + .btn-block {
@@ -6798,4 +6798,12 @@ button.close {
 .footer-style {
     margin: 0;
     background-color: #d8d8d8;
+}
+
+.btn-social {
+    color: #951b91;
+}
+
+.btn-social:hover {
+    color: #aa529a;
 }
