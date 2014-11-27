@@ -14,11 +14,7 @@
 	$class[$_SESSION["odl_class"]]="class=\"active\"";  
 
 	if($_SESSION["odl_class"]=="web"){
-		/* ------------- INDEED --------------- */	
-		$indeedAPI = new IndeedAPI( "6703735145249700" );
-		$indeedAPI->setDefaultParams( array(
-			'co' => 'it'
-		) );
+
 
 		// Pass a basic query
 		// $output = $indeedAPI->query('web developer');
@@ -34,11 +30,42 @@
 		
 		
 		switch($_GET["mode"]){
-			case "detail"; $content="detail";
+			case "detail";  
+							/* ----- INDEED CALL ----- */
+							$client = new IndeedAPI2("6703735145249700");
+							$params = array(
+												"jobkeys" => array($_GET["jobkey"])
+											);
+							$result = $client->jobs($params);
+							// print_r($result);
+							/* ----- /INDEED CALL ----- */		
+			
+							$content="
+				<br>
+					<div class=\"panel panel-default\">
+						<div class=\"panel-heading\">
+							<h3 class=\"panel-title\"><b>".$result["results"][0]["jobtitle"]." <small style=\"color: #ffffff;\">(".$result["results"][0]["formattedRelativeTime"].")</small></b></h3>
+							
+						</div>
+						<div class=\"panel-body\"><span class=\"label label-success pull-right\">Offerta pubblicata su ".$result["results"][0]["source"]."</span>
+							<h4>".strtoupper($result["results"][0]["company"])."<br>". $result["results"][0]["formattedLocation"]."</h4><br>
+							".$result["results"][0]["snippet"]."
+							<br><br>
+							<a href=\"".$result["results"][0]["url"]."\" class=\"btn btn-info pull-right\" role=\"button\">Vedi Annuncio Originale</a><br><br>
+							<div id=\"map-canvas\" class=\"embed-responsive embed-responsive-4by3\"></div>
+						</div>
+					</div>
+								
+							";
 						   $pagination="";
 						   break;
 						   
 			default:
+					/* ------------- INDEED --------------- */	
+				$indeedAPI = new IndeedAPI( "6703735145249700" );
+				$indeedAPI->setDefaultParams( array(
+					'co' => 'it'
+				) );
 				// print_r($_POST);
 				// Pass in more options
 				$output = $indeedAPI->query(array(
@@ -50,13 +77,7 @@
 					 
 				));
 				// print_r($output);
-				/* ----- INDEED CALL ----- */
-				$client = new IndeedAPI2("6703735145249700");
-				$params = array(
-									"jobkeys" => array($jobOpportunity->jobkey)
-								);
-				$results = $client->jobs($params);
-				/* ----- /INDEED CALL ----- */
+
 				/* ----- PAGINATION ----- */
 				$totalResults=$output->totalResults;
 				$paginationPages=ceil($totalResults/$_SESSION["limit"]);
@@ -85,7 +106,7 @@
 							<h4>".strtoupper($jobOpportunity->company)."<br>". $jobOpportunity->formattedLocation."</h4><br>
 							".$jobOpportunity->snippet."
 							<br><br>
-							 <a href=\"index.php?mode=detail&jobkey=".$jobOpportunity->jobkey."\" class=\"btn btn-info pull-left\" role=\"button\">Vedi Dettaglio Annuncio</a><a href=\"".$jobOpportunity->url."\" class=\"btn btn-default pull-right\" role=\"button\">Vedi Annuncio Originale</a>
+							 <a href=\"index.php?mode=detail&jobkey=".$jobOpportunity->jobkey."\" class=\"btn btn-info  pull-right\" role=\"button\">Vedi Dettaglio Annuncio</a><!-- <a href=\"".$jobOpportunity->url."\" class=\"btn btn-default pull-right\" role=\"button\">Vedi Annuncio Originale</a> -->
 						</div>
 						
 			
@@ -122,6 +143,13 @@
     <!-- Custom Fonts -->
     <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+	<!-- Google Maps -->
+	<style>
+		  #map-canvas {
+
+		  }
+    </style>
+	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -142,11 +170,19 @@
       function initialize() {
         var mapCanvas = document.getElementById('map-canvas');
         var mapOptions = {
-          center: new google.maps.LatLng(44.5403, -78.5463),
+          center: new google.maps.LatLng(<?php echo $result["results"][0]["latitude"] ?>, <?php echo $result["results"][0]["longitude"] ?>),
           zoom: 8,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
-        var map = new google.maps.Map(mapCanvas, mapOptions)
+		var myLatlng = new google.maps.LatLng(<?php echo $result["results"][0]["latitude"] ?>,<?php echo $result["results"][0]["longitude"] ?>);
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+		var image = 'marker.png';
+		var marker = new google.maps.Marker({
+			position: myLatlng,
+			map: map,
+			title:"<?php echo $result["results"][0]["jobtitle"]; ?>",
+			icon: image
+		});
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
