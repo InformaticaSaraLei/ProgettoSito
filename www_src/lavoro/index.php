@@ -41,7 +41,7 @@
 			'sort' => 'date'
 			 
 		));
-		print_r($output);
+		// print_r($output);
 		/* ----- INDEED CALL ----- */
 		$client = new IndeedAPI2("6703735145249700");
 		$params = array(
@@ -53,7 +53,7 @@
 		$totalResults=$output->totalResults;
 		$paginationPages=ceil($totalResults/$_SESSION["limit"]);
 		for($page=1;$page<=$paginationPages;$page++){
-			$pagination.="<li class=\"active\"><a href=\"index.html?start=".($i*$_SESSION["limit"])."\">".$i."</a></li>";
+			$pagination.="<li><a href=\"index.html?start=".($i*$_SESSION["limit"])."\">".$page."</a></li>";
 		
 		}
 		/* ----- /PAGINATION ----- */
@@ -192,11 +192,7 @@
 			<ul class="pagination">
 			  <li><a href="#"><span class="glyphicon glyphicon-fast-backward"></span></a></li>
 			  <li><a href="#"><span class="glyphicon glyphicon-step-backward"></span></a></li>
-			  <li class="active"><a href="#">1</a></li>
-			  <li><a href="#">2</a></li>
-			  <li><a href="#">3</a></li>
-			  <li><a href="#">4</a></li>
-			  <li><a href="#">5</a></li>
+			  <?php echo $pagination; ?>
 			  <li><a href="#"><span class="glyphicon glyphicon-step-forward"></span></a></li>
 			  <li><a href="#"><span class="glyphicon glyphicon-fast-forward"></span></a></li>
 			</ul>
