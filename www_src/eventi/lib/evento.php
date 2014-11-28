@@ -79,11 +79,7 @@ class EventiManager {
    * Ottieni gli eventi (ordinati per data decrescente) nei limiti indicati.
    * Restituisce un array di eventi.
    */
-  public function getEventi($da, $a) {
-    if(isEmpty($da))
-      $da = 1;
-    if(isEmpty($a))
-      $a = 1000000;
+  public function getEventi($da = 1, $a = 1000000) {
     $risultati = array();
     $this->conn->connetti();
     $res = $this->conn->query(EventiManager::$queryOttieniEventi,array($da, $a));
@@ -99,7 +95,7 @@ class EventiManager {
    * Restituisce un array di array associativi degli eventi per il calendario.
    */
   public function getEventiAssoc() {
-    $eventi=$this->getEventi(1,1000000);
+    $eventi=$this->getEventi();
     $out_array=array();
     foreach($eventi as $evento){
       $assoc_array=array();

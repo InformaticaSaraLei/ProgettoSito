@@ -62,22 +62,83 @@
     <!-- /.row -->
     
                 <div class="row">
-                  <form action="" method="POST">
-                      <div class="pull-left col-md-3 col-sm-12 col-xs-12">Titolo</div>
-                      <div class="pull-left col-md-9 col-sm-12 col-xs-12"><input type="text" name="titolo"></div>
-                      <div class="pull-left col-md-3 col-sm-12 col-xs-12">Descrizione</div>
-                      <div class="pull-left col-md-9 col-sm-12 col-xs-12"><input type="text" name="descrizione"></div>
-                      <div class="pull-left col-md-3 col-sm-12 col-xs-12">Link immagine di copertina</div>
-                      <div class="pull-left col-md-9 col-sm-12 col-xs-12"><input type="text" name="imgAddress"></div>
-                      <div class="pull-left col-md-3 col-sm-12 col-xs-12">Data inizio</div>
-                      <div class="pull-left col-md-9 col-sm-12 col-xs-12"><input type="text"></input></div>
-                      <div class="pull-left col-md-3 col-sm-12 col-xs-12">Data fine</div>
-                      <div class="pull-left col-md-9 col-sm-12 col-xs-12"><input type="text"></input></div>
-                      <div class="pull-left col-md-3 col-sm-12 col-xs-12">Contenuto</div>
-                      <div class="pull-left col-md-9 col-sm-12 col-xs-12"><textarea name="contenuto" rows="8"></textarea></div>
-                   </form>
+                  <form action="esito.php" method="POST">
+                  <fieldset>
+
+                  <div class="control-group">
+                    <label class="control-label" for="txtTitolo">Titolo</label>
+                    <div class="controls">
+                      <input id="txtTitolo" name="txtTitolo" placeholder="Titolo dell'evento" class="input-xxlarge" type="text">
+                      
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="txtDescrizione">Descrizione</label>
+                    <div class="controls">
+                      <input id="txtDescrizione" name="txtDescrizione" placeholder="Breve descrizione dell'evento" class="input-xxlarge" type="text">
+                      
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="txtLinkImmagine">Link immagine</label>
+                    <div class="controls">
+                      <input id="txtLinkImmagine" name="txtLinkImmagine" placeholder="Link all'immagine di copertina" class="input-xxlarge" type="text">
+                      
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="txtInizio">Inizio</label>
+                    <div class="controls">
+                      <input id="txtInizio" name="txtInizio" placeholder="Inizio dell'evento" class="input-xlarge" type="text">
+                      <p class="help-block">Formato: YYYY-MM-DD hh:mm</p>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="txtFine">Fine</label>
+                    <div class="controls">
+                      <input id="txtFine" name="txtFine" placeholder="Fine dell'evento" class="input-xlarge" type="text">
+                      <p class="help-block">Formato: YYYY-MM-DD hh:mm</p>
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="txtProvincia">Provincia</label>
+                    <div class="controls">
+                      <input id="txtProvincia" name="txtProvincia" placeholder="Provincia dove si tiene l'evento" class="input-xxlarge" type="text">
+                      
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="txtComune">Comune</label>
+                    <div class="controls">
+                      <input id="txtComune" name="txtComune" placeholder="Comune dove si tiene l'evento" class="input-xxlarge" type="text">
+                      
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="txtIndirizzo">Indirizzo</label>
+                    <div class="controls">
+                      <input id="txtIndirizzo" name="txtIndirizzo" placeholder="Indirizzo dove si tiene l'evento" class="input-xxlarge" type="text">
+                      
+                    </div>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="control-label" for="txaContenuto">Contenuto</label>
+                    <div class="controls">                     
+                      <textarea id="txaContenuto" name="txaContenuto"></textarea>
+                    </div>
+                  </div>
+
+                  </fieldset>
+                  </form>
                 </div>
- 
 <hr>
     
 </div>
@@ -94,6 +155,13 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="../js/bootstrap.min.js"></script>
+
+<script>
+$(function () {
+    $('#datetimepicker1').datetimepicker();
+});
+</script>
+
 
 </body>
 
