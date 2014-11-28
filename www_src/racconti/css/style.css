@@ -1,0 +1,42 @@
+.col-lg-12 {
+	text-align: justify;
+}
+
+.col-lg-12 h1 {
+	clear: both;
+}
+
+.img-sx {
+	float:left; 
+	padding-right:10px; 
+	padding-bottom:10px;
+	max-height:250px;
+}
+
+.img-dx {
+	float:right; 
+	padding-left:10px; 
+	padding-bottom:10px;
+	max-height:250px;
+}
+
+@media screen and (min-width: 992px) {
+	.img-sx, .img-dx {
+		float:left; 
+		padding-left:0px;
+		padding-right:10px; 
+		padding-bottom:10px;
+	}
+
+	#left {
+		clear: left;
+		width:48%;
+		float:left;
+	}
+
+	#right {
+		clear: right;
+		width:48%;
+		float:right;
+	}
+}

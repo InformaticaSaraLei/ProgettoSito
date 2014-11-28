@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 
 <head>
 
@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Informazioni evento x - Informatica sarà lei!</title>
+    <title>Eventi - Informatica sarà lei!</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -46,58 +46,56 @@
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Evento
-                <small>Sottotitolo</small>
+            <h1 class="page-header">Eventi
+                <small>Tutti gli eventi</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
                 </li>
-                <li><a href="index.html">Eventi</a></li>
-                <li class="active">Informazioni evento</li>
+                <li class="active">Eventi</li>
             </ol>
         </div>
     </div>
     <!-- /.row -->
-
+    
     <!-- Content Row -->
-    <a href="index.html">Torna agli eventi</a>
-    <a href="calendario.html">Calendario</a>
+    <?php
+      require 'lib/evento.php';
+      $em = new EventiManager();
+      $eventi = $em->getEventi();
+      foreach($eventi as $e) {
+        echo '<div class="col-md-6">'
+        echo '<div class="panel panel-default">'
+        echo '<div class="panel-heading">'
+        echo '<h4><i class="fa fa-fw fa-users">'+($e->titolo)+'</h4>'
+        echo '</div>'
+        echo '<div class="panel-body">'
+        echo '<div class="row">'
+        echo '<div class="pull-left col-md-7 col-sm-8 col-xs-12">'
+        echo '<p>'+($e->descrizione)+'</p>'
+        echo '</div>'
+        echo '<div class="pull-left col-md-5 col-sm-4 col-xs-12">'
+        echo '<img src="'+$e->link_img+'" class="img-responsive customer-img" alt="Immagine Evento">'
+        echo '</div>'
+        echo '</div>'
+        echo '<div class="row">'
+        echo '<div class="col-md-4"></div>'
+        echo '<div class="col-md-4">'
+        echo '<a href="#" class="btn btn-default text-center">Altre informazioni</a>'
+        echo '</div>'
+        echo '<div class="col-md-4"></div>'
+        echo '</div>'
+        echo '</div>'
+        echo '</div>'
+        echo '</div>'
+      }
+    ?>
+</div> 
+</div>
+<!-- /.row -->
 
-    <div class="row">
-        <div class="col-lg-12">
-            Titolo
-        </div>
-    </div>
-    <!-- /.row -->
 
-    <!-- Content Row -->
-    <div class="row">
-        <div class="col-lg-12">
-            Descrizione
-        </div>
-    </div>
-    <!-- /.row -->
-
-    <!-- Content Row -->
-    <div class="row">
-        <div class="col-lg-12">
-            <img src="evento.png"></img>
-        </div>
-    </div>
-    <!-- /.row -->
-
-    <!-- Content Row -->
-    <div class="row">
-        <div class="col-lg-12">
-            <a href="calendario.html">Visualizza evento nel calendario</a>
-        </div>
-        <div class="col-lg-12">
-            <p>Contenuto</p>
-        </div>
-    </div>
-    <!-- /.row -->
-
-    <hr>
+<hr>
 
 </div>
 <!-- /.container -->

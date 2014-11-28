@@ -1,11 +1,11 @@
 <?php
 class Connettore {
   // parametri per la connessione al database
-  private $nomehost = "";
+  private $nomehost = "localhost";
   private $port = "";
-  private $nomeuser = "";
-  private $password = "";
-  private $nomedb = "";
+  private $nomeuser = "root";
+  private $password = "root";
+  private $nomedb = "eventi";
 
   private $connessione = null;
 
