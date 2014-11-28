@@ -33,6 +33,7 @@ class EventiManager {
   private static $queryCancellazione = "DELETE FROM AGENDAEVENTI WHERE ID_AGENDA_EVENTI = ?";
   private static $queryOttieniEventi = "SELECT * FROM AGENDAEVENTI ORDER BY INIZIO, ORA_INIZIO LIMIT ?,?";
   private static $queryCercaPerData = "SELECT * FROM AGENDAEVENTI WHERE INIZIO <= ? AND FINE >= ?";
+  private static $queryRicercaPerID = "SELECT * FROM AGENDAEVENTI WHERE ID_AGENDA_EVENTI = ?";
   private $conn;
 
   public function __construct() {
@@ -55,6 +56,24 @@ class EventiManager {
       return false;
     }
     return true;
+  }
+
+  /*
+   * Recuper l'evento con l'id specificato.
+   * Restituisce l'evento se e' presente, NULL altrimenti..
+   */
+  public function getEventoById($id) {
+    try {
+      $this->conn->connetti();
+      $res = $this->conn->query(EventiManager::$queryRicercaPerId,array($id));
+      foreach($res as $record) {
+        e = new Evento($record['ID_AGENDA_EVENTI'],$record['TITOLO'],$record['DESCRIZIONE'],$record['CONTENUTO'],$record['INIZIO'],$record['ORA_INIZIO'],$record['FINE'],$record['ORA_FINE'],$record['PROVINCIA'],$record['COMUNE'],$record['INDIRIZZO'],$record['IMG_NOMEFILE'],$record['ID_UTENTE']));
+        return e;
+    }
+      $this->conn->disconnetti();
+    } catch (Exception $e) {
+    }
+    return NULL;
   }
 
   /*

@@ -58,133 +58,39 @@
     </div>
     <!-- /.row -->
     
-    <?php
-    require 'lib/connettore.php';
-    if($connettore = new Connettore().connetti()) print "okokkkok !!";
-    ?>
-    
-    
-    <!-- Qui va messo il codice php che stampa con un ciclo tutti gli eventi -->
-    <!-- Per il momento metto solo 4 item generici e statici -->
     <!-- Content Row -->
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-users"></i>Evento 1 a Pordenone</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="pull-left col-md-7 col-sm-8 col-xs-12">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque,
-                            optio corporis quae nulla
-                            aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus
-                            eveniet incidunt dicta nostrum quod?
-                        </p>
-                        </div>
-                        <div class="pull-left col-md-5 col-sm-4 col-xs-12">
-                            <img src="img/evento1.jpg" class="img-responsive customer-img" alt="Immagine Evento">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <a href="#" class="btn btn-default text-center">Altre informazioni</a>
-                        </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-users"></i>Evento 2 a Mestre</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="pull-left col-md-7 col-sm-8 col-xs-12">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque,
-                            optio corporis quae nulla
-                            aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus
-                            eveniet incidunt dicta nostrum quod?
-                        </p>
-                        </div>
-                        <div class="pull-left col-md-5 col-sm-4 col-xs-12">
-                            <img src="img/evento2.jpg" class="img-responsive customer-img" alt="Immagine Evento">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <a href="#" class="btn btn-default text-center">Altre informazioni</a>
-                        </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-    <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-users"></i>Evento 3 a Venezia</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="pull-left col-md-7 col-sm-8 col-xs-12">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque,
-                            optio corporis quae nulla
-                            aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus
-                            eveniet incidunt dicta nostrum quod?
-                        </p>
-                        </div>
-                        <div class="pull-left col-md-5 col-sm-4 col-xs-12">
-                            <img src="img/evento3.png" class="img-responsive customer-img" alt="Immagine Evento">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <a href="#" class="btn btn-default text-center">Altre informazioni</a>
-                        </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-users"></i>Evento 4 a Venezia</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="pull-left col-md-7 col-sm-8 col-xs-12">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque,
-                            optio corporis quae nulla
-                            aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus
-                            eveniet incidunt dicta nostrum quod?
-                        </p>
-                        </div>
-                        <div class="pull-left col-md-5 col-sm-4 col-xs-12">
-                            <img src="img/evento3.png" class="img-responsive customer-img" alt="Immagine Evento">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <a href="#" class="btn btn-default text-center">Altre informazioni</a>
-                        </div>
-                        <div class="col-md-4"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> 
+    <?php
+      require 'lib/evento.php';
+      $em = new EventiManager();
+      $eventi = $em->getEventi();
+      foreach($eventi as $e) {
+        echo '<div class="col-md-6">'
+        echo '<div class="panel panel-default">'
+        echo '<div class="panel-heading">'
+        echo '<h4><i class="fa fa-fw fa-users">'+($e->titolo)+'</h4>'
+        echo '</div>'
+        echo '<div class="panel-body">'
+        echo '<div class="row">'
+        echo '<div class="pull-left col-md-7 col-sm-8 col-xs-12">'
+        echo '<p>'+($e->descrizione)+'</p>'
+        echo '</div>'
+        echo '<div class="pull-left col-md-5 col-sm-4 col-xs-12">'
+        echo '<img src="'+$e->link_img+'" class="img-responsive customer-img" alt="Immagine Evento">'
+        echo '</div>'
+        echo '</div>'
+        echo '<div class="row">'
+        echo '<div class="col-md-4"></div>'
+        echo '<div class="col-md-4">'
+        echo '<a href="#" class="btn btn-default text-center">Altre informazioni</a>'
+        echo '</div>'
+        echo '<div class="col-md-4"></div>'
+        echo '</div>'
+        echo '</div>'
+        echo '</div>'
+        echo '</div>'
+      }
+    ?>
+</div> 
 </div>
 <!-- /.row -->
 
