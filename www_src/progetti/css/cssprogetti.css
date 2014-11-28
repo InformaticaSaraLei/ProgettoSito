@@ -1,6 +1,6 @@
 @media(min-width:768px) {
     section {
-        padding: 150px 0;
+        padding: 100px 0;
     }
 }
 
@@ -14,16 +14,20 @@
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+
 .portfolio-modal .modal-content h2 {
     margin-bottom: 15px;
     font-size: 3em;
 }
+
 .portfolio-modal .modal-content p {
     margin-bottom: 30px;
 }
+
 .portfolio-modal .modal-content img {
     margin-bottom: 30px;
 }
+
 .portfolio-modal .close-modal {
     position: absolute;
     top: 25px;
@@ -33,6 +37,7 @@
     background-color: transparent;
     cursor: pointer;
 }
+
 .portfolio-modal .close-modal:hover {
     opacity: .3;
 }
@@ -59,14 +64,23 @@
 }
 
 .text-muted {
-
-text-align: center;
+    text-align: center;
 }
 
 h3 {
     text-align: center;
 }
+
 .img-responsive {
     text-align: center;
+    max-width: 100%;
+}
 
+.panel{
+    height: 340px;
+}
+
+#caricamento-progetti{
+    margin-bottom: 370px;
+    width: 101%;
 }
