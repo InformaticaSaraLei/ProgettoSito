@@ -68,28 +68,26 @@
     
 <!-- /.row -->
     </br>
+    <?php
+      require 'lib/evento.php';
+      $em = new EventiManager();
+      $id = $_POST['id'];
+      $e = $em->getEventoById($id);
+    ?>
     <div class="row">
         <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-file-text-o"></i>Descrizione</h4>
+                  <h4><i class="fa fa-fw fa-file-text-o"></i>Descrizione</h4>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="pull-left col-md-6 col-sm-7">
                             <h4>Descrizione dell'evento</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque,
-                               optio corporis quae nulla
-                               aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus
-                               eveniet incidunt dicta nostrum quod?
-                               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque,
-                               optio corporis quae nulla
-                               aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus
-                               eveniet incidunt dicta nostrum quod?
-                            </p>
+                            <p><?php echo $e->descrizione ?></p>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="pull-left col-md-5 col-sm-5 col-xs-12">
-                            <img src="img/evento2.jpg" class="img-responsive customer-img" alt="Immagine Evento">
+                        <img src="<?php echo $e->link_img ?>" class="img-responsive customer-img" alt="Immagine Evento">
                         </div>
                     </div>
                 </div>
@@ -98,11 +96,11 @@
                     <h4><i class="fa fa-fw fa-clock-o"></i>Luogo e date</h4>
                 </div>
                 <div class="panel-body">
-                    Luogo:
+                Luogo: <?php $e->provincia + ' ' + $e->comune + ' ' + $e->indirizzo ?>
                     </br>
-                    Data inizio evento:alle ore:
+                    Data inizio evento: <?php $e->inizio?> alle ore: <?php $e->ora_inizio ?>
                     </br>
-                    Data fine evento:alle ore:
+                    Data fine evento: <?php $e->fine?> alle ore: <?php $e->orario_fine ?>
                 </div>
                     
         </div>
