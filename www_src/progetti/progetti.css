@@ -1,6 +1,6 @@
-@media (min-width: 768px) {
+@media(min-width:768px) {
     section {
-        padding: 150px 0;
+        padding: 100px 0;
     }
 }
 
@@ -61,4 +61,26 @@
     -webkit-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
+}
+
+.text-muted {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+.img-responsive {
+    text-align: center;
+    max-width: 100%;
+}
+
+.panel{
+    height: 340px;
+}
+
+#caricamento-progetti{
+    margin-bottom: 370px;
+    width: 101%;
 }
