@@ -16,36 +16,28 @@
                 padding-top: 45px;
                 padding-bottom: 20px;
             }
-            .col-md-12 {
+            .col-xs-12 {
                 border: 2px solid black;
-                border-radius: 10px 10px 10px 10px;
-                margin: 5px;
+                border-radius: 5px 5px 5px 5px;
             }
+			
             .center {
                 text-align: center;
             }
-            .campo {
-              margin-bottom: 25px;
-              background-color: white;
-              padding: 1px;
-              height: 510px;
-            }
-            .campo img {position: relative; float: left }
-            .table-no-border>thead>tr>th, 
-            .table-no-border>tbody>tr>th, 
-            .table-no-border>tfoot>tr>th, 
-            .table-no-border>thead>tr>td, 
-            .table-no-border>tbody>tr>td, 
-            .table-no-border>tfoot>tr>td {
-
-              border-top: none;
-              border-spacing: 0px; 
-              border-collapse: collapse;
-            }
             .marginpadding {
-              margin: 0;
-              padding: 0;
+                margin: 0;
+                padding: 0;
             }
+			
+			.hidden {
+				position:absolute;
+				left:0px;
+				top:-500px;
+				width:1px;
+				height:1px;
+				overflow:hidden;
+			}
+			
         </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
@@ -72,22 +64,13 @@
 
     <div class="container">
       <!-- Example row of columns -->
-      <div class="row"><h1 class="center"> <img id="Pres_gioco" src="http://icons.iconarchive.com/icons/dapino/callcenter-girls/64/callcenter-girls-glasses-icon.png" style="margin: 0; padding: 0;"> Alla scoperta dell'informatica</h1></div>
-      <div class="row" id="campo_totale">
-        <div class="col-md-12 marginpadding" id="contenitore_campo_console">
-          <div class="col-md-9">
-            <h2 class="center">Campo di gioco</h2>
-            <div class="campo">
-            </div>
-          </div>
-          <div class="col-md-3">  
-            <h2 class="center">Console</h2>
-            <p>Inserisci comando</p>
-            <p class="center"><input type="text" class="form-control" id="comando"> <br /> <a class="btn btn-default" href="#" role="button" onclick="esegui_comando()">Esegui</a> <a class="btn btn-default" href="#" role="button">Cancella</a></p>
-            <p><h2 class="center">Log eventi</h2><div id="log_eventi" style="height: 310px; overflow: scroll;"><p>campo spiegazione errori</p></div></p>
-          </div>
-        </div>
-      </div>
+      <div class="guscio" style="min-width:750; width: auto">
+		  <div class="row"><h1 class="center"> <img id="Titolo_gioco" src="http://icons.iconarchive.com/icons/dapino/callcenter-girls/64/callcenter-girls-glasses-icon.png" style="margin: 0; padding: 0;"> Alla scoperta dell'informatica</h1></div>
+		  <div class="row" id="campo_totale">
+			<div class="col-xs-12 marginpadding" id="contenitore_campo_console">     
+			</div>
+		  </div>
+	  </div>
 
       <hr>
 
@@ -103,6 +86,7 @@
 
         <script>
 			/*Variabili*/{
+				
 				/*console Gioco*/{
 				    //lingua testi visualizzati:
 					var default_lingua = "IT";
@@ -115,15 +99,21 @@
 					var var_obb_superflui = false;
 					
 					//Utility comando:
-					var rimuovi_spazi_comando = true;
-					var comand_case_sensitive = false;
+					var rimuovi_spazi_comando = false;
+					var comand_case_sensitive = true;
 				}
 				
 				/*Bottoni*/{
-					var bottone_avvia_gioco =   '<a class="btn btn-default" href="#" role="button" onclick="avvia_gioco()">'
-					                          + '<font size="4">Avvia il gioco</font></a>';
-					var bottone_pres_regole =   '<a class="btn btn-default" href="#" role="button" onclick="presentazione_regole()">'
-					                          + '<font size="4">Presentazione delle regole</font></a>';
+					var size_txt_bt = 4;
+				
+					var bottone_avvia_gioco   =   '<a class="btn btn-default" href="#" role="button" onclick="avvia_gioco()">'
+					                            + '<font size="'+size_txt_bt+'">Avvia il gioco</font></a>';
+					var bottone_pres_regole   =   '<a class="btn btn-default" href="#" role="button" onclick="presentazione_regole()">'
+					                            + '<font size="'+size_txt_bt+'">Presentazione delle regole</font></a>';
+					var bottone_chiudi        =   '<a class="btn btn-default" href="#" role="button" onclick="ricarica_partita()">'
+					                            + '<font size="'+size_txt_bt+'">Chiudi</font></a>';
+				    var bottone_riavvia_gioco =   '<a class="btn btn-default" href="index.html" role="button" onclick="index.html">'
+					                            + '<font size="'+size_txt_bt+'">Riavia gioco</font></a>';
 				}
 				
 				/*Testi*/{
@@ -138,7 +128,7 @@
 								  /*Regole*/
 								  {lingua: "IT", tipo: "Regole", 
 								                 txt: (   "Questo gioco ha l'obbiettivo di simulare l'importanza dei comandi nei linguaggi di programmazione, i comandi devono essere formattati nel seguente modo:"
-														+ "   <i>comando<b>(</b>spostamento<b>)</b></i>"
+														+ ' <font color= #DE3163 size="5"><i><u>comando<b>(</b>spostamento<b>)</b></u></i></font>'
 														+ "<br />(Dove comando è uno dei seguenti e al posto di numero un numero intero)"
 														+ '<ol type="a" style="margin: 4px 4px 4px 100px;" align="justify">'
 														   + '<li>("Nord", "Su", "Sopra"),</li>'
@@ -152,7 +142,17 @@
 														+ "</ol><br />"
 														+ '<p style="margin: 4px 40px 4px 40px;" align="justify">nota:</p>'
 														+ '<p style="margin: 4px 40px 4px 70px;" align="justify"> non sono valide altre parole al di fuori di quelle indicate e il comando deve avere la struttura sopra citata, si accetta esclusivamente un comando alla volta.</p>'
-													  )}
+													  )},
+													  
+								  /*Presentazione Obbiettivo*/
+								  {lingua: "IT", tipo: "Presentazione Obbiettivo", 
+								                 txt: (   "Testo obbiettivo raggiunto"
+												      )},
+													  
+								  /*Fine Gioco*/
+								  {lingua: "IT", tipo: "Ringraziamenti", 
+								                 txt: (   "Congratulazioni... speriamo che questo piccolo gioco vi abbia coinvolto."
+												      )}
 								]
 				}
 				
@@ -179,6 +179,7 @@
 					//forzature visualizzazione
 					var var_vis_elm_celle = false; //contenuto cella
 					var var_vis_griglia = false;   //griglia
+					var panel_liv = false;
 				}
 				
 				/*Obbiettivi*/{
@@ -186,16 +187,17 @@
 				}
 				
 				/*Livelli*/{
+				
+					//Elementi livelli
+					var liv_min_obbiettivi = 2;
+					var liv_min_ostacoli = 3;
+					
 					//numero livelli e mappe abbinate
 					var liv_map = [
 									{liv: 1, mp: 2}, //vuoto
 									{liv: 2, mp: 2}, //+ obbiettivi
 									{liv: 3, mp: 5}  //+ ostacoli
 								  ];
-					
-					//Elementi livelli
-					var liv_min_obbiettivi = 2;
-					var liv_min_ostacoli = 3;
 				}
 				
 				/*posizioni*/{
@@ -212,8 +214,6 @@
 					}
 				
 				/*campo*/{
-					var codice_campo_console = $('#campo_totale').html();
-					  
 					/*sfondo*/{
 						var background_color_campo = '#ffcc00';
 						var colore_griglia_se_visualizzata = '#FFDEAD';
@@ -236,9 +236,8 @@
 											 ;
 					
 					//dimensioni:
-						var num_righe = 15; //ex16;
-						var num_colonne = 25; //ex14;
-					
+						var num_righe = 19; //ex16;
+						var num_colonne = 24; //ex14;	
 				}
 				
 				/*sprite*/{
@@ -294,12 +293,11 @@
 			  
 			/*MAIN:*/{
 				$(document).ready(function(){
-					avvio_rapido ? avvia_gioco() : carica_div_preload();
+					avvio_rapido ? avvia_gioco() : presentazione_gioco();
 				});
 			}
 			
 			/*Funzioni:*/{			
-				
 				/*Presentazioni*/{
 					function presentazione_gioco(){//presentazione gioco
 						//log:
@@ -315,13 +313,14 @@
 								          4px  //destra 
 										  4px  //sotto 
 										  4px; //sinistra*/
-						$('#contenitore_campo_console').html(   '<div id="div_pres_gioco" style="background-color: #7FFFD4; height: 598px; width: 100%; display: none;" class="center">'
+						$('#contenitore_campo_console').html(   '<div id="div_pres_gioco" style="background-color: #7FFFD4; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
 						                                      + '<br /><br /><br />'
 															  + '<b><u><h1 class="center marginpadding"><font color=#5D8AA8>Presentazione del gioco</font></h1></u></b>'
 															  + '<br /><br /><br />'
 															  + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + recupera_testo(default_lingua, "Presentazione gioco") + '</font></p>'
 															  + '<br /><br />'
 															  + '<p>'+bottoni_finestra+'</p>'
+															  + '<br /><br />'
 															  + '</div>'
 															);
 						$('#div_pres_gioco').fadeIn(3500);
@@ -335,12 +334,13 @@
 						var bottoni_finestra = bottone_avvia_gioco;
 						
 						//carica contenitore
-						$('#contenitore_campo_console').html(   '<div id="div_pres_regole" style="background-color: #FFBF00; height: 598px; width: 100%; display: none;" class="center">'
+						$('#contenitore_campo_console').html(   '<div id="div_pres_regole" style="background-color: #FFBF00; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
 						                                      + '<br /><br />'
 															  + '<b><u><h1 class="center marginpadding"><font color=#A98307>Descrizione regole gioco</font></h1></u></b>'
 															  + '<br />'
 															  + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + recupera_testo(default_lingua, "Regole") + '</font></p><br />'
 															  + '<p>'+bottoni_finestra+'</p>'
+															  + '<br /><br />'
 															  + '</div>'
 															);
 						$('#div_pres_regole').fadeIn(3500);
@@ -348,10 +348,20 @@
 
 					function presentazione_obbiettivo_raggiunto(pos_obb){//presentazione obbiettivo
 						//bottoni:
-						var bottone_chiudi = '<a class="btn btn-default" href="#" role="button" onclick="ricarica_partita()">Chiudi</a>';
+						var bottoni_finestra = bottone_chiudi;
 						
 						//visualizza testo
-						$('#contenitore_campo_console').html('<div id="div_obbiettivi" style="background-color: yellow; height: 500px; width: 100%; display: none;" class="center"><h1 class="center marginpadding">descrizione obbiettivo</h1><p style="padding: 10;">Testo obb<p><p>'+bottone_chiudi+'</p></div>');
+						$('#contenitore_campo_console').html(   '<div id="div_obbiettivi" style="background-color: yellow; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
+						                                      + '<br /><br />'
+															  + '<b><u><h1 class="center marginpadding"><font color=#A98307>Presentazione obbiettivo</font></h1></u></b>'
+															  + '<br />'
+															  + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + recupera_testo(default_lingua, "Presentazione Obbiettivo") + '</font></p><br />'
+															  + '<p>'+bottoni_finestra+'</p>'
+															  + '<br /><br />'
+															  + '</div>'
+															);
+						
+						
 						$('#div_obbiettivi').fadeIn(3500);
 					}
 					
@@ -366,16 +376,72 @@
 						}
 						
 						//bottoni:
-						var bottone_gioco = '<a class="btn btn-default" href="index.html" role="button" onclick="index.html">Riavia gioco</a>';
+						var bottoni_finestra = bottone_riavvia_gioco;
+						
+						//"Ringraziamenti"
 						
 						//carica contenitore
-						$('#contenitore_campo_console').html('<div id="div_gioco_completato" style="background-color: green; height: 500px; width: 100%; display: none;" class="center"><h1 class="center marginpadding">descrizione gioco concluso</h1><p style="padding: 10;">congratulazioni...<p>'+bottone_gioco+'</div>');
-						$('#div_gioco_completato').fadeIn(3500);
+						$('#contenitore_campo_console').html(   '<div id="div_gioco_completato" style="background-color: #CCFF00; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
+						                                      + '<br /><br /><br />'
+															  + '<b><u><h1 class="center marginpadding"><font color=#6B8E23 size="8">Gioco completato</font></h1></u></b>'
+															  + '<br /><br /><br />'
+															  + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="center"><font size="4">' + recupera_testo(default_lingua, "Ringraziamenti") + '</font></p><br />'
+															  + '<br /><br />'
+															  + '<p>'+bottoni_finestra+'</p>'
+															  + '<br /><br />'
+															  + '</div>'
+															);
+						
+						$('#div_gioco_completato').fadeIn(3500);                                     
 					}
 				}
 				
-				function carica_div_preload(){
-					presentazione_gioco();
+				function Struttura_campo(){
+					return cmp_completo =	 '	<div class="col-xs-9" style="height: 100%; min-height: 598px; min-width:850; width: auto;" class="center" id="Utility">'
+									+'		<h2 class="center">Campo di gioco</h2>'
+									+'		<div class="campo" id="Campo_di_gioco" overflow: scroll;> </div>'
+									+'	</div>'
+									
+									+'	<div class="col-xs-3" style="height: 100%; min-height: 598px; width: auto;" class="center" id="Console">'
+									
+									+'		<div id="Comando">'
+									+'			<h2 class="center">Console</h2>'
+									+'          <p>Inserisci comando</p>'
+									+'		    <p class="center">'
+									+'				<input type="text" class="form-control" id="comando"> <br />'
+									+'			    <a class="btn btn-default" href="#" role="button" onclick="esegui_comando()">Esegui</a>'
+									+'			    <a class="btn btn-default" href="#" role="button">Cancella</a>'
+									+'			</p>'
+									+'	    </div>'
+									
+									+'		<div class="center" id="Opzioni">'
+									+'      	<form action="">'
+									+'  			<fieldset>'
+									+'   				<legend>Opzioni:</legend>'
+									+'					<p style="margin: 1px 1px 1px 15px;" align="justify">'
+									+'   					<input id="normalize" type="checkbox" name="Normalizza"    value="1"/> Non considerare gli spazi <br /> '
+									+'   					<input id="casesensible" type="checkbox" name="Caseseinsible" value="1"/> Non considerare maiuscole minuscole <br /> '
+									+'                  </p>'
+									+'  			</fieldset>'
+									+'  		</form>'
+									+'      </div>'
+									
+									+'		<div class="'+(panel_liv?"center":"hidden")+'" id="Livello">'
+									+'      <h2 class="center">Liv.</h2>'
+									+'      	<p class="center">'
+									+'          	<a class="btn btn-default" href="#" role="button" onclick="carica_livello()">Liv. Successivo</a>'
+									+'          </p>'
+									+'      </div>'
+									
+									+'		<div id="Log_eventi">'
+									+'		    <h2 class="center">Log eventi</h2>'
+									+'		    <div id="log_eventi" style="height: 330px; overflow: scroll;">'
+									+'		    	<p>Elenco avvenimenti e comandi errati:</p>'
+									+'		    </div>'
+									+'		</div>'
+									
+									+'      <br />'
+									+'	</div>'
 				}
 				
 				function recupera_testo(lingua, tipo){
@@ -403,7 +469,8 @@
 				
 				function avvia_gioco(){//avvia gioco
 					//crea il campo
-					$('#campo_totale').html(codice_campo_console);
+					$('#contenitore_campo_console').html(Struttura_campo());
+					//$('#campo_totale').html(codice_campo_console);
 					posizioni=[];
 					crea_griglia();
 					
@@ -425,9 +492,9 @@
 				
 				function crea_griglia(){//crea la griglia del campo				
 					/*ricarica struttura*/{
-						$('#campo_totale').html(codice_campo_console);
+						$('#contenitore_campo_console').html(Struttura_campo());
 					}
-				
+					
 					/*crea griglia*/{
 						//imposto che la griglia si veda solo se primo livello o impostato in debug
 						var spes_griglia_campo = ((mappa == 1) || (var_vis_griglia)) ? colore_griglia_se_visualizzata /*visualizza*/ : background_color_campo /*nascondi*/;
@@ -459,7 +526,8 @@
 					}
 					
 					/*visulizza griglia*/{
-						$('.campo').append(content);
+					    $("#Campo_di_gioco").append(content);
+						//$('.campo').append(content);
 					}
 				}
 
@@ -880,10 +948,10 @@
 					/*Recupera comando*/{
 						//{com: comando, az: azione, ps: passi}
 						var comando = {com: $("#comando").val(),az: null, sp: null, err: null};
-						//rimuove gli spazi dal comando
-						if (rimuovi_spazi_comando) {comando.com = (comando.com).replace(/ /g, '');}
+						//rimuove gli spazi dal comando						
+						if (rimuovi_spazi_comando || ((document.getElementById("normalize")).checked)) {comando.com = (comando.com).replace(/ /g, '');}
 						//formatta secondo lo standard del comando
-						if (!comand_case_sensitive) {
+						if ((!comand_case_sensitive) ||((document.getElementById("casesensible")).checked)) {
 							var tem_string = ((comando.com).toLowerCase());
 							comando.com = (tem_string = tem_string.charAt(0).toUpperCase() + tem_string.slice(1));
 							
@@ -1178,10 +1246,8 @@
 							   }
 					}
 				}  
-
 			}
-				/*non togliere gli obbiettivi se non visualizzati*/
-			} 
+
 		</script>
     </body>
 </html>
