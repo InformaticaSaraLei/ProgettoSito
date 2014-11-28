@@ -96,7 +96,7 @@
                 </div>
             </div>
         </div>
-        
+    
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -126,7 +126,7 @@
             </div>
         </div>
     </div>
-    
+    <div class="row">
     <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -159,7 +159,7 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-users"></i>Evento 3 a Venezia</h4>
+                    <h4><i class="fa fa-fw fa-users"></i>Evento 4 a Venezia</h4>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -184,7 +184,7 @@
                 </div>
             </div>
         </div>
-        
+    </div> 
 </div>
 <!-- /.row -->
 
