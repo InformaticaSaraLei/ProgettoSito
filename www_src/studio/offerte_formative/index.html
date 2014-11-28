@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Offerta formative - Informatica sarà lei!</title>
+    <title>Incentivi - Informatica sarà lei!</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../../css/modern-business.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../css/mixitup.css"/>
+
     <!-- Custom Fonts -->
     <link href="../../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -26,28 +28,11 @@
     <![endif]-->
 
     <!-- Navigation -->
-    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
-
-    <script type="text/javascript" src="../js/jquery.mixitup.min.js"></script>
-
-    <script type="text/javascript">
-
-        /*
-         *   We would normally recommend that all JavaScript is kept in a seperate .js file,
-         *   but we have included it in the document head for convenience.
-         */
-
-        // INSTANTIATE MIXITUP
-
-        $(function () {
-            $('#Grid').mixitup();
-        });
-
-    </script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script>
         $(function () {
-            $("#navigation_bar").load("../../navigation_bar.html");
-            $("#footer").load("../../footer.html");
+            $("#navigation_bar").load("../navigation_bar.html");
+            $("#footer").load("../footer.html");
         });
     </script>
 </head>
@@ -62,11 +47,10 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Incentivi
+                <small>Sottotitolo</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
-                </li>
-                <li><a href="../index.html">Studio</a>
                 </li>
                 <li class="active">Incentivi</li>
             </ol>
@@ -76,59 +60,78 @@
 
     <hr>
 
-
-    <!-- FILTER CONTROLS -->
-
-    <div class="row mixitup-wrapper">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default btn-lg filter" data-filter="all">Tutte le università
-                </button>
-                <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#" class="filter" data-filter="category_1">Venezia</a></li>
-                    <li><a href="#" class="filter" data-filter="category_2">Padova</a></li>
-                    <li><a href="#" class="filter" data-filter="category_3">Verona</a></li>
-                </ul>
+    <!-- Marketing Icons Section -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-fw fa-users"></i> Offerte formative</h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Offerte formative proposte dalle università di Venezia, Padova, Verona per i corsi di
+                        informatica.
+                    </p>
+                    <a href="#" class="btn btn-default">Scopri di più sulle offerte formative!</a>
+                </div>
             </div>
         </div>
-
-    </div>
-
-
-    <!-- GRID -->
-    <div class="container">
-        <div id="Grid" class="row mixitup-wrapper">
-            <ul>
-                <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_1" data-cat="1">
-                    <div><img class="img-responsive" src="../img/unive.gif" alt="">
-
-                        <h1><a href="#" class="filter" data-filter="category_1">Venezia</a></h1>
-
-                        <p><a href="unive.html">Incentivi</a></p></div>
-                </li>
-                <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1">
-                    <div><img class="img-responsive" src="../img/unipd.jpg" alt="">
-
-                        <h1><a href="#" class="filter" data-filter="category_2">Padova</a></h1>
-
-                        <p><a href="unipd.html"> Incentivi</a></p></div>
-                </li>
-                <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_3" data-cat="1">
-                    <div><img class="img-responsive" src="../img/univr.jpg" alt="">
-
-                        <h1><a href="#" class="filter" data-filter="category_3">Verona</a></h1>
-
-                        <p><a href="univr.html"> Incentivi</a></p></div>
-                </li>
-            </ul>
-
-
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-fw fa-graduation-cap"></i> Incentivi</h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Presentazione degli incentivi offerti rispettivamente dalle università di Venezia, Padova,
+                        Verona: si possono trovare informazioni
+                        utili riguardanti borse di studio, esoneri o riduzioni sulle tasse, borse di studio per stage.
+                    </p>
+                    <a href="#" class="btn btn-default">Scopri di più sugli incentivi!</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-fw fa-folder-open"></i> Orientamento</h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Informazioni e utilità volte all'orientamento offerte dalle università di Venezia, Padova,
+                        Verona.
+                    </p>
+                    <a href="#" class="btn btn-default">Scopri di più sull'orientamento</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><i class="fa fa-fw fa-folder-open"></i> Test OFA</h4>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Test OFA: primo passo verso la laurea. Presentazione dei rispettivi test d'ingresso riguardanti
+                        le facoltà di Venezia, Padova, Verona.
+                    </p>
+                    <a href="#" class="btn btn-default">Scopri di più sui test OFA!</a>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- /.row -->
 
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Most of Start Bootstrap's unstyled templates can be directly integrated into the Modern Business
+                template. You can view all of our unstyled templates on our website at <a
+                        href="http://startbootstrap.com/template-categories/unstyled">http://startbootstrap.com/template-categories/unstyled</a>.
+            </p>
+        </div>
+    </div>
+    <!-- /.row -->
 
     <hr>
 
@@ -140,6 +143,9 @@
 <!--- Inserimento navbar ---->
 
 <!-- End Footer -->
+
+<!-- jQuery -->
+<script src="../../js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="../../js/bootstrap.min.js"></script>
