@@ -103,6 +103,59 @@
 
         <script>
 			/*Variabili*/{
+				/*console Gioco*/{
+				    //lingua testi visualizzati:
+					var default_lingua = "IT";
+					
+					//Livello e mappa partenza/corrente:
+					var livello = 1;
+					var mappa = 1;
+					
+					//non deve raggiungere tutti gli obbiettivi per passare di livello:
+					var var_obb_superflui = false;
+					
+					//Utility comando:
+					var rimuovi_spazi_comando = true;
+					var comand_case_sensitive = false;
+				}
+				
+				/*Bottoni*/{
+					var bottone_avvia_gioco =   '<a class="btn btn-default" href="#" role="button" onclick="avvia_gioco()">'
+					                          + '<font size="4">Avvia il gioco</font></a>';
+					var bottone_pres_regole =   '<a class="btn btn-default" href="#" role="button" onclick="presentazione_regole()">'
+					                          + '<font size="4">Presentazione delle regole</font></a>';
+				}
+				
+				/*Testi*/{
+					var testi = [
+								  /*Presentazione Gioco*/
+								  {lingua: "IT", tipo: "Presentazione gioco",
+								                 txt: (   "Questo gico ha lo scopo di dimostrare come con poche righe di codice in un linguaggio di alto livello (linguaggio più viciono al programmatore/utente rispetto a quello macchina composto da 0 e 1) è possibile realizzare un gioco.<br /><br />"
+                                                        + "Inoltre abbiamo volutamente limitato le possibilità di spostamento del personaggio all'inserimento di comandi strutturati in un modo convenzionale (per dettagli visualizzare anche presentazione regole) per permettere al giocatore di capire per un programmatore quanto sia facile incorrere in errori (una lettera sbagliata) ma anche come si possano ottenere buoni risultati con semplici comandi."
+														+ "<br />"														
+												      )},
+																	  
+								  /*Regole*/
+								  {lingua: "IT", tipo: "Regole", 
+								                 txt: (   "Questo gioco ha l'obbiettivo di simulare l'importanza dei comandi nei linguaggi di programmazione, i comandi devono essere formattati nel seguente modo:"
+														+ "   <i>comando<b>(</b>spostamento<b>)</b></i>"
+														+ "<br />(Dove comando è uno dei seguenti e al posto di numero un numero intero)"
+														+ '<ol type="a" style="margin: 4px 4px 4px 100px;" align="justify">'
+														   + '<li>("Nord", "Su", "Sopra"),</li>'
+														   + '<li>"Nord-Est",</li>'
+														   + '<li>"Nord-Ovest",</li>'
+														   + '<li>("Sud", "Giu", "Sotto"),</li>'
+														   + '<li>"Sud-Est",</li>'
+														   + '<li>"Sud-Ovest",</li>'
+                                                           + '<li>("Est", "Destra"),</li>'
+														   + '<li>("Ovest", "Sinistra")</li>'
+														+ "</ol><br />"
+														+ '<p style="margin: 4px 40px 4px 40px;" align="justify">nota:</p>'
+														+ '<p style="margin: 4px 40px 4px 70px;" align="justify"> non sono valide altre parole al di fuori di quelle indicate e il comando deve avere la struttura sopra citata, si accetta esclusivamente un comando alla volta.</p>'
+													  )}
+								]
+				}
+				
 				/*Debug*/{
 					//Tutti i Debug:
 					var var_debug_all = false;
@@ -122,11 +175,6 @@
 					
 					//utility debug:
 					var avvio_rapido = false;
-					var var_obb_superflui = false;
-					
-					//Utility comando:
-					var rimuovi_spazi_comando = true;
-					var comand_case_sensitive = false;
 					
 					//forzature visualizzazione
 					var var_vis_elm_celle = false; //contenuto cella
@@ -136,12 +184,8 @@
 				/*Obbiettivi*/{
 					var num_obbiettivi = 0;
 				}
-				  
+				
 				/*Livelli*/{
-					//Livello e mappa corrente:
-					var livello = 1;
-					var mappa = 1;
-					
 					//numero livelli e mappe abbinate
 					var liv_map = [
 									{liv: 1, mp: 2}, //vuoto
@@ -153,7 +197,7 @@
 					var liv_min_obbiettivi = 2;
 					var liv_min_ostacoli = 3;
 				}
-				 
+				
 				/*posizioni*/{
 					//array posizioni
 						var posizioni = 
@@ -196,7 +240,7 @@
 						var num_colonne = 25; //ex14;
 					
 				}
-				  
+				
 				/*sprite*/{
 					//opzioni:
 					var vuota_attrav_img = true;//cella vuota e percorso sono immagini
@@ -238,7 +282,7 @@
 						    '<img id="pos_attraversata_00" src="./sprite/attraversata.png" style="margin: 0; padding: 0;">';
 					}
 				}
-				  
+				
 				/*Log:*/{
 					//orario avvio:
 					data_avvio_gioco = new Date();
@@ -253,11 +297,8 @@
 					avvio_rapido ? avvia_gioco() : carica_div_preload();
 				});
 			}
-			  
-			/*Funzioni:*/{
-				function carica_div_preload(){
-					presentazione_gioco();
-				}
+			
+			/*Funzioni:*/{			
 				
 				/*Presentazioni*/{
 					function presentazione_gioco(){//presentazione gioco
@@ -265,11 +306,24 @@
 						var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Presentazione Gioco</b><br />";
 					  
 						//bottoni:
-						var bottone_avvia_gioco = '<a class="btn btn-default" href="#" role="button" onclick="avvia_gioco()">Avvia il gioco</a>';
-						var bottone_pres_regole = '<a class="btn btn-default" href="#" role="button" onclick="presentazione_regole()">Presentazione delle regole</a>';
+						var bottoni_finestra =   bottone_avvia_gioco
+						                       + " "
+											   + bottone_pres_regole;
 						
-						//carica contenitore:
-						$('#contenitore_campo_console').html('<div id="div_pres_gioco" style="background-color: blue; height: 500px; width: 100%; display: none;" class="center"><b><u><h1 class="center marginpadding">Presentazione del gioco</h1></u></b><p><p></p><p style="padding: 10;">Questo gioco nasce con la finalità di ...<p><p>'+bottone_avvia_gioco+'   '+bottone_pres_regole+'</p></div>');
+						//carica contenitore: 
+						        /*margin: 4px  //sopra
+								          4px  //destra 
+										  4px  //sotto 
+										  4px; //sinistra*/
+						$('#contenitore_campo_console').html(   '<div id="div_pres_gioco" style="background-color: #7FFFD4; height: 598px; width: 100%; display: none;" class="center">'
+						                                      + '<br /><br /><br />'
+															  + '<b><u><h1 class="center marginpadding"><font color=#5D8AA8>Presentazione del gioco</font></h1></u></b>'
+															  + '<br /><br /><br />'
+															  + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + recupera_testo(default_lingua, "Presentazione gioco") + '</font></p>'
+															  + '<br /><br />'
+															  + '<p>'+bottoni_finestra+'</p>'
+															  + '</div>'
+															);
 						$('#div_pres_gioco').fadeIn(3500);
 					}
 					  
@@ -278,10 +332,17 @@
 						var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Presentazione Regole</b><br />";
 					  
 						//bottoni:
-						var bottone_avvia_gioco = '<a class="btn btn-default" href="#" role="button" onclick="avvia_gioco()">Avvia il gioco</a>';
+						var bottoni_finestra = bottone_avvia_gioco;
 						
 						//carica contenitore
-						$('#contenitore_campo_console').html('<div id="div_pres_regole" style="background-color: red; height: 500px; width: 100%; display: none;" class="center"><h1 class="center marginpadding">descrizione regole gioco</h1><p style="padding: 10;">Testo delle regole<p><p>'+bottone_avvia_gioco+'</p></div>');
+						$('#contenitore_campo_console').html(   '<div id="div_pres_regole" style="background-color: #FFBF00; height: 598px; width: 100%; display: none;" class="center">'
+						                                      + '<br /><br />'
+															  + '<b><u><h1 class="center marginpadding"><font color=#A98307>Descrizione regole gioco</font></h1></u></b>'
+															  + '<br />'
+															  + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + recupera_testo(default_lingua, "Regole") + '</font></p><br />'
+															  + '<p>'+bottoni_finestra+'</p>'
+															  + '</div>'
+															);
 						$('#div_pres_regole').fadeIn(3500);
 					}
 
@@ -311,6 +372,33 @@
 						$('#contenitore_campo_console').html('<div id="div_gioco_completato" style="background-color: green; height: 500px; width: 100%; display: none;" class="center"><h1 class="center marginpadding">descrizione gioco concluso</h1><p style="padding: 10;">congratulazioni...<p>'+bottone_gioco+'</div>');
 						$('#div_gioco_completato').fadeIn(3500);
 					}
+				}
+				
+				function carica_div_preload(){
+					presentazione_gioco();
+				}
+				
+				function recupera_testo(lingua, tipo){
+					//dove memorizzo il testo
+					var testo = "";
+					
+					/*Trova testo:*/{
+						//indice ciclo
+						var i = 0;
+						var txt_non_trovato = true;
+
+						while ((i < testi.length) && txt_non_trovato){
+							//aggiorno testo se trovato
+							if ((testi[i].lingua == lingua) && (testi[i].tipo == tipo)) {
+								testo = testi[i].txt;
+							}
+							
+							//aggiorno indice ciclo
+							i++;
+						}
+					}
+					
+					return testo;
 				}
 				
 				function avvia_gioco(){//avvia gioco
@@ -1092,8 +1180,6 @@
 				}  
 
 			}
-			  
-			/*Da implementare:*/{ 
 				/*non togliere gli obbiettivi se non visualizzati*/
 			} 
 		</script>
