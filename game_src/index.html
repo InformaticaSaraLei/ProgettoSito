@@ -75,7 +75,7 @@
       <hr>
 
       <footer>
-        <p>&copy; Caroti Rubens e Daniel Vedovato 2014</p>
+        <p><A HREF="#" style="color:black; text-decoration: none;" onclick="attiva_disattiva_pannelli_nascosti()"> &copy; </A> Caroti Rubens e Daniel Vedovato 2014</p>
       </footer>
     </div> <!-- /container -->        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
         <script>window.jQuery || document.write('<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"><\/script>')</script>
@@ -126,8 +126,8 @@
 					var testi = [
 								  /*Presentazione Gioco*/
 								  {lingua: "IT", tipo: "Presentazione gioco",
-								                 txt: (   "Questo gico ha lo scopo di dimostrare come con poche righe di codice in un linguaggio di alto livello (linguaggio più viciono al programmatore/utente rispetto a quello macchina composto da 0 e 1) è possibile realizzare un gioco.<br /><br />"
-                                                        + "Inoltre abbiamo volutamente limitato le possibilità di spostamento del personaggio all'inserimento di comandi strutturati in un modo convenzionale (per dettagli visualizzare anche presentazione regole) per permettere al giocatore di capire per un programmatore quanto sia facile incorrere in errori (una lettera sbagliata) ma anche come si possano ottenere buoni risultati con semplici comandi."
+								                 txt: (   "Questo gioco ha lo scopo di dimostrare come con poche righe di codice in un linguaggio di alto livello (linguaggio più viciono al programmatore/utente rispetto a quello macchina composto da 0 e 1) è possibile realizzare un gioco.<br /><br />"
+                                                        + "Inoltre abbiamo volutamente limitato le possibilità di spostamento del personaggio all'inserimento di comandi strutturati in un modo convenzionale (per dettagli visualizzare anche presentazione regole) per permettere al giocatore di sperimentare quanto per un programmatore sia facile incorrere in errori (una lettera sbagliata, ecc.. [per fortuna si è aiutati da software di sviluppo anche gratuiti]) ma come allo stesso modo di possano creare proprammi semplici/complessi/molto complessi semplicemente strutturando le operazioni basilari messe a disposizione dal linguaggio scelto."
 														+ "<br />"														
 												      )},
 																	  
@@ -137,17 +137,17 @@
 														+ ' <font color= #DE3163 size="5"><i><u>comando<b>(</b>spostamento<b>)</b></u></i></font>'
 														+ "<br />(Dove comando è uno dei seguenti e al posto di numero un numero intero)"
 														+ '<ol type="a" style="margin: 4px 4px 4px 100px;" align="justify">'
-														   + '<li>("Nord", "Su", "Sopra"),</li>'
-														   + '<li>"Nord-Est",</li>'
-														   + '<li>"Nord-Ovest",</li>'
-														   + '<li>("Sud", "Giu", "Sotto"),</li>'
-														   + '<li>"Sud-Est",</li>'
-														   + '<li>"Sud-Ovest",</li>'
-                                                           + '<li>("Est", "Destra"),</li>'
-														   + '<li>("Ovest", "Sinistra")</li>'
+														   + '<li>("Nord", "N", "Su", "Sopra"),</li>'
+														   + '<li>("Nord-Est", "N-E"),</li>'
+														   + '<li>("Nord-Ovest", "N-O"),</li>'
+														   + '<li>("Sud", "S", "Giu", "Sotto"),</li>'
+														   + '<li>("Sud-Est", "S-E"),</li>'
+														   + '<li>("Sud-Ovest", "S-O"),</li>'
+                                                           + '<li>("Est", "E", "Destra"),</li>'
+														   + '<li>("Ovest", "O", "Sinistra")</li>'
 														+ "</ol><br />"
 														+ '<p style="margin: 4px 40px 4px 40px;" align="justify">nota:</p>'
-														+ '<p style="margin: 4px 40px 4px 70px;" align="justify"> non sono valide altre parole al di fuori di quelle indicate e il comando deve avere la struttura sopra citata, si accetta esclusivamente un comando alla volta.</p>'
+														+ '<p style="margin: 4px 40px 4px 70px;" align="justify"><font size="3"><i> non sono valide altre parole al di fuori del set indicato, a seconda delle opzioni scelte si può rendere il gioco casesensible (differenza tra maiuscoe e minuscole o meno) e tralasciare gli spazi nel comando. E\' molto importante che il comando rispetti la struttura precedentemente prsentata, il gioco accetta esclusivamente l\'inserimento/processamento di un comando alla volta.</i></font></p>'
 													  )},
 													  
 								  /*Presentazione Obbiettivo*/
@@ -401,6 +401,14 @@
 					}
 				}
 				
+				function attiva_disattiva_pannelli_nascosti(){
+					panel_liv = panel_liv ? false : true;
+					
+					$('#contenitore_campo_console').html();
+					
+					ricarica_partita();
+				}
+				
 				function Struttura_campo(){//crea struttura pagina gioco
 					return cmp_completo =	 '	<div class="col-xs-9" style="height: 100%; min-height: 598px; min-width:850; width: auto;" class="center" id="Utility">'
 									+'		<h2 class="center">Campo di gioco</h2>'
@@ -587,36 +595,46 @@
 					
 					/*calcola nuova posizione*/{
 						switch(azione){//calcola le nuove coordinate
+							case "N"          :
 							case "Nord"       :
 							case "Su"         :
 							case "Sopra"      :					   
 											   pos_teorica_pers_riga -= spostamento; 
 								break;
+							case "S"          :
 							case "Sud"        :
 							case "Giu"        :
 							case "Sotto"      :					   
 											   pos_teorica_pers_riga += spostamento; 
 								break;
+							case "E"          :
 							case "Est"        :
 							case "Destra"     :
+							case "Dx"         :
 											   pos_teorica_pers_colonna += spostamento; 
 								break;
+							case "O"          :
 							case "Ovest"      :
-							case "Sinistra"   :						   
+							case "Sinistra"   :
+                            case "Dx"         :							
 											   pos_teorica_pers_colonna -= spostamento; 
 								break;
+							case "N-O"         :
 							case "Nord-Ovest" :
 											   pos_teorica_pers_riga -= spostamento;
 											   pos_teorica_pers_colonna -= spostamento;
 								break;
+							case "S-O"         :
 							case "Sud-Ovest"  : 
 											   pos_teorica_pers_riga += spostamento;
 											   pos_teorica_pers_colonna -= spostamento;
 								break;
+							case "N-E"         :
 							case "Nord-Est"   :
 											   pos_teorica_pers_riga -= spostamento;
 											   pos_teorica_pers_colonna += spostamento;
 								break;
+							case "S-E"         :
 							case "Sud-Est"    : 
 											   pos_teorica_pers_riga += spostamento;
 											   pos_teorica_pers_colonna += spostamento;
@@ -873,16 +891,16 @@
 				
 				function sintassi_comando_errata(comando, azione, passi){//sintassi comando valida
 					return (//comando validi:
-								(azione != "Nord")        && (azione != "Su")        && (azione != "Sopra")
-							 && (azione != "Nord-Est") 
-							 && (azione != "Nord-Ovest") 
+								(azione != "Nord")          && (azione != "N")         && (azione != "Su")        && (azione != "Sopra")
+							 && (azione != "Nord-Est")      && (azione != "N-E")
+							 && (azione != "Nord-Ovest")    && (azione != "N-O")
 							 
-							 && (azione != "Sud")         && (azione != "Giu")       && (azione != "Sotto")
-							 && (azione != "Sud-Est") 
-							 && (azione != "Sud-Ovest")
+							 && (azione != "Sud")           && (azione != "S")         && (azione != "Giu")       && (azione != "Sotto")
+							 && (azione != "Sud-Est")       && (azione != "S-E")
+							 && (azione != "Sud-Ovest")     && (azione != "S-O")
 							 
-							 && (azione != "Est")         && (azione != "Destra")   
-							 && (azione != "Ovest")       && (azione != "Sinistra")
+							 && (azione != "Est")           && (azione != "E")       && (azione != "Dx")        && (azione != "Destra")       
+							 && (azione != "Ovest")         && (azione != "O")       && (azione != "Sx")        && (azione != "Sinistra")  
 						   );
 				}
 				  
