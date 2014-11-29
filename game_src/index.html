@@ -98,9 +98,15 @@
 					//non deve raggiungere tutti gli obbiettivi per passare di livello:
 					var var_obb_superflui = false;
 					
-					//Utility comando:
-					var rimuovi_spazi_comando = false;
-					var comand_case_sensitive = true;
+					/*Utility comando:*/{
+						//default
+						var rimuovi_spazi_comando = false;
+						var comand_case_sensitive = true;
+					
+						//temp utente
+						var temp_ut_normalizza = false;
+						var temp_ut_case_sensitive = false;
+					}
 				}
 				
 				/*Bottoni*/{
@@ -179,15 +185,14 @@
 					//forzature visualizzazione
 					var var_vis_elm_celle = false; //contenuto cella
 					var var_vis_griglia = false;   //griglia
-					var panel_liv = false;
+					var panel_liv = false;         //panello per salvare livelli
 				}
 				
 				/*Obbiettivi*/{
 					var num_obbiettivi = 0;
 				}
 				
-				/*Livelli*/{
-				
+				/*Livelli*/{		
 					//Elementi livelli
 					var liv_min_obbiettivi = 2;
 					var liv_min_ostacoli = 3;
@@ -396,7 +401,7 @@
 					}
 				}
 				
-				function Struttura_campo(){
+				function Struttura_campo(){//crea struttura pagina gioco
 					return cmp_completo =	 '	<div class="col-xs-9" style="height: 100%; min-height: 598px; min-width:850; width: auto;" class="center" id="Utility">'
 									+'		<h2 class="center">Campo di gioco</h2>'
 									+'		<div class="campo" id="Campo_di_gioco" overflow: scroll;> </div>'
@@ -419,8 +424,8 @@
 									+'  			<fieldset>'
 									+'   				<legend>Opzioni:</legend>'
 									+'					<p style="margin: 1px 1px 1px 15px;" align="justify">'
-									+'   					<input id="normalize" type="checkbox" name="Normalizza"    value="1"/> Non considerare gli spazi <br /> '
-									+'   					<input id="casesensible" type="checkbox" name="Caseseinsible" value="1"/> Non considerare maiuscole minuscole <br /> '
+									+'   					<input id="normalize" type="checkbox" name="Normalizza" '+(temp_ut_normalizza ? 'checked="checked"':"")+' value="1"/> Non considerare gli spazi <br /> '
+									+'   					<input id="casesensible" type="checkbox" name="Caseseinsible" '+(temp_ut_case_sensitive ? 'checked="checked"':"")+' value="1"/> Non considerare maiuscole minuscole <br /> '
 									+'                  </p>'
 									+'  			</fieldset>'
 									+'  		</form>'
@@ -444,7 +449,12 @@
 									+'	</div>'
 				}
 				
-				function recupera_testo(lingua, tipo){
+				function Verifica_e_memorizza_opzioni(){//memorizza opzioni utente
+					temp_ut_normalizza = (document.getElementById("normalize")).checked;
+					temp_ut_case_sensitive = (document.getElementById("casesensible")).checked;
+				}
+				
+				function recupera_testo(lingua, tipo){//recupera il testo da visualizzare
 					//dove memorizzo il testo
 					var testo = "";
 					
@@ -946,12 +956,15 @@
 
 				function recupera_comando(){//recupera il comando inserito dal giocatore
 					/*Recupera comando*/{
+						//memorizza opzioni utente:
+						Verifica_e_memorizza_opzioni();
+					
 						//{com: comando, az: azione, ps: passi}
 						var comando = {com: $("#comando").val(),az: null, sp: null, err: null};
 						//rimuove gli spazi dal comando						
-						if (rimuovi_spazi_comando || ((document.getElementById("normalize")).checked)) {comando.com = (comando.com).replace(/ /g, '');}
+						if (rimuovi_spazi_comando || temp_ut_normalizza) {comando.com = (comando.com).replace(/ /g, '');}
 						//formatta secondo lo standard del comando
-						if ((!comand_case_sensitive) ||((document.getElementById("casesensible")).checked)) {
+						if ((!comand_case_sensitive) || temp_ut_case_sensitive) {
 							var tem_string = ((comando.com).toLowerCase());
 							comando.com = (tem_string = tem_string.charAt(0).toUpperCase() + tem_string.slice(1));
 							
