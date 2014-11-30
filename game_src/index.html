@@ -92,8 +92,8 @@
 					var default_lingua = "IT";
 					
 					//Livello e mappa partenza/corrente:
-					var livello = 1;
-					var mappa = 1;
+					var livello = null;
+					var mappa = null;
 					
 					//non deve raggiungere tutti gli obbiettivi per passare di livello:
 					var var_obb_superflui = false;
@@ -107,19 +107,6 @@
 						var temp_ut_normalizza = false;
 						var temp_ut_case_sensitive = false;
 					}
-				}
-				
-				/*Bottoni*/{
-					var size_txt_bt = 4;
-				
-					var bottone_avvia_gioco   =   '<a class="btn btn-default" href="#" role="button" onclick="avvia_gioco()">'
-					                            + '<font size="'+size_txt_bt+'">Avvia il gioco</font></a>';
-					var bottone_pres_regole   =   '<a class="btn btn-default" href="#" role="button" onclick="presentazione_regole()">'
-					                            + '<font size="'+size_txt_bt+'">Presentazione delle regole</font></a>';
-					var bottone_chiudi        =   '<a class="btn btn-default" href="#" role="button" onclick="ricarica_partita()">'
-					                            + '<font size="'+size_txt_bt+'">Chiudi</font></a>';
-				    var bottone_riavvia_gioco =   '<a class="btn btn-default" href="index.html" role="button" onclick="index.html">'
-					                            + '<font size="'+size_txt_bt+'">Riavia gioco</font></a>';
 				}
 				
 				/*Testi*/{
@@ -192,7 +179,7 @@
 					var num_obbiettivi = 0;
 				}
 				
-				/*Livelli*/{		
+				/*Livelli*/{
 					//Elementi livelli
 					var liv_min_obbiettivi = 2;
 					var liv_min_ostacoli = 3;
@@ -293,6 +280,28 @@
 					  
 					//Log:
 					var var_log = ((data_avvio_gioco.toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Start</b><br />";
+				}
+				
+				/*Bottoni*/{
+					var size_txt_bt_principali = 4;
+					var size_txt_bt_pan_opzioni_nascoste = 2;
+				
+					var bottone_avvia_gioco      =   '<a class="btn btn-default" href="#" role="button" onclick="avvia_gioco()">'
+					                               + '<font size="'+size_txt_bt_principali+'">Avvia il gioco</font></a>';
+					var bottone_pres_regole      =   '<a class="btn btn-default" href="#" role="button" onclick="presentazione_regole()">'
+					                               + '<font size="'+size_txt_bt_principali+'">Presentazione delle regole</font></a>';
+					var bottone_chiudi           =   '<a class="btn btn-default" href="#" role="button" onclick="ricarica_partita()">'
+					                               + '<font size="'+size_txt_bt_principali+'">Chiudi</font></a>';
+				    var bottone_riavvia_gioco    =   '<a class="btn btn-default" href="index.html" role="button" onclick="index.html">'
+					                               + '<font size="'+size_txt_bt_principali+'">Riavia gioco</font></a>';
+					
+					//pannello nascosto:
+					var bottone_Liv_successivo   =   '<a class="btn btn-default" href="#" role="button" onclick="carica_livello()">'
+                                                   + '<font size="'+size_txt_bt_pan_opzioni_nascoste+'">Liv. Successivo</font></a>';	
+					
+					/*bottone_Vis_Nasc_griglia*/
+					var bottone_Vis_Nasc_griglia = null;
+					visualizza_nascondi_griglia_sempre();							
 				}
 			}  
 			  
@@ -401,14 +410,6 @@
 					}
 				}
 				
-				function attiva_disattiva_pannelli_nascosti(){
-					panel_liv = panel_liv ? false : true;
-					
-					$('#contenitore_campo_console').html();
-					
-					ricarica_partita();
-				}
-				
 				function Struttura_campo(){//crea struttura pagina gioco
 					return cmp_completo =	 '	<div class="col-xs-9" style="height: 100%; min-height: 598px; min-width:850; width: auto;" class="center" id="Utility">'
 									+'		<h2 class="center">Campo di gioco</h2>'
@@ -442,7 +443,10 @@
 									+'		<div class="'+(panel_liv?"center":"hidden")+'" id="Livello">'
 									+'      <h2 class="center">Liv.</h2>'
 									+'      	<p class="center">'
-									+'          	<a class="btn btn-default" href="#" role="button" onclick="carica_livello()">Liv. Successivo</a>'
+									                + bottone_Liv_successivo + " " + bottone_Vis_Nasc_griglia
+									//+'              <p style="margin: 1px 1px 1px 15px;" align="justify">'
+									//+'   				<input type="checkbox" id="vis_grillia"  name="vis_griglia" onClick="check_vis_griglia()" '+(var_vis_griglia ? 'checked="checked"':"")+' value="1"/> Visualizza griglia <br /> '
+									//+'              </p>'
 									+'          </p>'
 									+'      </div>'
 									
@@ -455,6 +459,16 @@
 									
 									+'      <br />'
 									+'	</div>'
+				}
+
+				function attiva_disattiva_pannelli_nascosti(){//nascondi/visualizza il panello
+					panel_liv = panel_liv ? false : true;
+					
+					if (livello!=null) {
+						$('#contenitore_campo_console').html();
+						
+						ricarica_partita();
+					}
 				}
 				
 				function Verifica_e_memorizza_opzioni(){//memorizza opzioni utente
@@ -486,6 +500,10 @@
 				}
 				
 				function avvia_gioco(){//avvia gioco
+					//aggiorna livello
+					livello = (livello == null) ? 1: livello;
+					mappa = (mappa == null) ? 1: mappa;
+					
 					//crea il campo
 					$('#contenitore_campo_console').html(Struttura_campo());
 					//$('#campo_totale').html(codice_campo_console);
@@ -506,6 +524,19 @@
 					
 					//carica la mappa
 					carica_livello(livello, mappa);		
+				}
+				
+
+				function visualizza_nascondi_griglia_sempre(){//visualizza nascondi griglia missioni
+				    //verifica che sia avviato
+					if (livello!=null) {var_vis_griglia = var_vis_griglia ? false : var_vis_griglia = true};
+						
+					bottone_Vis_Nasc_griglia =   '<a class="btn btn-default" href="#" role="button" onclick="visualizza_nascondi_griglia_sempre()">'
+									           + '<font size="'+size_txt_bt_pan_opzioni_nascoste+'">'
+											   + (var_vis_griglia? 'Nascondi Griglia' : 'Visualizza Griglia')
+											   + '</font></a>';
+						
+					ricarica_partita();
 				}
 				
 				function crea_griglia(){//crea la griglia del campo				
@@ -616,7 +647,7 @@
 							case "O"          :
 							case "Ovest"      :
 							case "Sinistra"   :
-                            case "Dx"         :							
+                            case "Sx"         :							
 											   pos_teorica_pers_colonna -= spostamento; 
 								break;
 							case "N-O"         :
@@ -891,11 +922,11 @@
 				
 				function sintassi_comando_errata(comando, azione, passi){//sintassi comando valida
 					return (//comando validi:
-								(azione != "Nord")          && (azione != "N")         && (azione != "Su")        && (azione != "Sopra")
+								(azione != "Nord")          && (azione != "N")       && (azione != "Su")        && (azione != "Sopra")
 							 && (azione != "Nord-Est")      && (azione != "N-E")
 							 && (azione != "Nord-Ovest")    && (azione != "N-O")
 							 
-							 && (azione != "Sud")           && (azione != "S")         && (azione != "Giu")       && (azione != "Sotto")
+							 && (azione != "Sud")           && (azione != "S")       && (azione != "Giu")       && (azione != "Sotto")
 							 && (azione != "Sud-Est")       && (azione != "S-E")
 							 && (azione != "Sud-Ovest")     && (azione != "S-O")
 							 
