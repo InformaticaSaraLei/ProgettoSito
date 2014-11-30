@@ -1,24 +1,40 @@
-<?php
+﻿<?php
 	error_reporting(0);
 	session_start();
 
 	include "IndeedAPI.php";
+	include "db_pariopp_offertelavoro.php";
+    
+
 	
 	if($_SESSION["odl_class"]=="") $_SESSION["odl_class"]="local";
 	
 	if(($_GET["odl_from"]=="web")||($_GET["odl_from"]=="local")){
 	  $_SESSION["odl_class"]=$_GET["odl_from"];
 	}
-	
 	$class=array("local"=>"","web"=>"");
 	$class[$_SESSION["odl_class"]]="class=\"active\"";  
 
+	/* ------------------ LOCAL -------------------- */
+	if($_SESSION["odl_class"]=="local"){
+
+		if($_SESSION["llimit"]=="") $_SESSION["llimit"]=10; 
+		if($_SESSION["lstart"]=="") $_SESSION["lstart"]=0; 
+		if($_SESSION["lq"]==""){ $_SESSION["q"]="Informatica"; $lq_placeholder="Professione, parole chiave o società"; } else {}
+		if($_SESSION["ll"]==""){ $_SESSION["l"]="Venezia"; $ll_placeholder="città, regione o codice postale";} else {}
+		if($_POST["llimit"]!="") $_SESSION["llimit"]=$_SESSION["llimit"]+0;
+		if($_GET["lstart"]!="") $_SESSION["lstart"]=$_GET["lstart"]+0;
+		if($_POST["lq"]!="") $_SESSION["lq"]=$_POST["lq"];
+		if($_POST["ll"]!="") $_SESSION["ll"]=$_POST["ll"];		
+		$db=new Database();
+		$offerte= $db->getOfferteLavoro($_SESSION["lstart"],$_SESSION["llimit"]);
+		$content=print_r($offerte,TRUE);
+		
+		// print_r($offerte);
+	}
+	/* ------------------- /LOCAL ------------------ */
+	/* -------------------- WEB -------------------- */
 	if($_SESSION["odl_class"]=="web"){
-
-
-		// Pass a basic query
-		// $output = $indeedAPI->query('web developer');
-		//print_r($output);
 		if($_SESSION["limit"]=="") $_SESSION["limit"]=10; 
 		if($_SESSION["start"]=="") $_SESSION["start"]=0; 
 		if($_SESSION["q"]==""){ $_SESSION["q"]="Informatica"; $q_placeholder="Professione, parole chiave o società"; } else {}
@@ -27,7 +43,6 @@
 		if($_GET["start"]!="") $_SESSION["start"]=$_GET["start"]+0;
 		if($_POST["q"]!="") $_SESSION["q"]=$_POST["q"];
 		if($_POST["l"]!="") $_SESSION["l"]=$_POST["l"];
-		
 		
 		switch($_GET["mode"]){
 			case "detail";  
@@ -59,7 +74,6 @@
 							";
 						   $pagination="";
 						   break;
-						   
 			default:
 					/* ------------- INDEED --------------- */	
 				$indeedAPI = new IndeedAPI( "6703735145249700" );
@@ -116,10 +130,10 @@
 				}
 			break;
 		}	
-			
-
 	/* ------------- INDEED --------------- */		
     }
+	/* -------------------- /WEB -------------------- */
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
