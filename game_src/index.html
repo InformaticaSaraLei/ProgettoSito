@@ -75,7 +75,7 @@
       <hr>
 
       <footer>
-        <p><A HREF="#" style="color:black; text-decoration: none;" onclick="attiva_disattiva_pannelli_nascosti()"> &copy; </A> Caroti Rubens e Daniel Vedovato 2014</p>
+        <p><A HREF="#" style="color:black; text-decoration: none;" tabindex=-1 onclick="attiva_disattiva_pannelli_nascosti()"> &copy; </A> Caroti Rubens e Daniel Vedovato 2014</p>
       </footer>
     </div> <!-- /container -->        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
         <script>window.jQuery || document.write('<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"><\/script>')</script>
@@ -87,6 +87,20 @@
         <script>
 			/*Variabili*/{
 				
+				/*Colori msg*/{
+					var col_msg_opzioni = "#C0C0C0";
+					var col_msg_liv_completato = "yellow";
+					var col_msg_obb_raggiunto = "yellow";
+					var col_msg_esec_comando = "blue";
+					var col_msg_err_comando = "red";
+				    var col_msg_pres_regole = "green";
+					var col_msg_pres_gioco = "green";
+					var col_msg_avvio_gioco = "green";
+					var col_msg_pres_gioco_completato = "green";
+					var col_msg_inizio = "green";
+					var col_msg_fine = "green";
+				}
+				
 				/*console Gioco*/{
 				    //lingua testi visualizzati:
 					var default_lingua = "IT";
@@ -97,6 +111,9 @@
 					
 					//non deve raggiungere tutti gli obbiettivi per passare di livello:
 					var var_obb_superflui = false;
+					
+					//permetti di visualizzare sempre la griglia
+					var perm_ut_mod_vis_griglia = true;
 					
 					/*Utility comando:*/{
 						//default
@@ -134,7 +151,7 @@
 														   + '<li>("Ovest", "O", "Sinistra")</li>'
 														+ "</ol><br />"
 														+ '<p style="margin: 4px 40px 4px 40px;" align="justify">nota:</p>'
-														+ '<p style="margin: 4px 40px 4px 70px;" align="justify"><font size="3"><i> non sono valide altre parole al di fuori del set indicato, a seconda delle opzioni scelte si può rendere il gioco casesensible (differenza tra maiuscoe e minuscole o meno) e tralasciare gli spazi nel comando. E\' molto importante che il comando rispetti la struttura precedentemente prsentata, il gioco accetta esclusivamente l\'inserimento/processamento di un comando alla volta.</i></font></p>'
+														+ '<p style="margin: 4px 70px 4px 70px;" align="justify"><font size="3"><i> non sono valide altre parole al di fuori del set indicato, a seconda delle opzioni scelte si può rendere il gioco casesensible (differenza tra maiuscoe e minuscole o meno) e tralasciare gli spazi nel comando. E\' molto importante che il comando rispetti la struttura precedentemente prsentata, il gioco accetta esclusivamente l\'inserimento/processamento di un comando alla volta.</i></font></p>'
 													  )},
 													  
 								  /*Presentazione Obbiettivo*/
@@ -279,7 +296,7 @@
 					data_avvio_gioco = new Date();
 					  
 					//Log:
-					var var_log = ((data_avvio_gioco.toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Start</b><br />";
+					var var_log = ((data_avvio_gioco.toTimeString()).split(' ')[0]) + " : <b style='color: "+ col_msg_inizio +";'> Start</b><br />";
 				}
 				
 				/*Bottoni*/{
@@ -301,7 +318,7 @@
 					
 					/*bottone_Vis_Nasc_griglia*/
 					var bottone_Vis_Nasc_griglia = null;
-					visualizza_nascondi_griglia_sempre();							
+					crea_agg_bottone_vis_griglia();
 				}
 			}  
 			  
@@ -315,7 +332,7 @@
 				/*Presentazioni*/{
 					function presentazione_gioco(){//presentazione gioco
 						//log:
-						var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Presentazione Gioco</b><br />";
+						var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: "+ col_msg_pres_gioco +";'> Presentazione Gioco</b><br />";
 					  
 						//bottoni:
 						var bottoni_finestra =   bottone_avvia_gioco
@@ -342,7 +359,7 @@
 					  
 					function presentazione_regole(){//presentazione regole
 						//log:
-						var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Presentazione Regole</b><br />";
+						var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: "+ col_msg_pres_regole +";'> Presentazione Regole</b><br />";
 					  
 						//bottoni:
 						var bottoni_finestra = bottone_avvia_gioco;
@@ -382,7 +399,8 @@
 					function presentazione_gioco_completato(){//presentazione fine gioco
 						/*log:*/{
 							//creo testo per log
-							var temp_log = (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: green;'> Gioco completato </b><br />";
+							var temp_log =   (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: "+ col_msg_pres_gioco_completato +";'> Presentazione fine Gioco </b><br />"
+							               + (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: "+ col_msg_fine +";'> Gioco completato </b><br />";
 							//agg. variabile
 							var_log += temp_log;
 							//agg. div
@@ -411,8 +429,9 @@
 				}
 				
 				function Struttura_campo(){//crea struttura pagina gioco
-					return cmp_completo =	 '	<div class="col-xs-9" style="height: 100%; min-height: 598px; min-width:850; width: auto;" class="center" id="Utility">'
-									+'		<h2 class="center">Campo di gioco</h2>'
+					return cmp_completo =	 
+					                 '	<div class="col-xs-9" style="height: 100%; min-height: 598px; min-width:850; width: auto;" class="center" id="Utility">'
+									+'		<h2 class="center">Campo di gioco <font size="2">[ Liv. <i id="dett_liv">'+livello+'</i> Mappa <i id="dett_mappa">'+mappa+'</i> ]</font></h2>'
 									+'		<div class="campo" id="Campo_di_gioco" overflow: scroll;> </div>'
 									+'	</div>'
 									
@@ -422,7 +441,7 @@
 									+'			<h2 class="center">Console</h2>'
 									+'          <p>Inserisci comando</p>'
 									+'		    <p class="center">'
-									+'				<input type="text" class="form-control" id="comando"> <br />'
+									+'				<input type="text" value="" class="form-control" id="comando"> <br />'
 									+'			    <a class="btn btn-default" href="#" role="button" onclick="esegui_comando()">Esegui</a>'
 									+'			    <a class="btn btn-default" href="#" role="button">Cancella</a>'
 									+'			</p>'
@@ -433,8 +452,9 @@
 									+'  			<fieldset>'
 									+'   				<legend>Opzioni:</legend>'
 									+'					<p style="margin: 1px 1px 1px 15px;" align="justify">'
-									+'   					<input id="normalize" type="checkbox" name="Normalizza" '+(temp_ut_normalizza ? 'checked="checked"':"")+' value="1"/> Non considerare gli spazi <br /> '
-									+'   					<input id="casesensible" type="checkbox" name="Caseseinsible" '+(temp_ut_case_sensitive ? 'checked="checked"':"")+' value="1"/> Non considerare maiuscole minuscole <br /> '
+									+'   					<input id="normalize" onclick="mem_opz_ut_normalizza()" type="checkbox" name="Normalizza" '+(temp_ut_normalizza ? 'checked="checked"':"")+' value="1"/> Non considerare gli spazi <br /> '
+									+'   					<input id="casesensible" onclick="mem_opz_ut_case_sensitive()" type="checkbox" name="Caseseinsible" '+(temp_ut_case_sensitive ? 'checked="checked"':"")+' value="1"/> Non considerare maiuscole minuscole <br /> '
+									+'   					<input id="vis_griglia" onclick="visualizza_nascondi_griglia_sempre()" type="checkbox" name="vis_griglia" '+(var_vis_griglia ? 'checked="checked"':"")+' value="1" '+(perm_ut_mod_vis_griglia? '' : 'disabled=”disabled”' )+'/> Visualizza sempre la griglia<br /> '
 									+'                  </p>'
 									+'  			</fieldset>'
 									+'  		</form>'
@@ -443,10 +463,7 @@
 									+'		<div class="'+(panel_liv?"center":"hidden")+'" id="Livello">'
 									+'      <h2 class="center">Liv.</h2>'
 									+'      	<p class="center">'
-									                + bottone_Liv_successivo + " " + bottone_Vis_Nasc_griglia
-									//+'              <p style="margin: 1px 1px 1px 15px;" align="justify">'
-									//+'   				<input type="checkbox" id="vis_grillia"  name="vis_griglia" onClick="check_vis_griglia()" '+(var_vis_griglia ? 'checked="checked"':"")+' value="1"/> Visualizza griglia <br /> '
-									//+'              </p>'
+									                + bottone_Liv_successivo + ' <u id="bt_vis_griglia">' + bottone_Vis_Nasc_griglia + '</u>'
 									+'          </p>'
 									+'      </div>'
 									
@@ -471,9 +488,44 @@
 					}
 				}
 				
-				function Verifica_e_memorizza_opzioni(){//memorizza opzioni utente
-					temp_ut_normalizza = (document.getElementById("normalize")).checked;
+				function mem_opz_ut_case_sensitive(){//memorizza opzione normalize utente
+					//memorizza opzione:
 					temp_ut_case_sensitive = (document.getElementById("casesensible")).checked;
+				
+					/*log:*/{
+						//genera elemento log
+						var temp_log = (((new Date()).toTimeString()).split(' ')[0]) 
+										+ " : <b style='color: "+col_msg_opzioni+";'>"
+										+ (!temp_ut_case_sensitive ? "Disattivata CaseSensible" : "Attivato CaseSensible")
+										+ "</b><br />"
+									;
+						
+						//agg var. log
+						var_log += temp_log;
+						
+						//scrive il log
+						$("#log_eventi").append(""+ temp_log);
+					}
+				}
+				
+				function mem_opz_ut_normalizza(){//memorizza opzione normalize utente
+					//memorizza opzione:
+					temp_ut_normalizza = (document.getElementById("normalize")).checked;
+				
+					/*log:*/{
+						//genera elemento log
+						var temp_log = (((new Date()).toTimeString()).split(' ')[0]) 
+										+ " : <b style='color: "+col_msg_opzioni+";'>"
+										+ (!temp_ut_normalizza ? "Disattivata Normalize" : "Attivato Normalize")
+										+ "</b><br />"
+									;
+						
+						//agg var. log
+						var_log += temp_log;
+						
+						//scrive il log
+						$("#log_eventi").append(""+ temp_log);
+					}
 				}
 				
 				function recupera_testo(lingua, tipo){//recupera il testo da visualizzare
@@ -513,7 +565,7 @@
 					/*log:*/{
 						//agg var. log
 						var_log += (((new Date()).toTimeString()).split(' ')[0]) 
-										+ " : <b style='color: green;'>"
+										+ " : <b style='color: "+ col_msg_avvio_gioco +";'>"
 										+ "  Avvio Gioco"
 										+ "</b><br />"
 									;
@@ -526,16 +578,29 @@
 					carica_livello(livello, mappa);		
 				}
 				
-
-				function visualizza_nascondi_griglia_sempre(){//visualizza nascondi griglia missioni
-				    //verifica che sia avviato
-					if (livello!=null) {var_vis_griglia = var_vis_griglia ? false : var_vis_griglia = true};
-						
+				function crea_agg_bottone_vis_griglia(){
+					//aggiorna bottone:
 					bottone_Vis_Nasc_griglia =   '<a class="btn btn-default" href="#" role="button" onclick="visualizza_nascondi_griglia_sempre()">'
 									           + '<font size="'+size_txt_bt_pan_opzioni_nascoste+'">'
 											   + (var_vis_griglia? 'Nascondi Griglia' : 'Visualizza Griglia')
 											   + '</font></a>';
-						
+				}
+				
+				function visualizza_nascondi_griglia_sempre(){//visualizza nascondi griglia missioni
+				    //verifica che sia avviato
+					var_vis_griglia = var_vis_griglia ? false : true;
+					
+					crea_agg_bottone_vis_griglia();
+					
+					/*log:*/{
+						//agg var. log
+						var_log += (((new Date()).toTimeString()).split(' ')[0]) 
+										+ " : <b style='color: "+col_msg_opzioni+";'>"
+										+ (!var_vis_griglia ? "Disattivato vis. griglia" : "Attivato vis. griglia")
+										+ "</b><br />"
+									;
+					}
+					
 					ricarica_partita();
 				}
 				
@@ -883,6 +948,11 @@
 						}
 					}
 					
+					/*Agg. livello indicato pres. testo*/{
+						$('#dett_liv').html(livello);
+						$('#dett_mappa').html(mappa);
+					}
+					
 					/*pulisci array posizioni*/{
 						posizioni=[];
 					}
@@ -987,7 +1057,7 @@
 								var temp_log =   ""
 									   + temp_or.ora_txt 
 									   + temp_or.time_elapsed
-									   + " : <b style='color: yellow;'>"
+									   + " : <b style='color: "+col_msg_obb_raggiunto+";'>"
 									   +" [" + posizione_pot_obb + "] : "
 									   + "Obbiettivo completato"
 									   +"</b><br />";
@@ -1004,10 +1074,7 @@
 				}
 
 				function recupera_comando(){//recupera il comando inserito dal giocatore
-					/*Recupera comando*/{
-						//memorizza opzioni utente:
-						Verifica_e_memorizza_opzioni();
-					
+					/*Recupera comando*/{					
 						//{com: comando, az: azione, ps: passi}
 						var comando = {com: $("#comando").val(),az: null, sp: null, err: null};
 						//rimuove gli spazi dal comando						
@@ -1076,7 +1143,7 @@
 													temp_log =   ""
 															   + data_inizio.ora_txt 
 															   + data_inizio.time_elapsed
-															   + " : <b style='color: red;'>"
+															   + " : <b style='color: "+col_msg_err_comando+";'>"
 															   + "<u>"   
 															   + comando.com
 															   + " <BIG>*</BIG>"
@@ -1118,7 +1185,7 @@
 														temp_log =   ""
 																   + data_inizio.ora_txt 
 																   + data_inizio.time_elapsed
-																   + " : <b style='color: blue;'>"
+																   + " : <b style='color: "+col_msg_esec_comando+";'>"
 																   + " [" + (posizioni[loc_arr_pos].coordinate) + "] : "
 																   + comando.com
 																   + "</b><br />";
@@ -1132,7 +1199,7 @@
 																temp_log +=  ""
 																		   + temp_or.ora_txt 
 																		   + temp_or.time_elapsed
-																		   + " : <b style='color: yellow;'>"
+																		   + " : <b style='color: +"+col_msg_liv_completato+";'>"
 																		   +" [" + (posizioni[loc_arr_pos].coordinate) + "] : "
 																		   + "Livello completato"
 																		   +"</b><br />";
@@ -1198,7 +1265,7 @@
 							   {//gioco non concluso
 								/*pulisci campo*/{
 									if (mappa > 2) //primi due livelli? 
-											 {//si 
+											 {//si
 											  pulisci_campo();
 											 }
 										else {//no
