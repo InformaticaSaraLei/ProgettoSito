@@ -57,47 +57,44 @@
         </div>
     </div>
     <!-- /.row -->
-    
+
     <!-- Content Row -->
     <?php
-      require 'lib/evento.php';
-      $em = new EventiManager();
-      $eventi = $em->getEventi();
-      foreach($eventi as $e) {
-        echo '<div class="col-md-6">'
-        echo '<div class="panel panel-default">'
-        echo '<div class="panel-heading">'
-        echo '<h4><i class="fa fa-fw fa-users">'+($e->titolo)+'</h4>'
-        echo '</div>'
-        echo '<div class="panel-body">'
-        echo '<div class="row">'
-        echo '<div class="pull-left col-md-7 col-sm-8 col-xs-12">'
-        echo '<p>'+($e->descrizione)+'</p>'
-        echo '</div>'
-        echo '<div class="pull-left col-md-5 col-sm-4 col-xs-12">'
-        echo '<img src="'+$e->link_img+'" class="img-responsive customer-img" alt="Immagine Evento">'
-        echo '</div>'
-        echo '</div>'
-        echo '<div class="row">'
-        echo '<div class="col-md-4"></div>'
-        echo '<div class="col-md-4">'
-        echo '<a href="#" class="btn btn-default text-center">Altre informazioni</a>'
-        echo '</div>'
-        echo '<div class="col-md-4"></div>'
-        echo '</div>'
-        echo '</div>'
-        echo '</div>'
-        echo '</div>'
-      }
+    require 'lib/evento.php';
+    $em = new EventiManager();
+    $eventi = $em->getEventi();
+    foreach ($eventi as $e) {
+        echo '<div class="col-md-6">';
+        echo '<div class="panel panel-default">';
+        echo '<div class="panel-heading">';
+        echo '<h4><i class="fa fa-fw fa-users">' + ($e->titolo) + '</h4>';
+        echo '</div>';
+        echo '<div class="panel-body">';
+        echo '<div class="row">';
+        echo '<div class="pull-left col-md-7 col-sm-8 col-xs-12">';
+        echo '<p>' + ($e->descrizione) + '</p>';
+        echo '</div>';
+        echo '<div class="pull-left col-md-5 col-sm-4 col-xs-12">';
+        echo '<img src="' + $e->link_img + '" class="img-responsive customer-img" alt="Immagine Evento">';
+        echo '</div>';
+        echo '</div>';
+        echo '<div class="row">';
+        echo '<div class="col-md-4"></div>';
+        echo '<div class="col-md-4">';
+        echo '<a href="#" class="btn btn-default text-center">Altre informazioni</a>';
+        echo '</div>';
+        echo '<div class="col-md-4"></div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+    }
     ?>
-</div> 
-</div>
-<!-- /.row -->
-
-
-<hr>
+    <!-- /.row -->
+    <hr>
 
 </div>
+
 <!-- /.container -->
 
 <!-- Footer -->
