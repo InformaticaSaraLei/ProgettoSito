@@ -57,60 +57,60 @@
             </ol>
         </div>
     </div>
-    
+
     <!-- /.row -->
     <!-- Content Row -->
-    
+
     <div class="row text-right">
-            <a href="calendario.html">Calendario</a>
+        <a href="calendario.html">Calendario</a>
     </div>
-    
-    
-<!-- /.row -->
-    </br>
+
+
+    <!-- /.row -->
+    <br>
     <?php
-      require 'lib/evento.php';
-      $em = new EventiManager();
-      $id = $_POST['id'];
-      $e = $em->getEventoById($id);
+    require 'lib/evento.php';
+    $em = new EventiManager();
+    $id = $_POST['id'];
+    $e = $em->getEventoById($id);
     ?>
     <div class="row">
         <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4><i class="fa fa-fw fa-file-text-o"></i>Descrizione</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="pull-left col-md-6 col-sm-7">
-                            <h4>Descrizione dell'evento</h4>
-                            <p><?php echo $e->descrizione ?></p>
-                        </div>
-                        <div class="col-md-1"></div>
-                        <div class="pull-left col-md-5 col-sm-5 col-xs-12">
+            <div class="panel-heading">
+                <h4><i class="fa fa-fw fa-file-text-o"></i>Descrizione</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="pull-left col-md-6 col-sm-7">
+                        <h4>Descrizione dell'evento</h4>
+
+                        <p><?php echo $e->descrizione ?></p>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="pull-left col-md-5 col-sm-5 col-xs-12">
                         <img src="<?php echo $e->link_img ?>" class="img-responsive customer-img" alt="Immagine Evento">
-                        </div>
                     </div>
                 </div>
-                </br>
-                <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-clock-o"></i>Luogo e date</h4>
-                </div>
-                <div class="panel-body">
+            </div>
+            <br>
+            <div class="panel-heading">
+                <h4><i class="fa fa-fw fa-clock-o"></i>Luogo e date</h4>
+            </div>
+            <div class="panel-body">
                 Luogo: <?php $e->provincia + ' ' + $e->comune + ' ' + $e->indirizzo ?>
-                    </br>
-                    Data inizio evento: <?php $e->inizio?> alle ore: <?php $e->ora_inizio ?>
-                    </br>
-                    Data fine evento: <?php $e->fine?> alle ore: <?php $e->orario_fine ?>
-                </div>
-                    
+                <br>
+                Data inizio evento: <?php $e->inizio ?> alle ore: <?php $e->ora_inizio ?>
+                <br>
+                Data fine evento: <?php $e->fine ?> alle ore: <?php $e->orario_fine ?>
+            </div>
+
         </div>
     </div>
 
-<hr>
+    <hr>
 
 
-
-<!-- End Footer -->
+    <!-- End Footer -->
 
 </div>
 <!-- /.container -->

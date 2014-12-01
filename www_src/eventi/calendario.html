@@ -9,9 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Eventi - Informatica sarà lei!</title>
-	<!-- jQuery -->
-	<script src="../js/jquery.js"></script>
+    <title>Eventi - Informatica sarï¿½ lei!</title>
+    <!-- jQuery -->
+    <script src="../js/jquery.js"></script>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -37,37 +37,37 @@
             $("#footer").load("../footer.html");
         });
     </script>
-	<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
-	<script  src="fullcalendar/lib/jquery.min.js"></script>
-	<script  src="fullcalendar/lib/moment.min.js"></script>
-	<script  src="fullcalendar/fullcalendar.js"></script>
-	<script src="fullcalendar/lang/it.js"></script>
-	<script >
-		$(document).ready(function() {
-		
-			$('#calendar').fullCalendar({
-				header: {
-					left: 'prev,next today',
-					center: 'title',
-					right: 'month,agendaWeek,agendaDay'
-				},
-				lang: 'it',
-				defaultDate: new Date(),
-				editable: true,
-				eventLimit: true, // allow "more" link when too many events
-				events: {
-					url: 'fullcalendar/php/get-events.php',
-					error: function() {
-						$('#script-warning').show();
-					}
-				},
-				loading: function(bool) {
-					$('#loading').toggle(bool);
-				}
-			});
-			
-		});
-	</script>
+    <link rel='stylesheet' href='fullcalendar/fullcalendar.css'/>
+    <script src="fullcalendar/lib/jquery.min.js"></script>
+    <script src="fullcalendar/lib/moment.min.js"></script>
+    <script src="fullcalendar/fullcalendar.js"></script>
+    <script src="fullcalendar/lang/it.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                lang: 'it',
+                defaultDate: new Date(),
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                events: {
+                    url: 'fullcalendar/php/get-events.php',
+                    error: function () {
+                        $('#script-warning').show();
+                    }
+                },
+                loading: function (bool) {
+                    $('#loading').toggle(bool);
+                }
+            });
+
+        });
+    </script>
 </head>
 <body>
 <div id="navigation_bar"></div>
@@ -85,8 +85,8 @@
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
                 </li>
-                <li ><a href="index.html">Eventi</a></li>
-				<li class="active">Calendario eventi</li>
+                <li><a href="index.html">Eventi</a></li>
+                <li class="active">Calendario eventi</li>
             </ol>
         </div>
     </div>
@@ -94,19 +94,19 @@
 
     <!-- Content Row -->
     <div class="row">
-       <div id='script-warning'>
-		<code>php/get-events.php</code> must be running.
-		</div>
+        <div id='script-warning'>
+            <code>php/get-events.php</code> must be running.
+        </div>
 
-		<div id='loading'>loading...</div>
+        <div id='loading'>loading...</div>
 
-		<div id='calendar'></div>
+        <div id='calendar'></div>
 
 
-	</div>
-	<!-- /.row -->
+    </div>
+    <!-- /.row -->
 
-<hr>
+    <hr>
 
 </div>
 <!-- /.container -->
@@ -116,7 +116,6 @@
 <!--- Inserimento navbar ---->
 
 <!-- End Footer -->
-
 
 
 <!-- Bootstrap Core JavaScript -->
