@@ -78,7 +78,7 @@
                 $oraInizio = substr($txtInizio, 12);
                 $dataFine = substr($txtFine, 0, 10);
                 $oraFine = substr($txtFine, 12);
-                $id_utente = "";// TODO Cambiare questa riga
+                $id_utente = "";// Passato con metodo POST 
 
                 $res = $em->creaEvento($titolo, $descrizione, $contenuto, $dataInizio, $oraInizio, $dataFine, $oraFine, $provincia, $comune, $indirizzo, $linkImg, $id_utente);
                 stampaEsito($res);
@@ -90,8 +90,7 @@
             }
 
 
-            public
-            function stampaEsito($esito)
+            public function stampaEsito($esito)
             {
                 echo '<h1 class="section-heading">';
                 if ($esito) {
