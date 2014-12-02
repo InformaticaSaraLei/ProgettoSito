@@ -5,9 +5,9 @@ class Connettore
     // parametri per la connessione al database
     private $nomehost = "localhost";
     private $port = "";
-    private $nomeuser = "root";
-    private $password = "root";
-    private $nomedb = "eventi";
+    private $nomeuser = "pariopp-owner";
+    private $password = "";
+    private $nomedb = "pariopp";
 
     private $connessione = null;
 
