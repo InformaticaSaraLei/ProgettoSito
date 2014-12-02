@@ -40,7 +40,7 @@
 		<item>
 			<title><![CDATA[<p>".$array['news']."</p>]]></title>
 			<description><![CDATA[<p>".$array['snippet']."</p>]]></description>
-			<pubDate>".date('D, d M Y H:i:s O',$array['data_inserimento'])."</pubDate>
+			<pubDate>".date('D, d M Y H:i:s O',$array['data'])."</pubDate>
 		</item>";
 	}
 	echo "</channel></rss>";
