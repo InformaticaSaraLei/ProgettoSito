@@ -80,25 +80,26 @@
                 $oraFine = substr($txtFine, 12);
                 $id_utente = "";// Passato con metodo POST 
 
-                $res = $em->creaEvento($titolo, $descrizione, $contenuto, $dataInizio, $oraInizio, $dataFine, $oraFine, $provincia, $comune, $indirizzo, $linkImg, $id_utente);
-                stampaEsito($res);
+                $res = $em->creaEvento($titolo, $descrizione, $contenuto, $dataInizio, $oraInizio, $dataFine, $oraFine,
+            $provincia, $comune, $indirizzo, $linkImg, $id_utente);
+            stampaEsito($res);
             } elseif ($op == 'canc') {
-                // Cancellazione evento
-                $id = $_POST['id'];
-                $res = $em->cancellaEvento($id);
-                stampaEsito($res);
+            // Cancellazione evento
+            $id = $_POST['id'];
+            $res = $em->cancellaEvento($id);
+            stampaEsito($res);
             }
 
 
             public function stampaEsito($esito)
             {
-                echo '<h1 class="section-heading">';
-                if ($esito) {
-                    echo "Azione riuscita";
-                } else {
-                    echo "Azione fallita";
-                }
-                echo '</h1>';
+            echo '<h1 class="section-heading">';
+            if ($esito) {
+            echo "Azione riuscita";
+            } else {
+            echo "Azione fallita";
+            }
+            echo '</h1>';
             }
 
             ?>

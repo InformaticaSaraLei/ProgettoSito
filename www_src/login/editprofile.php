@@ -5,17 +5,17 @@ include_once("lib/admincontroller.php");
 
 session_start();
 
-$user=new UsersController();
+$user = new UsersController();
 
-if (isset($_SESSION['login'])) {  
-        $userid = $_SESSION['login'];
-        $name = $user->GetName($userid);
-        $surname = $user->GetSurname($userid);
-        $email = $user->GetEmail($userid);
-        $username = $user->GetUsername($userid);
+if (isset($_SESSION['login'])) {
+    $userid = $_SESSION['login'];
+    $name = $user->GetName($userid);
+    $surname = $user->GetSurname($userid);
+    $email = $user->GetEmail($userid);
+    $username = $user->GetUsername($userid);
 } else {
-        header("Location: error.php?error=5");
-        die();
+    header("Location: error.php?error=5");
+    die();
 }
 
 ?>
@@ -84,36 +84,44 @@ if (isset($_SESSION['login'])) {
     <!-- Content Row -->
     <div class="row">
         <div class="col-lg-12">
-        <h2>Modifica informazioni:</h2>
-        <p>In questa pagina puoi modificare le tue informazioni personali.</p>
-        <form action="" method="POST">
-        <table>
-          <tr>
-            <td><b>Nome:</b></td><td><input type="text" name="name" value="<? echo $name; ?>"></td>
-          </tr>
-          <tr>
-            <td><b>Cognome:</b></td><td><input type="text" name="surname" value="<? echo $surname; ?>"></td>
-          </tr>
-          <tr>
-            <td><b>Email:</b></td><td><input type="text" name="email" value="<? echo $email; ?>"></td>
-          </tr>
-          <tr>
-            <td><b>Username:</b></td><td><input type="text" name="username" value="<? echo $username; ?>"></td>
-          </tr>
-          <tr>
-            <td><p>Modifica la password o lascia i campi vuoti:</p></td>
-          </tr>
-          <tr>
-            <td><b>Password:</b></td><td><input type="password" name="pass1"></td>
-          </tr>
-          <tr>
-            <td><b>Coferma password:</b></td><td><input type="password" name="pass2"></td>
-          </tr>
-          <tr>
-            <td><input type="submit" name="change" value="Modifica"></td>
-          </tr>
-        </table>
-        </form>
+            <h2>Modifica informazioni:</h2>
+
+            <p>In questa pagina puoi modificare le tue informazioni personali.</p>
+
+            <form action="" method="POST">
+                <table>
+                    <tr>
+                        <td><b>Nome:</b></td>
+                        <td><input type="text" name="name" value="<? echo $name; ?>"></td>
+                    </tr>
+                    <tr>
+                        <td><b>Cognome:</b></td>
+                        <td><input type="text" name="surname" value="<? echo $surname; ?>"></td>
+                    </tr>
+                    <tr>
+                        <td><b>Email:</b></td>
+                        <td><input type="text" name="email" value="<? echo $email; ?>"></td>
+                    </tr>
+                    <tr>
+                        <td><b>Username:</b></td>
+                        <td><input type="text" name="username" value="<? echo $username; ?>"></td>
+                    </tr>
+                    <tr>
+                        <td><p>Modifica la password o lascia i campi vuoti:</p></td>
+                    </tr>
+                    <tr>
+                        <td><b>Password:</b></td>
+                        <td><input type="password" name="pass1"></td>
+                    </tr>
+                    <tr>
+                        <td><b>Coferma password:</b></td>
+                        <td><input type="password" name="pass2"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="change" value="Modifica"></td>
+                    </tr>
+                </table>
+            </form>
         </div>
     </div>
     <!-- /.row -->
@@ -146,9 +154,9 @@ if (isset($_SESSION['login'])) {
 <?php
 
 if (isset($_POST[change])) {
-        $user->EditProfile($userid);
-        header("Location: profile.php");
-        die();
+    $user->EditProfile($userid);
+    header("Location: profile.php");
+    die();
 }
 
 ?>

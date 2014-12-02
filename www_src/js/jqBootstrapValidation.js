@@ -679,7 +679,7 @@
                 },
                 validate: function ($this, value, validator) {
                     return (!validator.regex.test(value) && !validator.negative)
-                        || (validator.regex.test(value) && validator.negative);
+                    || (validator.regex.test(value) && validator.negative);
                 }
             },
             required: {
@@ -689,7 +689,7 @@
                 },
                 validate: function ($this, value, validator) {
                     return !!(value.length === 0 && !validator.negative)
-                        || !!(value.length > 0 && validator.negative);
+                    || !!(value.length > 0 && validator.negative);
                 },
                 blockSubmit: true
             },
@@ -704,7 +704,7 @@
                 },
                 validate: function ($this, value, validator) {
                     return (value !== validator.element.val() && !validator.negative)
-                        || (value === validator.element.val() && validator.negative);
+                    || (value === validator.element.val() && validator.negative);
                 },
                 blockSubmit: true
             },
@@ -715,7 +715,7 @@
                 },
                 validate: function ($this, value, validator) {
                     return (parseFloat(value, 10) > parseFloat(validator.max, 10) && !validator.negative)
-                        || (parseFloat(value, 10) <= parseFloat(validator.max, 10) && validator.negative);
+                    || (parseFloat(value, 10) <= parseFloat(validator.max, 10) && validator.negative);
                 }
             },
             min: {
@@ -725,7 +725,7 @@
                 },
                 validate: function ($this, value, validator) {
                     return (parseFloat(value) < parseFloat(validator.min) && !validator.negative)
-                        || (parseFloat(value) >= parseFloat(validator.min) && validator.negative);
+                    || (parseFloat(value) >= parseFloat(validator.min) && validator.negative);
                 }
             },
             maxlength: {
@@ -735,7 +735,7 @@
                 },
                 validate: function ($this, value, validator) {
                     return ((value.length > validator.maxlength) && !validator.negative)
-                        || ((value.length <= validator.maxlength) && validator.negative);
+                    || ((value.length <= validator.maxlength) && validator.negative);
                 }
             },
             minlength: {
@@ -745,7 +745,7 @@
                 },
                 validate: function ($this, value, validator) {
                     return ((value.length < validator.minlength) && !validator.negative)
-                        || ((value.length >= validator.minlength) && validator.negative);
+                    || ((value.length >= validator.minlength) && validator.negative);
                 }
             },
             maxchecked: {
@@ -759,7 +759,7 @@
                 },
                 validate: function ($this, value, validator) {
                     return (validator.elements.filter(":checked").length > validator.maxchecked && !validator.negative)
-                        || (validator.elements.filter(":checked").length <= validator.maxchecked && validator.negative);
+                    || (validator.elements.filter(":checked").length <= validator.maxchecked && validator.negative);
                 },
                 blockSubmit: true
             },
@@ -774,7 +774,7 @@
                 },
                 validate: function ($this, value, validator) {
                     return (validator.elements.filter(":checked").length < validator.minchecked && !validator.negative)
-                        || (validator.elements.filter(":checked").length >= validator.minchecked && validator.negative);
+                    || (validator.elements.filter(":checked").length >= validator.minchecked && validator.negative);
                 },
                 blockSubmit: true
             }

@@ -1,4 +1,4 @@
-@media(min-width:768px) {
+@media (min-width: 768px) {
     section {
         padding: 100px 0;
     }
@@ -76,11 +76,11 @@ h3 {
     max-width: 100%;
 }
 
-.panel{
+.panel {
     height: 340px;
 }
 
-#caricamento-progetti{
+#caricamento-progetti {
     margin-bottom: 370px;
     width: 101%;
 }
