@@ -36,7 +36,7 @@ class EventiManager
 {
     private static $queryInserimento = "INSERT INTO agendaeventi (TITOLO, DESCRIZIONE, CONTENUTO, INIZIO, FINE, PROVINCIA, COMUNE, INDIRIZZO, IMG_NOME, FK_INSERITO_DA) VALUES (?,?,?,?,?,?,?,?,?,?)";
     private static $queryCancellazione = "DELETE FROM agendaeventi WHERE ID = ?";
-    private static $queryOttieniEventi = "SELECT * FROM agendaeventi ORDER BY INIZIO, ORA_INIZIO LIMIT ?,?";
+    private static $queryOttieniEventi = "SELECT * FROM agendaeventi ORDER BY INIZIO LIMIT ?,?";
     private static $queryCercaPerData = "SELECT * FROM agendaeventi WHERE INIZIO <= ? AND FINE >= ?";
     private static $queryRicercaPerID = "SELECT * FROM agendaeventi WHERE ID = ?";
     private $conn;
@@ -161,7 +161,7 @@ class EventiManager
      * Controlla se i parametri sono validi.
      * Restituisce true se e' presente almeno un parametro vuoto, false altrimenti.
      */
-    private function isEmpty(...$params)
+    private function isEmpty(...$params)// potrebbe non essere suportato (...) da php < 5.6
     {
         foreach ($params as $p) {
             if (!isset($str) or strlen($str) == 0) {
