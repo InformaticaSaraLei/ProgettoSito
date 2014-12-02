@@ -5,22 +5,24 @@ class Evento
 {
     public $id;
     public $titolo;
+    public $descrizione;
+    public $contenuto;
+    public $inizio;
+    public $fine;
+    public $provincia;
+    public $comune;
+    public $indirizzo;
     public $link_img;
-    public $data_inizio;
-    public $data_fine;
-    public $luogo;
-    public $corpo;
+    public $id_utente;
 
-    public function __construct($id, $titolo, $descrizione, $contenuto, $inizio, $oraInizio, $fine, $orarioFine, $provincia, $comune, $indirizzo, $img_nomefile, $id_utente)
+    public function __construct($id, $titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $img_nomefile, $id_utente)
     {
         $this->id = $id;
         $this->titolo = $titolo;
         $this->descrizione = $descrizione;
         $this->contenuto = $contenuto;
         $this->inizio = $inizio;
-        $this->ora_inizio = $ora_inizio;
         $this->fine = $fine;
-        $this->orario_fine = $orario_fine;
         $this->provincia = $provincia;
         $this->comune = $comune;
         $this->indirizzo = $indirizzo;
