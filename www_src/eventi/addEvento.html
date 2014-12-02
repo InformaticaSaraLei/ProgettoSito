@@ -47,116 +47,118 @@
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Eventi
-                <small>Aggiungi evento</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="../index.html">Home</a>
-                </li>
-                <li><a href="listaEventi.html">Eventi</a></li>
-                <li class="active">Aggiungi evento</li>
-            </ol>
+                <h1 class="page-header">Eventi
+                    <small>Aggiungi evento</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="../index.html">Home</a>
+                    </li>
+                    <li><a href="listaEventi.html">Eventi</a></li>
+                    <li class="active">Aggiungi evento</li>
+                </ol>
+            </div>
         </div>
-    </div>
-
-    <!-- /.row -->
-
-    <div class="row">
-        <form action="esito.php" method="POST">
-            <fieldset>
-
-                <div class="control-group">
-                    <label class="control-label" for="txtTitolo">Titolo</label>
-
-                    <div class="controls">
-                        <input id="txtTitolo" name="txtTitolo" placeholder="Titolo dell'evento" class="input-xxlarge"
-                               type="text">
-
+    
+        <!-- /.row -->
+    
+        
+            <form action="esito.php" method="POST">
+                <fieldset>
+                    <div class="row">
+                        <div class="pull-left col-lg-6 col-md-12">
+                            <div class="control-group">
+                                <label class="control-label" for="txtTitolo">Titolo</label>
+            
+                                <div class="controls">
+                                    <input id="txtTitolo" name="txtTitolo" placeholder="Titolo dell'evento" class="input-xxlarge"
+                                           type="text">
+            
+                                </div>
+                            </div>
+            
+                            <div class="control-group">
+                                <label class="control-label" for="txtDescrizione">Descrizione</label>
+            
+                                <div class="controls">
+                                    <input id="txtDescrizione" name="txtDescrizione" placeholder="Breve descrizione dell'evento"
+                                           class="input-xxlarge" type="text">
+            
+                                </div>
+                            </div>
+            
+                            <div class="control-group">
+                                <label class="control-label" for="txtLinkImmagine">Link immagine</label>
+            
+                                <div class="controls">
+                                    <input id="txtLinkImmagine" name="txtLinkImmagine" placeholder="Link all'immagine di copertina"
+                                           class="input-xxlarge" type="text">
+            
+                                </div>
+                            </div>
+            
+                            <div class="control-group">
+                                <label class="control-label" for="txtInizio">Inizio</label>
+            
+                                <div class="controls">
+                                    <input id="txtInizio" name="txtInizio" placeholder="Inizio dell'evento" class="input-xlarge"
+                                           type="text">
+            
+                                    <p class="help-block">Formato: YYYY-MM-DD hh:mm</p>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="txtFine">Fine</label>
+            
+                                <div class="controls">
+                                    <input id="txtFine" name="txtFine" placeholder="Fine dell'evento" class="input-xlarge"
+                                           type="text">
+            
+                                    <p class="help-block">Formato: YYYY-MM-DD hh:mm</p>
+                                </div>
+                            </div>
+                        </div>    
+                        <div class="pull-left col-lg-6 col-md-12">
+                            <div class="control-group">
+                                <label class="control-label" for="txtProvincia">Provincia</label>
+            
+                                <div class="controls">
+                                    <input id="txtProvincia" name="txtProvincia" placeholder="Provincia dove si tiene l'evento"
+                                           class="input-xxlarge" type="text">
+            
+                                </div>
+                            </div>
+            
+                            <div class="control-group">
+                                <label class="control-label" for="txtComune">Comune</label>
+            
+                                <div class="controls">
+                                    <input id="txtComune" name="txtComune" placeholder="Comune dove si tiene l'evento"
+                                           class="input-xxlarge" type="text">
+            
+                                </div>
+                            </div>
+            
+                            <div class="control-group">
+                                <label class="control-label" for="txtIndirizzo">Indirizzo</label>
+            
+                                <div class="controls">
+                                    <input id="txtIndirizzo" name="txtIndirizzo" placeholder="Indirizzo dove si tiene l'evento"
+                                           class="input-xxlarge" type="text">
+            
+                                </div>
+                            </div>
                     </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="txtDescrizione">Descrizione</label>
-
-                    <div class="controls">
-                        <input id="txtDescrizione" name="txtDescrizione" placeholder="Breve descrizione dell'evento"
-                               class="input-xxlarge" type="text">
-
+                    <div class="row">
+                        <div class="control-group col-lg-12">
+                            <label class="control-label" for="txaContenuto">Contenuto</label>
+            
+                            <div class="controls">
+                                <textarea id="txaContenuto" name="txaContenuto"></textarea>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="txtLinkImmagine">Link immagine</label>
-
-                    <div class="controls">
-                        <input id="txtLinkImmagine" name="txtLinkImmagine" placeholder="Link all'immagine di copertina"
-                               class="input-xxlarge" type="text">
-
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="txtInizio">Inizio</label>
-
-                    <div class="controls">
-                        <input id="txtInizio" name="txtInizio" placeholder="Inizio dell'evento" class="input-xlarge"
-                               type="text">
-
-                        <p class="help-block">Formato: YYYY-MM-DD hh:mm</p>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="txtFine">Fine</label>
-
-                    <div class="controls">
-                        <input id="txtFine" name="txtFine" placeholder="Fine dell'evento" class="input-xlarge"
-                               type="text">
-
-                        <p class="help-block">Formato: YYYY-MM-DD hh:mm</p>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="txtProvincia">Provincia</label>
-
-                    <div class="controls">
-                        <input id="txtProvincia" name="txtProvincia" placeholder="Provincia dove si tiene l'evento"
-                               class="input-xxlarge" type="text">
-
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="txtComune">Comune</label>
-
-                    <div class="controls">
-                        <input id="txtComune" name="txtComune" placeholder="Comune dove si tiene l'evento"
-                               class="input-xxlarge" type="text">
-
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="txtIndirizzo">Indirizzo</label>
-
-                    <div class="controls">
-                        <input id="txtIndirizzo" name="txtIndirizzo" placeholder="Indirizzo dove si tiene l'evento"
-                               class="input-xxlarge" type="text">
-
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="txaContenuto">Contenuto</label>
-
-                    <div class="controls">
-                        <textarea id="txaContenuto" name="txaContenuto"></textarea>
-                    </div>
-                </div>
-
-            </fieldset>
-        </form>
+                </fieldset>
+            </form>
     </div>
     <hr>
 
