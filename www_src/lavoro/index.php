@@ -25,10 +25,131 @@
 		if($_POST["llimit"]!="") $_SESSION["llimit"]=$_SESSION["llimit"]+0;
 		if($_GET["lstart"]!="") $_SESSION["lstart"]=$_GET["lstart"]+0;
 		if($_POST["lq"]!="") $_SESSION["lq"]=$_POST["lq"];
-		if($_POST["ll"]!="") $_SESSION["ll"]=$_POST["ll"];		
+		if($_POST["ll"]!="") $_SESSION["ll"]=$_POST["ll"];
+		
+		
+		
+		switch($_POST["action"]){
+			case "insert"  : // ---- insertOpportunita
+			                 $_SESSION["action"]="";
+							 $content.="<b>insert<br>";
+							 break;
+			case "update"  : // ---- updateOpportunita
+			                 $_SESSION["action"]="";
+							 $content.="<b>update<br>";
+							 break;
+		    case "delete"  : // ---- deleteOpportunita
+			                 $_SESSION["action"]="";
+							 $content.="<b>delete<br>";
+							 break;
+		}
+		
+		switch($_GET["action"]){
+			case "insert"  : $_SESSION["action"]="insert";
+			$content.="<br><br>
+
+
+								<form class=\"form-horizontal\" role=\"form\" method=\"POST\">
+								  <div class=\"form-group\" draggable=\"true\">
+									<div class=\"col-sm-2\">
+									  <label for=\"TITOLO_LAVORO\" class=\"control-label\">TITOLO</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input type=\"text\" class=\"form-control\" id=\"TITOLO_LAVORO\" placeholder=\"Titolo opportunità\">
+									</div>
+								  </div>
+								  <div class=\"form-group\" draggable=\"true\">
+									<div class=\"col-sm-2\">
+									  <label for=\"TIPO_CONTRATTO\" class=\"control-label\">CONTRATTO</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input type=\"text\" class=\"form-control\" id=\"TIPO_CONTRATTO\" placeholder=\"Tipo contratto\">
+									</div>
+								  </div>
+								  
+								  <div class=\"form-group\" draggable=\"true\">
+									<div class=\"col-sm-2\">
+									  <label for=\"AZIENDA_NOME\" class=\"control-label\">AZIENDA</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input type=\"text\" class=\"form-control\" id=\"AZIENDA_NOME\" placeholder=\"Azienda proponente\">
+									</div>
+								  </div>								  
+								  
+								  <div class=\"form-group\" draggable=\"true\">
+									<div class=\"col-sm-2\">
+									  <label for=\"AZIENDA_PROVINCIA\" class=\"control-label\">PROVINCIA</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input type=\"text\" class=\"form-control\" id=\"AZIENDA_PROVINCIA\" placeholder=\"Provincia\">
+									</div>
+								  </div>									  
+						
+								  <div class=\"form-group\" draggable=\"true\">
+									<div class=\"col-sm-2\">
+									  <label for=\"AZIENDA_CITTA\" class=\"control-label\">CITTA</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input type=\"text\" class=\"form-control\" id=\"AZIENDA_CITTA\" placeholder=\"Città\">
+									</div>
+								  </div>	
+						
+								  <div class=\"form-group\" draggable=\"true\">
+									<div class=\"col-sm-2\">
+									  <label for=\"AZIENDA_LATITUDINE\" class=\"control-label\">LATITUDINE</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input type=\"text\" class=\"form-control\" id=\"AZIENDA_LATITUDINE\" placeholder=\"Latitudine\">
+									</div>
+								  </div>						
+						
+								  <div class=\"form-group\" draggable=\"true\">
+									<div class=\"col-sm-2\">
+									  <label for=\"AZIENDA_LONGITUDINE\" class=\"control-label\">LONGITUDINE</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input type=\"text\" class=\"form-control\" id=\"AZIENDA_LONGITUDINE\" placeholder=\"Longitudine\">
+									</div>
+								  </div>												
+						
+								  <div class=\"form-group\">
+									<div class=\"col-sm-2\">
+									  <label for=\"inputEmail\" class=\"control-label\">EMAIL</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input type=\"email\" class=\"form-control\" id=\"inputEmail\" placeholder=\"Email di contatto\">
+									</div>
+								  </div>
+								  <div class=\"form-group\">
+									<div class=\"col-sm-2\">
+									  <label for=\"inputFonte\" class=\"control-label\">FONTE</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input type=\"text\" class=\"form-control\" id=\"inputFonte\" placeholder=\"Fonte dell'opportunità\">
+									</div>
+								  </div>
+								  <div class=\"form-group\">
+									<div class=\"col-sm-offset-2 col-sm-10\">
+									  <button type=\"submit\" class=\"btn btn-warning pull-right\" draggable=\"true\">Salva</button>
+									</div>
+								  </div>
+								  <input type=\"hidden\" name=\"action\" value=\"".$_SESSION["action"]."\">
+								</form>
+
+
+					 			
+			";
+			
+							 break;
+			default        : $_SESSION["action"]="";
+							 break;
+		}
 		$db=new Database();
 		$offerte= $db->getOfferteLavoro($_SESSION["lstart"],$_SESSION["llimit"]);
-		$content=print_r($offerte,TRUE);
+		if($_SESSION["action"]!="insert"){
+			$content.="<a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a>";
+		}		
+		$content.=print_r($offerte,TRUE);
 		
 		// print_r($offerte);
 	}

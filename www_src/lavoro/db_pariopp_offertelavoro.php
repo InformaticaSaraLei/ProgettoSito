@@ -2,8 +2,8 @@
 
 class Database {
 	public $db_host="localhost";
-	public $db_user="pariopp";
-	public $db_password="pariopp";
+	public $db_user="pariopp-owner";
+	public $db_password="";
 	public $db_name="pariopp";
 	public $table_offertelavoro="offertelavoro";
 	public $table_offertelavorostati="offertelavorostati";
