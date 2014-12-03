@@ -5,6 +5,33 @@
 	include "IndeedAPI.php";
 	include "db_pariopp_offertelavoro.php";
     
+	function buildNationOptions($elenco="",$selectedValue=""){
+		// print_r($elenco);
+		$options="<option value=\"\" selected>Nazione dell'opportunità di lavoro";
+		foreach($elenco as $nazione)
+			// print_r($nazione);
+			if($selectedValue==$nazione["ID"]){
+				print $selectedValue."==".$nazione["ID"]."<br>";
+				$options.="<option value=\"".$nazione["ID"]."\" selected>".$nazione["DESCRIZIONE"];
+				}
+			else
+				$options.="<option value=\"".$nazione["ID"]."\">".$nazione["DESCRIZIONE"];
+		return $options;
+	}
+	
+	function buildStatiOptions($elenco="",$selectedValue=""){
+
+		foreach($elenco as $stato)
+
+			if($selectedValue==$stato["ID"]){
+				print $selectedValue."==".$stato["ID"]."<br>";
+				$options.="<option value=\"".$stato["ID"]."\" selected>".$stato["STATO"];
+				}
+			else
+				$options.="<option value=\"".$stato["ID"]."\">".$stato["STATO"];
+		return $options;
+	}	
+	
 
 	
 	if($_SESSION["odl_class"]=="") $_SESSION["odl_class"]="local";
@@ -27,35 +54,60 @@
 		if($_POST["lq"]!="") $_SESSION["lq"]=$_POST["lq"];
 		if($_POST["ll"]!="") $_SESSION["ll"]=$_POST["ll"];
 		
-		
+		$db=new Database();
+		$offerte= $db->getOfferteLavoro($_SESSION["lstart"],$_SESSION["llimit"]);
+		$nazioni=$db->getNazioni();
+		$stati=$db->getStatiOpportunita();
 		
 		switch($_POST["action"]){
 			case "insert"  : // ---- insertOpportunita
 			                 $_SESSION["action"]="";
+							 $_GET["action"]="";
 							 $content.="<b>insert<br>";
+							 print_r($_POST);
 							 break;
 			case "update"  : // ---- updateOpportunita
 			                 $_SESSION["action"]="";
+							 $_GET["action"]="";
 							 $content.="<b>update<br>";
+							  print_r($_POST);
 							 break;
 		    case "delete"  : // ---- deleteOpportunita
 			                 $_SESSION["action"]="";
+							 $_GET["action"]="";
 							 $content.="<b>delete<br>";
 							 break;
 		}
 		
 		switch($_GET["action"]){
+			case "update"  : $_SESSION["action"]="update";
+							 $action_to_do=true;
+							 break;
 			case "insert"  : $_SESSION["action"]="insert";
-			$content.="<br><br>
+							 $action_to_do=true;
+							 break;
+			case "delete"  : $_SESSION["action"]="delete";
+							 $action_to_do=false;
+							 break;
+			default        : $action_to_do=false;
+			                 $_SESSION["action"]="";
+							 break;
+		}
+		if($action_to_do){
+		    $content.="<br><br>
 
-
-								<form class=\"form-horizontal\" role=\"form\" method=\"POST\">
+					<div class=\"panel panel-default\">
+						<div class=\"panel-heading\">
+							<h3 class=\"panel-title\">INSERIMENTO OPPORTUNITA'</h3>
+						</div>
+						<div class=\"panel-body\">
+								<form class=\"form-horizontal\" role=\"form\" method=\"POST\" target=\"index.php\">
 								  <div class=\"form-group\" draggable=\"true\">
 									<div class=\"col-sm-2\">
 									  <label for=\"TITOLO_LAVORO\" class=\"control-label\">TITOLO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input type=\"text\" class=\"form-control\" id=\"TITOLO_LAVORO\" placeholder=\"Titolo opportunità\">
+									  <input name=\"TITOLO_LAVORO\" type=\"text\" class=\"form-control\" id=\"TITOLO_LAVORO\" placeholder=\"Titolo opportunità\">
 									</div>
 								  </div>
 								  <div class=\"form-group\" draggable=\"true\">
@@ -63,7 +115,7 @@
 									  <label for=\"TIPO_CONTRATTO\" class=\"control-label\">CONTRATTO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input type=\"text\" class=\"form-control\" id=\"TIPO_CONTRATTO\" placeholder=\"Tipo contratto\">
+									  <input name=\"TIPO_CONTRATTO\" type=\"text\" class=\"form-control\" id=\"TIPO_CONTRATTO\" placeholder=\"Tipo contratto\">
 									</div>
 								  </div>
 								  
@@ -72,16 +124,26 @@
 									  <label for=\"AZIENDA_NOME\" class=\"control-label\">AZIENDA</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input type=\"text\" class=\"form-control\" id=\"AZIENDA_NOME\" placeholder=\"Azienda proponente\">
+									  <input name=\"AZIENDA_NOME\" type=\"text\" class=\"form-control\" id=\"AZIENDA_NOME\" placeholder=\"Azienda proponente\">
 									</div>
 								  </div>								  
+								  
+								  
+								  <div class=\"form-group\" draggable=\"true\">
+									<div class=\"col-sm-2\">
+									  <label for=\"FK_NAZIONE\" class=\"control-label\">NAZIONE</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <select name=\"FK_NAZIONE\" class=\"form-control\" id=\"FK_NAZIONE\" placeholder=\"Nazione\">".buildNationOptions($nazioni,"")."</select>
+									</div>
+								  </div>									  
 								  
 								  <div class=\"form-group\" draggable=\"true\">
 									<div class=\"col-sm-2\">
 									  <label for=\"AZIENDA_PROVINCIA\" class=\"control-label\">PROVINCIA</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input type=\"text\" class=\"form-control\" id=\"AZIENDA_PROVINCIA\" placeholder=\"Provincia\">
+									  <input name=\"AZIENDA_PROVINCIA\" type=\"text\" class=\"form-control\" id=\"AZIENDA_PROVINCIA\" placeholder=\"Provincia\">
 									</div>
 								  </div>									  
 						
@@ -90,7 +152,7 @@
 									  <label for=\"AZIENDA_CITTA\" class=\"control-label\">CITTA</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input type=\"text\" class=\"form-control\" id=\"AZIENDA_CITTA\" placeholder=\"Città\">
+									  <input name=\"AZIENDA_CITTA\" type=\"text\" class=\"form-control\" id=\"AZIENDA_CITTA\" placeholder=\"Città\">
 									</div>
 								  </div>	
 						
@@ -99,7 +161,7 @@
 									  <label for=\"AZIENDA_LATITUDINE\" class=\"control-label\">LATITUDINE</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input type=\"text\" class=\"form-control\" id=\"AZIENDA_LATITUDINE\" placeholder=\"Latitudine\">
+									  <input name=\"AZIENDA_LATITUDINE\" type=\"text\" class=\"form-control\" id=\"AZIENDA_LATITUDINE\" placeholder=\"Latitudine\">
 									</div>
 								  </div>						
 						
@@ -108,48 +170,98 @@
 									  <label for=\"AZIENDA_LONGITUDINE\" class=\"control-label\">LONGITUDINE</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input type=\"text\" class=\"form-control\" id=\"AZIENDA_LONGITUDINE\" placeholder=\"Longitudine\">
+									  <input name=\"AZIENDA_LONGITUDINE\" type=\"text\" class=\"form-control\" id=\"AZIENDA_LONGITUDINE\" placeholder=\"Longitudine\">
 									</div>
 								  </div>												
 						
-								  <div class=\"form-group\">
+								  <div class=\"form-group\" draggable=\"true\">
 									<div class=\"col-sm-2\">
-									  <label for=\"inputEmail\" class=\"control-label\">EMAIL</label>
+									  <label for=\"CONTATTO_TEL\" class=\"control-label\">TELEFONO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input type=\"email\" class=\"form-control\" id=\"inputEmail\" placeholder=\"Email di contatto\">
+									  <input name=\"CONTATTO_TEL\" type=\"text\" class=\"form-control\" id=\"CONTATTO_TEL\" placeholder=\"Contatto telefonico\">
 									</div>
 								  </div>
-								  <div class=\"form-group\">
+
+								  <div class=\"form-group\" draggable=\"true\">
 									<div class=\"col-sm-2\">
-									  <label for=\"inputFonte\" class=\"control-label\">FONTE</label>
+									  <label for=\"CONTATTO_FAX\" class=\"control-label\">CONTATTO FAX</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input type=\"text\" class=\"form-control\" id=\"inputFonte\" placeholder=\"Fonte dell'opportunità\">
+									  <input name=\"CONTATTO_FAX\" type=\"text\" class=\"form-control\" id=\"CONTATTO_FAX\" placeholder=\"Contatto fax\">
+									</div>
+								  </div>								  
+						
+								  <div class=\"form-group\">
+									<div class=\"col-sm-2\">
+									  <label for=\"CONTATTO_EMAIL\" class=\"control-label\">EMAIL</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input name=\"CONTATTO_EMAIL\" type=\"email\" class=\"form-control\" id=\"CONTATTO_EMAIL\" placeholder=\"Email di contatto\">
 									</div>
 								  </div>
+								  
+								  
+								  <div class=\"form-group\">
+									<div class=\"col-sm-2\">
+									  <label for=\"FONTE_DESCR\" class=\"control-label\">FONTE</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input name=\"FONTE_DESCR\" type=\"text\" class=\"form-control\" id=\"FONTE_DESCR\" placeholder=\"Fonte\">
+									</div>
+								  </div>
+								  
+								  <div class=\"form-group\">
+									<div class=\"col-sm-2\">
+									  <label for=\"FONTE_LINK\" class=\"control-label\">LINK ALLA FONTE</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input name=\"FONTE_LINK\" type=\"text\" class=\"form-control\" id=\"FONTE_LINK\" placeholder=\"Link alla fonte\">
+									</div>
+								  </div>							  
+								  
+								  <div class=\"form-group\">
+									<div class=\"col-sm-2\">
+									  <label for=\"SNIPPET_ANNUNCIO\" class=\"control-label\">ESTRATTO ANNUNCIO</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <input name=\"SNIPPET_ANNUNCIO\" type=\"text\" class=\"form-control\" id=\"SNIPPET_ANNUNCIO\" placeholder=\"Estratto dell'annuncio\">
+									</div>
+								  </div>							  
+								  
+								  <div class=\"form-group\" draggable=\"true\">
+									<div class=\"col-sm-2\">
+									  <label for=\"FK_STATO_OFFERTA\" class=\"control-label\">STATO OFFERTA</label>
+									</div>
+									<div class=\"col-sm-10\">
+									  <select name=\"FK_STATO_OFFERTA\" id=\"FK_STATO_OFFERTA\" class=\"form-control\" id=\"FK_STATO_OFFERTA\" placeholder=\"Stato offerta\">".buildStatiOptions($stati,"")."</select>
+									</div>
+								  </div>								  
+								  
+								  
 								  <div class=\"form-group\">
 									<div class=\"col-sm-offset-2 col-sm-10\">
 									  <button type=\"submit\" class=\"btn btn-warning pull-right\" draggable=\"true\">Salva</button>
 									</div>
 								  </div>
+								  
+								  
 								  <input type=\"hidden\" name=\"action\" value=\"".$_SESSION["action"]."\">
 								</form>
-
+							</div>
+						</div>	
 
 					 			
 			";
-			
-							 break;
-			default        : $_SESSION["action"]="";
-							 break;
+		
 		}
-		$db=new Database();
-		$offerte= $db->getOfferteLavoro($_SESSION["lstart"],$_SESSION["llimit"]);
+		
+		
+		
 		if($_SESSION["action"]!="insert"){
 			$content.="<a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a>";
 		}		
-		$content.=print_r($offerte,TRUE);
+		// $content.=print_r($offerte,TRUE);
 		
 		// print_r($offerte);
 	}

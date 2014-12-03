@@ -12,10 +12,11 @@ class Database {
 
     public function __construct() {
 		$this->mysqli = new mysqli($this->db_host, $this->db_user, $this->db_password, $this->db_name);
-		
+		$this->mysqli->set_charset("utf8");
 		if ($this->mysqli->connect_errno) {
 			echo "Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error;
 		}
+		// else printf("Current character set: %s\n", $this->mysqli->character_set_name());
 	
     }
 		
@@ -24,12 +25,29 @@ class Database {
 		$sql = "SELECT * FROM offertelavoro LIMIT ".$start.",".$limit;
 		// print $sql;
 		$res = $this->mysqli->query($sql);
-		return $res;
+		while($row = $res->fetch_array(MYSQLI_ASSOC)){
+			$return[]=$row;
+		}
+		return $return;
 	}
 
+	public function getNazioni(){
+		$sql = "SELECT * FROM nazioni";
+		$res = $this->mysqli->query($sql);
+		while($row = $res->fetch_array(MYSQLI_ASSOC)){
+			$return[]=$row;
+		}
+		return $return;
+	}
 	
-	
-	
+	public function getStatiOpportunita(){
+		$sql = "SELECT * FROM offertelavorostati";
+		$res = $this->mysqli->query($sql);
+		while($row = $res->fetch_array(MYSQLI_ASSOC)){
+			$return[]=$row;
+		}
+		return $return;
+	}	
 	
 	
 }
