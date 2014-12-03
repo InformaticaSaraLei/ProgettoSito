@@ -49,6 +49,14 @@ class Database {
 		return $return;
 	}	
 	
+	public function insertOpportunita($values=""){
+		$sql="INSERT INTO offertelavoro 
+		(TITOLO_LAVORO, TIPO_CONTRATTO, AZIENDA_NOME, AZIENDA_PROVINCIA, AZIENDA_CITTA, AZIENDA_LATITUDINE, AZIENDA_LONGITUDINE, CONTATTO_TEL, CONTATTO_FAX, CONTATTO_EMAIL, FONTE_DESCR, FONTE_LINK, SNIPPET_ANNUNCIO, DATA_INSERIMENTO, FK_STATO_OFFERTA, FK_NAZIONE) 
+		VALUES 
+		('".$values["TITOLO_LAVORO"]."', '".$values["TIPO_CONTRATTO"]."', '".$values["AZIENDA_NOME"]."', '".$values["AZIENDA_PROVINCIA"]."', '".$values["AZIENDA_CITTA"]."', '".$values["AZIENDA_LATITUDINE"]."', '".$values["AZIENDA_LONGITUDINE"]."', '".$values["CONTATTO_TEL"]."', '".$values["CONTATTO_FAX"]."', '".$values["CONTATTO_EMAIL"]."', '".$values["FONTE_DESCR"]."', '".$values["FONTE_LINK"]."', '".$values["SNIPPET_ANNUNCIO"]."', DATE(NOW()), '".$values["FK_STATO_OFFERTA"]."', '".$values["FK_NAZIONE"]."');
+		";
+	    print $sql;
+	}
 	
 }
 	

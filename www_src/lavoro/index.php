@@ -10,8 +10,8 @@
 		$options="<option value=\"\" selected>Nazione dell'opportunità di lavoro";
 		foreach($elenco as $nazione)
 			// print_r($nazione);
-			if($selectedValue==$nazione["ID"]){
-				print $selectedValue."==".$nazione["ID"]."<br>";
+			if(($selectedValue==$nazione["ID"])||($selectedValue=="" && $nazione["DESCRIZIONE"]=="Italia")){
+				// print $selectedValue."==".$nazione["ID"]."<br>";
 				$options.="<option value=\"".$nazione["ID"]."\" selected>".$nazione["DESCRIZIONE"];
 				}
 			else
@@ -64,6 +64,7 @@
 			                 $_SESSION["action"]="";
 							 $_GET["action"]="";
 							 $content.="<b>insert<br>";
+							 $db->insertOpportunita($_POST);
 							 print_r($_POST);
 							 break;
 			case "update"  : // ---- updateOpportunita
@@ -78,13 +79,14 @@
 							 $content.="<b>delete<br>";
 							 break;
 		}
-		
+		print $_GET["action"];
 		switch($_GET["action"]){
 			case "update"  : $_SESSION["action"]="update";
 							 $action_to_do=true;
 							 break;
 			case "insert"  : $_SESSION["action"]="insert";
 							 $action_to_do=true;
+							 
 							 break;
 			case "delete"  : $_SESSION["action"]="delete";
 							 $action_to_do=false;
@@ -93,12 +95,18 @@
 			                 $_SESSION["action"]="";
 							 break;
 		}
+			print "atd:".$action_to_do;
+			if($_SESSION["action"]!="insert"){
+				$content.="<br><a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a>";
+			}	
+			
 		if($action_to_do){
-		    $content.="<br><br>
-
+			$map_action_string=array("insert"=>"INSERIMENTO","update"=>"MODIFICA");
+			
+		    $content.="<br>
 					<div class=\"panel panel-default\">
 						<div class=\"panel-heading\">
-							<h3 class=\"panel-title\">INSERIMENTO OPPORTUNITA'</h3>
+							<h3 class=\"panel-title\">".$map_action_string[$_SESSION["action"]]." OPPORTUNITA'</h3>
 						</div>
 						<div class=\"panel-body\">
 								<form class=\"form-horizontal\" role=\"form\" method=\"POST\" target=\"index.php\">
@@ -254,12 +262,11 @@
 					 			
 			";
 		
-		}
 		
 		
 		
-		if($_SESSION["action"]!="insert"){
-			$content.="<a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a>";
+		
+		
 		}		
 		// $content.=print_r($offerte,TRUE);
 		
