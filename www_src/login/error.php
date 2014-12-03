@@ -61,36 +61,36 @@
     <!-- Content Row -->
     <div class="row">
         <div class="col-lg-12">
-        		<h2>Attenzione!</h2>
-                <?
-                	if (isset($_GET['error'])) {
-                    	$error=$_GET['error'];
-                        if ($error==1) {
-                        	echo "<p>Attenzione, non sono stati compilati tutti i campi, ritorna al form di <a href='register.php'>registrazione</a>.</p>";
-                        } elseif ($error==2) {
-                            echo "<p>Attenzione, Le due password non coincidono, torna alla pagina di <a href='register.php'>registrazione</a>.</p>";
-                        } elseif ($error==3) {
-                            echo "<p>Attenzione, inserire sia Username e password, ritorna al form di <a href='login.php'>login</a>.</p>";
-                        } elseif ($error==4) {
-                            echo "<p>Attenzione, username o password errati, ritorna alla pagina di <a href='login.php'>login</a>.</p>";
-                        } elseif ($error==5) {
-                            echo "<p>Attenzione, devi prima aver effettuato il <a href='login.php'>login</a> per accedere a questa pagina.</p>";
-                        } elseif ($error==6) {
-                            echo "<p>Attenzione, hai già  effettuato il login! Torna alla <a href='index.html'>Home Page</a>.</p>";
-                        } elseif ($error==7) {
-                            echo "<p>Attenzione, non puoi effettuare il logout, effettua prima il <a href='login.php'>Login</a>.</p>";
-                        } elseif ($error==8) {
-                            echo "<p>Attenzione, Non sei un utente con privilegi di amministratore, torna alla <a href='index.html'>Home Page</a>.</p>";
-                        } elseif ($error==9) {
-                            echo "<p>Attenzione, i campi password sono stati compilati in modo errato, torna a <a href='editprofile.php'>Modifica profilo</a>.</p>";
-                        } else {
-                            echo "<p>Errore non definito!</p>";
-                        }
-                    } else {
-                    	echo "<p>Errore non definito!</p>";
-                    }
-                ?>
-                
+            <h2>Attenzione!</h2>
+            <?
+            if (isset($_GET['error'])) {
+                $error = $_GET['error'];
+                if ($error == 1) {
+                    echo "<p>Attenzione, non sono stati compilati tutti i campi, ritorna al form di <a href='register.php'>registrazione</a>.</p>";
+                } elseif ($error == 2) {
+                    echo "<p>Attenzione, Le due password non coincidono, torna alla pagina di <a href='register.php'>registrazione</a>.</p>";
+                } elseif ($error == 3) {
+                    echo "<p>Attenzione, inserire sia Username e password, ritorna al form di <a href='login.php'>login</a>.</p>";
+                } elseif ($error == 4) {
+                    echo "<p>Attenzione, username o password errati, ritorna alla pagina di <a href='login.php'>login</a>.</p>";
+                } elseif ($error == 5) {
+                    echo "<p>Attenzione, devi prima aver effettuato il <a href='login.php'>login</a> per accedere a questa pagina.</p>";
+                } elseif ($error == 6) {
+                    echo "<p>Attenzione, hai già  effettuato il login! Torna alla <a href='index.html'>Home Page</a>.</p>";
+                } elseif ($error == 7) {
+                    echo "<p>Attenzione, non puoi effettuare il logout, effettua prima il <a href='login.php'>Login</a>.</p>";
+                } elseif ($error == 8) {
+                    echo "<p>Attenzione, Non sei un utente con privilegi di amministratore, torna alla <a href='index.html'>Home Page</a>.</p>";
+                } elseif ($error == 9) {
+                    echo "<p>Attenzione, i campi password sono stati compilati in modo errato, torna a <a href='editprofile.php'>Modifica profilo</a>.</p>";
+                } else {
+                    echo "<p>Errore non definito!</p>";
+                }
+            } else {
+                echo "<p>Errore non definito!</p>";
+            }
+            ?>
+
         </div>
     </div>
     <!-- /.row -->

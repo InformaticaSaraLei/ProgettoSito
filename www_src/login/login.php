@@ -3,8 +3,8 @@
 session_start();
 
 if (isset($_SESSION['login'])) {
-        header("Location: error.php?error=6");
-        die();  
+    header("Location: error.php?error=6");
+    die();
 }
 
 ?>
@@ -73,22 +73,25 @@ if (isset($_SESSION['login'])) {
     <!-- Content Row -->
     <div class="row">
         <div class="col-lg-12">
-         <h2>Effettua il login:</h2>
-         <form action="login.php" method="POST">
-         <table>
-           <tr>
-             <td>Username:</td><td><input type="text" name="username"></td>
-           </tr>
-           <tr>
-             <td>Password:</td><td><input type="password" name="password"></td>
-           </tr>
-           <tr>
-             <td><input type="submit" name="login" value="login"></td>
-             <td><input type="reset" value="reset"></td>
-           </tr>
-         </table>
-         </form>
-         <p>Se non sei registrato <a href="register.php">Registrati ora!</a></p>
+            <h2>Effettua il login:</h2>
+
+            <form action="login.php" method="POST">
+                <table>
+                    <tr>
+                        <td>Username:</td>
+                        <td><input type="text" name="username"></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input type="password" name="password"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="login" value="login"></td>
+                        <td><input type="reset" value="reset"></td>
+                    </tr>
+                </table>
+            </form>
+            <p>Se non sei registrato <a href="register.php">Registrati ora!</a></p>
         </div>
     </div>
     <!-- /.row -->
@@ -120,8 +123,8 @@ if (isset($_SESSION['login'])) {
 include_once("lib/userscontroller.php");
 
 if (isset($_POST['login'])) {
-        $newuser=new UsersController();
-        $newuser->LoginUser();
+    $newuser = new UsersController();
+    $newuser->LoginUser();
 }
 
 ?>

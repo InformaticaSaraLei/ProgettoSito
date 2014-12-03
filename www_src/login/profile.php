@@ -5,18 +5,18 @@ require_once("./lib/userscontroller.php");
 session_start();
 
 if (isset($_SESSION['login'])) {
-        $user=new UsersController();
-        // prelevo il nome dell'utente
-        $name = $user->GetName($_SESSION['login']);
-        // prelevo il cognome dell'utente
-        $surname = $user->GetSurname($_SESSION['login']);
-        // prelevo l'indirizzo dell'utente
-        $email = $user->GetEmail($_SESSION['login']);
-        // prelevo l'username dell'utente
-        $username = $user->GetUsername($_SESSION['login']);
+    $user = new UsersController();
+    // prelevo il nome dell'utente
+    $name = $user->GetName($_SESSION['login']);
+    // prelevo il cognome dell'utente
+    $surname = $user->GetSurname($_SESSION['login']);
+    // prelevo l'indirizzo dell'utente
+    $email = $user->GetEmail($_SESSION['login']);
+    // prelevo l'username dell'utente
+    $username = $user->GetUsername($_SESSION['login']);
 } else {
-        header("Location: error.php?error=5");
-        die();
+    header("Location: error.php?error=5");
+    die();
 }
 
 ?>
@@ -84,23 +84,28 @@ if (isset($_SESSION['login'])) {
     <!-- Content Row -->
     <div class="row">
         <div class="col-lg-12">
-        <h2>Benvenuto <? echo "$name"; ?></h2>
-        <p>Qui puoi gestire le tue informazioni personali e modificarle.</p>
-        <table>
-          <tr>
-            <td><b>Nome:</b></td><td><? echo "$name"; ?></td>               
-          </tr>
-          <tr>
-            <td><b>Cognome:</b></td><td><? echo "$surname"; ?></td>
-          </tr>
-          <tr>
-            <td><b>Email:</b></td><td><? echo "$email"; ?></td>
-          </tr>
-          <tr>
-            <td><b>Username:</b></td><td><? echo "$username"; ?></td>
-          </tr>
-         </table>
-        <p><a href="editprofile.php">Modifica</a> il tuo prifilo.</p>
+            <h2>Benvenuto <? echo "$name"; ?></h2>
+
+            <p>Qui puoi gestire le tue informazioni personali e modificarle.</p>
+            <table>
+                <tr>
+                    <td><b>Nome:</b></td>
+                    <td><? echo "$name"; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Cognome:</b></td>
+                    <td><? echo "$surname"; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Email:</b></td>
+                    <td><? echo "$email"; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Username:</b></td>
+                    <td><? echo "$username"; ?></td>
+                </tr>
+            </table>
+            <p><a href="editprofile.php">Modifica</a> il tuo prifilo.</p>
         </div>
     </div>
     <!-- /.row -->

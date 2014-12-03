@@ -3,8 +3,8 @@
 session_start();
 
 if (isset($_SESSION['login'])) {
-        header("Location: error.php?error=6");
-        die();  
+    header("Location: error.php?error=6");
+    die();
 }
 
 ?>
@@ -72,32 +72,38 @@ if (isset($_SESSION['login'])) {
     <!-- Content Row -->
     <div class="row">
         <div class="col-lg-12">
-        		<form action="register.php" method="POST">
+            <form action="register.php" method="POST">
                 <table>
                     <tr>
-                      <td>Nome:</td><td><input type="text" name="name"></td>
+                        <td>Nome:</td>
+                        <td><input type="text" name="name"></td>
                     </tr>
                     <tr>
-                      <td>Cognome:</td><td><input type="text" name="surname"></td>
+                        <td>Cognome:</td>
+                        <td><input type="text" name="surname"></td>
                     </tr>
                     <tr>
-                      <td>Email:</td><td><input type="text" name="email"></td>
+                        <td>Email:</td>
+                        <td><input type="text" name="email"></td>
                     </tr>
                     <tr>
-                      <td>Username:</td><td><input type="text" name="username"></td>
+                        <td>Username:</td>
+                        <td><input type="text" name="username"></td>
                     </tr>
                     <tr>
-                      <td>Password:</td><td><input type="password" name="pass1"></td>
+                        <td>Password:</td>
+                        <td><input type="password" name="pass1"></td>
                     </tr>
                     <tr>
-                      <td>Conferma password:</td><td><input type="password" name="pass2"></td>
+                        <td>Conferma password:</td>
+                        <td><input type="password" name="pass2"></td>
                     </tr>
                     <tr>
-                      <td><input type="submit" name="register" value="registrati"></td>
-                      <td><input type="reset" value="reset"></td>
+                        <td><input type="submit" name="register" value="registrati"></td>
+                        <td><input type="reset" value="reset"></td>
                     </tr>
                 </table>
-                </form>
+            </form>
         </div>
     </div>
     <!-- /.row -->
@@ -129,8 +135,8 @@ if (isset($_SESSION['login'])) {
 include_once("./lib/userscontroller.php");
 
 if (isset($_POST['register'])) {
-        $newuser=new UsersController();
-        $newuser->AddUser();
+    $newuser = new UsersController();
+    $newuser->AddUser();
 }
 
 ?>
