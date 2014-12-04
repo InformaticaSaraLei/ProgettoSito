@@ -32,7 +32,7 @@
 		return $options;
 	}	
 	
-
+	$pagination_prefix="";
 	
 	if($_SESSION["odl_class"]=="") $_SESSION["odl_class"]="local";
 	
@@ -47,8 +47,8 @@
 
 		if($_SESSION["llimit"]=="") $_SESSION["llimit"]=10; 
 		if($_SESSION["lstart"]=="") $_SESSION["lstart"]=0; 
-		if($_SESSION["lq"]==""){ $_SESSION["q"]="Informatica"; $lq_placeholder="Professione, parole chiave o società"; } else {}
-		if($_SESSION["ll"]==""){ $_SESSION["l"]="Venezia"; $ll_placeholder="città, regione o codice postale";} else {}
+		if($_SESSION["lq"]==""){ $_SESSION["lq"]="Informatica"; $lq_placeholder="Professione, parole chiave o società"; } else {}
+		if($_SESSION["ll"]==""){ $_SESSION["ll"]="Venezia"; $ll_placeholder="città, regione o codice postale";} else {}
 		if($_POST["llimit"]!="") $_SESSION["llimit"]=$_SESSION["llimit"]+0;
 		if($_GET["lstart"]!="") $_SESSION["lstart"]=$_GET["lstart"]+0;
 		if($_POST["lq"]!="") $_SESSION["lq"]=$_POST["lq"];
@@ -56,6 +56,7 @@
 		
 		$db=new Database();
 		$offerte= $db->getOfferteLavoro($_SESSION["lstart"],$_SESSION["llimit"]);
+		$totalResults= $db->total_results;
 		$nazioni=$db->getNazioni();
 		$stati=$db->getStatiOpportunita();
 		
@@ -79,7 +80,7 @@
 							 $content.="<b>delete<br>";
 							 break;
 		}
-		print $_GET["action"];
+		// print $_GET["action"];
 		switch($_GET["action"]){
 			case "update"  : $_SESSION["action"]="update";
 							 $action_to_do=true;
@@ -93,17 +94,59 @@
 							 break;
 			default        : $action_to_do=false;
 			                 $_SESSION["action"]="";
+							 
 							 break;
 		}
-			print "atd:".$action_to_do;
-			if($_SESSION["action"]!="insert"){
-				$content.="<br><a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a>";
-			}	
+
+					
+		// print "atd:".$action_to_do;
+		if($_SESSION["action"]!="insert"){
+			$content.="<br><a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a>";
+		}	
+		
+			switch($_GET["mode"]){
+				case "detail" : $content.="detail"; break;
+				default : 	$jobOpportunity=""; // print_r($offerte);
+					/* ----- PAGINATION ----- */
+					
+					$paginationPages=ceil($totalResults/$_SESSION["llimit"]);
+					$currentPage=$_SESSION["lstart"]/$_SESSION["llimit"];
+					// print $totalResults."<br>";
+					$pagination_prefix="l";
+					// print $paginationPages;
+					for($page=1;$page<=$paginationPages;$page++){
+					// print $page;
+						if($currentPage==($page-1))
+							$pagination.="<li class=\"active\"><a href=\"index.php?lstart=".(($page-1)*$_SESSION["llimit"])."#navigation_bar\">".$page."</a></li>";
+						else	
+							$pagination.="<li><a href=\"index.php?lstart=".(($page-1)*$_SESSION["llimit"])."#navigation_bar\">".$page."</a></li>";
+					}
+					$paginationBlock="
+					
+					";
+					/* ----- /PAGINATION ----- */						
+				
+							foreach($offerte as $jobOpportunity)
+							$content.="
+					<br><br>
+						<div class=\"panel panel-default\">
+							<div class=\"panel-heading\">
+								<h3 class=\"panel-title\"><b>".$jobOpportunity["TITOLO_LAVORO"]." <small style=\"color: #ffffff;\">(".$jobOpportunity["DATA_INSERIMENTO"].")</small></b></h3>
+							</div>
+							<div class=\"panel-body\">
+								<h4>".strtoupper($jobOpportunity[""])."<br>". $jobOpportunity[""]."</h4><br>
+								".$jobOpportunity["SNIPPET_ANNUNCIO"]."
+								<br><br>
+								 <a href=\"index.php?mode=detail&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-info  pull-right\" role=\"button\">Vedi Dettaglio Annuncio</a>
+							</div>
+						</div>
+						";
+							break;
+			}
 			
-		if($action_to_do){
+        if(action_to_do){
 			$map_action_string=array("insert"=>"INSERIMENTO","update"=>"MODIFICA");
-			
-		    $content.="<br>
+		    $content.="<br><br>
 					<div class=\"panel panel-default\">
 						<div class=\"panel-heading\">
 							<h3 class=\"panel-title\">".$map_action_string[$_SESSION["action"]]." OPPORTUNITA'</h3>
@@ -187,7 +230,7 @@
 									  <label for=\"CONTATTO_TEL\" class=\"control-label\">TELEFONO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"CONTATTO_TEL\" type=\"text\" class=\"form-control\" id=\"CONTATTO_TEL\" placeholder=\"Contatto telefonico\">
+									  <input name=\"CONTATTO_TEL\" type=\"tel\" class=\"form-control\" id=\"CONTATTO_TEL\" placeholder=\"Contatto telefonico\">
 									</div>
 								  </div>
 
@@ -224,7 +267,7 @@
 									  <label for=\"FONTE_LINK\" class=\"control-label\">LINK ALLA FONTE</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"FONTE_LINK\" type=\"text\" class=\"form-control\" id=\"FONTE_LINK\" placeholder=\"Link alla fonte\">
+									  <input name=\"FONTE_LINK\" type=\"url\" class=\"form-control\" id=\"FONTE_LINK\" placeholder=\"Link alla fonte\">
 									</div>
 								  </div>							  
 								  
@@ -490,11 +533,11 @@
         <div  id="pagination"  class="col-lg-12 text-center">		
 			<?php if($pagination!="") : ?>
 			<ul class="pagination pagination-sm">
-			  <li><a href="index.php?start=0#navigation_bar"><span class="glyphicon glyphicon-fast-backward"></span></a></li>
-			  <li><a href="<?php if($currentPage>1) echo "index.php?start=".($currentPage-1)*$_SESSION["limit"]; ?>"><span class="glyphicon glyphicon-step-backward"></span></a></li>
+			  <li><a href="index.php?<?php echo $pagination_prefix;?>start=0#navigation_bar"><span class="glyphicon glyphicon-fast-backward"></span></a></li>
+			  <li><a href="<?php if($currentPage>1) echo "index.php?".$pagination_prefix."start=".($currentPage-1)*$_SESSION[$pagination_prefix."limit"]; ?>"><span class="glyphicon glyphicon-step-backward"></span></a></li>
 			  <?php echo $pagination; ?>
-			  <li><a href="<?php if($currentPage<($paginationPages-1)) echo "index.php?start=".($currentPage+1)*$_SESSION["limit"]; ?>#navigation_bar"><span class="glyphicon glyphicon-step-forward"></span></a></li>
-			  <li><a href="index.php?start=<?php echo ($paginationPages-1)*$_SESSION["limit"] ?>#navigation_bar"><span class="glyphicon glyphicon-fast-forward"></span></a></li>
+			  <li><a href="<?php if($currentPage<($paginationPages-1)) echo "index.php?".$pagination_prefix."start=".($currentPage+1)*$_SESSION[$pagination_prefix."limit"]; ?>#navigation_bar"><span class="glyphicon glyphicon-step-forward"></span></a></li>
+			  <li><a href="index.php?<?php echo $pagination_prefix;?>start=<?php echo ($paginationPages-1)*$_SESSION[$pagination_prefix."limit"] ?>#navigation_bar"><span class="glyphicon glyphicon-fast-forward"></span></a></li>
 			</ul>
 			<?php endif; ?>	
 	    </div>
@@ -509,14 +552,14 @@
 	 <!-- /.row -->
 	<!-- Content Row -->
 	<div class="row">
-        <div  id="pagination2"  class="col-lg-12 text-center">	
+    <div  id="pagination2"  class="col-lg-12 text-center">		
 			<?php if($pagination!="") : ?>
 			<ul class="pagination pagination-sm">
-			  <li><a href="index.php?start=0#navigation_bar"><span class="glyphicon glyphicon-fast-backward"></span></a></li>
-			  <li><a href="<?php if($currentPage>1) echo "index.php?start=".($currentPage-1)*$_SESSION["limit"]; ?>"><span class="glyphicon glyphicon-step-backward"></span></a></li>
+			  <li><a href="index.php?<?php echo $pagination_prefix;?>start=0#navigation_bar"><span class="glyphicon glyphicon-fast-backward"></span></a></li>
+			  <li><a href="<?php if($currentPage>1) echo "index.php?".$pagination_prefix."start=".($currentPage-1)*$_SESSION[$pagination_prefix."limit"]; ?>"><span class="glyphicon glyphicon-step-backward"></span></a></li>
 			  <?php echo $pagination; ?>
-			  <li><a href="<?php if($currentPage<($paginationPages-1)) echo "index.php?start=".($currentPage+1)*$_SESSION["limit"]; ?>#navigation_bar"><span class="glyphicon glyphicon-step-forward"></span></a></li>
-			  <li><a href="index.php?start=<?php echo ($paginationPages-1)*$_SESSION["limit"] ?>#navigation_bar"><span class="glyphicon glyphicon-fast-forward"></span></a></li>
+			  <li><a href="<?php if($currentPage<($paginationPages-1)) echo "index.php?".$pagination_prefix."start=".($currentPage+1)*$_SESSION[$pagination_prefix."limit"]; ?>#navigation_bar"><span class="glyphicon glyphicon-step-forward"></span></a></li>
+			  <li><a href="index.php?<?php echo $pagination_prefix;?>start=<?php echo ($paginationPages-1)*$_SESSION[$pagination_prefix."limit"] ?>#navigation_bar"><span class="glyphicon glyphicon-fast-forward"></span></a></li>
 			</ul>
 			<?php endif; ?>	
 	    </div>

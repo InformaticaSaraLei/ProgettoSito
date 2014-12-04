@@ -9,6 +9,7 @@ class Database {
 	public $table_offertelavorostati="offertelavorostati";
 	public $table_offertelavorotags="offertelavorotags";
 	public $mysqli;
+	public $total_results;
 
     public function __construct() {
 		$this->mysqli = new mysqli($this->db_host, $this->db_user, $this->db_password, $this->db_name);
@@ -23,11 +24,14 @@ class Database {
 		
 	public function getOfferteLavoro($start=0,$limit=30){
 		$sql = "SELECT * FROM offertelavoro LIMIT ".$start.",".$limit;
-		// print $sql;
 		$res = $this->mysqli->query($sql);
 		while($row = $res->fetch_array(MYSQLI_ASSOC)){
 			$return[]=$row;
 		}
+		$total_results_query="SELECT COUNT(*) AS cnt FROM offertelavoro";
+		$res = $this->mysqli->query($total_results_query);
+		$row=$res->fetch_array(MYSQLI_ASSOC);
+		$this->total_results=$row["cnt"];
 		return $return;
 	}
 
@@ -55,7 +59,7 @@ class Database {
 		VALUES 
 		('".$values["TITOLO_LAVORO"]."', '".$values["TIPO_CONTRATTO"]."', '".$values["AZIENDA_NOME"]."', '".$values["AZIENDA_PROVINCIA"]."', '".$values["AZIENDA_CITTA"]."', '".$values["AZIENDA_LATITUDINE"]."', '".$values["AZIENDA_LONGITUDINE"]."', '".$values["CONTATTO_TEL"]."', '".$values["CONTATTO_FAX"]."', '".$values["CONTATTO_EMAIL"]."', '".$values["FONTE_DESCR"]."', '".$values["FONTE_LINK"]."', '".$values["SNIPPET_ANNUNCIO"]."', DATE(NOW()), '".$values["FK_STATO_OFFERTA"]."', '".$values["FK_NAZIONE"]."');
 		";
-	    print $sql;
+		$res = $this->mysqli->query($sql);
 	}
 	
 }
