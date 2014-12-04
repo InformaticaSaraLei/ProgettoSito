@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Eventi - Informatica sar� lei!</title>
+    <title>Eventi - Informatica sarï¿½ lei!</title>
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
 
@@ -61,9 +61,7 @@
                         $('#script-warning').show();
                     }
                 },
-                loading: function (bool) {
-                    $('#loading').toggle(bool);
-                }
+               
             });
 
         });
@@ -75,17 +73,17 @@
 
 <!-- Page Content -->
 <div class="container">
-
+    <br>
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Calendario
-                <small>Sottotitolo</small>
+                <small>Eventi</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
                 </li>
-                <li><a href="index.html">Eventi</a></li>
+                <li><a href="index.php">Eventi</a></li>
                 <li class="active">Calendario eventi</li>
             </ol>
         </div>
@@ -94,13 +92,9 @@
 
     <!-- Content Row -->
     <div class="row">
-        <div id='script-warning'>
-            <code>php/get-events.php</code> must be running.
-        </div>
-
-        <div id='loading'>loading...</div>
-
+        <div class="col-md-12 col-sm-12 col-xs-12">
         <div id='calendar'></div>
+        </div>
 
 
     </div>

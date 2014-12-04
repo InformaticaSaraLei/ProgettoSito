@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Esito operazione - Informatica sarà lei!</title>
+    <title>Esito operazione - Informatica sarÃ  lei!</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -60,8 +60,24 @@
     <div class="container">
         <div class="page-header">
             <?php
+            include_once "lib/evento.php";
+            function stampaEsito($esito)
+            {
+                echo '<h1 class="section-heading">';
+                if ($esito) {
+                    echo 'Azione riuscita';
+                    echo '<h3><a href="index.php">Torna agli eventi</a></h3>';
+                    echo '<h3><a href="addEvento.php.php">Aggiungi altro evento</a></h3>';
+                } else {
+                    echo 'Azione Fallita';
+                    echo '<h3><a href="index.php">Torna agli eventi</a></h3>';
+                }
+                echo '</h1>';
+            }
+
+
             $em = new EventiManager();
-            $op = $_POST['op'];
+            $op = $_GET['op'];
             if ($op == 'add') {
                 // Aggiunta evento
                 $titolo = $_POST['txtTitolo'];
@@ -73,36 +89,19 @@
                 $comune = $_POST['txtComune'];
                 $indirizzo = $_POST['txtIndirizzo'];
                 $contenuto = $_POST['txaContenuto'];
+                $id_utente = 1; // Salvato da qualche parte in SESSION :D
 
-                $dataInizio = substr($txtInizio, 0, 10);
-                $oraInizio = substr($txtInizio, 12);
-                $dataFine = substr($txtFine, 0, 10);
-                $oraFine = substr($txtFine, 12);
-                $id_utente = "";// Passato con metodo POST 
-
-                $res = $em->creaEvento($titolo, $descrizione, $contenuto, $dataInizio, $oraInizio, $dataFine, $oraFine,
-            $provincia, $comune, $indirizzo, $linkImg, $id_utente);
-            stampaEsito($res);
+                $res = $em->creaEvento($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $linkImg, $id_utente);
+                stampaEsito($res);
             } elseif ($op == 'canc') {
-            // Cancellazione evento
-            $id = $_POST['id'];
-            $res = $em->cancellaEvento($id);
-            stampaEsito($res);
+                // Cancellazione evento
+                $id = $_GET['id'];
+                $res = $em->cancellaEvento($id);
+                stampaEsito($res);
             }
-
-
-            public function stampaEsito($esito)
-            {
-            echo '<h1 class="section-heading">';
-            if ($esito) {
-            echo "Azione riuscita";
-            } else {
-            echo "Azione fallita";
-            }
-            echo '</h1>';
-            }
-
             ?>
+            
+            
         </div>
     </div>
     <hr>
