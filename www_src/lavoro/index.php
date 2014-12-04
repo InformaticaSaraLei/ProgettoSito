@@ -47,18 +47,15 @@
 
 		if($_SESSION["llimit"]=="") $_SESSION["llimit"]=10; 
 		if($_SESSION["lstart"]=="") $_SESSION["lstart"]=0; 
-		if($_SESSION["lq"]==""){ $_SESSION["lq"]="Informatica"; $lq_placeholder="Professione, parole chiave o società"; } else {}
-		if($_SESSION["ll"]==""){ $_SESSION["ll"]="Venezia"; $ll_placeholder="città, regione o codice postale";} else {}
-		if($_POST["llimit"]!="") $_SESSION["llimit"]=$_SESSION["llimit"]+0;
+		if($_SESSION["q"]==""){ $_SESSION["q"]="Informatica"; $lq_placeholder="Professione, parole chiave o società"; } else {}
+		if($_SESSION["l"]==""){ $_SESSION["l"]="Venezia"; $ll_placeholder="città, regione o codice postale";} else {}
+		if($_POST["llimit"]) $_SESSION["llimit"]=$_SESSION["llimit"]+0;
 		if($_GET["lstart"]!="") $_SESSION["lstart"]=$_GET["lstart"]+0;
-		if($_POST["lq"]!="") $_SESSION["lq"]=$_POST["lq"];
-		if($_POST["ll"]!="") $_SESSION["ll"]=$_POST["ll"];
+		if($_POST["q"]!="") $_SESSION["q"]=$_POST["q"];
+		if($_POST["l"]!="") $_SESSION["l"]=$_POST["l"];
 		
 		$db=new Database();
-		$offerte= $db->getOfferteLavoro($_SESSION["lstart"],$_SESSION["llimit"]);
-		$totalResults= $db->total_results;
-		$nazioni=$db->getNazioni();
-		$stati=$db->getStatiOpportunita();
+
 		
 		switch($_POST["action"]){
 			case "insert"  : // ---- insertOpportunita
@@ -66,6 +63,8 @@
 							 $_GET["action"]="";
 							 $content.="<b>insert<br>";
 							 $db->insertOpportunita($_POST);
+							 $offerte= $db->getOfferteLavoro($_SESSION["lstart"],$_SESSION["llimit"],$_SESSION["q"]);
+							 $totalResults= $db->total_results;
 							 print_r($_POST);
 							 break;
 			case "update"  : // ---- updateOpportunita
@@ -93,58 +92,71 @@
 							 $action_to_do=false;
 							 break;
 			default        : $action_to_do=false;
-			                 $_SESSION["action"]="";
+			                 $_SESSION["action"]="list";
 							 
 							 break;
 		}
 
-					
+		$offerte= $db->getOfferteLavoro($_SESSION["lstart"],$_SESSION["llimit"],$_SESSION["q"]);
+		$totalResults= $db->total_results;
+		$nazioni=$db->getNazioni();
+		$stati=$db->getStatiOpportunita();		
+
+		
 		// print "atd:".$action_to_do;
 		if($_SESSION["action"]!="insert"){
 			$content.="<br><a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a>";
 		}	
 		
-			switch($_GET["mode"]){
-				case "detail" : $content.="detail"; break;
-				default : 	$jobOpportunity=""; // print_r($offerte);
-					/* ----- PAGINATION ----- */
-					
-					$paginationPages=ceil($totalResults/$_SESSION["llimit"]);
-					$currentPage=$_SESSION["lstart"]/$_SESSION["llimit"];
-					// print $totalResults."<br>";
-					$pagination_prefix="l";
-					// print $paginationPages;
-					for($page=1;$page<=$paginationPages;$page++){
-					// print $page;
-						if($currentPage==($page-1))
-							$pagination.="<li class=\"active\"><a href=\"index.php?lstart=".(($page-1)*$_SESSION["llimit"])."#navigation_bar\">".$page."</a></li>";
-						else	
-							$pagination.="<li><a href=\"index.php?lstart=".(($page-1)*$_SESSION["llimit"])."#navigation_bar\">".$page."</a></li>";
-					}
-					$paginationBlock="
-					
-					";
-					/* ----- /PAGINATION ----- */						
-				
-							foreach($offerte as $jobOpportunity)
-							$content.="
-					<br><br>
-						<div class=\"panel panel-default\">
-							<div class=\"panel-heading\">
-								<h3 class=\"panel-title\"><b>".$jobOpportunity["TITOLO_LAVORO"]." <small style=\"color: #ffffff;\">(".$jobOpportunity["DATA_INSERIMENTO"].")</small></b></h3>
-							</div>
-							<div class=\"panel-body\">
-								<h4>".strtoupper($jobOpportunity[""])."<br>". $jobOpportunity[""]."</h4><br>
-								".$jobOpportunity["SNIPPET_ANNUNCIO"]."
-								<br><br>
-								 <a href=\"index.php?mode=detail&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-info  pull-right\" role=\"button\">Vedi Dettaglio Annuncio</a>
-							</div>
-						</div>
-						";
+		switch($_GET["mode"]){
+			case "detail" : $content.="detail"; 
 							break;
-			}
+			default 	  :	break;			
+							
+		}
+		
+		if($_SESSION["action"]=="list"){
+			$jobOpportunity=""; // print_r($offerte);
+			/* ----- PAGINATION ----- */
 			
-        if(action_to_do){
+			$paginationPages=ceil($totalResults/$_SESSION["llimit"]);
+			$currentPage=$_SESSION["lstart"]/$_SESSION["llimit"];
+			// print $totalResults."<br>";
+			$pagination_prefix="l";
+			// print $paginationPages;
+			for($page=1;$page<=$paginationPages;$page++){
+			// print $page;
+				if($currentPage==($page-1))
+					$pagination.="<li class=\"active\"><a href=\"index.php?lstart=".(($page-1)*$_SESSION["llimit"])."#navigation_bar\">".$page."</a></li>";
+				else	
+					$pagination.="<li><a href=\"index.php?lstart=".(($page-1)*$_SESSION["llimit"])."#navigation_bar\">".$page."</a></li>";
+			}
+			$paginationBlock="
+			
+			";
+			/* ----- /PAGINATION ----- */						
+		
+			foreach($offerte as $jobOpportunity){
+				// print_r($offerte);
+				$content.="
+				<br><br>
+				<div class=\"panel panel-default\">
+					<div class=\"panel-heading\">
+						<h3 class=\"panel-title\"><b>".$jobOpportunity["TITOLO_LAVORO"]." <small style=\"color: #ffffff;\">(".$jobOpportunity["DATA_INSERIMENTO"].")</small></b></h3>
+					</div>
+					<div class=\"panel-body\">
+						<h4>".strtoupper($jobOpportunity["AZIENDA_CITTA"])."(". $jobOpportunity["AZIENDA_PROVINCIA"].") - ".$jobOpportunity["FK_NAZIONE"]."</h4><br>
+						".$jobOpportunity["SNIPPET_ANNUNCIO"]."
+						<br>
+						 <a href=\"index.php?mode=detail&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-info  pull-right\" role=\"button\">Vedi Dettaglio Annuncio</a>
+					</div>
+				</div>
+				";		
+			}
+		}
+		
+			
+        if($action_to_do){
 			$map_action_string=array("insert"=>"INSERIMENTO","update"=>"MODIFICA");
 		    $content.="<br><br>
 					<div class=\"panel panel-default\">
@@ -152,7 +164,7 @@
 							<h3 class=\"panel-title\">".$map_action_string[$_SESSION["action"]]." OPPORTUNITA'</h3>
 						</div>
 						<div class=\"panel-body\">
-								<form class=\"form-horizontal\" role=\"form\" method=\"POST\" target=\"index.php\">
+								<form class=\"form-horizontal\" role=\"form\" method=\"POST\" action=\"index.php\">
 								  <div class=\"form-group\" draggable=\"true\">
 									<div class=\"col-sm-2\">
 									  <label for=\"TITOLO_LAVORO\" class=\"control-label\">TITOLO</label>
@@ -297,7 +309,7 @@
 								  </div>
 								  
 								  
-								  <input type=\"hidden\" name=\"action\" value=\"".$_SESSION["action"]."\">
+								  <input type=\"hidden\" id=\"action\" name=\"action\" value=\"".$_SESSION["action"]."\">
 								</form>
 							</div>
 						</div>	

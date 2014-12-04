@@ -22,13 +22,14 @@ class Database {
     }
 		
 		
-	public function getOfferteLavoro($start=0,$limit=30){
-		$sql = "SELECT * FROM offertelavoro LIMIT ".$start.",".$limit;
+	public function getOfferteLavoro($start=0,$limit=30,$q=""){
+		if($q!="") $and=" AND (TITOLO_LAVORO LIKE '%".$q."%' OR AZIENDA_NOME LIKE '%".$q."%' OR SNIPPET_ANNUNCIO LIKE '%".$q."%')";
+		$sql = "SELECT * FROM offertelavoro WHERE 1=1 ".$and." LIMIT ".$start.",".$limit;
 		$res = $this->mysqli->query($sql);
 		while($row = $res->fetch_array(MYSQLI_ASSOC)){
 			$return[]=$row;
 		}
-		$total_results_query="SELECT COUNT(*) AS cnt FROM offertelavoro";
+		$total_results_query="SELECT COUNT(*) AS cnt FROM offertelavoro WHERE 1=1 ".$and;
 		$res = $this->mysqli->query($total_results_query);
 		$row=$res->fetch_array(MYSQLI_ASSOC);
 		$this->total_results=$row["cnt"];
