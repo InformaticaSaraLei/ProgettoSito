@@ -1,5 +1,5 @@
 <?php
-require_once "connettore.php"
+require_once "connettore.php";
 
 class Evento
 {
@@ -34,11 +34,7 @@ class Evento
 
 class EventiManager
 {
-    private static $queryInserimento = "INSERT INTO agendaeventi (TITOLO, DESCRIZIONE, CONTENUTO, INIZIO, FINE, PROVINCIA, COMUNE, INDIRIZZO, IMG_NOME, FK_INSERITO_DA) VALUES (?,?,?,?,?,?,?,?,?,?)";
-    private static $queryCancellazione = "DELETE FROM agendaeventi WHERE ID = ?";
-    private static $queryOttieniEventi = "SELECT * FROM agendaeventi ORDER BY INIZIO LIMIT ?,?";
-    private static $queryCercaPerData = "SELECT * FROM agendaeventi WHERE INIZIO <= ? AND FINE >= ?";
-    private static $queryRicercaPerID = "SELECT * FROM agendaeventi WHERE ID = ?";
+    
     private $conn;
 
     public function __construct()
@@ -50,16 +46,24 @@ class EventiManager
      * Crea l'evento in base ai parametri specificati e lo salva nel database.
      * Restituisce true se l'operazione va a buon fine, false altrimenti.
      */
+     public function isEmpty($params)// potrebbe non essere suportato (...) da php < 5.6
+      {
+        foreach ($params as $p) {
+            if (!isset($p) or strlen($p) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function creaEvento($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $img_nomefile, $id_utente)
     {
-        if (isEmpty($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $img_nomefile, $id_utente)) {
+        if ($this->isEmpty(array($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $img_nomefile, $id_utente))) {
             throw new Exception('Invalid arguments');
         }
         try {
-            $this->conn->connetti();
-            $res = $this->conn->query(EventiManager::$queryInserimento, array($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $img_nomefile, $id_utente));
-            $this->conn->disconnetti();
-        } catch (Exception $e) {
+            return $this->conn->execAction("Insert INTO agendaeventi(TITOLO, DESCRIZIONE, CONTENUTO, INIZIO, FINE, PROVINCIA, COMUNE, INDIRIZZO, IMG_NOME, FK_INSERITO_DA)VALUES('".$titolo."','".$descrizione."','".$contenuto."','".$inizio."','".$fine."','".$provincia."','".$comune."','".$indirizzo."','".$img_nomefile."','".$id_utente."');");
+        } catch (Exception $e){ 
             return false;
         }
         return true;
@@ -72,13 +76,11 @@ class EventiManager
     public function getEventoById($id)
     {
         try {
-            $this->conn->connetti();
-            $res = $this->conn->query(EventiManager::$queryRicercaPerId, array($id));
+            $res = $this->conn->execQuery("Select * From agendaeventi Where ID=".$id);
             foreach ($res as $record) {
-                e = new Evento($record['ID'], $record['TITOLO'], $record['DESCRIZIONE'], $record['CONTENUTO'], $record['INIZIO'], $record['FINE'], $record['PROVINCIA'], $record['COMUNE'], $record['INDIRIZZO'], $record['IMG_NOME'], $record['FK_INSERITO_DA']));
-        return e;
-    }
-            $this->conn->disconnetti();
+                $e = new Evento($record['ID'], $record['TITOLO'], $record['DESCRIZIONE'], $record['CONTENUTO'], $record['INIZIO'], $record['FINE'], $record['PROVINCIA'], $record['COMUNE'], $record['INDIRIZZO'], $record['IMG_NOME'], $record['FK_INSERITO_DA']);
+			return $e;
+			}
         } catch (Exception $e) {
         }
         return NULL;
@@ -90,13 +92,11 @@ class EventiManager
      */
     public function cancellaEvento($id)
     {
-        if (isEmpty($id) or $id < 0) {
+        if ($this->isEmpty(array($id)) or $id < 0) {
             throw new Exception('Invalid argument');
         }
         try {
-            $this->conn->connetti();
-            $this->conn->query(EventiManager::$queryCancellazione, array($id));
-            $this->conn->disconnetti();
+            return $this->conn->execAction("Delete From agendaeventi Where ID=".$id);
         } catch (Exception $e) {
             return false;
         }
@@ -107,16 +107,14 @@ class EventiManager
      * Ottieni gli eventi (ordinati per data decrescente) nei limiti indicati.
      * Restituisce un array di eventi.
      */
-    public function getEventi($da = 1, $a = 1000000)
+    public function getEventi($da = 0, $a = 1000000)
     {
         $risultati = array();
-        $this->conn->connetti();
-        $res = $this->conn->query(EventiManager::$queryOttieniEventi, array($da, $a));
+        $res = $this->conn->execQuery("Select * From agendaeventi LIMIT ".$da.",".$a);
         foreach ($res as $record) {
-            e = new Evento($record['ID'], $record['TITOLO'], $record['DESCRIZIONE'], $record['CONTENUTO'], $record['INIZIO'], $record['FINE'], $record['PROVINCIA'], $record['COMUNE'], $record['INDIRIZZO'], $record['IMG_NOME'], $record['FK_INSERITO_DA']));
-      $risultati[] = e;
+            $e = new Evento($record['ID'], $record['TITOLO'], $record['DESCRIZIONE'], $record['CONTENUTO'], $record['INIZIO'], $record['FINE'], $record['PROVINCIA'], $record['COMUNE'], $record['INDIRIZZO'], $record['IMG_NOME'], $record['FK_INSERITO_DA']);
+      $risultati[] = $e;
     }
-        $this->conn->disconnetti();
         return $risultati;
     }
 
@@ -134,7 +132,7 @@ class EventiManager
             $assoc_array['title'] = $evento->titolo;
             $assoc_array['start'] = $evento->inizio;
             $assoc_array['end'] = $evento->fine;
-            $assoc_array['url'] = "evento.php?id=" . $evento->id;
+            $assoc_array['url'] = "paginaEvento.php?id=" . $evento->id;
             array_push($out_array, $assoc_array);
         }
         return $out_array;
@@ -147,13 +145,11 @@ class EventiManager
     public function getEventiPerData($data)
     {
         $risultati = array();
-        $this->conn->connetti();
-        $res = $this->conn->query(EventiManager::$queryCercaPerData, array($data));
+        $res = $this->conn->execQuery("Select * From agendaeventi Where DATA='".$data."'");
         foreach ($res as $record) {
-            e = new Evento($record['ID'], $record['TITOLO'], $record['DESCRIZIONE'], $record['CONTENUTO'], $record['INIZIO'], $record['FINE'], $record['PROVINCIA'], $record['COMUNE'], $record['INDIRIZZO'], $record['IMG_NOME'], $record['FK_INSERITO_DA']));
-      $risultati[] = e
+            $e = new Evento($record['ID'], $record['TITOLO'], $record['DESCRIZIONE'], $record['CONTENUTO'], $record['INIZIO'], $record['FINE'], $record['PROVINCIA'], $record['COMUNE'], $record['INDIRIZZO'], $record['IMG_NOME'], $record['FK_INSERITO_DA']);
+      $risultati[] = $e;
     }
-        $this->conn->disconnetti();
         return $risultati;
     }
 
@@ -161,15 +157,7 @@ class EventiManager
      * Controlla se i parametri sono validi.
      * Restituisce true se e' presente almeno un parametro vuoto, false altrimenti.
      */
-    private function isEmpty(...$params)// potrebbe non essere suportato (...) da php < 5.6
-    {
-        foreach ($params as $p) {
-            if (!isset($str) or strlen($str) == 0) {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 }
 
 ?>
