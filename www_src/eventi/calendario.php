@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Eventi - Informatica sarï¿½ lei!</title>
+    <title>Eventi - Informatica sar� lei!</title>
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
 

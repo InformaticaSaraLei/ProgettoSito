@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Esito operazione - Informatica sarÃ  lei!</title>
+    <title>Esito operazione - Informatica sarà lei!</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -74,31 +74,35 @@
                 }
                 echo '</h1>';
             }
+			$loggato=true; //Impostare se loggato o no in qualche modo
+			$isAdmin=true;//Impostare se l'utente è admin
+			if($loggato && $isAdmin){
+					$em = new EventiManager();
+					$op = $_GET['op'];
+					if ($op == 'add') {
+						// Aggiunta evento
+						$titolo = $_POST['txtTitolo'];
+						$descrizione = $_POST['txtDescrizione'];
+						$linkImg = $_POST['txtLinkImmagine'];
+						$inizio = $_POST['txtInizio'];
+						$fine = $_POST['txtFine'];
+						$provincia = $_POST['txtProvincia'];
+						$comune = $_POST['txtComune'];
+						$indirizzo = $_POST['txtIndirizzo'];
+						$contenuto = $_POST['txaContenuto'];
+						$id_utente = 1; // Salvato da qualche parte in SESSION :D
 
-
-            $em = new EventiManager();
-            $op = $_GET['op'];
-            if ($op == 'add') {
-                // Aggiunta evento
-                $titolo = $_POST['txtTitolo'];
-                $descrizione = $_POST['txtDescrizione'];
-                $linkImg = $_POST['txtLinkImmagine'];
-                $inizio = $_POST['txtInizio'];
-                $fine = $_POST['txtFine'];
-                $provincia = $_POST['txtProvincia'];
-                $comune = $_POST['txtComune'];
-                $indirizzo = $_POST['txtIndirizzo'];
-                $contenuto = $_POST['txaContenuto'];
-                $id_utente = 1; // Salvato da qualche parte in SESSION :D
-
-                $res = $em->creaEvento($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $linkImg, $id_utente);
-                stampaEsito($res);
-            } elseif ($op == 'canc') {
-                // Cancellazione evento
-                $id = $_GET['id'];
-                $res = $em->cancellaEvento($id);
-                stampaEsito($res);
-            }
+						$res = $em->creaEvento($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $linkImg, $id_utente);
+						stampaEsito($res);
+					} elseif ($op == 'canc') {
+						// Cancellazione evento
+						$id = $_GET['id'];
+						$res = $em->cancellaEvento($id);
+						stampaEsito($res);
+					}
+				}else{
+					echo "<H1>Siamo spiacenti ma lei non ha i permessi per accedere a questa pagina</H1>";
+				}
             ?>
             
             

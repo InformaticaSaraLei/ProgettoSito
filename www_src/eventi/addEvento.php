@@ -42,7 +42,23 @@
 
 <!-- Page Content -->
 <div class="container">
+<?php
+    include_once "../login/lib/userscontroller.php";
+    include_once "../login/lib/database.php";
+    include_once "../login/lib/functions.php";
+    
+    $isAdmin = false;
+    $loggato = false;
+    
+    $user = new UsersController();
+    if(isset($_SESSION['login']))
+        $loggato = true;
+        
+    if($user->isAdmin($_SESSION['login']))
+        $isAdmin = true;
 
+	if($loggato && $isAdmin){
+?>
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-lg-12">
@@ -52,7 +68,7 @@
                 <ol class="breadcrumb">
                     <li><a href="../index.html">Home</a>
                     </li>
-                    <li><a href="listaEventi.php">Eventi</a></li>
+                    <li><a href="index.php">Eventi</a></li>
                     <li class="active">Aggiungi evento</li>
                 </ol>
             </div>
@@ -120,8 +136,6 @@
                     </div>
                     
                     
-                    
-
                     <div class="row">
                             <div class="pull-left col-md-6 col-sm-6 col-xs-12 panel panel-default input-group">
                               <div class="panel-heading">
@@ -195,6 +209,15 @@
              </div>
             </form>
     </div>
+<? }else{ ?>
+    <div class="row alert alert-danger" role="alert"><div class="col-md-12">
+	<H1>Siamo spiacenti ma lei non ha i permessi per accedere a questa pagina.</H1></div>
+    </div>
+    <div class="row"><div class="col-md-12">
+    <h3>Torna agli <a href="index.php">eventi</a></h3></div>
+    </div>
+<? } ?>
+
     <hr>
 
 </div>

@@ -14,7 +14,7 @@ include_once "lib/evento.php";
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Eventi - Informatica sarÃ  lei!</title>
+    <title>Eventi - Informatica sarà lei!</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -62,18 +62,34 @@ include_once "lib/evento.php";
         </div>
     </div>
     <!-- /.row -->
-    <div class="row">
-        <div class="pull-right col-md-1 col-sm-12 col-xs-12"><a href="calendario.php">Calendario</a></div>
-    </div>
+    
+    
+    
+    <div class="row">   
 	<?php
-		$loggato=true; //Impostare se loggato o no in qualche modo
-		$isAdmin=true;//Impostare se l'utente Ã¨ admin
+        include_once "../login/lib/userscontroller.php";
+        include_once "../login/lib/database.php";
+        include_once "../login/lib/functions.php";
+        
+        $isAdmin = false;
+        $loggato = true;
+        
+        $user = new UsersController();
+        if(!isset($_SESSION['login']))
+            $loggato = false;
+            
+        if($loggato && $user->isAdmin($_SESSION['login']))
+            $isAdmin = true;
+        
 		if($loggato && $isAdmin){
-			echo '<div class="row">
-						<div class="pull-left col-md-1 col-sm-12 col-xs-12"><a href="addEvento.php">Aggiungi evento</a></div>
-				  </div>';
+			echo '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left">
+                  <a href="addEvento.php">Aggiungi evento</a></div>';
 		}
 	?>
+        <div class="pull-right col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
+            <a href="calendario.php">Calendario</a>
+        </div>
+    </div>
 
     <!-- Content Row -->
     <?php
@@ -94,7 +110,7 @@ include_once "lib/evento.php";
                             echo $e->descrizione;
                         echo '</div>';
                         echo '<div class="pull-left col-md-6 col-lg-6 col-sm-6 col-xs-6">';
-                            echo '<img src="'.$e->link_img.'" class="img-responsive customer-img" alt="Immagine Evento">';
+                            echo '<img src="'.$e->link_img.'" class="img-responsive" alt="Immagine Evento">';
                         echo '</div>';
                     echo '</div>';
                     echo '<br>';
@@ -117,7 +133,6 @@ include_once "lib/evento.php";
     }
     
     ?>
-
 
     <!-- /.row -->
     <hr>
