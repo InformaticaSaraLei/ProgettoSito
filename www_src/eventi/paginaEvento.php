@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+
 <html lang="en">
 
 <head>
@@ -36,6 +38,17 @@
         });
     </script>
 </head>
+
+
+
+
+  <?php
+    require 'lib/evento.php';
+    $em = new EventiManager();
+    $id = $_GET['id'];
+    $e = $em->getEventoById($id);
+   ?>
+
 <body>
 <div id="navigation_bar"></div>
 <!--- Inserimento navbar ---->
@@ -47,13 +60,13 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Eventi
-                <small>Titolo dell'evento</small>
+                <small><? echo  $e->titolo;?></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
                 </li>
-                <li><a href="listaEventi.html">Eventi</a></li>
-                <li class="active">Titolo dell'evento</li>
+                <li><a href="./">Eventi</a></li>
+                <li class="active"><? echo $e->titolo;?></li>
             </ol>
         </div>
     </div>
@@ -62,18 +75,21 @@
     <!-- Content Row -->
 
     <div class="row text-right">
-        <a href="calendario.html">Calendario</a>
+        <a href="calendario.php">Calendario</a>
     </div>
-
+	<?php
+		$loggato=true; //Impostare se loggato o no in qualche modo
+		$isAdmin=true;//Impostare se l'utente Ã¨ admin
+		if($loggato && $isAdmin){
+			echo '<div class="row">
+						<div class="pull-left col-md-1 col-sm-12 col-xs-12"><a href="esito.php?op=canc&id='.$e->id.'" onclick="return confirm(\'Sei sicuro di voler cancellare questo evento?\');">Elimina evento</a></div>
+				  </div>';
+		}
+	?>
 
     <!-- /.row -->
     <br>
-    <?php
-    require 'lib/evento.php';
-    $em = new EventiManager();
-    $id = $_POST['id'];
-    $e = $em->getEventoById($id);
-    ?>
+  
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -93,22 +109,21 @@
                 </div>
             </div>
             <br>
-
             <div class="panel-heading">
                 <h4><i class="fa fa-fw fa-clock-o"></i>Luogo e date</h4>
             </div>
             <div class="panel-body">
-                Luogo: <?php $e->provincia + ' ' + $e->comune + ' ' + $e->indirizzo ?>
+                Luogo: <?php echo $e->provincia." ".$e->comune." ".$e->indirizzo; ?>
                 <br>
-                Data inizio evento: <?php $e->inizio ?> alle ore: <?php $e->ora_inizio ?>
+                Data inizio evento: <?php echo substr($e->inizio,0,10); ?> alle ore: <?php  echo substr($e->inizio,10,6); ?>
                 <br>
-                Data fine evento: <?php $e->fine ?> alle ore: <?php $e->orario_fine ?>
+                Data fine evento: <?php echo substr($e->fine,0,10); ?> alle ore: <?php echo substr($e->fine,10,6); ?>
             </div>
             <div class="panel-heading">
                 <h4><i class="fa fa-fw fa-question-circle"></i>Contenuto</h4>
             </div>
             <div class="panel-body">
-                <?php $e->contenuto ?>
+                <?php echo $e->contenuto; ?>
             </div>
         </div>
     </div>
