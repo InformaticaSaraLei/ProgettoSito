@@ -65,13 +65,13 @@
 							 $db->insertOpportunita($_POST);
 							 $offerte= $db->getOfferteLavoro($_SESSION["lstart"],$_SESSION["llimit"],$_SESSION["q"]);
 							 $totalResults= $db->total_results;
-							 print_r($_POST);
+							 // print_r($_POST);
 							 break;
 			case "update"  : // ---- updateOpportunita
 			                 $_SESSION["action"]="";
 							 $_GET["action"]="";
 							 $content.="<b>update<br>";
-							  print_r($_POST);
+							 // print_r($_POST);
 							 break;
 		    case "delete"  : // ---- deleteOpportunita
 			                 $_SESSION["action"]="";
@@ -82,6 +82,7 @@
 		// print $_GET["action"];
 		switch($_GET["action"]){
 			case "update"  : $_SESSION["action"]="update";
+							 $offerta=$db->getOffertaLavoro($_GET["jobkey"]);
 							 $action_to_do=true;
 							 break;
 			case "insert"  : $_SESSION["action"]="insert";
@@ -148,7 +149,7 @@
 						<h4>".strtoupper($jobOpportunity["AZIENDA_CITTA"])."(". $jobOpportunity["AZIENDA_PROVINCIA"].") - ".$jobOpportunity["FK_NAZIONE"]."</h4><br>
 						".$jobOpportunity["SNIPPET_ANNUNCIO"]."
 						<br>
-						 <a href=\"index.php?mode=detail&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-info  pull-right\" role=\"button\">Vedi Dettaglio Annuncio</a>
+						 <a href=\"index.php?action=update&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-warning  \" role=\"button\">Modifica Annuncio</a><a href=\"index.php?mode=detail&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-info  pull-right\" role=\"button\">Vedi Dettaglio Annuncio</a>
 					</div>
 				</div>
 				";		
@@ -170,7 +171,7 @@
 									  <label for=\"TITOLO_LAVORO\" class=\"control-label\">TITOLO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"TITOLO_LAVORO\" type=\"text\" class=\"form-control\" id=\"TITOLO_LAVORO\" placeholder=\"Titolo opportunità\">
+									  <input name=\"TITOLO_LAVORO\" type=\"text\" class=\"form-control\" id=\"TITOLO_LAVORO\" placeholder=\"Titolo opportunità\" value=\"".$offerta["TITOLO_LAVORO"]."\">
 									</div>
 								  </div>
 								  <div class=\"form-group\" draggable=\"true\">
@@ -178,7 +179,7 @@
 									  <label for=\"TIPO_CONTRATTO\" class=\"control-label\">CONTRATTO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"TIPO_CONTRATTO\" type=\"text\" class=\"form-control\" id=\"TIPO_CONTRATTO\" placeholder=\"Tipo contratto\">
+									  <input name=\"TIPO_CONTRATTO\" type=\"text\" class=\"form-control\" id=\"TIPO_CONTRATTO\" placeholder=\"Tipo contratto\" value=\"".$offerta["TIPO_CONTRATTO"]."\">
 									</div>
 								  </div>
 								  
@@ -187,7 +188,7 @@
 									  <label for=\"AZIENDA_NOME\" class=\"control-label\">AZIENDA</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"AZIENDA_NOME\" type=\"text\" class=\"form-control\" id=\"AZIENDA_NOME\" placeholder=\"Azienda proponente\">
+									  <input name=\"AZIENDA_NOME\" type=\"text\" class=\"form-control\" id=\"AZIENDA_NOME\" placeholder=\"Azienda proponente\" value=\"".$offerta["AZIENDA_NOME"]."\">
 									</div>
 								  </div>								  
 								  
@@ -197,7 +198,7 @@
 									  <label for=\"FK_NAZIONE\" class=\"control-label\">NAZIONE</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <select name=\"FK_NAZIONE\" class=\"form-control\" id=\"FK_NAZIONE\" placeholder=\"Nazione\">".buildNationOptions($nazioni,"")."</select>
+									  <select name=\"FK_NAZIONE\" class=\"form-control\" id=\"FK_NAZIONE\" placeholder=\"Nazione\">".buildNationOptions($nazioni,$offerta["FK_NAZIONE"])."</select>
 									</div>
 								  </div>									  
 								  
@@ -206,7 +207,7 @@
 									  <label for=\"AZIENDA_PROVINCIA\" class=\"control-label\">PROVINCIA</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"AZIENDA_PROVINCIA\" type=\"text\" class=\"form-control\" id=\"AZIENDA_PROVINCIA\" placeholder=\"Provincia\">
+									  <input name=\"AZIENDA_PROVINCIA\" type=\"text\" class=\"form-control\" id=\"AZIENDA_PROVINCIA\" placeholder=\"Provincia\" value=\"".$offerta["AZIENDA_PROVINCIA"]."\">
 									</div>
 								  </div>									  
 						
@@ -215,7 +216,7 @@
 									  <label for=\"AZIENDA_CITTA\" class=\"control-label\">CITTA</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"AZIENDA_CITTA\" type=\"text\" class=\"form-control\" id=\"AZIENDA_CITTA\" placeholder=\"Città\">
+									  <input name=\"AZIENDA_CITTA\" type=\"text\" class=\"form-control\" id=\"AZIENDA_CITTA\" placeholder=\"Città\" value=\"".$offerta["AZIENDA_CITTA"]."\">
 									</div>
 								  </div>	
 						
@@ -224,7 +225,7 @@
 									  <label for=\"AZIENDA_LATITUDINE\" class=\"control-label\">LATITUDINE</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"AZIENDA_LATITUDINE\" type=\"text\" class=\"form-control\" id=\"AZIENDA_LATITUDINE\" placeholder=\"Latitudine\">
+									  <input name=\"AZIENDA_LATITUDINE\" type=\"text\" class=\"form-control\" id=\"AZIENDA_LATITUDINE\" placeholder=\"Latitudine\" value=\"".$offerta["AZIENDA_LATITUDINE"]."\">
 									</div>
 								  </div>						
 						
@@ -233,7 +234,7 @@
 									  <label for=\"AZIENDA_LONGITUDINE\" class=\"control-label\">LONGITUDINE</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"AZIENDA_LONGITUDINE\" type=\"text\" class=\"form-control\" id=\"AZIENDA_LONGITUDINE\" placeholder=\"Longitudine\">
+									  <input name=\"AZIENDA_LONGITUDINE\" type=\"text\" class=\"form-control\" id=\"AZIENDA_LONGITUDINE\" placeholder=\"Longitudine\" value=\"".$offerta["AZIENDA_LONGITUDINE"]."\">
 									</div>
 								  </div>												
 						
@@ -242,7 +243,7 @@
 									  <label for=\"CONTATTO_TEL\" class=\"control-label\">TELEFONO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"CONTATTO_TEL\" type=\"tel\" class=\"form-control\" id=\"CONTATTO_TEL\" placeholder=\"Contatto telefonico\">
+									  <input name=\"CONTATTO_TEL\" type=\"tel\" class=\"form-control\" id=\"CONTATTO_TEL\" placeholder=\"Contatto telefonico\" value=\"".$offerta["CONTATTO_TEL"]."\">
 									</div>
 								  </div>
 
@@ -251,7 +252,7 @@
 									  <label for=\"CONTATTO_FAX\" class=\"control-label\">CONTATTO FAX</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"CONTATTO_FAX\" type=\"text\" class=\"form-control\" id=\"CONTATTO_FAX\" placeholder=\"Contatto fax\">
+									  <input name=\"CONTATTO_FAX\" type=\"text\" class=\"form-control\" id=\"CONTATTO_FAX\" placeholder=\"Contatto fax\" value=\"".$offerta["CONTATTO_FAX"]."\">
 									</div>
 								  </div>								  
 						
@@ -260,7 +261,7 @@
 									  <label for=\"CONTATTO_EMAIL\" class=\"control-label\">EMAIL</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"CONTATTO_EMAIL\" type=\"email\" class=\"form-control\" id=\"CONTATTO_EMAIL\" placeholder=\"Email di contatto\">
+									  <input name=\"CONTATTO_EMAIL\" type=\"email\" class=\"form-control\" id=\"CONTATTO_EMAIL\" placeholder=\"Email di contatto\" value=\"".$offerta["CONTATTO_EMAIL"]."\">
 									</div>
 								  </div>
 								  
@@ -270,7 +271,7 @@
 									  <label for=\"FONTE_DESCR\" class=\"control-label\">FONTE</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"FONTE_DESCR\" type=\"text\" class=\"form-control\" id=\"FONTE_DESCR\" placeholder=\"Fonte\">
+									  <input name=\"FONTE_DESCR\" type=\"text\" class=\"form-control\" id=\"FONTE_DESCR\" placeholder=\"Fonte\" value=\"".$offerta["FONTE_DESCR"]."\">
 									</div>
 								  </div>
 								  
@@ -279,7 +280,7 @@
 									  <label for=\"FONTE_LINK\" class=\"control-label\">LINK ALLA FONTE</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"FONTE_LINK\" type=\"url\" class=\"form-control\" id=\"FONTE_LINK\" placeholder=\"Link alla fonte\">
+									  <input name=\"FONTE_LINK\" type=\"url\" class=\"form-control\" id=\"FONTE_LINK\" placeholder=\"Link alla fonte\" value=\"".$offerta["FONTE_LINK"]."\">
 									</div>
 								  </div>							  
 								  
@@ -288,7 +289,7 @@
 									  <label for=\"SNIPPET_ANNUNCIO\" class=\"control-label\">ESTRATTO ANNUNCIO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"SNIPPET_ANNUNCIO\" type=\"text\" class=\"form-control\" id=\"SNIPPET_ANNUNCIO\" placeholder=\"Estratto dell'annuncio\">
+									  <input name=\"SNIPPET_ANNUNCIO\" type=\"text\" class=\"form-control\" id=\"SNIPPET_ANNUNCIO\" placeholder=\"Estratto dell'annuncio\" value=\"".$offerta["SNIPPET_ANNUNCIO"]."\">
 									</div>
 								  </div>							  
 								  
@@ -297,7 +298,7 @@
 									  <label for=\"FK_STATO_OFFERTA\" class=\"control-label\">STATO OFFERTA</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <select name=\"FK_STATO_OFFERTA\" id=\"FK_STATO_OFFERTA\" class=\"form-control\" id=\"FK_STATO_OFFERTA\" placeholder=\"Stato offerta\">".buildStatiOptions($stati,"")."</select>
+									  <select name=\"FK_STATO_OFFERTA\" id=\"FK_STATO_OFFERTA\" class=\"form-control\" id=\"FK_STATO_OFFERTA\" placeholder=\"Stato offerta\">".buildStatiOptions($stati,$offerta["FK_STATO_OFFERTA"])."</select>
 									</div>
 								  </div>								  
 								  
@@ -310,6 +311,7 @@
 								  
 								  
 								  <input type=\"hidden\" id=\"action\" name=\"action\" value=\"".$_SESSION["action"]."\">
+								  <input type=\"hidden\" id=\"ID\" name=\"ID\" value=\"".$_GET["jobkey"]."\">
 								</form>
 							</div>
 						</div>	
