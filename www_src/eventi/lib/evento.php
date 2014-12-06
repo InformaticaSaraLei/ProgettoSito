@@ -59,7 +59,8 @@ class EventiManager
     public function creaEvento($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $img_nomefile, $id_utente)
     {
         if ($this->isEmpty(array($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $img_nomefile, $id_utente))) {
-            throw new Exception('Invalid arguments');
+            return false;
+            /* throw new Exception('Invalid arguments'); */
         }
         try {
             return $this->conn->execAction("Insert INTO agendaeventi(TITOLO, DESCRIZIONE, CONTENUTO, INIZIO, FINE, PROVINCIA, COMUNE, INDIRIZZO, IMG_NOME, FK_INSERITO_DA)VALUES('".$titolo."','".$descrizione."','".$contenuto."','".$inizio."','".$fine."','".$provincia."','".$comune."','".$indirizzo."','".$img_nomefile."','".$id_utente."');");
@@ -93,7 +94,8 @@ class EventiManager
     public function cancellaEvento($id)
     {
         if ($this->isEmpty(array($id)) or $id < 0) {
-            throw new Exception('Invalid argument');
+            return false;
+            /* throw new Exception('Invalid argument'); */
         }
         try {
             return $this->conn->execAction("Delete From agendaeventi Where ID=".$id);

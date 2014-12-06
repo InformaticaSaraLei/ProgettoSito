@@ -97,7 +97,7 @@
 		}
 	?>
         <div class="pull-right col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-            <a href="calendario.php">Calendario</a>
+            <h4><a href="calendario.php">Calendario</a></h4>
         </div>
     </div>
 
@@ -112,13 +112,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="pull-left col-md-6 col-sm-7">
-                        <h4>Descrizione dell'evento</h4>
-
                         <p><?php echo $e->descrizione ?></p>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="pull-left col-md-5 col-sm-5 col-xs-12">
-                        <img src="<?php echo $e->link_img ?>" class="img-responsive customer-img" alt="Immagine Evento">
                     </div>
                 </div>
             </div>
@@ -137,7 +131,14 @@
                 <h4><i class="fa fa-fw fa-question-circle"></i>Contenuto</h4>
             </div>
             <div class="panel-body">
-                <?php echo $e->contenuto; ?>
+                <div class="row">
+                    <div class="pull-left col-md-6 col-sm-7">
+                        <p><?php echo $e->contenuto ?></p>
+                    </div>
+                    <div class="pull-right col-md-5 col-sm-5 col-xs-12">
+                        <img src="<?php echo $e->link_img ?>" class="img-responsive customer-img" alt="Immagine Evento">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

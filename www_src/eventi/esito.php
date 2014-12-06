@@ -74,8 +74,21 @@
                 }
                 echo '</h1>';
             }
-			$loggato=true; //Impostare se loggato o no in qualche modo
-			$isAdmin=true;//Impostare se l'utente è admin
+
+      include_once "../login/lib/userscontroller.php";
+      include_once "../login/lib/database.php";
+      include_once "../login/lib/functions.php";
+      
+      $isAdmin = false;
+      $loggato = false;
+      
+      $user = new UsersController();
+      if(isset($_SESSION['login']))
+          $loggato = true;
+        
+      if($user->isAdmin($_SESSION['login']))
+          $isAdmin = true;
+
 			if($loggato && $isAdmin){
 					$em = new EventiManager();
 					$op = $_GET['op'];
@@ -101,7 +114,14 @@
 						stampaEsito($res);
 					}
 				}else{
-					echo "<H1>Siamo spiacenti ma lei non ha i permessi per accedere a questa pagina</H1>";
+?>
+<div class="row alert alert-danger" role="alert"><div class="col-md-12">
+          <H1>Siamo spiacenti ma lei non ha i permessi per accedere a questa pagina.</H1></div>
+            </div>
+            <div class="row"><div class="col-md-12">
+            <h3>Torna agli <a href="index.php">eventi</a></h3></div>
+            </div>
+<?
 				}
             ?>
             

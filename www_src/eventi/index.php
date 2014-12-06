@@ -83,11 +83,11 @@ include_once "lib/evento.php";
         
 		if($loggato && $isAdmin){
 			echo '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left">
-                  <a href="addEvento.php">Aggiungi evento</a></div>';
+                  <h3><a href="addEvento.php">Aggiungi evento</a></h3></div>';
 		}
 	?>
         <div class="pull-right col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-            <a href="calendario.php">Calendario</a>
+            <h3><a href="calendario.php">Calendario</a></h3>
         </div>
     </div>
 
@@ -110,7 +110,7 @@ include_once "lib/evento.php";
                             echo $e->descrizione;
                         echo '</div>';
                         echo '<div class="pull-left col-md-6 col-lg-6 col-sm-6 col-xs-6">';
-                            echo '<img src="'.$e->link_img.'" class="img-responsive" alt="Immagine Evento">';
+                          echo '<img src="'.$e->link_img.'" class="img-responsive" alt="Immagine Evento">';
                         echo '</div>';
                     echo '</div>';
                     echo '<br>';
@@ -128,7 +128,7 @@ include_once "lib/evento.php";
     }else{
         echo '<div class="row"><div class="pull-left col-md-4 col-lg-4"></div>';
         echo '<div class="pull-left col-md-4 col-lg-4">';
-        echo '<p>Nessun evento programmato</p></div>';
+        echo '<p>Non evento programmato</p></div>';
         echo '<div class="pull-left col-md-4 col-lg-4"></div></div>';
     }
     

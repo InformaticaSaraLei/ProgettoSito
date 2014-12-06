@@ -123,20 +123,6 @@
                     
                     
                     <div class="row">
-                        <div class="pull-left col-md-12 col-sm-12 col-xs-12 panel panel-default input-group">
-                            <div class="panel-heading">
-                                 <label class="control-label" for="txaContenuto">Contenuto</label>
-                            </div>
-                            <div class="panel-body">    
-                                <div class="center controls input-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                                    <textarea id="txaContenuto" name="txaContenuto" class="form-control"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="row">
                             <div class="pull-left col-md-6 col-sm-6 col-xs-12 panel panel-default input-group">
                               <div class="panel-heading">
                                 <label class="control-label" for="txtInizio">Inizio</label>
@@ -200,7 +186,22 @@
                                 </div>
                               </div>
                             </div>
+                    
                     </div>
+
+                            <div class="row">
+                                <div class="pull-left col-md-12 col-sm-12 col-xs-12 panel panel-default input-group">
+                                    <div class="panel-heading">
+                                         <label class="control-label" for="txaContenuto">Contenuto</label>
+                                    </div>
+                                    <div class="panel-body">    
+                                        <div class="center controls input-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                            <textarea rows="10" id="txaContenuto" name="txaContenuto" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
                 </fieldset>
              <div class="row">
               <div class="pull-left col-md-5 col-sm-5 col-xs-5"></div>
@@ -240,7 +241,8 @@
         $('#datetimepicker1').datetimepicker();
     });
 </script>
-
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script>tinymce.init({selector:'textarea'});</script>
 
 </body>
 
