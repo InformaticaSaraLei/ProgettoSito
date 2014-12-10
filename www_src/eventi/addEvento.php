@@ -210,14 +210,14 @@
              </div>
             </form>
     </div>
-<? }else{ ?>
+<?php }else{ ?>
     <div class="row alert alert-danger" role="alert"><div class="col-md-12">
 	<H1>Siamo spiacenti ma lei non ha i permessi per accedere a questa pagina.</H1></div>
     </div>
     <div class="row"><div class="col-md-12">
     <h3>Torna agli <a href="index.php">eventi</a></h3></div>
     </div>
-<? } ?>
+<?php } ?>
 
     <hr>
 
