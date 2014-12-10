@@ -59,7 +59,7 @@
     <!-- /.row -->
     <div class="container">
         <div class="page-header">
-            <?php
+        <?php
             include_once "lib/evento.php";
             function stampaEsito($esito)
             {
@@ -121,7 +121,7 @@
             <div class="row"><div class="col-md-12">
             <h3>Torna agli <a href="index.php">eventi</a></h3></div>
             </div>
-<?
+<?php
 				}
             ?>
             
