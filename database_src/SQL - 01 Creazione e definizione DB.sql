@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `pariopp`.`offertelavorostorico` (
 			ON DELETE RESTRICT
 			ON UPDATE CASCADE,
 	FOREIGN KEY `FK_offertelavorostorico_OFFSTAT`(`FK_STATO_OFFERTA` )
-			REFERENCES `pariopp`.`offertelavoroStati`(`id`)
+			REFERENCES `pariopp`.`offertelavorostati`(`id`)
 			ON DELETE RESTRICT
 			ON UPDATE CASCADE,
 	FOREIGN KEY `FK_offertelavorostorico_UTENTE`(`FK_UTENTE` )
@@ -197,6 +197,7 @@ CREATE TABLE IF NOT EXISTS `pariopp`.`opportunitaculturalipersone` (
     AZIENDA_ATTUALE VARCHAR(100) NOT NULL,
     AZIENDA_ATTUALE_SITOWEB VARCHAR(100) NOT NULL,
     STORIA VARCHAR(15000) NOT NULL,
+	DATA_INSERIMENTO DATE NOT NULL,
     LASTMOD TIMESTAMP NOT NULL DEFAULT now() ON UPDATE now(),
     
     PRIMARY KEY(ID),
