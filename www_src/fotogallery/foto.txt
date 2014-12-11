@@ -1,50 +1,238 @@
-<a href="https://www.flickr.com/photos/128846442@N03/15712782588" title="verona 1 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7515/15712782588_24bb593ffc_n.jpg" width="320" height="198" alt="verona 1"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15712782588" title="verona 1 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7515/15712782588_82dda3c82d_o.jpg" width="1024" height="634" alt="verona 1"></a>
+nome : Girls in lab 1
+data : 2/12/2014
+risoluzione : 3552x2000
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : Università Ca'Foscari Venezia Girls Lab Technology Computer Informaticasaralei Informatica Programming
+link : <a href="https://www.flickr.com/photos/128846442@N03/15920730516" title="Girls in lab 1 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7556/15920730516_c4a4c67ca1_b.jpg" width="1024" height="577" alt="Girls in lab 1"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15900279285" title="girl-tech 1 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7470/15900279285_c61da5d94f_n.jpg" width="320" height="213" alt="girl-tech 1"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15900279285" title="girl-tech 1 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7470/15900279285_0bedf5d399_o.jpg" width="1698" height="1131" alt="girl-tech 1"></a>
+nome : Girls in lab 2
+data : 2/12/2014
+risoluzione : 3552x2000
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : Università Ca'Foscari Venezia Girls Lab Technology Computer Informaticasaralei Informatica Programming
+link : <a href="https://www.flickr.com/photos/128846442@N03/15324272494" title="Girls in lab 2 by Informatica Sarà Lei, on Flickr"><img src="https://farm9.staticflickr.com/8592/15324272494_ef5d31b465_b.jpg" width="1024" height="577" alt="Girls in lab 2"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15900280135" title="Padova lab by Informatica SarÃ  Lei, on Flickr"><img src="https://farm9.staticflickr.com/8590/15900280135_ea4f5aaf69_n.jpg" width="320" height="240" alt="Padova lab"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15900280135" title="Padova lab by Informatica SarÃ  Lei, on Flickr"><img src="https://farm9.staticflickr.com/8590/15900280135_12532783a7_o.jpg" width="800" height="600" alt="Padova lab"></a>
+nome : Girls in lab 3
+data : 2/12/2014
+risoluzione : 3552x2000
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : Università Ca'Foscari Venezia Girls Lab Technology Computer Informaticasaralei Informatica Programming
+link : <a href="https://www.flickr.com/photos/128846442@N03/15946546035" title="Girls in lab 3 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7513/15946546035_2bb392b9ec_b.jpg" width="1024" height="577" alt="Girls in lab 3"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15712785938" title="padova lab 1 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7558/15712785938_94c093bd75_n.jpg" width="320" height="240" alt="padova lab 1"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15712785938" title="padova lab 1 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7558/15712785938_3463323998_o.jpg" width="800" height="600" alt="padova lab 1"></a>
+nome : Girls in lab 4
+data : 2/12/2014
+risoluzione : 3552x2000
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : Università Ca'Foscari Venezia Girls Lab Technology Computer Informaticasaralei Informatica Programming
+link : <a href="https://www.flickr.com/photos/128846442@N03/15324284224" title="Girls in lab 4 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7508/15324284224_d68c81058f_b.jpg" width="1024" height="577" alt="Girls in lab 4"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15280643803" title="girl-tech 2 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm9.staticflickr.com/8607/15280643803_5a5d379d5f_n.jpg" width="320" height="200" alt="girl-tech 2"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15280643803" title="girl-tech 2 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm9.staticflickr.com/8607/15280643803_b50e033704_o.jpg" width="620" height="387" alt="girl-tech 2"></a>
+nome : Girls in lab 5
+data : 2/12/2014
+risoluzione : 3552x2000
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : Università Ca'Foscari Venezia Girls Lab Technology Computer Informaticasaralei Informatica Programming
+link : <a href="https://www.flickr.com/photos/128846442@N03/15945889502" title="Girls in lab 5 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7579/15945889502_b23473bb79_b.jpg" width="1024" height="577" alt="Girls in lab 5"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15712787348" title="laboratorioinformatico6 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7496/15712787348_324aae4ab3_n.jpg" width="320" height="213" alt="laboratorioinformatico6"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15712787348" title="laboratorioinformatico6 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7496/15712787348_b83751b81c_o.jpg" width="1280" height="853" alt="laboratorioinformatico6"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15712788148" title="girl-tech 3 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm9.staticflickr.com/8658/15712788148_4624e0a6c7_n.jpg" width="320" height="253" alt="girl-tech 3"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15712788148" title="girl-tech 3 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm9.staticflickr.com/8658/15712788148_c56b804769_o.jpg" width="1142" height="905" alt="girl-tech 3"></a>
+nome : Girls in lab 6
+data : 2/12/2014
+risoluzione : 3552x2000
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : Università Ca'Foscari Venezia Girls Lab Technology Computer Informaticasaralei Informatica Programming
+link : <a href="https://www.flickr.com/photos/128846442@N03/15920759726" title="Girls in lab 6 by Informatica Sarà Lei, on Flickr"><img src="https://farm9.staticflickr.com/8615/15920759726_951094fd89_b.jpg" width="1024" height="577" alt="Girls in lab 6"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15899634202" title="ca&#x27; foscari lab 3 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7498/15899634202_fc40c6fa50_n.jpg" width="320" height="240" alt="ca&#x27; foscari lab 3"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15899634202" title="ca&#x27; foscari lab 3 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7498/15899634202_a15a9a28d4_o.jpg" width="3264" height="2448" alt="ca&#x27; foscari lab 3"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15874476586" title="girl-tech 4 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7538/15874476586_0d287c2074_n.jpg" width="320" height="213" alt="girl-tech 4"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15874476586" title="girl-tech 4 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7538/15874476586_b58033117c_o.jpg" width="620" height="413" alt="girl-tech 4"></a>
+nome : Girls in lab 7
+data : 2/12/2014
+risoluzione : 3552x2000
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : Università Ca'Foscari Venezia Girls Lab Technology Computer Informaticasaralei Informatica Programming
+link : <a href="https://www.flickr.com/photos/128846442@N03/15945899082" title="Girls in lab 7 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7567/15945899082_a63e81e9cc_b.jpg" width="1024" height="577" alt="Girls in lab 7"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15900286585" title="girl-tech 5 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7574/15900286585_65bb180a00_n.jpg" width="320" height="180" alt="girl-tech 5"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15900286585" title="girl-tech 5 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7574/15900286585_79e2ce8aa9_o.jpg" width="1280" height="719" alt="girl-tech 5"></a>
+nome : Girls in lab 8
+data : 2/12/2014
+risoluzione : 3552x2000
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : Università Ca'Foscari Venezia Girls Lab Technology Computer Informaticasaralei Informatica Programming
+link : <a href="https://www.flickr.com/photos/128846442@N03/15759278310" title="Girls in lab 8 by Informatica Sarà Lei, on Flickr"><img src="https://farm9.staticflickr.com/8612/15759278310_282b114fec_b.jpg" width="1024" height="577" alt="Girls in lab 8"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15714251929" title="auditorium by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7571/15714251929_52f82c323a_n.jpg" width="320" height="180" alt="auditorium"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15714251929" title="auditorium by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7571/15714251929_f96f3b8df0_o.jpg" width="5312" height="2988" alt="auditorium"></a>
+nome : Girls in lab 9
+data : 2/12/2014
+risoluzione : 3552x2000
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : Università Ca'Foscari Venezia Girls Lab Technology Computer Informaticasaralei Informatica Programming
+link : <a href="https://www.flickr.com/photos/128846442@N03/15759283870" title="Girls in lab 9 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7532/15759283870_b55af1a7f0_b.jpg" width="1024" height="577" alt="Girls in lab 9"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15900315705" title="campus scientifico 1 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7522/15900315705_308e4b0be1_n.jpg" width="320" height="180" alt="campus scientifico 1"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15900315705" title="campus scientifico 1 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7522/15900315705_f1749a1146_o.jpg" width="5312" height="2988" alt="campus scientifico 1"></a>
+nome : Girls in lab 10
+data : 2/12/2014
+risoluzione : 3552x2000
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : Università Ca'Foscari Venezia Girls Lab Technology Computer Informaticasaralei Informatica Programming
+link : <a href="https://www.flickr.com/photos/128846442@N03/15760550799" title="Girls in lab 10 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7574/15760550799_cb5cb31650_b.jpg" width="1024" height="577" alt="Girls in lab 10"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15898342701" title="campus scientifico 2 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7474/15898342701_b053097009_n.jpg" width="320" height="180" alt="campus scientifico 2"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15898342701" title="campus scientifico 2 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7474/15898342701_10fc55199d_o.jpg" width="5312" height="2988" alt="campus scientifico 2"></a>
+nome : verona 1
+data : 28/11/2014
+risoluzione : 1024x634
+formato : JPG
+latitudine : 45.402017
+longitudine : 10.996971
+tag : Università Verona
+link : <a href="https://www.flickr.com/photos/128846442@N03/15712782588" title="verona 1 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7515/15712782588_24bb593ffc_b.jpg" width="1024" height="634" alt="verona 1"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15713041460" title="campus scientifico 3 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7518/15713041460_476d3935b7_n.jpg" width="320" height="180" alt="campus scientifico 3"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15713041460" title="campus scientifico 3 by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7518/15713041460_5075498e5f_o.jpg" width="5312" height="2988" alt="campus scientifico 3"></a>
+nome : girl-tech 1
+data : 27/04/2007
+risoluzione : 1698x1131
+formato : JPG
+latitudine : 
+longitudine : 
+tag : Programming Informatica Informaticasaralei Computer Technology Lab
+link : <a href="https://www.flickr.com/photos/128846442@N03/15900279285" title="girl-tech 1 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7470/15900279285_c61da5d94f_b.jpg" width="1024" height="682" alt="girl-tech 1"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15714316729" title="edificio delta by Informatica SarÃ  Lei, on Flickr"><img src="https://farm9.staticflickr.com/8577/15714316729_1b5f8f8717_n.jpg" width="320" height="180" alt="edificio delta"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15714316729" title="edificio delta by Informatica SarÃ  Lei, on Flickr"><img src="https://farm9.staticflickr.com/8577/15714316729_b2591bdf05_o.jpg" width="5312" height="2988" alt="edificio delta"></a>
+nome : girl-tech 2
+data : 28/11/2014
+risoluzione : 620x387
+formato : JPG
+latitudine : 
+longitudine : 
+tag : Programming Informatica Informaticasaralei Computer Technology Lab
+link : <a href="https://www.flickr.com/photos/128846442@N03/15280643803" title="girl-tech 2 by Informatica Sarà Lei, on Flickr"><img src="https://farm9.staticflickr.com/8607/15280643803_b50e033704_o.jpg" width="620" height="387" alt="girl-tech 2"></a>
 
-<a href="https://www.flickr.com/photos/128846442@N03/15713069440" title="lab 3 edificio zeta by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7537/15713069440_4666302297_n.jpg" width="320" height="180" alt="lab 3 edificio zeta"></a>
-<a href="https://www.flickr.com/photos/128846442@N03/15713069440" title="lab 3 edificio zeta by Informatica SarÃ  Lei, on Flickr"><img src="https://farm8.staticflickr.com/7537/15713069440_1898f126a7_o.jpg" width="5312" height="2988" alt="lab 3 edificio zeta"></a>
+nome : laboratorioinformatico6
+data : 31/10/2012
+risoluzione : 1280x853
+formato : JPG
+latitudine : 
+longitudine : 
+tag : informatica informaticasaralei laboratorio
+link : <a href="https://www.flickr.com/photos/128846442@N03/15712787348" title="laboratorioinformatico6 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7496/15712787348_324aae4ab3_b.jpg" width="1024" height="682" alt="laboratorioinformatico6"></a>
 
-// iframe
-<iframe src="https://www.flickr.com/photos/128846442@N03/15712782588/in/photostream/player/" width="1024" height="634" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+nome : girl-tech 3
+data : 28/11/2014
+risoluzione : 1142x905
+formato : JPG
+latitudine : 
+longitudine : 
+tag : Programming Informatica Informaticasaralei Computer Technology Lab girl università
+link : <a href="https://www.flickr.com/photos/128846442@N03/15712788148" title="girl-tech 3 by Informatica Sarà Lei, on Flickr"><img src="https://farm9.staticflickr.com/8658/15712788148_4624e0a6c7_b.jpg" width="1024" height="811" alt="girl-tech 3"></a>
+
+
+nome : ca' foscari lab 3
+data : 28/11/2014
+risoluzione : 3264x2448
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : Programming Informatica Informaticasaralei Computer Technology Lab girls università Venzia ca'foscari
+link : <a href="https://www.flickr.com/photos/128846442@N03/15899634202" title="ca&#x27; foscari lab 3 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7498/15899634202_fc40c6fa50_b.jpg" width="1024" height="768" alt="ca&#x27; foscari lab 3"></a>
+
+
+nome : girl-tech 4
+data : 28/11/2014
+risoluzione : 620x413
+formato : JPG
+latitudine : 
+longitudine : 
+tag : Programming Informatica Informaticasaralei Computer Technology Lab girl università
+link : <a href="https://www.flickr.com/photos/128846442@N03/15874476586" title="girl-tech 4 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7538/15874476586_b58033117c_o.jpg" width="620" height="413" alt="girl-tech 4"></a>
+
+nome : girl-tech5
+data : 28/11/2014
+risoluzione : 1280x719
+formato : JPG
+latitudine : 
+longitudine : 
+tag : Programming Informatica Informaticasaralei Computer Technology Lab girl università
+link : <a href="https://www.flickr.com/photos/128846442@N03/15900286585" title="girl-tech 5 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7574/15900286585_65bb180a00_b.jpg" width="1024" height="575" alt="girl-tech 5"></a>
+
+nome : Padova lab
+data : 28/11/2014
+risoluzione : 800x600
+formato : JPG
+latitudine : 45.406740
+longitudine : 11.877950
+tag : Università Informatica Informaticasaràlei Computer Technology Lab Padova
+link : <a href="https://www.flickr.com/photos/128846442@N03/15900280135" title="Padova lab by Informatica Sarà Lei, on Flickr"><img src="https://farm9.staticflickr.com/8590/15900280135_12532783a7_o.jpg" width="800" height="600" alt="Padova lab"></a>
+
+nome : auditorium
+data : 26/11/2014
+risoluzione : 5312x2988
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : auditorium università informatica informaticasaràlei Venezia Ca'Foscari
+link : <a href="https://www.flickr.com/photos/128846442@N03/15714251929" title="auditorium by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7571/15714251929_52f82c323a_b.jpg" width="1024" height="576" alt="auditorium"></a>
+
+nome : campus scientifico 1
+data : 26/11/2014
+risoluzione : 5312x2988
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : campus scientifico università informatica informaticasaràlei Venezia Ca'Foscari
+link : <a href="https://www.flickr.com/photos/128846442@N03/15900315705" title="campus scientifico 1 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7522/15900315705_308e4b0be1_b.jpg" width="1024" height="576" alt="campus scientifico 1"></a>
+
+nome : campus scientifico 2
+data : 26/11/2014
+risoluzione : 5312x2988
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : campus scientifico università informatica informaticasaràlei Venezia Ca'Foscari
+link : <a href="https://www.flickr.com/photos/128846442@N03/15898342701" title="campus scientifico 2 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7474/15898342701_b053097009_b.jpg" width="1024" height="576" alt="campus scientifico 2"></a>
+
+nome : campus scientifico 3
+data : 26/11/2014
+risoluzione : 5312x2988
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : campus scientifico università informatica informaticasaràlei Venezia Ca'Foscari
+link :<a href="https://www.flickr.com/photos/128846442@N03/15713041460" title="campus scientifico 3 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7518/15713041460_476d3935b7_b.jpg" width="1024" height="576" alt="campus scientifico 3"></a>
+
+nome : edificio delta
+data : 26/11/2014
+risoluzione : 5312x2988
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : campus scientifico università informatica informaticasaràlei Venezia Ca'Foscari edificiodelta
+link : <a href="https://www.flickr.com/photos/128846442@N03/15714316729" title="edificio delta by Informatica Sarà Lei, on Flickr"><img src="https://farm9.staticflickr.com/8577/15714316729_1b5f8f8717_b.jpg" width="1024" height="576" alt="edificio delta"></a>
+
+nome : lab 3 edificio zeta
+data : 26/11/2014
+risoluzione : 5312x2988
+formato : JPG
+latitudine : 45.47862
+longitudine : 12.25578
+tag : computer lab università informatica informaticasaràlei Venezia Ca'Foscari edificiozeta
+link : <a href="https://www.flickr.com/photos/128846442@N03/15713069440" title="lab 3 edificio zeta by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7537/15713069440_4666302297_b.jpg" width="1024" height="576" alt="lab 3 edificio zeta"></a>
+
+
+nome : Padova lab 1
+data : 28/11/2014
+risoluzione : 800x600
+formato : JPG
+latitudine : 45.406740
+longitudine : 11.877950
+tag : Università Informatica Informaticasaralei Computer Technology Lab Padova
+link : <a href="https://www.flickr.com/photos/128846442@N03/15712785938" title="padova lab 1 by Informatica Sarà Lei, on Flickr"><img src="https://farm8.staticflickr.com/7558/15712785938_3463323998_o.jpg" width="800" height="600" alt="padova lab 1"></a>

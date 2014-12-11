@@ -1,0 +1,43 @@
+Nome: karina e Giulia
+Data: 24 novembre 2014
+Risoluzione: 1280x720
+formato: MP4
+latitudine: 45.47862
+longitudine: 12.25578
+Durata: 3:14
+Tag: intervista, ca' foscari, laureande, triennale, terzo anno, informatica, informaticasaralei
+
+
+
+Nome: Samantha
+Data: 22 novembre 2014
+Risoluzione: 1280x720
+formato: MP4
+latitudine: 45.89119
+longitudine: 12.32672
+Durata: 3:34
+Tag: intervista, laureanda, università degli studi di udine, laurea magistrale, primo anno, informaticasaralei, informatica
+
+
+Nome: Dalila
+Data: 24 novembre 2014
+Risoluzione: 1280x720
+formato: MP4
+latitudine: 45.47862
+longitudine: 12.25578
+Durata: 4:01
+Tag: intervista, laureanda, ca' foscari, laurea magistrale, primo anno, informatica, informaticasaralei
+
+
+
+Nome: Prof.ssa Marta Simeoni
+Data: 25 novembre 2014
+Risoluzione: 1280x720
+formato: MP4
+latitudine: 45.47862
+longitudine: 12.25578
+Durata: 4:10
+Tag: intervista, lavoratrice, professoressa, ricercatrice, ca' foscari, informaticasaralei, informatica
+
+
+
