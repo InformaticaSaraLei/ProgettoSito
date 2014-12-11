@@ -4,9 +4,9 @@ class Database {
 
   // Parametri connessione database
   private $host = "localhost";
-  private $username = "andreascarpa9";
-  private $pass = "kadropagnu24";
-  private $dbname = "my_andreascarpa9";
+  private $username = "";
+  private $pass = "";
+  private $dbname = "";
 
   private $dbconn=null;
 
@@ -87,4 +87,4 @@ class Database {
 
 }
 
-?>
+?>
