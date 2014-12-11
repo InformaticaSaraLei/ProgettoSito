@@ -118,6 +118,11 @@
 					//non deve raggiungere tutti gli obbiettivi per passare di livello:
 					var var_obb_superflui = false;
 					
+					//obbiettivi ripetibili
+					var var_obb_ripetibili = true;
+					var random_obb = true;
+					var num_tentativi_random_obb = 5;
+					
 					//permetti di visualizzare sempre la griglia
 					var perm_ut_mod_vis_griglia = true;
 					
@@ -132,8 +137,13 @@
 					}
 				}
 				
-				/*Testi*/{
-					var testi = [
+				/*temp comando*/{
+					var temp_comando = "";
+				}
+				
+				/*Testi visualizzati*/{
+					/*testi*/{
+						var testi = [
 								  /*Presentazione Gioco*/
 								  {lingua: "IT", tipo: "Presentazione gioco",
 								                 txt: (   "Questo gioco ha lo scopo di dimostrare come con poche righe di codice in un linguaggio di alto livello (linguaggio più viciono al programmatore/utente rispetto a quello macchina composto da 0 e 1) è possibile realizzare un gioco.<br /><br />"
@@ -160,16 +170,34 @@
 														+ '<p style="margin: 4px 70px 4px 70px;" align="justify"><font size="3"><i> non sono valide altre parole al di fuori del set indicato, a seconda delle opzioni scelte si può rendere il gioco casesensible (differenza tra maiuscoe e minuscole o meno) e tralasciare gli spazi nel comando. E\' molto importante che il comando rispetti la struttura precedentemente prsentata, il gioco accetta esclusivamente l\'inserimento/processamento di un comando alla volta.</i></font></p>'
 													  )},
 													  
-								  /*Presentazione Obbiettivo*/
-								  {lingua: "IT", tipo: "Presentazione Obbiettivo", 
-								                 txt: (   "Testo obbiettivo raggiunto"
-												      )},
-													  
 								  /*Fine Gioco*/
 								  {lingua: "IT", tipo: "Ringraziamenti", 
 								                 txt: (   "Congratulazioni... speriamo che questo piccolo gioco vi abbia coinvolto."
 												      )}
 								]
+					}
+					
+					/*obbiettivi*/{
+						var testi_obbiettivi = [
+								/*Presentazione Gioco*/
+								{lingua: "IT", utilizzato: false, 
+								        jpg: '<img id="bussola_00" src="./sprite/bussola.png" style="margin: 0; padding: 0;">',
+										tipo: "ob1",
+								        txt: (   "..testo.."
+										       + "<br />"														
+											 )}
+								
+								//,{lingua: "IT", utilizzato: false, jpg: '<img id="bussola_00" src="./sprite/bussola.png" style="margin: 0; padding: 0;">', tipo: "ob1", txt: ("..testo.."+ "<br />")}
+
+							]
+						
+						//temp per inserire obbiettivi						
+						for (var i=0; i<30; i++){
+							testi_obbiettivi[testi_obbiettivi.length]=
+								'{lingua: "IT", utilizzato: false, jpg: '+'<img id='+'"bussola_'+ i +'" src="./sprite/bussola.png" style="margin: 0; padding: 0;">'+', tipo: "ob'+i+'", txt: ("..testo.."+ "<br />")}';
+						}
+							
+					}
 				}
 				
 				/*Debug*/{
@@ -199,7 +227,9 @@
 				}
 				
 				/*Obbiettivi*/{
-					var num_obbiettivi = 0;
+					var num_obbiettivi = 0;//num obb. mappa
+					var num_obbiettivi_disponibili = testi_obbiettivi.length; //num obb. utilizzabili
+					var num_obb_raggiunto = 0; //num obb. raggiunto se caricati in sequenza
 				}
 				
 				/*Livelli*/{
@@ -388,15 +418,21 @@
 					}
 
 					function presentazione_obbiettivo_raggiunto(pos_obb){//presentazione obbiettivo
+						//memorizza comando presente nella barra comando:
+						temp_comando = $("#comando").val();
+						
 						//bottoni:
 						var bottoni_finestra = bottone_chiudi;
+						
+						//testo obbiettivo
+						var txt_obb = recupera_testo_obbiettivo(default_lingua);
 						
 						//visualizza testo
 						$('#contenitore_campo_console').html(   '<div id="div_obbiettivi" style="background-color: yellow; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
 						                                      + '<br /><br />'
-															  + '<b><u><h1 class="center marginpadding"><font color=#A98307>Presentazione obbiettivo</font></h1></u></b>'
+															  + '<b><h1 class="center marginpadding">'+txt_obb.jpg+' <u><font color=#A98307>Presentazione obbiettivo: '+txt_obb.tit+'</font></u></h1></b>'
 															  + '<br />'
-															  + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + recupera_testo(default_lingua, "Presentazione Obbiettivo") + '</font></p><br />'
+															  + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + txt_obb.txt + '</font></p><br />'
 															  + '<p>'+bottoni_finestra+'</p>'
 															  + '<br /><br />'
 															  + '</div>'
@@ -451,7 +487,7 @@
 									+'			<h2 class="center">Console '+bussola_img+'</h2>'
 									+'          <p>Inserisci comando</p>'
 									+'		    <p class="center">'
-									+'				<input type="text" value="" class="form-control" id="comando"> <br />'
+									+'				<input type="text" value="'+temp_comando+'" class="form-control" id="comando"> <br />'
 									+'			    <a class="btn btn-default" href="#" role="button" onclick="esegui_comando()">Esegui</a>'
 									+'			    <a class="btn btn-default" href="#" role="button">Cancella</a>'
 									+'			</p>'
@@ -538,6 +574,54 @@
 					}
 				}
 				
+				function reset_obbiettivi_raggiunti(){//reset obbiettivi raggiunti
+					for(var i=0; i<testi_obbiettivi.length; i++){
+						testi_obbiettivi[i].utilizzato = true;
+					}
+				}
+				
+				function recupera_testo_obbiettivo(lingua){//recupera il testo dell'obbiettivo da visualizzare
+					/*Trova testo:*/{
+						//indice ciclo
+						var pos_obbiettivo = null;
+						var txt_non_trovato = true;
+						
+						if (random_obb) {
+							var i = 0;
+					
+							while ((i < num_tentativi_random_obb) && txt_non_trovato){
+								//propongo obbiettivo
+								pos_obbiettivo = (Math.floor(Math.random() * num_obbiettivi_disponibili) + 0);
+								
+								//aggiorno testo se trovato
+								if ((var_obb_ripetibili ? true : !(testi_obbiettivi[pos_obbiettivo].utilizzato)) && (testi_obbiettivi[pos_obbiettivo].lingua == lingua)) {
+									   txt_non_trovato = false;
+									 }	
+								else i++;
+							}
+						}
+						
+						if (txt_non_trovato){
+							for(var i=num_obb_raggiunto; i<testi_obbiettivi.length; i++){
+								if ((var_obb_ripetibili ? true : !(testi_obbiettivi[pos_obbiettivo].utilizzato)) && (testi_obbiettivi[pos_obbiettivo].lingua == lingua)) {
+								   pos_obbiettivo = i;
+								   num_obb_raggiunto++;
+								}	
+							}
+						}
+					}
+					
+					//agg. dati obbiettivi:
+					testi_obbiettivi[pos_obbiettivo].utilizzato = true;
+					num_obbiettivi_disponibili--;
+					
+					//torna info obbiettivo:
+					return {tit: testi_obbiettivi[pos_obbiettivo].tipo,
+							txt: testi_obbiettivi[pos_obbiettivo].txt,
+							jpg: testi_obbiettivi[pos_obbiettivo].jpg
+						   };
+				}
+				
 				function recupera_testo(lingua, tipo){//recupera il testo da visualizzare
 					//dove memorizzo il testo
 					var testo = "";
@@ -551,6 +635,7 @@
 							//aggiorno testo se trovato
 							if ((testi[i].lingua == lingua) && (testi[i].tipo == tipo)) {
 								testo = testi[i].txt;
+								txt_non_trovato = false;
 							}
 							
 							//aggiorno indice ciclo
@@ -614,6 +699,10 @@
 									;
 					}
 					
+					//memorizza comando presente nella barra comando:
+					temp_comando = $("#comando").val();
+					
+					//ricarica partita
 					ricarica_partita();
 				}
 				
@@ -1272,7 +1361,13 @@
 							}
 						}	
 					}
-							
+					
+					/*reset obbiettivi*/{
+						if (var_obb_ripetibili){
+							reset_obbiettivi_raggiunti();
+						}
+					}
+					
 					/*carica livello*/{
 						if (liv_succ.fin == false) 
 							   {//gioco non concluso
@@ -1308,7 +1403,9 @@
 									}
 									
 									if (livello > (liv_min_obbiettivi-1)){/*Obbiettivi*/
-										for (var num_obb_car=0; num_obb_car < (Math.floor(Math.random() * 5) + 6) ; num_obb_car++){//Random obbiettivi
+										var numero_obbiettivi_da_inserire = Math.min(num_obbiettivi_disponibili, (Math.floor(Math.random() * 5) + 6));
+									
+										for (var num_obb_car=0; num_obb_car < numero_obbiettivi_da_inserire ; num_obb_car++){//Random obbiettivi
 											carica_sprite("Obbiettivo", num_obb_car, false, obbiettivo_img, posizione_vuota());
 											
 											//agg. numero obbiettivi
