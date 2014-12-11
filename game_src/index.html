@@ -89,15 +89,21 @@
 				
 				/*Colori msg*/{
 					var col_msg_opzioni = "#C0C0C0";
+					
+					//obbiettivi
 					var col_msg_liv_completato = "yellow";
 					var col_msg_obb_raggiunto = "yellow";
+					
+					//comandi
 					var col_msg_esec_comando = "blue";
 					var col_msg_err_comando = "red";
-				    var col_msg_pres_regole = "green";
-					var col_msg_pres_gioco = "green";
-					var col_msg_avvio_gioco = "green";
-					var col_msg_pres_gioco_completato = "green";
+				    
+					//presentazioni
 					var col_msg_inizio = "green";
+					var col_msg_avvio_gioco = "green";
+					var col_msg_pres_gioco = "green";
+					var col_msg_pres_regole = "green";
+					var col_msg_pres_gioco_completato = "green";
 					var col_msg_fine = "green";
 				}
 				
@@ -140,15 +146,15 @@
 								                 txt: (   "Questo gioco ha l'obbiettivo di simulare l'importanza dei comandi nei linguaggi di programmazione, i comandi devono essere formattati nel seguente modo:"
 														+ ' <font color= #DE3163 size="5"><i><u>comando<b>(</b>spostamento<b>)</b></u></i></font>'
 														+ "<br />(Dove comando è uno dei seguenti e al posto di numero un numero intero)"
-														+ '<ol type="a" style="margin: 4px 4px 4px 100px;" align="justify">'
+														+ '<ol type="a" style="margin: 4px 4px 4px 100px;" align="left">'
 														   + '<li>("Nord", "N", "Su", "Sopra"),</li>'
 														   + '<li>("Nord-Est", "N-E"),</li>'
 														   + '<li>("Nord-Ovest", "N-O"),</li>'
 														   + '<li>("Sud", "S", "Giu", "Sotto"),</li>'
 														   + '<li>("Sud-Est", "S-E"),</li>'
 														   + '<li>("Sud-Ovest", "S-O"),</li>'
-                                                           + '<li>("Est", "E", "Destra"),</li>'
-														   + '<li>("Ovest", "O", "Sinistra")</li>'
+                                                           + '<li>("Est", "E", "Destra", "Dx"),</li>'
+														   + '<li>("Ovest", "O", "Sinistra", "Sx")</li>'
 														+ "</ol><br />"
 														+ '<p style="margin: 4px 40px 4px 40px;" align="justify">nota:</p>'
 														+ '<p style="margin: 4px 70px 4px 70px;" align="justify"><font size="3"><i> non sono valide altre parole al di fuori del set indicato, a seconda delle opzioni scelte si può rendere il gioco casesensible (differenza tra maiuscoe e minuscole o meno) e tralasciare gli spazi nel comando. E\' molto importante che il comando rispetti la struttura precedentemente prsentata, il gioco accetta esclusivamente l\'inserimento/processamento di un comando alla volta.</i></font></p>'
@@ -318,7 +324,6 @@
 					
 					/*bottone_Vis_Nasc_griglia*/
 					var bottone_Vis_Nasc_griglia = null;
-					crea_agg_bottone_vis_griglia();
 				}
 			}  
 			  
@@ -555,6 +560,9 @@
 					//aggiorna livello
 					livello = (livello == null) ? 1: livello;
 					mappa = (mappa == null) ? 1: mappa;
+					
+					//genera bottone griglia
+					crea_agg_bottone_vis_griglia();
 					
 					//crea il campo
 					$('#contenitore_campo_console').html(Struttura_campo());
