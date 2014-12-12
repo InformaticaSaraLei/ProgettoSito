@@ -36,6 +36,29 @@
 }
 
 .img-responsive {
-    max-height: 450px;
-    max-width: 350px;
+    max-height: 400px;
+    max-width: 300px;
+}
+
+	
+.element {
+    position: relative;
+}
+ 
+/*replace the content value with the
+corresponding value from the list below*/
+ 
+.twitter:before {
+    content: “\f099″;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+    color: #000;
+    font-size: 18px;
+    padding-right: 0.5em;
+    position: absolute;
+    top: 10px;
+    left: 0;
 }
