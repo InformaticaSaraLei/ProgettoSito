@@ -141,7 +141,7 @@ class UsersController
                 if (isset($_SESSION['login'])) {
                         session_unset();
                         session_destroy();
-                        header('location: index.html');
+                        header('location: ../index.html');
                         exit();
                 } else {
                         header('location: error.php?error=7');
@@ -151,4 +151,4 @@ class UsersController
 
         
 
-}
+}
