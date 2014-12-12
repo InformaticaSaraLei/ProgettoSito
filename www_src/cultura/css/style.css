@@ -8,18 +8,10 @@
 
 .img-sx {
     float: left;
-    padding-right: 10px;
+    padding-right: 100px;
     padding-bottom: 10px;
-    max-height: 500px;
-    max-width: 250px;
-}
-
-.img-dx {
-    float: right;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    max-height: 250px;
-    max-width: 250px;
+    max-height: 450px;
+    max-width: 350px;
 }
 
 @media screen and (min-width: 992px) {
@@ -41,4 +33,9 @@
         width: 48%;
         float: right;
     }
+}
+
+.img-responsive {
+    max-height: 450px;
+    max-width: 350px;
 }
