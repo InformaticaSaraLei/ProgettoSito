@@ -1,5 +1,4 @@
 <?php
-//ini_set('include_path', '');
 include_once "lib/evento.php";
 ?>
 
@@ -128,7 +127,7 @@ include_once "lib/evento.php";
     }else{
         echo '<div class="row"><div class="pull-left col-md-4 col-lg-4"></div>';
         echo '<div class="pull-left col-md-4 col-lg-4">';
-        echo '<p>Non evento programmato</p></div>';
+        echo '<p>Nessun evento programmato</p></div>';
         echo '<div class="pull-left col-md-4 col-lg-4"></div></div>';
     }
     
