@@ -487,12 +487,12 @@
         }
 		var myLatlng = new google.maps.LatLng(<?php echo $result["results"][0]["latitude"] ?>,<?php echo $result["results"][0]["longitude"] ?>);
         var map = new google.maps.Map(mapCanvas, mapOptions);
-		var image = 'marker.png';
+		<!-- var image = 'marker.png'; -->
 		var marker = new google.maps.Marker({
 			position: myLatlng,
 			map: map,
-			title:"<?php echo $result["results"][0]["jobtitle"]; ?>",
-			icon: image
+			title:"<?php echo $result["results"][0]["jobtitle"]; ?>"
+			<!-- ,icon: image -->
 		});
       }
       google.maps.event.addDomListener(window, 'load', initialize);
