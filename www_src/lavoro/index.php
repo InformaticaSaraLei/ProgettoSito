@@ -1,5 +1,5 @@
 ﻿<?php
-	error_reporting(0);
+	error_reporting(E_ERROR);
 	session_start();
 
 	include "IndeedAPI.php";
@@ -149,7 +149,7 @@
 						<h4>".strtoupper($jobOpportunity["AZIENDA_CITTA"])."(". $jobOpportunity["AZIENDA_PROVINCIA"].") - ".$jobOpportunity["FK_NAZIONE"]."</h4><br>
 						".$jobOpportunity["SNIPPET_ANNUNCIO"]."
 						<br>
-						 <a href=\"index.php?action=update&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-warning  \" role=\"button\">Modifica Annuncio</a><a href=\"index.php?mode=detail&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-info  pull-right\" role=\"button\">Vedi Dettaglio Annuncio</a>
+						 <a href=\"index.php?odl_from=local&action=update&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-warning  \" role=\"button\">Modifica Annuncio</a><a href=\"index.php?odl_from=local&mode=detail&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-info  pull-right\" role=\"button\">Vedi Dettaglio Annuncio</a>
 					</div>
 				</div>
 				";		
@@ -417,7 +417,7 @@
 							<h4>".strtoupper($jobOpportunity->company)."<br>". $jobOpportunity->formattedLocation."</h4><br>
 							".$jobOpportunity->snippet."
 							<br><br>
-							 <a href=\"index.php?mode=detail&jobkey=".$jobOpportunity->jobkey."\" class=\"btn btn-info  pull-right\" role=\"button\">Vedi Dettaglio Annuncio</a><!-- <a href=\"".$jobOpportunity->url."\" class=\"btn btn-default pull-right\" role=\"button\">Vedi Annuncio Originale</a> -->
+							 <a href=\"index.php?odl_from=web&mode=detail&jobkey=".$jobOpportunity->jobkey."\" class=\"btn btn-info  pull-right\" role=\"button\">Vedi Dettaglio Annuncio</a>
 						</div>
 						
 			
