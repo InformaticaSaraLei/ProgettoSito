@@ -116,12 +116,16 @@ class IndeedAPI2
         $args["publisher"] = $this->publisher;
         $args["v"] = $this->version;
         $args["format"] = $format;
-        $c = curl_init(sprintf("%s?%s", $endpoint, http_build_query($args)));
-        curl_setopt($c, CURLOPT_RETURNTRANSFER, TRUE);
-        $result = curl_exec($c);
-        curl_close($c);
-        $r = (!$raw ? json_decode($result, $assoc = true) : $result);
-        return $r;
+        $file_c = file_get_contents(sprintf("%s?%s", $endpoint, http_build_query($args)));
+        #        #  echo $file_c;
+        $output = json_decode($file_c);
+
+        # $c = curl_init(sprintf("%s?%s", $endpoint, http_build_query($args)));
+        # curl_setopt($c, CURLOPT_RETURNTRANSFER, TRUE);
+        # $result = curl_exec($c);
+        # curl_close($c);
+        # $r = (!$raw ? json_decode($result, $assoc = true) : $result);
+        return $output->results[0];
     }
 
     private function validate_args($required_fields, $args)
