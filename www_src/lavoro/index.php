@@ -364,7 +364,7 @@
 							".$result["results"][0]["snippet"]."
 							<br><br>
 							<a href=\"".$result["results"][0]["url"]."\" class=\"btn btn-info pull-right\" role=\"button\">Vedi Annuncio Originale</a><br><br>
-							<div id=\"map-canvas\" class=\"embed-responsive embed-responsive-4by3\"></div>
+							<!-- <div id=\"map-canvas\" class=\"embed-responsive embed-responsive-4by3\"></div> -->
 						</div>
 					</div>
 								
@@ -476,6 +476,7 @@
             $("#footer").load("../footer.html");
         });
     </script>
+	<!--
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script>
       function initialize() {
@@ -487,16 +488,17 @@
         }
 		var myLatlng = new google.maps.LatLng(<?php echo $result["results"][0]["latitude"] ?>,<?php echo $result["results"][0]["longitude"] ?>);
         var map = new google.maps.Map(mapCanvas, mapOptions);
-		<!-- var image = 'marker.png'; -->
+		var image = 'marker.png';
 		var marker = new google.maps.Marker({
 			position: myLatlng,
 			map: map,
-			title:"<?php echo $result["results"][0]["jobtitle"]; ?>"
-			<!-- ,icon: image -->
+			title:"<?php echo $result["results"][0]["jobtitle"]; ?>",
+			icon: image
 		});
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
+	-->
 </head>
 <body>
 <div id="navigation_bar"></div>
