@@ -1,8 +1,11 @@
+ALTER TABLE `pariopp`.`media` 
+ADD CONSTRAINT uk_media_link UNIQUE (LINK);
+
 INSERT INTO `pariopp`.`media` (NOME, DATA_REALIZZAZIONE, RISOLUZIONE, FORMATO, LINK, LONGITUDINE, LATITUDINE, TIPOMEDIA, DURATA) VALUES
-("Karina e Giulia","2014-11-24 00:00:00","1280x720","MP4","https://www.youtube.com/embed/71RBsn2HB0Q","12,25578","45,47862","Video",0),
-("Samantha","2014-11-22 00:00:00","1280x720","MP4","https://www.youtube.com/embed/kJ7efLh6tyo","12,32672","45,89119","Video",0),
-("Dalila","2014-11-24 00:00:00","1280x720","MP4","https://www.youtube.com/embed/YIH6eFbU6KU","12,25578","45,47862","Video",0),
-("Prof.ssa Marta Simeoni","2014-11-25 00:00:00","1280x720","MP4","https://www.youtube.com/embed/aj-LjYG66hg","12,25578","45,47862","Video",0),
+("Karina e Giulia","2014-11-24 00:00:00","1280x720","MP4","https://www.youtube.com/embed/71RBsn2HB0Q","12,25578","45,47862","Video",194),
+("Samantha","2014-11-22 00:00:00","1280x720","MP4","https://www.youtube.com/embed/kJ7efLh6tyo","12,32672","45,89119","Video",214),
+("Dalila","2014-11-24 00:00:00","1280x720","MP4","https://www.youtube.com/embed/YIH6eFbU6KU","12,25578","45,47862","Video",241),
+("Prof.ssa Marta Simeoni","2014-11-25 00:00:00","1280x720","MP4","https://www.youtube.com/embed/aj-LjYG66hg","12,25578","45,47862","Video",250),
 ("Girls in lab 1","2014-12-02 00:00:00","3552x2000","JPEG","https://farm8.staticflickr.com/7556/15920730516_c4a4c67ca1_b.jpg","12,25578","45,47862","Foto",0),
 ("Girls in lab 2","2014-12-02 00:00:00","3552x2000","JPEG","https://farm9.staticflickr.com/8592/15324272494_ef5d31b465_b.jpg","12,25578","45,47862","Foto",0),
 ("Girls in lab 3","2014-12-02 00:00:00","3552x2000","JPEG","https://farm8.staticflickr.com/7513/15946546035_2bb392b9ec_b.jpg","12,25578","45,47862","Foto",0),
