@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -86,13 +87,7 @@
 						if($i%3==0)
 						 echo '<div class="row">';
 						echo '<div class="col-md-4 img-portfolio"">';
-						echo '<a href="'.$row['LINK'].'" title="'.$row['NOME'].'"><img class="img-responsive img-hover" src="'.$row['LINK'].'" width="720" height="400" alt="verona 1"></a>'."<h3><a href=\"http://".$row['LINK']."\">".$row['NOME']."</a></h3>";
-						echo " TAGS: ";
-						$sql2 = "select tags.tag as tag from tags,media,mediatags where media.ID=".$row['ID']." and tags.id=mediatags.fk_tag and mediatags.fk_media=media.id";
-						$result2 = mysqli_query($conn, $sql2);
-						while($tag = mysqli_fetch_assoc($result2)) {
-							echo "<a>".$tag['tag']."</a> ";
-						}	
+						echo '<a href="'.$row['LINK'].'" title="'.$row['NOME'].'"><img class="img-responsive img-hover" src="'.$row['LINK'].'" width="720" height="400" alt="verona 1"></a>'."<h3><a href=\"".$row['LINK']."\">".$row['NOME']."</a></h3>";	
 						echo '</div>';
 						$i++;
 						if($i%3==0)
