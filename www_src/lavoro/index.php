@@ -1,5 +1,5 @@
 ﻿<?php
-	# error_reporting(E_ERROR);
+	error_reporting(0);
 	session_start();
 	include "IndeedAPI.php";
 	include "db_pariopp_offertelavoro.php";
