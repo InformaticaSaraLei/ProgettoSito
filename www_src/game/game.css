@@ -1,13 +1,15 @@
 body {
-    padding-top: 50px;
+    padding-top: 45px;
     padding-bottom: 20px;
 }
 
+/*
 .col-md-12 {
     border: 2px solid black;
     border-radius: 10px 10px 10px 10px;
     margin: 5px;
 }
+*/
 
 .center {
     text-align: center;
@@ -39,4 +41,19 @@ body {
 .marginpadding {
     margin: 0;
     padding: 0;
+}
+
+.col-xs-12 {
+    border: 2px solid black;
+    border-radius: 5px 5px 5px 5px;
+}
+            
+
+.hidden {
+    position:absolute;
+    left:0px;
+    top:-500px;
+    width:1px;
+    height:1px;
+    overflow:hidden;
 }
