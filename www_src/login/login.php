@@ -1,6 +1,6 @@
 <?php
 
-require_once("./lib/userscontroller.php");
+require_once("/lib/userscontroller.php");
 
 session_start();
 
@@ -129,8 +129,6 @@ session_start();
 
 
 <?php
-
-include_once("lib/userscontroller.php");
 
 if (isset($_POST['login'])) {
     $newuser = new UsersController();
