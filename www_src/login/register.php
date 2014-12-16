@@ -132,7 +132,7 @@ if (isset($_SESSION['login'])) {
 
 <?php
 
-include_once("./lib/userscontroller.php");
+include_once("lib/userscontroller.php");
 
 if (isset($_POST['register'])) {
     $newuser = new UsersController();
