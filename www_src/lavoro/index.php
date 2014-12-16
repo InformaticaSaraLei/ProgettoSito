@@ -102,10 +102,31 @@
 		$stati=$db->getStatiOpportunita();		
 
 		
+		
+		switch($_GET["admin_mode"]){
+			case "0" : $_SESSION["admin_mode"]=0;
+			           break;
+			case "1" : $_SESSION["admin_mode"]=1;
+			           break;
+					   
+		}
+		// echo $_SESSION["admin_mode"];
+		if($_SESSION["admin_mode"]==0){
+			$content.="<a class=\"btn btn-warning\" type=\"button\" href=\"index.php?admin_mode=1\">ENTRA MODALITA' ADMIN</a>";
+		}else{
+			$content.="<a class=\"btn btn-success\" type=\"button\" href=\"index.php?admin_mode=0\">TORNA MODALITA' UTENTE</a>";
+		}			
+		
+		
 		// print "atd:".$action_to_do;
-		if($_SESSION["action"]!="insert"){
-			$content.="<br><a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a>";
+		if(($_SESSION["action"]!="insert")&& $_SESSION["admin_mode"]){
+			$content.="<a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a>";
 		}	
+	
+
+	
+		
+
 		
 		switch($_GET["mode"]){
 			case "detail" : $content.="detail"; 
@@ -155,7 +176,7 @@
 		}
 		
 			
-        if($action_to_do){
+        if($action_to_do && $_SESSION["admin_mode"]){
 			$map_action_string=array("insert"=>"INSERIMENTO","update"=>"MODIFICA");
 		    $content.="<br><br>
 					<div class=\"panel panel-default\">
