@@ -184,7 +184,7 @@
 							<h3 class=\"panel-title\">".$map_action_string[$_SESSION["action"]]." OPPORTUNITA'</h3>
 						</div>
 						<div class=\"panel-body\">
-								<form class=\"form-horizontal\" role=\"form\" method=\"POST\" action=\"index.php\">
+								<form id=\"editform\" class=\"form-horizontal\" role=\"form\" method=\"POST\" action=\"index.php\">
 								  <div class=\"form-group\" draggable=\"true\">
 									<div class=\"col-sm-2\">
 									  <label for=\"TITOLO_LAVORO\" class=\"control-label\">TITOLO</label>
@@ -324,7 +324,9 @@
 								  
 								  <div class=\"form-group\">
 									<div class=\"col-sm-offset-2 col-sm-10\">
-									  <button type=\"submit\" class=\"btn btn-warning pull-right\" draggable=\"true\">Salva</button>
+									  <button id=\"btnsubmit\" type=\"submit\" class=\"btn btn-warning pull-right\" draggable=\"true\">Salva</button>
+									 
+									
 									</div>
 								  </div>
 								  
@@ -496,6 +498,8 @@
             $("#footer").load("../footer.html");
         });
     </script>
+
+	
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script>
       function initialize() {
@@ -632,6 +636,26 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="../js/bootstrap.min.js"></script>
+
+<!-- bootbox code -->
+<script src="./bootbox.min.js"></script>
+<script>
+
+
+$(function() {
+            $("#btnsubmit").on("click", function(e) {
+                e.preventDefault();
+                var _this = this;
+                bootbox.confirm("Sei Sicuro di voler salvare?", function(result) {
+                    if (result) {
+					    $('#editform').submit();
+                        // $(_this).parent().submit();
+                    }
+                });
+            });
+        });
+
+</script>
 
 </body>
 
