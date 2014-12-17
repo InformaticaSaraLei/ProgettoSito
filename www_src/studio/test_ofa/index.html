@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="it">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,12 +9,12 @@
 
     <title>Test OFA - Informatica sarà lei!</title>
 
-    <!-- Bootstrap Core CSS -->
+<!-- Bootstrap Core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../../css/modern-business.css" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="../css/mixitup.css"/>
     <!-- Custom Fonts -->
     <link href="../../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -28,11 +26,24 @@
     <![endif]-->
 
     <!-- Navigation -->
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+
+    <script type="text/javascript" src="../js/jquery.mixitup.min.js"></script>
+
+    <script type="text/javascript">
+        /*
+         *   We would normally recommend that all JavaScript is kept in a seperate .js file,
+         *   but we have included it in the document head for convenience.
+         */
+        // INSTANTIATE MIXITUP
+        $(function () {
+            $('#Grid').mixitup();
+        });
+    </script>
     <script>
         $(function () {
-            $("#navigation_bar").load("../navigation_bar.html");
-            $("#footer").load("../footer.html");
+            $("#navigation_bar").load("../../navigation_bar.html");
+            $("#footer").load("../../footer.html");
         });
     </script>
 </head>
@@ -59,70 +70,68 @@
     <!-- /.row -->
 
     <hr>
-
-    <!-- Marketing Icons Section -->
-    <div class="row">
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-users"></i>Padova</h4>
-                </div>
-                <div class="panel-body">
-                    <p>
-                        Informazioni relative al Test OFA somministrato presso l'ateneo di Padova per i corsi
-                        di laurea in informatica.
-                    </p>
-                    <a href="ofapadova.html" class="btn btn-default">Maggiori Informazioni</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-graduation-cap"></i>Venezia</h4>
-                </div>
-                <div class="panel-body">
-                    <p>
-                        Informazioni relative al Test OFA somministrato presso l'ateneo di Venezia per i corsi
-                        di laurea in informatica.
-                    </p>
-                    <a href="ofavenezia.html" class="btn btn-default">Maggiori Informazioni</a>
+    
+         <!-- FILTER CONTROLS -->
+    
+        <div class="row mixitup-wrapper">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-lg filter" data-filter="all">Tutte le università
+                    </button>
+                    <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" class="filter" data-filter="category_1">Venezia</a></li>
+                        <li><a href="#" class="filter" data-filter="category_2">Padova</a></li>
+                        <li><a href="#" class="filter" data-filter="category_3">Verona</a></li>
+                    </ul>
                 </div>
             </div>
+    
         </div>
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4><i class="fa fa-fw fa-folder-open"></i>Verona</h4>
-                </div>
-                <div class="panel-body">
-                    <p>
-                        Informazioni relative al Test OFA somministrato presso l'ateneo di Verona per i corsi
-                        di laurea in informatica.
-                    </p>
-                    <a href="ofaverona.html" class="btn btn-default">Maggiori Informazioni</a>
-                </div>
+        
+        <!-- GRID -->
+        <div class="container">
+            <div id="Grid" class="row mixitup-wrapper">
+                <ul>
+                    <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_1" data-cat="1">
+                        <div><img class="img-responsive" src="../img/unive.gif" alt="">
+    
+                            <h1><a href="ofavenezia.html" class="filter" data-filter="category_1">Venezia</a></h1>
+    
+                            <p><a href="ofavenezia.html">Maggiori Informazioni</a></p></div>
+                    </li>
+                    <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_2" data-cat="1">
+                        <div><img class="img-responsive" src="../img/unipd.jpg" alt="">
+    
+                            <h1><a href="ofapadova.html" class="filter" data-filter="category_2">Padova</a></h1>
+    
+                            <p><a href="ofapadova.html">Maggiori Informazioni</a></p></div>
+                    </li>
+                    <li class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mix category_3" data-cat="1">
+                        <div><img class="img-responsive" src="../img/univr.jpg" alt="">
+    
+                            <h1><a href="ofaverona.html" class="filter" data-filter="category_3">Verona</a></h1>
+    
+                            <p><a href="ofaverona.html">Maggiori Informazioni</a></p></div>
+                    </li>
+                </ul>
+    
+    
             </div>
         </div>
-    </div>
-    <!-- /.row -->
-
-    <!-- Content Row -->
-    <!-- /.row -->
 
     <hr>
-
-    <!-- Footer -->
-    <div id="footer"></div>
-    <!--- Inserimento navbar ---->
-
-    <!-- End Footer -->
 
 </div>
 <!-- /.container -->
 
-<!-- jQuery -->
-<script src="../../js/jquery.js"></script>
+<!-- Footer -->
+<div id="footer"></div>
+<!--- Inserimento navbar ---->
+
+<!-- End Footer -->
 
 <!-- Bootstrap Core JavaScript -->
 <script src="../../js/bootstrap.min.js"></script>
