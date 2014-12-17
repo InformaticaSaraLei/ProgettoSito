@@ -166,9 +166,14 @@
 					</div>
 					<div class=\"panel-body\">
 						<h4>".strtoupper($jobOpportunity["AZIENDA_CITTA"])."(". $jobOpportunity["AZIENDA_PROVINCIA"].") - ".$jobOpportunity["FK_NAZIONE"]."</h4><br>
-						".$jobOpportunity["SNIPPET_ANNUNCIO"]."
+						".$jobOpportunity["SNIPPET_ANNUNCIO"]."";
+						if ($_SESSION["admin_mode"]) 
+							$content.="
 						<br>
-						 <a href=\"index.php?odl_from=local&action=update&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-warning  \" role=\"button\">Modifica Annuncio</a><a href=\"index.php?odl_from=local&mode=detail&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-info  pull-right\" role=\"button\">Vedi Dettaglio Annuncio</a>
+						 <a href=\"index.php?odl_from=local&action=update&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-warning  \" role=\"button\">Modifica Annuncio</a>
+						 ";
+						$content.="<a href=\"index.php?odl_from=local&mode=detail&jobkey=".$jobOpportunity["ID"]."\" class=\"btn btn-info  pull-right\" role=\"button\">Vedi Dettaglio Annuncio</a>
+						
 					</div>
 				</div>
 				";		
