@@ -4,6 +4,13 @@
 	include "IndeedAPI.php";
 	include "db_pariopp_offertelavoro.php";
     
+	
+	
+	$translations = array(
+		"update" => "Modifica",
+		"insert" => "Inserisci"
+	);
+	
 	function buildNationOptions($elenco="",$selectedValue=""){
 		// print_r($elenco);
 		$options="<option value=\"\" selected>Nazione dell'opportunità di lavoro";
@@ -55,6 +62,10 @@
 
 		$db=new Database();
 
+		
+		
+		
+		
 		switch($_POST["action"]){
 			case "insert"  : // ---- insertOpportunita
 			                 $_SESSION["action"]="";
@@ -68,6 +79,7 @@
 			case "update"  : // ---- updateOpportunita
 			                 $_SESSION["action"]="";
 							 $_GET["action"]="";
+							 $db->updateOpportunita($_POST);
 							 $content.="<b>update<br>";
 							 // print_r($_POST);
 							 break;
@@ -76,7 +88,19 @@
 							 $_GET["action"]="";
 							 $content.="<b>delete<br>";
 							 break;
-		} 
+			case "search"  : $_SESSION["odl_from"]="local";	
+							 $_GET["odl_from"]="local";
+							 $_GET["action"]="";
+							 $content.="<b>search<br>";
+			                 break;
+		} 			
+		
+		
+		
+		
+		
+		
+
 		// print $_GET["action"]; 
 		switch($_GET["action"]){
 			case "update"  : $_SESSION["action"]="update";
@@ -96,6 +120,12 @@
 							 break;
 		}
 
+		
+		
+	
+		
+		
+		
 		$offerte= $db->getOfferteLavoro($_SESSION["lstart"],$_SESSION["llimit"],$_SESSION["q"]);
 		$totalResults= $db->total_results;
 		$nazioni=$db->getNazioni();
@@ -329,7 +359,7 @@
 								  
 								  <div class=\"form-group\">
 									<div class=\"col-sm-offset-2 col-sm-10\">
-									  <button id=\"btnsubmit\" type=\"submit\" class=\"btn btn-warning pull-right\" draggable=\"true\">Salva</button>
+									  <button id=\"btnsubmit\" type=\"submit\" class=\"btn btn-warning pull-right\" draggable=\"true\">".$translations[$_SESSION["action"]]."</button>
 									 
 									
 									</div>
@@ -555,7 +585,9 @@
 			  <div class="form-group">
 				<input id="q" name="q" type="text" class="form-control" placeholder="<?php echo $q_placeholder; ?>" value="<?php echo $_SESSION["q"];?>">
 				<input id="l" name="l" type="text" class="form-control" placeholder="<?php echo $l_placeholder; ?>" value="<?php echo $_SESSION["l"];?>">
+				<input id="action" name="action" type="hidden" value="search" class="form-control">
 			  </div>
+			  
 			  <button type="submit" class="btn btn-default">Cerca</button>
 			</form>
 		</div>
@@ -651,7 +683,7 @@ $(function() {
             $("#btnsubmit").on("click", function(e) {
                 e.preventDefault();
                 var _this = this;
-                bootbox.confirm("Sei Sicuro di voler salvare?", function(result) {
+                bootbox.confirm("Sei sicuro di voler <?php if($_SESSION["action"]=="insert") echo "inserire"; if($_SESSION["action"]=="update") echo "modificare";?> l'offerta?", function(result) {
                     if (result) {
 					    $('#editform').submit();
                         // $(_this).parent().submit();
