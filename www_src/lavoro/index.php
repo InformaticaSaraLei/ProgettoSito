@@ -1,5 +1,5 @@
 ﻿<?php
-	error_reporting(0);
+	error_reporting(1);
 	session_start();
 	include "IndeedAPI.php";
 	include "db_pariopp_offertelavoro.php";
@@ -62,13 +62,13 @@
 
 		
 		
-		
+	
 		
 		switch($_POST["action"]){
 			case "insert"  : // ---- insertOpportunita
 			                 $_SESSION["action"]="";
 							 $_GET["action"]="";
-							 $content.="<b>insert<br>";
+							 // $content.="<b>insert<br>";
 							 $db->insertOpportunita($_POST);
 							 $offerte= $db->getOfferteLavoro($_SESSION["lstart"],$_SESSION["llimit"],$_SESSION["q"]);
 							 $totalResults= $db->total_results;
@@ -78,18 +78,19 @@
 			                 $_SESSION["action"]="";
 							 $_GET["action"]="";
 							 $db->updateOpportunita($_POST);
-							 $content.="<b>update<br>";
+							 // $content.="<b>update<br>";
 							 // print_r($_POST);
 							 break;
 		    case "delete"  : // ---- deleteOpportunita
 			                 $_SESSION["action"]="";
 							 $_GET["action"]="";
-							 $content.="<b>delete<br>";
+							 // $content.="<b>delete<br>";
 							 break;
 			case "search"  : $_SESSION["odl_from"]="local";	
 							 $_GET["odl_from"]="local";
 							 $_GET["action"]="";
-							 $content.="<b>search<br>";
+							$_GET["mode"]="";
+							 // $content.="<b>search<br>";
 			                 break;
 		} 			
 		
@@ -107,7 +108,6 @@
 							 break;
 			case "insert"  : $_SESSION["action"]="insert";
 							 $action_to_do=true;
-							 
 							 break;
 			case "delete"  : $_SESSION["action"]="delete";
 							 $action_to_do=false;
@@ -153,11 +153,50 @@
 	
 
 	
-		
 
 		
 		switch($_GET["mode"]){
-			case "detail" : $content.="detail"; 
+			case "detail" : // $content.="detail"; 
+							$_SESSION["action"]="detail";
+							$action_to_do=0;
+							$offerta=$db->getOffertaLavoro($_GET["jobkey"]);
+							$json_string="{ \"version\" : 2, \"results\" : [ { \"jobtitle\" : \"\", \"company\" : \"\", \"city\" : \"\", \"state\" : \"\", \"country\" : \"\", \"formattedLocation\" : \"\", \"source\" : \"\", \"date\" : \"\", \"snippet\" : \"\", \"url\" : \"\", \"onmousedown\" : \"\", \"latitude\" : 45.46154, \"longitude\" : 9.186813, \"jobkey\" : \"\", \"sponsored\" : false, \"expired\" : false, \"indeedApply\" : false, \"formattedLocationFull\" : \"\", \"formattedRelativeTime\" : \"\", \"recommendations\": [] } ] }";
+							$obj_tmp=json_decode($json_string);
+							$result=$obj_tmp->results[0];
+													$result->jobtitle=$offerta["TITOLO_LAVORO"];
+
+							$result->company=$offerta["AZIENDA_NOME"];
+							$result->formattedRelativeTime=$offerta["DATA_INSERIMENTO"];
+							$result->formattedLocation=$offerta["AZIENDA_CITTA"]." (".$offerta["AZIENDA_PROVINCIA"].")";
+							$result->snippet=$offerta["SNIPPET_ANNUNCIO"];
+							$result->latitude=$offerta["AZIENDA_LATITUDINE"];
+							$result->longitude=$offerta["AZIENDA_LONGITUDINE"];
+						
+							$content.="
+				<br>
+					<div class=\"panel panel-default\">
+						<div class=\"panel-heading\">
+							<h3 class=\"panel-title\"><b>".$result->jobtitle." <small style=\"color: #ffffff;\">(".$result->formattedRelativeTime.")</small></b></h3>
+							
+						</div>
+						<div class=\"panel-body\"><span class=\"label label-success pull-right\">Offerta pubblicata su ".$result->source."</span>
+							<h4>".strtoupper($result->company)."<br>". $result->formattedLocation."</h4><br>
+							".$result->snippet."<br>";
+							if ($_SESSION["admin_mode"]) 
+							$content.="
+						 <br>
+						 <a href=\"index.php?odl_from=local&action=update&jobkey=".$offerta["ID"]."\" class=\"btn btn-warning  \" role=\"button\">Modifica Annuncio</a>
+						 
+						 ";
+						    if($offerta["FONTE_LINK"]!="")
+						       $content.="<a href=\"".$offerta["FONTE_LINK"]."\" class=\"btn btn-info pull-right\" role=\"button\" target=\"_blank\">Vedi Annuncio Originale pubblicato da ".$offerta["FONTE_DESCR"]."</a><br><br>";
+							if($result->latitude!="" && $result->longitude!="")
+							   $content.="<div id=\"map-canvas\" class=\"embed-responsive embed-responsive-4by3\"></div>";
+					$content.="
+						</div>
+					</div>
+															
+							";
 							break;
 			default 	  :	break;			
 							
@@ -418,7 +457,7 @@
 							<h4>".strtoupper($result->company)."<br>". $result->formattedLocation."</h4><br>
 							".$result->snippet."
 							<br><br>
-							<a href=\"".$result->url."\" class=\"btn btn-info pull-right\" role=\"button\">Vedi Annuncio Originale</a><br><br>
+							<a href=\"".$result->url."\" class=\"btn btn-info pull-right\" role=\"button\" target=\"_blank\">Vedi Annuncio Originale</a><br><br>
 							<div id=\"map-canvas\" class=\"embed-responsive embed-responsive-4by3\"></div>
 						</div>
 					</div>

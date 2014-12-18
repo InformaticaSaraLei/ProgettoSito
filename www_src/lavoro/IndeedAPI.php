@@ -117,7 +117,7 @@ class IndeedAPI2
         $args["v"] = $this->version;
         $args["format"] = $format;
         $file_c = file_get_contents(sprintf("%s?%s", $endpoint, http_build_query($args)));
-        #        #  echo $file_c;
+        // echo $file_c;
         $output = json_decode($file_c);
 
         # $c = curl_init(sprintf("%s?%s", $endpoint, http_build_query($args)));
