@@ -42,12 +42,12 @@
 
 
 
-  <?php
-    require 'lib/evento.php';
-    $em = new EventiManager();
-    $id = $_GET['id'];
-    $e = $em->getEventoById($id);
-   ?>
+<?php
+require 'lib/evento.php';
+$em = new EventiManager();
+$id = $_GET['id'];
+$e = $em->getEventoById($id);
+?>
 
 <body>
 <div id="navigation_bar"></div>
@@ -60,13 +60,13 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Eventi
-                <small><? echo  $e->titolo;?></small>
+                <small><? echo $e->titolo; ?></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
                 </li>
                 <li><a href="./">Eventi</a></li>
-                <li class="active"><? echo $e->titolo;?></li>
+                <li class="active"><? echo $e->titolo; ?></li>
             </ol>
         </div>
     </div>
@@ -74,28 +74,28 @@
     <!-- /.row -->
     <!-- Content Row -->
 
-    <div class="row">    
-	<?php
+    <div class="row">
+        <?php
         include_once "../login/lib/userscontroller.php";
         include_once "../login/lib/database.php";
         include_once "../login/lib/functions.php";
-        
+
         $isAdmin = false;
         $loggato = true;
-        
+
         $user = new UsersController();
-        if(!isset($_SESSION['login']))
+        if (!isset($_SESSION['login']))
             $loggato = false;
-            
-        if($loggato && $user->isAdmin($_SESSION['login']))
+
+        if ($loggato && $user->isAdmin($_SESSION['login']))
             $isAdmin = true;
-            
-		if($loggato && $isAdmin){
-			echo    '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left">
-                         <a href="esito.php?op=canc&id='.$e->id.'" onclick="return confirm(\'Sei sicuro di voler cancellare questo evento?\');">Elimina evento</a>
+
+        if ($loggato && $isAdmin) {
+            echo '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left">
+                         <a href="esito.php?op=canc&id=' . $e->id . '" onclick="return confirm(\'Sei sicuro di voler cancellare questo evento?\');">Elimina evento</a>
                      </div>';
-		}
-	?>
+        }
+        ?>
         <div class="pull-right col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
             <h4><a href="calendario.php">Calendario</a></h4>
         </div>
@@ -103,7 +103,7 @@
 
     <!-- /.row -->
     <br>
-  
+
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -117,15 +117,18 @@
                 </div>
             </div>
             <br>
+
             <div class="panel-heading">
                 <h4><i class="fa fa-fw fa-clock-o"></i>Luogo e date</h4>
             </div>
             <div class="panel-body">
-                Luogo: <?php echo $e->provincia." ".$e->comune." ".$e->indirizzo; ?>
+                Luogo: <?php echo $e->provincia . " " . $e->comune . " " . $e->indirizzo; ?>
                 <br>
-                Data inizio evento: <?php echo substr($e->inizio,0,10); ?> alle ore: <?php  echo substr($e->inizio,10,6); ?>
+                Data inizio evento: <?php echo substr($e->inizio, 0, 10); ?> alle
+                ore: <?php echo substr($e->inizio, 10, 6); ?>
                 <br>
-                Data fine evento: <?php echo substr($e->fine,0,10); ?> alle ore: <?php echo substr($e->fine,10,6); ?>
+                Data fine evento: <?php echo substr($e->fine, 0, 10); ?> alle
+                ore: <?php echo substr($e->fine, 10, 6); ?>
             </div>
             <div class="panel-heading">
                 <h4><i class="fa fa-fw fa-question-circle"></i>Contenuto</h4>

@@ -47,13 +47,12 @@ body {
     border: 2px solid black;
     border-radius: 5px 5px 5px 5px;
 }
-            
 
 .hidden {
-    position:absolute;
-    left:0px;
-    top:-500px;
-    width:1px;
-    height:1px;
-    overflow:hidden;
+    position: absolute;
+    left: 0px;
+    top: -500px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }

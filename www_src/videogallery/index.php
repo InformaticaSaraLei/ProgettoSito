@@ -58,42 +58,42 @@
         </div>
     </div>
     <!-- /.row -->
- <?php
-				$servername = "localhost";
-				$username = "pariopp-owner";
-				$password = "pariopp";
-				$dbname = "pariopp";
+    <?php
+    $servername = "localhost";
+    $username = "pariopp-owner";
+    $password = "pariopp";
+    $dbname = "pariopp";
 
-				// Create connection
-				$conn = mysqli_connect($servername, $username, $password, $dbname);
-				// Check connection
-				if (!$conn) {
-					die("Connection failed: " . mysqli_connect_error());
-				}
+    // Create connection
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
 
-				$sql = "select * from media where tipomedia=\"video\";";
-				$result = mysqli_query($conn, $sql);
+    $sql = "select * from media where tipomedia=\"video\";";
+    $result = mysqli_query($conn, $sql);
 
-				if (mysqli_num_rows($result) > 0) {
-					$i=0;
-					while($row = mysqli_fetch_assoc($result)) {
-						if($i%2==0)
-						 echo '<div class="row">';
-						echo '<div class="col-md-6 img-portfolio">';
-						echo "<div class=\"embed-responsive embed-responsive-16by9\"><iframe class=\"embed-responsive-item\" width=\"560\" height=\"315\" src=\"".$row['LINK']."\" frameborder=\"0\" allowfullscreen></iframe></div><h3><a href=\"".$row['LINK']."\">".$row['NOME']."</a></h3> ";	
-						echo '</div>';
-						$i++;
-						if($i%2==0)
-						 echo '</div>';
-					}
-					
-				} else {
-					echo "0 results";
-				}
-				
-				mysqli_close($conn);
-?>
-	
+    if (mysqli_num_rows($result) > 0) {
+        $i = 0;
+        while ($row = mysqli_fetch_assoc($result)) {
+            if ($i % 2 == 0)
+                echo '<div class="row">';
+            echo '<div class="col-md-6 img-portfolio">';
+            echo "<div class=\"embed-responsive embed-responsive-16by9\"><iframe class=\"embed-responsive-item\" width=\"560\" height=\"315\" src=\"" . $row['LINK'] . "\" frameborder=\"0\" allowfullscreen></iframe></div><h3><a href=\"" . $row['LINK'] . "\">" . $row['NOME'] . "</a></h3> ";
+            echo '</div>';
+            $i++;
+            if ($i % 2 == 0)
+                echo '</div>';
+        }
+
+    } else {
+        echo "0 results";
+    }
+
+    mysqli_close($conn);
+    ?>
+
 
     <hr>
 

@@ -61,30 +61,29 @@ include_once "lib/evento.php";
         </div>
     </div>
     <!-- /.row -->
-    
-    
-    
-    <div class="row">   
-	<?php
+
+
+    <div class="row">
+        <?php
         include_once "../login/lib/userscontroller.php";
         include_once "../login/lib/database.php";
         include_once "../login/lib/functions.php";
-        
+
         $isAdmin = false;
         $loggato = true;
-        
+
         $user = new UsersController();
-        if(!isset($_SESSION['login']))
+        if (!isset($_SESSION['login']))
             $loggato = false;
-            
-        if($loggato && $user->isAdmin($_SESSION['login']))
+
+        if ($loggato && $user->isAdmin($_SESSION['login']))
             $isAdmin = true;
-        
-		if($loggato && $isAdmin){
-			echo '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left">
+
+        if ($loggato && $isAdmin) {
+            echo '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left">
                   <h3><a href="addEvento.php">Aggiungi evento</a></h3></div>';
-		}
-	?>
+        }
+        ?>
         <div class="pull-right col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
             <h3><a href="calendario.php">Calendario</a></h3>
         </div>
@@ -95,42 +94,42 @@ include_once "lib/evento.php";
     $i = 0;
     $em = new EventiManager();
     $eventi = $em->getEventi();
-    if(isset($eventi) && count($eventi)!= 0){
+    if (isset($eventi) && count($eventi) != 0) {
         foreach ($eventi as $e) {
-            $i = $i +1;
-            if($i % 2 != 0) echo '<div class="row">';
+            $i = $i + 1;
+            if ($i % 2 != 0) echo '<div class="row">';
             echo '<div class="pull-left col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-default">';
-                echo '<div class="panel-heading">';
-                    echo '<h4><i class="fa fa-fw fa-users"></i>'.($e->titolo).'</h4>';
-                echo '</div>';
-                echo '<div class="panel-body">';
-                    echo '<div class="row">';
-                        echo '<div class="pull-left col-md-6 col-lg-6 col-sm-6 col-xs-6">';
-                            echo $e->descrizione;
-                        echo '</div>';
-                        echo '<div class="pull-left col-md-6 col-lg-6 col-sm-6 col-xs-6">';
-                          echo '<img src="'.$e->link_img.'" class="img-responsive" alt="Immagine Evento">';
-                        echo '</div>';
-                    echo '</div>';
-                    echo '<br>';
-                    echo '<div class="row">';
-                        echo '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4"></div>';
-                        echo '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">';
-                            echo '<a href="paginaEvento.php?id='.$e->id.'" class="btn btn-default text-center">Altre informazioni</a>';
-                        echo '</div>';
-                        echo '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4"></div>';
-                    echo '</div>';
-                echo '</div>';
+            echo '<div class="panel-heading">';
+            echo '<h4><i class="fa fa-fw fa-users"></i>' . ($e->titolo) . '</h4>';
             echo '</div>';
-            if($i % 2 == 0) echo '</div>';
+            echo '<div class="panel-body">';
+            echo '<div class="row">';
+            echo '<div class="pull-left col-md-6 col-lg-6 col-sm-6 col-xs-6">';
+            echo $e->descrizione;
+            echo '</div>';
+            echo '<div class="pull-left col-md-6 col-lg-6 col-sm-6 col-xs-6">';
+            echo '<img src="' . $e->link_img . '" class="img-responsive" alt="Immagine Evento">';
+            echo '</div>';
+            echo '</div>';
+            echo '<br>';
+            echo '<div class="row">';
+            echo '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4"></div>';
+            echo '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">';
+            echo '<a href="paginaEvento.php?id=' . $e->id . '" class="btn btn-default text-center">Altre informazioni</a>';
+            echo '</div>';
+            echo '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4"></div>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+            if ($i % 2 == 0) echo '</div>';
         }
-    }else{
+    } else {
         echo '<div class="row"><div class="pull-left col-md-4 col-lg-4"></div>';
         echo '<div class="pull-left col-md-4 col-lg-4">';
         echo '<p>Nessun evento programmato</p></div>';
         echo '<div class="pull-left col-md-4 col-lg-4"></div></div>';
     }
-    
+
     ?>
 
     <!-- /.row -->
