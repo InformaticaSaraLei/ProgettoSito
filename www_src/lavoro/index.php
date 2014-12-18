@@ -30,7 +30,7 @@
 		foreach($elenco as $stato)
 
 			if($selectedValue==$stato["ID"]){
-				print $selectedValue."==".$stato["ID"]."<br>";
+				// print $selectedValue."==".$stato["ID"]."<br>";
 				$options.="<option value=\"".$stato["ID"]."\" selected>".$stato["STATO"];
 				}
 			else
@@ -142,9 +142,9 @@
 		}
 		// echo $_SESSION["admin_mode"];
 		if($_SESSION["admin_mode"]==0){
-			$content.="<a class=\"btn btn-warning\" type=\"button\" href=\"index.php?admin_mode=1\">ENTRA MODALITA' ADMIN</a>";
+			$content.="<br><a class=\"btn btn-warning\" type=\"button\" href=\"index.php?admin_mode=1\">ENTRA MODALITA' ADMIN</a>";
 		}else{
-			$content.="<a class=\"btn btn-success\" type=\"button\" href=\"index.php?admin_mode=0\">TORNA MODALITA' UTENTE</a>";
+			$content.="<br><a class=\"btn btn-success\" type=\"button\" href=\"index.php?admin_mode=0\">TORNA MODALITA' UTENTE</a>";
 		}			
 		
 		
@@ -680,17 +680,24 @@
 
 
 $(function() {
-            $("#btnsubmit").on("click", function(e) {
-                e.preventDefault();
-                var _this = this;
-                bootbox.confirm("Sei sicuro di voler <?php if($_SESSION["action"]=="insert") echo "inserire"; if($_SESSION["action"]=="update") echo "modificare";?> l'offerta?", function(result) {
-                    if (result) {
-					    $('#editform').submit();
-                        // $(_this).parent().submit();
-                    }
-                });
-            });
-        });
+			   
+			$( "#editform" ).submit(function( event ) {
+				event.preventDefault();
+				bootbox.confirm("Sei sicuro di voler <?php if($_SESSION["action"]=="insert") echo "inserire"; if($_SESSION["action"]=="update") echo "modificare";?> l'offerta?",  function(result) {
+					if (result) {
+						$('#editform').unbind('submit').submit();
+					}
+				});				  
+			});
+			
+			  
+			  
+
+			   
+			   
+			   
+             }
+		);
 
 </script>
 
