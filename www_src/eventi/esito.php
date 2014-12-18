@@ -59,7 +59,7 @@
     <!-- /.row -->
     <div class="container">
         <div class="page-header">
-        <?php
+            <?php
             include_once "lib/evento.php";
             function stampaEsito($esito)
             {
@@ -75,57 +75,59 @@
                 echo '</h1>';
             }
 
-      include_once "../login/lib/userscontroller.php";
-      include_once "../login/lib/database.php";
-      include_once "../login/lib/functions.php";
-      
-      $isAdmin = false;
-      $loggato = false;
-      
-      $user = new UsersController();
-      if(isset($_SESSION['login']))
-          $loggato = true;
-        
-      if($user->isAdmin($_SESSION['login']))
-          $isAdmin = true;
+            include_once "../login/lib/userscontroller.php";
+            include_once "../login/lib/database.php";
+            include_once "../login/lib/functions.php";
 
-			if($loggato && $isAdmin){
-					$em = new EventiManager();
-					$op = $_GET['op'];
-					if ($op == 'add') {
-						// Aggiunta evento
-						$titolo = $_POST['txtTitolo'];
-						$descrizione = $_POST['txtDescrizione'];
-						$linkImg = $_POST['txtLinkImmagine'];
-						$inizio = $_POST['txtInizio'];
-						$fine = $_POST['txtFine'];
-						$provincia = $_POST['txtProvincia'];
-						$comune = $_POST['txtComune'];
-						$indirizzo = $_POST['txtIndirizzo'];
-						$contenuto = $_POST['txaContenuto'];
-						$id_utente = 1; // Salvato da qualche parte in SESSION :D
+            $isAdmin = false;
+            $loggato = false;
 
-						$res = $em->creaEvento($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $linkImg, $id_utente);
-						stampaEsito($res);
-					} elseif ($op == 'canc') {
-						// Cancellazione evento
-						$id = $_GET['id'];
-						$res = $em->cancellaEvento($id);
-						stampaEsito($res);
-					}
-				}else{
-?>
-<div class="row alert alert-danger" role="alert"><div class="col-md-12">
-          <H1>Siamo spiacenti ma lei non ha i permessi per accedere a questa pagina.</H1></div>
-            </div>
-            <div class="row"><div class="col-md-12">
-            <h3>Torna agli <a href="index.php">eventi</a></h3></div>
-            </div>
-<?php
-				}
+            $user = new UsersController();
+            if (isset($_SESSION['login']))
+                $loggato = true;
+
+            if ($user->isAdmin($_SESSION['login']))
+                $isAdmin = true;
+
+            if ($loggato && $isAdmin) {
+                $em = new EventiManager();
+                $op = $_GET['op'];
+                if ($op == 'add') {
+                    // Aggiunta evento
+                    $titolo = $_POST['txtTitolo'];
+                    $descrizione = $_POST['txtDescrizione'];
+                    $linkImg = $_POST['txtLinkImmagine'];
+                    $inizio = $_POST['txtInizio'];
+                    $fine = $_POST['txtFine'];
+                    $provincia = $_POST['txtProvincia'];
+                    $comune = $_POST['txtComune'];
+                    $indirizzo = $_POST['txtIndirizzo'];
+                    $contenuto = $_POST['txaContenuto'];
+                    $id_utente = 1; // Salvato da qualche parte in SESSION :D
+
+                    $res = $em->creaEvento($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $linkImg, $id_utente);
+                    stampaEsito($res);
+                } elseif ($op == 'canc') {
+                    // Cancellazione evento
+                    $id = $_GET['id'];
+                    $res = $em->cancellaEvento($id);
+                    stampaEsito($res);
+                }
+            } else {
+                ?>
+                <div class="row alert alert-danger" role="alert">
+                    <div class="col-md-12">
+                        <H1>Siamo spiacenti ma lei non ha i permessi per accedere a questa pagina.</H1></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Torna agli <a href="index.php">eventi</a></h3></div>
+                </div>
+            <?php
+            }
             ?>
-            
-            
+
+
         </div>
     </div>
     <hr>

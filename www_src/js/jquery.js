@@ -393,8 +393,8 @@
                 }, CLASS: function (a) {
                     var b = y[a + " "];
                     return b || (b = new RegExp("(^|" + M + ")" + a + "(" + M + "|$)")) && y(a, function (a) {
-                        return b.test("string" == typeof a.className && a.className || typeof a.getAttribute !== C && a.getAttribute("class") || "")
-                    })
+                            return b.test("string" == typeof a.className && a.className || typeof a.getAttribute !== C && a.getAttribute("class") || "")
+                        })
                 }, ATTR: function (a, b, c) {
                     return function (d) {
                         var e = fb.attr(d, a);
@@ -1057,10 +1057,10 @@
         }, _queueHooks: function (a, b) {
             var c = b + "queueHooks";
             return m._data(a, c) || m._data(a, c, {
-                empty: m.Callbacks("once memory").add(function () {
-                    m._removeData(a, b + "queue"), m._removeData(a, c)
+                    empty: m.Callbacks("once memory").add(function () {
+                        m._removeData(a, b + "queue"), m._removeData(a, c)
+                    })
                 })
-            })
         }
     }), m.fn.extend({
         queue: function (a, b) {

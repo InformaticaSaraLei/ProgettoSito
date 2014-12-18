@@ -401,7 +401,7 @@
         function getLocaleData(langCode) {
             var f = moment.localeData || moment.langData;
             return f.call(moment, langCode) ||
-            f.call(moment, 'en'); // the newer localData could return null, so fall back to en
+                f.call(moment, 'en'); // the newer localData could return null, so fall back to en
         }
 
 
@@ -1332,9 +1332,9 @@
 
         function isFetchNeeded(start, end) {
             return !rangeStart || // nothing has been fetched yet?
-                // or, a part of the new range is outside of the old range? (after normalizing)
-            start.clone().stripZone() < rangeStart.clone().stripZone() ||
-            end.clone().stripZone() > rangeEnd.clone().stripZone();
+                    // or, a part of the new range is outside of the old range? (after normalizing)
+                start.clone().stripZone() < rangeStart.clone().stripZone() ||
+                end.clone().stripZone() > rangeEnd.clone().stripZone();
         }
 
 
@@ -1576,11 +1576,11 @@
 
         function getSourcePrimitive(source) {
             return (
-                (typeof source === 'object') ? // a normalized event source?
-                    (source.origArray || source.googleCalendarId || source.url || source.events) : // get the primitive
-                    null
-            ) ||
-            source; // the given argument *is* the primitive
+                    (typeof source === 'object') ? // a normalized event source?
+                        (source.origArray || source.googleCalendarId || source.url || source.events) : // get the primitive
+                        null
+                ) ||
+                source; // the given argument *is* the primitive
         }
 
 
@@ -3008,8 +3008,8 @@
         else {
             input = fc.moment.parseZone(input); // normalize input
             return oldMomentProto.isSame.call(this, input) &&
-            Boolean(this._ambigTime) === Boolean(input._ambigTime) &&
-            Boolean(this._ambigZone) === Boolean(input._ambigZone);
+                Boolean(this._ambigTime) === Boolean(input._ambigTime) &&
+                Boolean(this._ambigZone) === Boolean(input._ambigZone);
         }
     };
 
@@ -4089,8 +4089,8 @@
 
         if (cell1 && cell2) {
             return cell1.grid === cell2.grid &&
-            cell1.row === cell2.row &&
-            cell1.col === cell2.col;
+                cell1.row === cell2.row &&
+                cell1.col === cell2.col;
         }
 
         return false;
@@ -4737,9 +4737,9 @@
             var styles = stylesMethod ? stylesMethod.call(this, seg) : ''; // a semi-colon separated CSS property string
 
             return '<' + this.fillSegTag +
-            (classes.length ? ' class="' + classes.join(' ') + '"' : '') +
-            (styles ? ' style="' + styles + '"' : '') +
-            ' />';
+                (classes.length ? ' class="' + classes.join(' ') + '"' : '') +
+                (styles ? ' style="' + styles + '"' : '') +
+                ' />';
         },
 
 
@@ -4750,13 +4750,13 @@
         // Renders a day-of-week header row
         headHtml: function () {
             return '' +
-            '<div class="fc-row ' + this.view.widgetHeaderClass + '">' +
-            '<table>' +
-            '<thead>' +
-            this.rowHtml('head') + // leverages RowRenderer
-            '</thead>' +
-            '</table>' +
-            '</div>';
+                '<div class="fc-row ' + this.view.widgetHeaderClass + '">' +
+                '<table>' +
+                '<thead>' +
+                this.rowHtml('head') + // leverages RowRenderer
+                '</thead>' +
+                '</table>' +
+                '</div>';
         },
 
 
@@ -4767,9 +4767,9 @@
             var colFormat = view.opt('columnFormat');
 
             return '' +
-            '<th class="fc-day-header ' + view.widgetHeaderClass + ' fc-' + dayIDs[date.day()] + '">' +
-            htmlEscape(calendar.formatDate(date, colFormat)) +
-            '</th>';
+                '<th class="fc-day-header ' + view.widgetHeaderClass + ' fc-' + dayIDs[date.day()] + '">' +
+                htmlEscape(calendar.formatDate(date, colFormat)) +
+                '</th>';
         },
 
 
@@ -5518,9 +5518,9 @@
 // DOES NOT WORK ON INVERTED BACKGROUND EVENTS because they have no eventStartMS/eventDurationMS
     function compareSegs(seg1, seg2) {
         return seg1.eventStartMS - seg2.eventStartMS || // earlier events go first
-        seg2.eventDurationMS - seg1.eventDurationMS || // tie? longer events go first
-        seg2.event.allDay - seg1.event.allDay || // tie? put all-day events first (booleans cast to 0/1)
-        (seg1.event.title || '').localeCompare(seg2.event.title); // tie? alphabetically by title
+            seg2.eventDurationMS - seg1.eventDurationMS || // tie? longer events go first
+            seg2.event.allDay - seg1.event.allDay || // tie? put all-day events first (booleans cast to 0/1)
+            (seg1.event.title || '').localeCompare(seg2.event.title); // tie? alphabetically by title
     }
 
 
@@ -5588,23 +5588,23 @@
             }
 
             return '' +
-            '<div class="' + classes.join(' ') + '">' +
-            '<div class="fc-bg">' +
-            '<table>' +
-            this.rowHtml('day', row) + // leverages RowRenderer. calls dayCellHtml()
-            '</table>' +
-            '</div>' +
-            '<div class="fc-content-skeleton">' +
-            '<table>' +
-            (this.numbersVisible ?
-            '<thead>' +
-            this.rowHtml('number', row) + // leverages RowRenderer. View will define render method
-            '</thead>' :
-                ''
-            ) +
-            '</table>' +
-            '</div>' +
-            '</div>';
+                '<div class="' + classes.join(' ') + '">' +
+                '<div class="fc-bg">' +
+                '<table>' +
+                this.rowHtml('day', row) + // leverages RowRenderer. calls dayCellHtml()
+                '</table>' +
+                '</div>' +
+                '<div class="fc-content-skeleton">' +
+                '<table>' +
+                (this.numbersVisible ?
+                '<thead>' +
+                this.rowHtml('number', row) + // leverages RowRenderer. View will define render method
+                '</thead>' :
+                    ''
+                ) +
+                '</table>' +
+                '</div>' +
+                '</div>';
         },
 
 
@@ -5951,26 +5951,26 @@
                 '</span>';
 
             return '<a class="' + classes.join(' ') + '"' +
-            (event.url ?
-            ' href="' + htmlEscape(event.url) + '"' :
-                ''
-            ) +
-            (skinCss ?
-            ' style="' + skinCss + '"' :
-                ''
-            ) +
-            '>' +
-            '<div class="fc-content">' +
-            (isRTL ?
-            titleHtml + ' ' + timeHtml : // put a natural space in between
-            timeHtml + ' ' + titleHtml   //
-            ) +
-            '</div>' +
-            (isResizable ?
-                '<div class="fc-resizer"/>' :
-                ''
-            ) +
-            '</a>';
+                (event.url ?
+                ' href="' + htmlEscape(event.url) + '"' :
+                    ''
+                ) +
+                (skinCss ?
+                ' style="' + skinCss + '"' :
+                    ''
+                ) +
+                '>' +
+                '<div class="fc-content">' +
+                (isRTL ?
+                titleHtml + ' ' + timeHtml : // put a natural space in between
+                timeHtml + ' ' + titleHtml   //
+                ) +
+                '</div>' +
+                (isResizable ?
+                    '<div class="fc-resizer"/>' :
+                    ''
+                ) +
+                '</a>';
         },
 
 
@@ -6558,16 +6558,16 @@
         // Renders the basic HTML skeleton for the grid
         renderHtml: function () {
             return '' +
-            '<div class="fc-bg">' +
-            '<table>' +
-            this.rowHtml('slotBg') + // leverages RowRenderer, which will call slotBgCellHtml
-            '</table>' +
-            '</div>' +
-            '<div class="fc-slats">' +
-            '<table>' +
-            this.slatRowHtml() +
-            '</table>' +
-            '</div>';
+                '<div class="fc-bg">' +
+                '<table>' +
+                this.rowHtml('slotBg') + // leverages RowRenderer, which will call slotBgCellHtml
+                '</table>' +
+                '</div>' +
+                '<div class="fc-slats">' +
+                '<table>' +
+                this.slatRowHtml() +
+                '</table>' +
+                '</div>';
         },
 
 
@@ -7094,38 +7094,38 @@
             }
 
             return '<a class="' + classes.join(' ') + '"' +
-            (event.url ?
-            ' href="' + htmlEscape(event.url) + '"' :
-                ''
-            ) +
-            (skinCss ?
-            ' style="' + skinCss + '"' :
-                ''
-            ) +
-            '>' +
-            '<div class="fc-content">' +
-            (timeText ?
-            '<div class="fc-time"' +
-            ' data-start="' + htmlEscape(startTimeText) + '"' +
-            ' data-full="' + htmlEscape(fullTimeText) + '"' +
-            '>' +
-            '<span>' + htmlEscape(timeText) + '</span>' +
-            '</div>' :
-                ''
-            ) +
-            (event.title ?
-            '<div class="fc-title">' +
-            htmlEscape(event.title) +
-            '</div>' :
-                ''
-            ) +
-            '</div>' +
-            '<div class="fc-bg"/>' +
-            (isResizable ?
-                '<div class="fc-resizer"/>' :
-                ''
-            ) +
-            '</a>';
+                (event.url ?
+                ' href="' + htmlEscape(event.url) + '"' :
+                    ''
+                ) +
+                (skinCss ?
+                ' style="' + skinCss + '"' :
+                    ''
+                ) +
+                '>' +
+                '<div class="fc-content">' +
+                (timeText ?
+                '<div class="fc-time"' +
+                ' data-start="' + htmlEscape(startTimeText) + '"' +
+                ' data-full="' + htmlEscape(fullTimeText) + '"' +
+                '>' +
+                '<span>' + htmlEscape(timeText) + '</span>' +
+                '</div>' :
+                    ''
+                ) +
+                (event.title ?
+                '<div class="fc-title">' +
+                htmlEscape(event.title) +
+                '</div>' :
+                    ''
+                ) +
+                '</div>' +
+                '<div class="fc-bg"/>' +
+                (isResizable ?
+                    '<div class="fc-resizer"/>' :
+                    ''
+                ) +
+                '</a>';
         },
 
 
@@ -7366,10 +7366,10 @@
     function compareForwardSlotSegs(seg1, seg2) {
         // put higher-pressure first
         return seg2.forwardPressure - seg1.forwardPressure ||
-            // put segments that are closer to initial edge first (and favor ones with no coords yet)
-        (seg1.backwardCoord || 0) - (seg2.backwardCoord || 0) ||
-            // do normal sorting...
-        compareSegs(seg1, seg2);
+                // put segments that are closer to initial edge first (and favor ones with no coords yet)
+            (seg1.backwardCoord || 0) - (seg2.backwardCoord || 0) ||
+                // do normal sorting...
+            compareSegs(seg1, seg2);
     }
 
     ;
@@ -8072,10 +8072,10 @@
             var day0 = t.start.day(); // first date's day of week
             cellOffset += dayToCellMap[day0]; // normlize cellOffset to beginning-of-week
             return Math.floor(cellOffset / cellsPerWeek) * 7 + // # of days from full weeks
-            cellToDayMap[ // # of days from partial last week
-            (cellOffset % cellsPerWeek + cellsPerWeek) % cellsPerWeek // crazy math to handle negative cellOffsets
-                ] -
-            day0; // adjustment for beginning-of-week normalization
+                cellToDayMap[ // # of days from partial last week
+                (cellOffset % cellsPerWeek + cellsPerWeek) % cellsPerWeek // crazy math to handle negative cellOffsets
+                    ] -
+                day0; // adjustment for beginning-of-week normalization
         }
 
         // day offset -> date
@@ -8106,10 +8106,10 @@
             var day0 = t.start.day(); // first date's day of week
             dayOffset += day0; // normalize dayOffset to beginning-of-week
             return Math.floor(dayOffset / 7) * cellsPerWeek + // # of cells from full weeks
-            dayToCellMap[ // # of cells from partial last week
-            (dayOffset % 7 + 7) % 7 // crazy math to handle negative dayOffsets
-                ] -
-            dayToCellMap[day0]; // adjustment for beginning-of-week normalization
+                dayToCellMap[ // # of cells from partial last week
+                (dayOffset % 7 + 7) % 7 // crazy math to handle negative dayOffsets
+                    ] -
+                dayToCellMap[day0]; // adjustment for beginning-of-week normalization
         }
 
         // cell offset -> cell (object with row & col keys)
@@ -8366,24 +8366,24 @@
         // The day-grid component will render inside of a container defined by this HTML.
         renderHtml: function () {
             return '' +
-            '<table>' +
-            '<thead>' +
-            '<tr>' +
-            '<td class="' + this.widgetHeaderClass + '">' +
-            this.dayGrid.headHtml() + // render the day-of-week headers
-            '</td>' +
-            '</tr>' +
-            '</thead>' +
-            '<tbody>' +
-            '<tr>' +
-            '<td class="' + this.widgetContentClass + '">' +
-            '<div class="fc-day-grid-container">' +
-            '<div class="fc-day-grid"/>' +
-            '</div>' +
-            '</td>' +
-            '</tr>' +
-            '</tbody>' +
-            '</table>';
+                '<table>' +
+                '<thead>' +
+                '<tr>' +
+                '<td class="' + this.widgetHeaderClass + '">' +
+                this.dayGrid.headHtml() + // render the day-of-week headers
+                '</td>' +
+                '</tr>' +
+                '</thead>' +
+                '<tbody>' +
+                '<tr>' +
+                '<td class="' + this.widgetContentClass + '">' +
+                '<div class="fc-day-grid-container">' +
+                '<div class="fc-day-grid"/>' +
+                '</div>' +
+                '</td>' +
+                '</tr>' +
+                '</tbody>' +
+                '</table>';
         },
 
 
@@ -8392,11 +8392,11 @@
         headIntroHtml: function () {
             if (this.weekNumbersVisible) {
                 return '' +
-                '<th class="fc-week-number ' + this.widgetHeaderClass + '" ' + this.weekNumberStyleAttr() + '>' +
-                '<span>' + // needed for matchCellWidths
-                htmlEscape(this.opt('weekNumberTitle')) +
-                '</span>' +
-                '</th>';
+                    '<th class="fc-week-number ' + this.widgetHeaderClass + '" ' + this.weekNumberStyleAttr() + '>' +
+                    '<span>' + // needed for matchCellWidths
+                    htmlEscape(this.opt('weekNumberTitle')) +
+                    '</span>' +
+                    '</th>';
             }
         },
 
@@ -8406,11 +8406,11 @@
         numberIntroHtml: function (row) {
             if (this.weekNumbersVisible) {
                 return '' +
-                '<td class="fc-week-number" ' + this.weekNumberStyleAttr() + '>' +
-                '<span>' + // needed for matchCellWidths
-                this.calendar.calculateWeekNumber(this.cellToDate(row, 0)) +
-                '</span>' +
-                '</td>';
+                    '<td class="fc-week-number" ' + this.weekNumberStyleAttr() + '>' +
+                    '<span>' + // needed for matchCellWidths
+                    this.calendar.calculateWeekNumber(this.cellToDate(row, 0)) +
+                    '</span>' +
+                    '</td>';
             }
         },
 
@@ -8420,7 +8420,7 @@
         dayIntroHtml: function () {
             if (this.weekNumbersVisible) {
                 return '<td class="fc-week-number ' + this.widgetContentClass + '" ' +
-                this.weekNumberStyleAttr() + '></td>';
+                    this.weekNumberStyleAttr() + '></td>';
             }
         },
 
@@ -8447,9 +8447,9 @@
             classes.unshift('fc-day-number');
 
             return '' +
-            '<td class="' + classes.join(' ') + '" data-date="' + date.format() + '">' +
-            date.date() +
-            '</td>';
+                '<td class="' + classes.join(' ') + '" data-date="' + date.format() + '">' +
+                date.date() +
+                '</td>';
         },
 
 
@@ -8897,29 +8897,29 @@
         // The day-grid and time-grid components will render inside containers defined by this HTML.
         renderHtml: function () {
             return '' +
-            '<table>' +
-            '<thead>' +
-            '<tr>' +
-            '<td class="' + this.widgetHeaderClass + '">' +
-            this.timeGrid.headHtml() + // render the day-of-week headers
-            '</td>' +
-            '</tr>' +
-            '</thead>' +
-            '<tbody>' +
-            '<tr>' +
-            '<td class="' + this.widgetContentClass + '">' +
-            (this.dayGrid ?
-            '<div class="fc-day-grid"/>' +
-            '<hr class="' + this.widgetHeaderClass + '"/>' :
-                ''
-            ) +
-            '<div class="fc-time-grid-container">' +
-            '<div class="fc-time-grid"/>' +
-            '</div>' +
-            '</td>' +
-            '</tr>' +
-            '</tbody>' +
-            '</table>';
+                '<table>' +
+                '<thead>' +
+                '<tr>' +
+                '<td class="' + this.widgetHeaderClass + '">' +
+                this.timeGrid.headHtml() + // render the day-of-week headers
+                '</td>' +
+                '</tr>' +
+                '</thead>' +
+                '<tbody>' +
+                '<tr>' +
+                '<td class="' + this.widgetContentClass + '">' +
+                (this.dayGrid ?
+                '<div class="fc-day-grid"/>' +
+                '<hr class="' + this.widgetHeaderClass + '"/>' :
+                    ''
+                ) +
+                '<div class="fc-time-grid-container">' +
+                '<div class="fc-time-grid"/>' +
+                '</div>' +
+                '</td>' +
+                '</tr>' +
+                '</tbody>' +
+                '</table>';
         },
 
 
@@ -8944,11 +8944,11 @@
                 }
 
                 return '' +
-                '<th class="fc-axis fc-week-number ' + this.widgetHeaderClass + '" ' + this.axisStyleAttr() + '>' +
-                '<span>' + // needed for matchCellWidths
-                htmlEscape(weekText) +
-                '</span>' +
-                '</th>';
+                    '<th class="fc-axis fc-week-number ' + this.widgetHeaderClass + '" ' + this.axisStyleAttr() + '>' +
+                    '<span>' + // needed for matchCellWidths
+                    htmlEscape(weekText) +
+                    '</span>' +
+                    '</th>';
             }
             else {
                 return '<th class="fc-axis ' + this.widgetHeaderClass + '" ' + this.axisStyleAttr() + '></th>';
@@ -8960,11 +8960,11 @@
         // Queried by the DayGrid subcomponent when generating rows. Ordering depends on isRTL.
         dayIntroHtml: function () {
             return '' +
-            '<td class="fc-axis ' + this.widgetContentClass + '" ' + this.axisStyleAttr() + '>' +
-            '<span>' + // needed for matchCellWidths
-            (this.opt('allDayHtml') || htmlEscape(this.opt('allDayText'))) +
-            '</span>' +
-            '</td>';
+                '<td class="fc-axis ' + this.widgetContentClass + '" ' + this.axisStyleAttr() + '>' +
+                '<span>' + // needed for matchCellWidths
+                (this.opt('allDayHtml') || htmlEscape(this.opt('allDayText'))) +
+                '</span>' +
+                '</td>';
         },
 
 

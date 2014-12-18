@@ -72,7 +72,7 @@ session_start();
         <div class="col-lg-12">
             <?php
             if (!isset($_SESSION['login'])) {
-            echo '
+                echo '
             <h2>Effettua il login:</h2>
  
             <form action="login.php" method="POST">
@@ -94,11 +94,11 @@ session_start();
             <p>Se non sei registrato <a href="register.php">Registrati ora!</a></p>
             ';
             } else {
-            $user=new UsersController();
-            // prelevo il nome dell'utente
-            $name = $user->GetName($_SESSION['login']);
-            echo "<h2>Benvenuto $name</h2><br>";
-            echo "Accedi al tuo <a href='profile.php'>profilo</a> oppure effettua il <a href='logout.php'>logout</a>";
+                $user = new UsersController();
+                // prelevo il nome dell'utente
+                $name = $user->GetName($_SESSION['login']);
+                echo "<h2>Benvenuto $name</h2><br>";
+                echo "Accedi al tuo <a href='profile.php'>profilo</a> oppure effettua il <a href='logout.php'>logout</a>";
             }
 
             ?>

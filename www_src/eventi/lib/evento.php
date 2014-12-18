@@ -34,7 +34,7 @@ class Evento
 
 class EventiManager
 {
-    
+
     private $conn;
 
     public function __construct()
@@ -46,8 +46,8 @@ class EventiManager
      * Crea l'evento in base ai parametri specificati e lo salva nel database.
      * Restituisce true se l'operazione va a buon fine, false altrimenti.
      */
-     public function isEmpty($params)// potrebbe non essere suportato (...) da php < 5.6
-      {
+    public function isEmpty($params)// potrebbe non essere suportato (...) da php < 5.6
+    {
         foreach ($params as $p) {
             if (!isset($p) or strlen($p) == 0) {
                 return true;
@@ -63,8 +63,8 @@ class EventiManager
             /* throw new Exception('Invalid arguments'); */
         }
         try {
-            return $this->conn->execAction("Insert INTO agendaeventi(TITOLO, DESCRIZIONE, CONTENUTO, INIZIO, FINE, PROVINCIA, COMUNE, INDIRIZZO, IMG_NOME, FK_INSERITO_DA)VALUES('".$titolo."','".$descrizione."','".$contenuto."','".$inizio."','".$fine."','".$provincia."','".$comune."','".$indirizzo."','".$img_nomefile."','".$id_utente."');");
-        } catch (Exception $e){ 
+            return $this->conn->execAction("Insert INTO agendaeventi(TITOLO, DESCRIZIONE, CONTENUTO, INIZIO, FINE, PROVINCIA, COMUNE, INDIRIZZO, IMG_NOME, FK_INSERITO_DA)VALUES('" . $titolo . "','" . $descrizione . "','" . $contenuto . "','" . $inizio . "','" . $fine . "','" . $provincia . "','" . $comune . "','" . $indirizzo . "','" . $img_nomefile . "','" . $id_utente . "');");
+        } catch (Exception $e) {
             return false;
         }
         return true;
@@ -77,11 +77,11 @@ class EventiManager
     public function getEventoById($id)
     {
         try {
-            $res = $this->conn->execQuery("Select * From agendaeventi Where ID=".$id);
+            $res = $this->conn->execQuery("Select * From agendaeventi Where ID=" . $id);
             foreach ($res as $record) {
                 $e = new Evento($record['ID'], $record['TITOLO'], $record['DESCRIZIONE'], $record['CONTENUTO'], $record['INIZIO'], $record['FINE'], $record['PROVINCIA'], $record['COMUNE'], $record['INDIRIZZO'], $record['IMG_NOME'], $record['FK_INSERITO_DA']);
-			return $e;
-			}
+                return $e;
+            }
         } catch (Exception $e) {
         }
         return NULL;
@@ -98,7 +98,7 @@ class EventiManager
             /* throw new Exception('Invalid argument'); */
         }
         try {
-            return $this->conn->execAction("Delete From agendaeventi Where ID=".$id);
+            return $this->conn->execAction("Delete From agendaeventi Where ID=" . $id);
         } catch (Exception $e) {
             return false;
         }
@@ -112,11 +112,11 @@ class EventiManager
     public function getEventi($da = 0, $a = 1000000)
     {
         $risultati = array();
-        $res = $this->conn->execQuery("Select * From agendaeventi LIMIT ".$da.",".$a);
+        $res = $this->conn->execQuery("Select * From agendaeventi LIMIT " . $da . "," . $a);
         foreach ($res as $record) {
             $e = new Evento($record['ID'], $record['TITOLO'], $record['DESCRIZIONE'], $record['CONTENUTO'], $record['INIZIO'], $record['FINE'], $record['PROVINCIA'], $record['COMUNE'], $record['INDIRIZZO'], $record['IMG_NOME'], $record['FK_INSERITO_DA']);
-      $risultati[] = $e;
-    }
+            $risultati[] = $e;
+        }
         return $risultati;
     }
 
@@ -147,11 +147,11 @@ class EventiManager
     public function getEventiPerData($data)
     {
         $risultati = array();
-        $res = $this->conn->execQuery("Select * From agendaeventi Where DATA='".$data."'");
+        $res = $this->conn->execQuery("Select * From agendaeventi Where DATA='" . $data . "'");
         foreach ($res as $record) {
             $e = new Evento($record['ID'], $record['TITOLO'], $record['DESCRIZIONE'], $record['CONTENUTO'], $record['INIZIO'], $record['FINE'], $record['PROVINCIA'], $record['COMUNE'], $record['INDIRIZZO'], $record['IMG_NOME'], $record['FK_INSERITO_DA']);
-      $risultati[] = $e;
-    }
+            $risultati[] = $e;
+        }
         return $risultati;
     }
 
@@ -159,7 +159,7 @@ class EventiManager
      * Controlla se i parametri sono validi.
      * Restituisce true se e' presente almeno un parametro vuoto, false altrimenti.
      */
-    
+
 }
 
 ?>

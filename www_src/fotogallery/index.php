@@ -57,50 +57,54 @@
             </ol>
         </div>
     </div>
-	<div class="row">
-		<h3> Slideshow </h3>
-		<div class="embed-responsive embed-responsive-16by9">
-			<iframe class="embed-responsive-item" src="https://www.flickr.com/photos/128846442@N03/15920730516/in/photostream/player/" width="1024" height="577" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-		</div>
-	</div>
-	<hr>
-   <!-- /.row -->
- <?php
-				$servername = "localhost";
-				$username = "pariopp-owner";
-				$password = "pariopp";
-				$dbname = "pariopp";
+    <div class="row">
+        <h3> Slideshow </h3>
 
-				// Create connection
-				$conn = mysqli_connect($servername, $username, $password, $dbname);
-				// Check connection
-				if (!$conn) {
-					die("Connection failed: " . mysqli_connect_error());
-				}
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item"
+                    src="https://www.flickr.com/photos/128846442@N03/15920730516/in/photostream/player/" width="1024"
+                    height="577" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen
+                    oallowfullscreen msallowfullscreen></iframe>
+        </div>
+    </div>
+    <hr>
+    <!-- /.row -->
+    <?php
+    $servername = "localhost";
+    $username = "pariopp-owner";
+    $password = "pariopp";
+    $dbname = "pariopp";
 
-				$sql = "select * from media where tipomedia=\"foto\";";
-				$result = mysqli_query($conn, $sql);
+    // Create connection
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
 
-				if (mysqli_num_rows($result) > 0) {
-					$i=0;
-					while($row = mysqli_fetch_assoc($result)) {
-						if($i%3==0)
-						 echo '<div class="row">';
-						echo '<div class="col-md-4 img-portfolio"">';
-						echo '<a href="'.$row['LINK'].'" title="'.$row['NOME'].'"><img class="img-responsive img-hover" src="'.$row['LINK'].'" width="720" height="400" alt="verona 1"></a>'."<h3><a href=\"".$row['LINK']."\">".$row['NOME']."</a></h3>";	
-						echo '</div>';
-						$i++;
-						if($i%3==0)
-						 echo '</div>';
-					}
-					
-				} else {
-					echo "0 results";
-				}
-				
-				mysqli_close($conn);
-?>
-	
+    $sql = "select * from media where tipomedia=\"foto\";";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $i = 0;
+        while ($row = mysqli_fetch_assoc($result)) {
+            if ($i % 3 == 0)
+                echo '<div class="row">';
+            echo '<div class="col-md-4 img-portfolio"">';
+            echo '<a href="' . $row['LINK'] . '" title="' . $row['NOME'] . '"><img class="img-responsive img-hover" src="' . $row['LINK'] . '" width="720" height="400" alt="verona 1"></a>' . "<h3><a href=\"" . $row['LINK'] . "\">" . $row['NOME'] . "</a></h3>";
+            echo '</div>';
+            $i++;
+            if ($i % 3 == 0)
+                echo '</div>';
+        }
+
+    } else {
+        echo "0 results";
+    }
+
+    mysqli_close($conn);
+    ?>
+
 
     <hr>
 
