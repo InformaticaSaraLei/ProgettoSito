@@ -9,7 +9,7 @@
 
 <div class="row">
 <div class="row">
-  <div class="col-xs-3"><a href="#" title="Image 1"><img src="/ProgettoSito/www_src/erasmus/img/esn1.jpg" class="thumbnail img-responsive"></a></div>
+  <div class="col-xs-3"><a href="#" title="Image 1"><img src="/ProgettoSito/www_src/erasmus/img/esn3.jpg" class="thumbnail img-responsive"></a></div>
   <div class="col-xs-3"><a href="#" title="Image 2"><img src="/ProgettoSito/www_src/erasmus/img/esn2.jpg" class="thumbnail img-responsive"></a></div>
   <div class="col-xs-3"><a href="#" title="Image 3"><img src="/ProgettoSito/www_src/erasmus/img/esn3.jpg" class="thumbnail img-responsive"></a></div>
   <div class="col-xs-3"><a href="#" title="Image 4"><img src="/ProgettoSito/www_src/erasmus/img/esn4.jpg" class="thumbnail img-responsive"></a></div>
