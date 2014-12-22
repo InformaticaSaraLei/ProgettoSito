@@ -1,12 +1,13 @@
 <?php
 ?>
 
-<div> 
+<div>
     <p>Debating whether or not to study abroad? Go for it!! Some rather spend more time at their
         school, while others say that studying abroad is the single most important, not to say the
         greatest, experience of their college years. If you still have doubts, here are some reasons to
         demote you:
     </p>
+
     <div class>
         <ul class="list">
             <li>Learn a new language</li>
@@ -22,7 +23,8 @@
             <li>You learn more about yourself</li>
             <li>Enhances employment opportunities</li>
             <li>Something totally different and an unforgettable experience. You will never do
-            anything like this again in your life</li>
+                anything like this again in your life
+            </li>
         </ul>
     </div>
 </div>

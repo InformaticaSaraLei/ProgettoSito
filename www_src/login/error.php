@@ -66,9 +66,9 @@
             if (isset($_GET['error'])) {
                 $error = $_GET['error'];
                 if ($error == 1) {
-                    echo "<p>Attenzione, non sono stati compilati tutti i campi, ritorna al form di <a href='register.php'>registrazione</a>.</p>";
+                    echo "<p>Attenzione, non sono stati compilati tutti i campi.</p>";
                 } elseif ($error == 2) {
-                    echo "<p>Attenzione, Le due password non coincidono, torna alla pagina di <a href='register.php'>registrazione</a>.</p>";
+                    echo "<p>Attenzione, Le due password non coincidono.</p>";
                 } elseif ($error == 3) {
                     echo "<p>Attenzione, inserire sia Username e password, ritorna al form di <a href='login.php'>login</a>.</p>";
                 } elseif ($error == 4) {

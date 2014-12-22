@@ -91,7 +91,6 @@ session_start();
                     </tr>
                 </table>
             </form>
-            <p>Se non sei registrato <a href="register.php">Registrati ora!</a></p>
             ';
             } else {
                 $user = new UsersController();
