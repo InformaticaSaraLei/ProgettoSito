@@ -1,29 +1,27 @@
 <?php
 /**
-*
-* This file is part of the phpBB Forum Software package.
-*
-* @copyright (c) phpBB Limited <https://www.phpbb.com>
-* @copyright (c) 2010 phpBB.it
-* @copyright (c) 2014 phpBBItalia.net <http://www.phpbbitalia.net>
-* @license GNU General Public License, version 2 (GPL-2.0)
-*
-* For full copyright and license information, please see
-* the docs/CREDITS.txt file.
-*
-*/
+ *
+ * This file is part of the phpBB Forum Software package.
+ *
+ * @copyright (c) phpBB Limited <https://www.phpbb.com>
+ * @copyright (c) 2010 phpBB.it
+ * @copyright (c) 2014 phpBBItalia.net <http://www.phpbbitalia.net>
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ * For full copyright and license information, please see
+ * the docs/CREDITS.txt file.
+ *
+ */
 
 /**
-* DO NOT CHANGE
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
+ * DO NOT CHANGE
+ */
+if (!defined('IN_PHPBB')) {
+    exit;
 }
 
-if (empty($lang) || !is_array($lang))
-{
-	$lang = array();
+if (empty($lang) || !is_array($lang)) {
+    $lang = array();
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -43,8 +41,8 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'CONTROLLER_ARGUMENT_VALUE_MISSING'	=> 'Valore mancante per l’argomento #%1$s: <strong>%3$s</strong> nella classe <strong>%2$s</strong>',
-	'CONTROLLER_NOT_SPECIFIED'			=> 'Nessun controller è stato specificato.',
-	'CONTROLLER_METHOD_NOT_SPECIFIED'	=> 'Nessun metodo specificato per il controller.',
-	'CONTROLLER_SERVICE_UNDEFINED'		=> 'Il servizio per il controller "<strong>%s</strong>" non è definito in ./config/services.yml.',
+    'CONTROLLER_ARGUMENT_VALUE_MISSING' => 'Valore mancante per l’argomento #%1$s: <strong>%3$s</strong> nella classe <strong>%2$s</strong>',
+    'CONTROLLER_NOT_SPECIFIED' => 'Nessun controller è stato specificato.',
+    'CONTROLLER_METHOD_NOT_SPECIFIED' => 'Nessun metodo specificato per il controller.',
+    'CONTROLLER_SERVICE_UNDEFINED' => 'Il servizio per il controller "<strong>%s</strong>" non è definito in ./config/services.yml.',
 ));

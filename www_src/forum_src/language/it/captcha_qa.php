@@ -1,29 +1,27 @@
 <?php
 /**
-*
-* This file is part of the phpBB Forum Software package.
-*
-* @copyright (c) phpBB Limited <https://www.phpbb.com>
-* @copyright (c) 2010 phpBB.it
-* @copyright (c) 2014 phpBBItalia.net <http://www.phpbbitalia.net>
-* @license GNU General Public License, version 2 (GPL-2.0)
-*
-* For full copyright and license information, please see
-* the docs/CREDITS.txt file.
-*
-*/
+ *
+ * This file is part of the phpBB Forum Software package.
+ *
+ * @copyright (c) phpBB Limited <https://www.phpbb.com>
+ * @copyright (c) 2010 phpBB.it
+ * @copyright (c) 2014 phpBBItalia.net <http://www.phpbbitalia.net>
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ * For full copyright and license information, please see
+ * the docs/CREDITS.txt file.
+ *
+ */
 
 /**
-* DO NOT CHANGE
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
+ * DO NOT CHANGE
+ */
+if (!defined('IN_PHPBB')) {
+    exit;
 }
 
-if (empty($lang) || !is_array($lang))
-{
-	$lang = array();
+if (empty($lang) || !is_array($lang)) {
+    $lang = array();
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -39,27 +37,27 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'CAPTCHA_QA'				=> 'Q&amp;A',
-	'CONFIRM_QUESTION_EXPLAIN'	=> 'Questa domanda serve a prevenire iscrizioni automatiche.',
-	'CONFIRM_QUESTION_WRONG'	=> 'La risposta alla domanda di conferma di registrazione, non è corretta.',
+    'CAPTCHA_QA' => 'Q&amp;A',
+    'CONFIRM_QUESTION_EXPLAIN' => 'Questa domanda serve a prevenire iscrizioni automatiche.',
+    'CONFIRM_QUESTION_WRONG' => 'La risposta alla domanda di conferma di registrazione, non è corretta.',
 
-	'QUESTION_ANSWERS'			=> 'Risposte',
-	'ANSWERS_EXPLAIN'			=> 'Inserisci risposte valide alla domanda, una per riga.',
-	'CONFIRM_QUESTION'			=> 'Domanda',
+    'QUESTION_ANSWERS' => 'Risposte',
+    'ANSWERS_EXPLAIN' => 'Inserisci risposte valide alla domanda, una per riga.',
+    'CONFIRM_QUESTION' => 'Domanda',
 
-	'ANSWER'					=> 'Risposta',
-	'EDIT_QUESTION'				=> 'Modifica Domanda',
-	'QUESTIONS'					=> 'Domande',
-	'QUESTIONS_EXPLAIN'			=> 'Durante la registrazione, gli utenti saranno invitati a rispondere a una delle domande qui specificate. Per usare questo plugin, almeno una domanda deve essere impostata nella lingua predefinita. Queste domande dovrebbero essere facili per il vostro target di riferimento, al di là della capacità di un Bot in grado di eseguire una ricerca su Google™. Utilizzando una grande e regolarmente modificata serie di domande, si avranno i risultati migliori. Abilita il controllo rigoroso, se la tua domanda tiene conto della punteggiatura o dell’uso di iniziali maiuscole.',
-	'QUESTION_DELETED'			=> 'Domanda cancellata',
-	'QUESTION_LANG'				=> 'Lingua',
-	'QUESTION_LANG_EXPLAIN'		=> 'La lingua della domanda e delle sue risposte.',
-	'QUESTION_STRICT'			=> 'Controllo rigoroso',
-	'QUESTION_STRICT_EXPLAIN'	=> 'Se abilitato, si terrà conto delle iniziali maiuscole e degli spazi.',
+    'ANSWER' => 'Risposta',
+    'EDIT_QUESTION' => 'Modifica Domanda',
+    'QUESTIONS' => 'Domande',
+    'QUESTIONS_EXPLAIN' => 'Durante la registrazione, gli utenti saranno invitati a rispondere a una delle domande qui specificate. Per usare questo plugin, almeno una domanda deve essere impostata nella lingua predefinita. Queste domande dovrebbero essere facili per il vostro target di riferimento, al di là della capacità di un Bot in grado di eseguire una ricerca su Google™. Utilizzando una grande e regolarmente modificata serie di domande, si avranno i risultati migliori. Abilita il controllo rigoroso, se la tua domanda tiene conto della punteggiatura o dell’uso di iniziali maiuscole.',
+    'QUESTION_DELETED' => 'Domanda cancellata',
+    'QUESTION_LANG' => 'Lingua',
+    'QUESTION_LANG_EXPLAIN' => 'La lingua della domanda e delle sue risposte.',
+    'QUESTION_STRICT' => 'Controllo rigoroso',
+    'QUESTION_STRICT_EXPLAIN' => 'Se abilitato, si terrà conto delle iniziali maiuscole e degli spazi.',
 
-	'QUESTION_TEXT'				=> 'Domanda',
-	'QUESTION_TEXT_EXPLAIN'		=> 'La domanda che sarà richiesta al momento della registrazione.',
+    'QUESTION_TEXT' => 'Domanda',
+    'QUESTION_TEXT_EXPLAIN' => 'La domanda che sarà richiesta al momento della registrazione.',
 
-	'QA_ERROR_MSG'				=> 'Si prega di compilare tutti i campi e inserire almeno una risposta.',
-	'QA_LAST_QUESTION'			=> 'Non puoi cancellare tutte le domande prima che il plugin sia attivo.',
+    'QA_ERROR_MSG' => 'Si prega di compilare tutti i campi e inserire almeno una risposta.',
+    'QA_LAST_QUESTION' => 'Non puoi cancellare tutte le domande prima che il plugin sia attivo.',
 ));

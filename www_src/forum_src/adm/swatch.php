@@ -1,16 +1,16 @@
 <?php
 /**
-*
-* @package phpBB3
-* @version $Id$
-* @copyright (c) 2005 phpBB Group
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
+ *
+ * @package phpBB3
+ * @version $Id$
+ * @copyright (c) 2005 phpBB Group
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ *
+ */
 
 /**
-* @ignore
-*/
+ * @ignore
+ */
 define('IN_PHPBB', true);
 define('ADMIN_START', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './../';
@@ -26,7 +26,7 @@ $user->setup();
 $template->set_custom_template($phpbb_root_path . 'adm/style', 'admin');
 
 $template->set_filenames(array(
-	'body' => 'colour_swatch.html')
+        'body' => 'colour_swatch.html')
 );
 
 $form = request_var('form', '');
@@ -37,13 +37,13 @@ $form = (!preg_match('/^[a-z0-9_-]+$/i', $form)) ? '' : $form;
 $name = (!preg_match('/^[a-z0-9_-]+$/i', $name)) ? '' : $name;
 
 $template->assign_vars(array(
-	'OPENER'		=> $form,
-	'NAME'			=> $name,
-	'T_IMAGES_PATH'	=> "{$phpbb_root_path}images/",
+    'OPENER' => $form,
+    'NAME' => $name,
+    'T_IMAGES_PATH' => "{$phpbb_root_path}images/",
 
-	'S_USER_LANG'			=> $user->lang['USER_LANG'],
-	'S_CONTENT_DIRECTION'	=> $user->lang['DIRECTION'],
-	'S_CONTENT_ENCODING'	=> 'UTF-8',
+    'S_USER_LANG' => $user->lang['USER_LANG'],
+    'S_CONTENT_DIRECTION' => $user->lang['DIRECTION'],
+    'S_CONTENT_ENCODING' => 'UTF-8',
 ));
 
 $template->display('body');

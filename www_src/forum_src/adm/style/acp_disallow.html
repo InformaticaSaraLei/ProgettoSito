@@ -8,38 +8,38 @@
 
 <form id="acp_disallow" method="post" action="{U_ACTION}">
 
-<fieldset>
-	<legend>{L_ADD_DISALLOW_TITLE}</legend>
-<dl>
-	<dt><label for="user">{L_USERNAME}:</label><br /><span>{L_ADD_DISALLOW_EXPLAIN}</span></dt>
-	<dd><input id="user" type="text" class="text medium" maxlength="255" name="disallowed_user" /></dd>
-</dl>
+    <fieldset>
+        <legend>{L_ADD_DISALLOW_TITLE}</legend>
+        <dl>
+            <dt><label for="user">{L_USERNAME}:</label><br/><span>{L_ADD_DISALLOW_EXPLAIN}</span></dt>
+            <dd><input id="user" type="text" class="text medium" maxlength="255" name="disallowed_user"/></dd>
+        </dl>
 
-<p class="quick">
-	<input class="button1" type="submit" name="disallow" value="{L_SUBMIT}" />
-</p>
-</fieldset>
+        <p class="quick">
+            <input class="button1" type="submit" name="disallow" value="{L_SUBMIT}"/>
+        </p>
+    </fieldset>
 
-<h1>{L_DELETE_DISALLOW_TITLE}</h1>
+    <h1>{L_DELETE_DISALLOW_TITLE}</h1>
 
-<p>{L_DELETE_DISALLOW_EXPLAIN}</p>
+    <p>{L_DELETE_DISALLOW_EXPLAIN}</p>
 
-<fieldset>
-	<legend>{L_DELETE_DISALLOW_TITLE}</legend>
-<!-- IF S_DISALLOWED_NAMES -->
-	<dl>
-		<dt><label for="disallowed">{L_USERNAME}:</label></dt>
-		<dd><select name="disallowed_id" id="disallowed">{S_DISALLOWED_NAMES}</select></dd>
-	</dl>
+    <fieldset>
+        <legend>{L_DELETE_DISALLOW_TITLE}</legend>
+        <!-- IF S_DISALLOWED_NAMES -->
+        <dl>
+            <dt><label for="disallowed">{L_USERNAME}:</label></dt>
+            <dd><select name="disallowed_id" id="disallowed">{S_DISALLOWED_NAMES}</select></dd>
+        </dl>
 
-	<p class="quick">
-		<input class="button1" type="submit" name="allow" value="{L_SUBMIT}" />
-	</p>
-<!-- ELSE -->
-	<p>{L_NO_DISALLOWED}</p>
-<!-- ENDIF -->
-	{S_FORM_TOKEN}
-</fieldset>
+        <p class="quick">
+            <input class="button1" type="submit" name="allow" value="{L_SUBMIT}"/>
+        </p>
+        <!-- ELSE -->
+        <p>{L_NO_DISALLOWED}</p>
+        <!-- ENDIF -->
+        {S_FORM_TOKEN}
+    </fieldset>
 </form>
 
 <!-- INCLUDE overall_footer.html -->
