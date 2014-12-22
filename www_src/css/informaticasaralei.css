@@ -203,3 +203,6 @@ footer {
 #portfolio .portfolio-item {
     margin: 30px 0px 30px;
 }
+.img-centered {
+    margin: 0 auto;
+}
