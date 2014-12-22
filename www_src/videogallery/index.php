@@ -16,7 +16,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/css/informaticasaralei.css" rel="stylesheet">
+    <link href="/css/modern-business.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -47,9 +47,7 @@
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Videgallery
-                <small>Le videointerviste</small>
-            </h1>
+            <h1 class="page-header">Videgallery</h1>
             <ol class="breadcrumb">
                 <li><a href="/index.html">Home</a>
                 </li>
@@ -80,7 +78,7 @@
             if ($i % 2 == 0)
                 echo '<div class="row">';
             echo '<div class="col-md-6 img-portfolio">';
-            echo "<div class=\"embed-responsive embed-responsive-16by9\"><iframe class=\"embed-responsive-item\" width=\"560\" height=\"315\" src=\"" . $row['LINK'] . "\" frameborder=\"0\" allowfullscreen></iframe></div><h3><a href=\"" . $row['LINK'] . "\">" . $row['NOME'] . "</a></h3> ";
+            echo "<div class=\"embed-responsive embed-responsive-16by9\"><iframe class=\"embed-responsive-item\" width=\"560\" height=\"315\" src=\"" . $row['LINK'] . "\" frameborder=\"0\" allowfullscreen></iframe></div><h3><a href=\"" . $row['LINK'] . "\" target=\"_blank\">" . $row['NOME'] . "</a></h3> ";
             echo '</div>';
             $i++;
             if ($i % 2 == 0)
@@ -93,12 +91,6 @@
 
     mysqli_close($conn);
     ?>
-
-
-    <hr>
-
-
-    <hr>
 
 </div>
 <!-- /.container -->

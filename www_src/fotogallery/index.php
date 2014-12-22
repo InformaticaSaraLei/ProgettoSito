@@ -16,7 +16,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/css/informaticasaralei.css" rel="stylesheet">
+    <link href="/css/modern-business.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -35,6 +35,7 @@
             $("#navigation_bar").load("../navigation_bar.html");
             $("#footer").load("../footer.html");
         });
+						
     </script>
 </head>
 <body>
@@ -47,9 +48,7 @@
     <!-- Page Heading/Breadcrumbs -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Fotogallery
-                <small>Le foto</small>
-            </h1>
+            <h1 class="page-header">Fotogallery</h1>
             <ol class="breadcrumb">
                 <li><a href="/index.html">Home</a>
                 </li>
@@ -59,12 +58,12 @@
     </div>
     <div class="row">
         <h3> Slideshow </h3>
-
+		
         <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item"
-                    src="https://www.flickr.com/photos/128846442@N03/15920730516/in/photostream/player/" width="1024"
-                    height="577" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen
-                    oallowfullscreen msallowfullscreen></iframe>
+            <div style='position: relative; padding-bottom: 51%; height: 0; overflow: hidden;'>
+				<iframe id='iframe' src='http://flickrit.com/slideshowholder.php?height=50&size=big&userId=128846442@N03&click=true&thumbnails=0&transition=0&layoutType=responsive&sort=0' scrolling='no' frameborder='0'style='width:100%; height:100%; position: absolute; top:0; left:0;' >
+				</iframe>
+			</div>
         </div>
     </div>
     <hr>
@@ -91,7 +90,7 @@
             if ($i % 3 == 0)
                 echo '<div class="row">';
             echo '<div class="col-md-4 img-portfolio"">';
-            echo '<a href="' . $row['LINK'] . '" title="' . $row['NOME'] . '"><img class="img-responsive img-hover" src="' . $row['LINK'] . '" width="720" height="400" alt="verona 1"></a>' . "<h3><a href=\"" . $row['LINK'] . "\">" . $row['NOME'] . "</a></h3>";
+            echo '<a href="' . $row['LINK'] . '" title="' . $row['NOME'] . '" target="_blank"><img class="img-responsive img-hover" src="' . $row['LINK'] . '" alt="' . $row['NOME'] . '"></a>' . "<h3><a href=\"" . $row['LINK'] . "\" target=\"_blank\" >" . $row['NOME'] . "</a></h3>";
             echo '</div>';
             $i++;
             if ($i % 3 == 0)
@@ -104,12 +103,6 @@
 
     mysqli_close($conn);
     ?>
-
-
-    <hr>
-
-
-    <hr>
 
 </div>
 <!-- /.container -->
