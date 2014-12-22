@@ -1,26 +1,24 @@
 <?php
 /**
-*
-* viewforum [English]
-*
-* @package language
-* @version $Id$
-* @copyright (c) 2005 phpBB Group
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
+ *
+ * viewforum [English]
+ *
+ * @package language
+ * @version $Id$
+ * @copyright (c) 2005 phpBB Group
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ *
+ */
 
 /**
-* DO NOT CHANGE
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
+ * DO NOT CHANGE
+ */
+if (!defined('IN_PHPBB')) {
+    exit;
 }
 
-if (empty($lang) || !is_array($lang))
-{
-	$lang = array();
+if (empty($lang) || !is_array($lang)) {
+    $lang = array();
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -36,36 +34,36 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'ACTIVE_TOPICS'			=> 'Active topics',
-	'ANNOUNCEMENTS'			=> 'Announcements',
+    'ACTIVE_TOPICS' => 'Active topics',
+    'ANNOUNCEMENTS' => 'Announcements',
 
-	'FORUM_PERMISSIONS'		=> 'Forum permissions',
+    'FORUM_PERMISSIONS' => 'Forum permissions',
 
-	'ICON_ANNOUNCEMENT'		=> 'Announcement',
-	'ICON_STICKY'			=> 'Sticky',
+    'ICON_ANNOUNCEMENT' => 'Announcement',
+    'ICON_STICKY' => 'Sticky',
 
-	'LOGIN_NOTIFY_FORUM'	=> 'You have been notified about this forum, please login to view it.',
+    'LOGIN_NOTIFY_FORUM' => 'You have been notified about this forum, please login to view it.',
 
-	'MARK_TOPICS_READ'		=> 'Mark topics read',
+    'MARK_TOPICS_READ' => 'Mark topics read',
 
-	'NEW_POSTS_HOT'			=> 'New posts [ Popular ]',	// Not used anymore
-	'NEW_POSTS_LOCKED'		=> 'New posts [ Locked ]',	// Not used anymore
-	'NO_NEW_POSTS_HOT'		=> 'No new posts [ Popular ]',	// Not used anymore
-	'NO_NEW_POSTS_LOCKED'	=> 'No new posts [ Locked ]',	// Not used anymore
-	'NO_READ_ACCESS'		=> 'You do not have the required permissions to read topics within this forum.',
-	'NO_UNREAD_POSTS_HOT'		=> 'No unread posts [ Popular ]',
-	'NO_UNREAD_POSTS_LOCKED'	=> 'No unread posts [ Locked ]',
+    'NEW_POSTS_HOT' => 'New posts [ Popular ]',    // Not used anymore
+    'NEW_POSTS_LOCKED' => 'New posts [ Locked ]',    // Not used anymore
+    'NO_NEW_POSTS_HOT' => 'No new posts [ Popular ]',    // Not used anymore
+    'NO_NEW_POSTS_LOCKED' => 'No new posts [ Locked ]',    // Not used anymore
+    'NO_READ_ACCESS' => 'You do not have the required permissions to read topics within this forum.',
+    'NO_UNREAD_POSTS_HOT' => 'No unread posts [ Popular ]',
+    'NO_UNREAD_POSTS_LOCKED' => 'No unread posts [ Locked ]',
 
-	'POST_FORUM_LOCKED'		=> 'Forum is locked',
+    'POST_FORUM_LOCKED' => 'Forum is locked',
 
-	'TOPICS_MARKED'			=> 'The topics for this forum have now been marked read.',
+    'TOPICS_MARKED' => 'The topics for this forum have now been marked read.',
 
-	'UNREAD_POSTS_HOT'		=> 'Unread posts [ Popular ]',
-	'UNREAD_POSTS_LOCKED'	=> 'Unread posts [ Locked ]',
+    'UNREAD_POSTS_HOT' => 'Unread posts [ Popular ]',
+    'UNREAD_POSTS_LOCKED' => 'Unread posts [ Locked ]',
 
-	'VIEW_FORUM'			=> 'View forum',
-	'VIEW_FORUM_TOPIC'		=> '1 topic',
-	'VIEW_FORUM_TOPICS'		=> '%d topics',
+    'VIEW_FORUM' => 'View forum',
+    'VIEW_FORUM_TOPIC' => '1 topic',
+    'VIEW_FORUM_TOPICS' => '%d topics',
 ));
 
 ?>

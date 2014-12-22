@@ -2,19 +2,20 @@
 
 <form id="confirm" method="post" action="{S_CONFIRM_ACTION}">
 
-<fieldset>
-	<h1>{MESSAGE_TITLE}</h1>
-	<p>{MESSAGE_TEXT}</p>
+    <fieldset>
+        <h1>{MESSAGE_TITLE}</h1>
 
-	{S_HIDDEN_FIELDS}
+        <p>{MESSAGE_TEXT}</p>
 
-	<div style="text-align: center;">
-		<input type="submit" name="confirm" value="{L_YES}" class="button2" />&nbsp; 
-		<input type="submit" name="cancel" value="{L_NO}" class="button2" />
-	</div>
+        {S_HIDDEN_FIELDS}
 
-</fieldset>
-		
+        <div style="text-align: center;">
+            <input type="submit" name="confirm" value="{L_YES}" class="button2"/>&nbsp;
+            <input type="submit" name="cancel" value="{L_NO}" class="button2"/>
+        </div>
+
+    </fieldset>
+
 </form>
 
 <!-- INCLUDE overall_footer.html -->
