@@ -1,6 +1,6 @@
 <?php
-    $page = $_GET['page'];
-    $_SESSION['actual-page'] = $page;
+$page = $_GET['page'];
+$_SESSION['actual-page'] = $page;
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -35,15 +35,14 @@
     <!-- Navigation -->
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="../js/jquery.js"></script>
-    
+
     <script>
         $(function () {
             $("#navigation_bar").load("../navigation_bar.html");
             $("#footer").load("../footer.html");
         });
-        
-        
-        
+
+
     </script>
 </head>
 <body>
@@ -51,19 +50,22 @@
 <!--- Inserimento navbar ---->
 <div></div>
 <!-- Page Content -->
-    
+
 <div class="container">
-	<div class="row clearfix">
-		<div class="col-md-2 column">
+    <div class="row clearfix">
+        <div class="col-md-2 column">
             <div class="page-header">
                 <ul class="nav nav-pills nav-stacked">
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Going Abroad<strong class="caret"></strong></a>
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Going Abroad<strong
+                                class="caret"></strong></a>
                         <ul class="dropdown-menu">
                             <li><a href="index.php?page=content/going-abroad/why.php">Why?</a></li>
-                            <li><a href="index.php?page=content/going-abroad/what-do-I-need.php">What do I need?</a></li>
+                            <li><a href="index.php?page=content/going-abroad/what-do-I-need.php">What do I need?</a>
+                            </li>
                             <li><a href="index.php?page=content/going-abroad/what-country.php">What country?</a></li>
-                            <li><a href="index.php?page=content/going-abroad/what-about-the-language.php">What about the language?</a></li>
+                            <li><a href="index.php?page=content/going-abroad/what-about-the-language.php">What about the
+                                    language?</a></li>
                         </ul>
                     </li>
                     <li>
@@ -73,9 +75,11 @@
                         <a href="index.php?page=content/scholarships/scholarships.php">Scholarships</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Experiences<strong class="caret"></strong></a>
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Experiences<strong
+                                class="caret"></strong></a>
                         <ul class="dropdown-menu">
-                            <li><a href="index.php?page=content/experiences/experiences-reports.php">Expirences Reports</a></li>
+                            <li><a href="index.php?page=content/experiences/experiences-reports.php">Expirences
+                                    Reports</a></li>
                             <li><a href="index.php?page=content/experiences/gallery.php">Gallery</a></li>
                         </ul>
                     </li>
@@ -84,35 +88,35 @@
                     </li>
                 </ul>
             </div>
-		</div>
-		<div class="col-md-8 column">
-            
+        </div>
+        <div class="col-md-8 column">
+
             <?php include('content/content-header.php'); ?>
-            
+
             <p>
                 <?php
-                    if (!empty($page)) {
-                        include($page);
-                    } 	/* if $page has a value, include it */
-                    else {
-                        include('content/home.php');
-                    } 	/* otherwise, include the default page */
+                if (!empty($page)) {
+                    include($page);
+                }    /* if $page has a value, include it */
+                else {
+                    include('content/home.php');
+                }    /* otherwise, include the default page */
                 ?>
             </p>
-		</div>
-	</div>
+        </div>
+    </div>
     <hr>
-</div>    
-    
+</div>
+
 
 <div class="container">
     <div class="row">
         <div class="col-md-2">
-            
+
         </div>
         <div class="col-md-8">
-            
-            
+
+
         </div>
     </div>
 </div>

@@ -48,7 +48,7 @@
                     .on('click', function (event) {
                         // Close modal if click is outside of modal-content:
                         if (event.target === modal[0] ||
-                                event.target === modal.children()[0]) {
+                            event.target === modal.children()[0]) {
                             event.preventDefault();
                             event.stopPropagation();
                             that.close();
