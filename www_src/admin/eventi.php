@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Aggiungi Evento</title>
+    <title>Amministra Eventi</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -43,9 +43,9 @@
 <!-- Page Content -->
 <div class="container">
     <?php
-    include_once "../login/lib/userscontroller.php";
-    include_once "../login/lib/database.php";
-    include_once "../login/lib/functions.php";
+    include_once "./lib/userscontroller.php";
+    include_once "./lib/database.php";
+    include_once "./lib/functions.php";
 
     $isAdmin = false;
     $loggato = false;
@@ -68,7 +68,7 @@
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
                 </li>
-                <li><a href="index.php">Eventi</a></li>
+                <li><a href="../eventi/index.php">Eventi</a></li>
                 <li class="active">Aggiungi evento</li>
             </ol>
         </div>
@@ -77,7 +77,7 @@
     <!-- /.row -->
 
 
-    <form action="esito.php?op=add" method="POST">
+    <form action="../eventi/esito.php?op=add" method="POST">
         <fieldset>
             <div class="row">
                 <div class="pull-left col-md-3"></div>
@@ -223,7 +223,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h3>Torna agli <a href="index.php">eventi</a></h3></div>
+            <h3>Torna agli <a href="../eventi/index.php">eventi</a></h3></div>
     </div>
 <?php } ?>
 

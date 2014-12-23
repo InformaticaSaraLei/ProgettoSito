@@ -75,9 +75,9 @@
                 echo '</h1>';
             }
 
-            include_once "../login/lib/userscontroller.php";
-            include_once "../login/lib/database.php";
-            include_once "../login/lib/functions.php";
+            include_once "../admin/lib/userscontroller.php";
+            include_once "../admin/lib/database.php";
+            include_once "../admin/lib/functions.php";
 
             $isAdmin = false;
             $loggato = false;

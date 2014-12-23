@@ -65,9 +65,9 @@ include_once "lib/evento.php";
 
     <div class="row">
         <?php
-        include_once "../login/lib/userscontroller.php";
-        include_once "../login/lib/database.php";
-        include_once "../login/lib/functions.php";
+        include_once "../admin/lib/userscontroller.php";
+        include_once "../admin/lib/database.php";
+        include_once "../admin/lib/functions.php";
 
         $isAdmin = false;
         $loggato = true;
@@ -81,7 +81,7 @@ include_once "lib/evento.php";
 
         if ($loggato && $isAdmin) {
             echo '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left">
-                  <h3><a href="addEvento.php">Aggiungi evento</a></h3></div>';
+                  <h3><a href="../admin/eventi.php">Aggiungi evento</a></h3></div>';
         }
         ?>
         <div class="pull-right col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
