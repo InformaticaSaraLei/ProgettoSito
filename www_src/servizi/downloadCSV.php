@@ -1,6 +1,6 @@
 <?php
 include("CreateCSV.class.php");
-$conn = mysql_connect("localhost", "root", ""); //da completare con con connessione DB
+$conn = mysql_connect("localhost", "pariopp-owner", ""); //da completare con con connessione DB
 
 $sql = "SELECT email FROM newsletterusers";
 

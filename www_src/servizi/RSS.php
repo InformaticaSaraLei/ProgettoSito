@@ -1,12 +1,12 @@
 <?php
-/* connessione al database
 
-    $link = mysql_connect('localhost', 'nome_utente', 'password');
+
+    $link = mysql_connect('localhost', 'pariopp-owner', 'password');
 if (!$link) {
     die ('Non riesco a connettermi: ' . mysql_error());
 }
 
-$db_selected = mysql_select_db('prova', $link);
+$db_selected = mysql_select_db('pariopp', $link);
 if (!$db_selected) {
     die ("Errore nella selezione del database: " . mysql_error());
 }
@@ -15,7 +15,7 @@ echo 'connesso con successo';
 
 mysql_close($link);
 
-*/
+
 
 //seleziono i dati
 
@@ -30,9 +30,9 @@ header("Content-type: text/xml");
 echo("<rss version=\"2.0\">");
 echo("<channel>");
 echo("<title>Notizie da Informatica Sarà Lei</title>");
-echo("<link>http://www.nomesito.it</link>");
+echo("<link>http://test01.dsi.unive.it</link>");
 echo("<description>Descrizione</description>");
-echo "<docs>http://www.nomesito.it/rss.php</docs>";
+echo "<docs>http://test01.dsi.unive.it/servizi/RSS.php</docs>";
 
 echo("<language>IT-it</language>");
 while ($array = mysql_fetch_array($query)) {

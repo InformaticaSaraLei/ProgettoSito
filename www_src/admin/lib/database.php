@@ -5,9 +5,9 @@ class Database
 
     // Parametri connessione database
     private $host = "localhost";
-    private $username = "";
+    private $username = "pariopp-owner";
     private $pass = "";
-    private $dbname = "";
+    private $dbname = "pariopp";
 
     private $dbconn = null;
 
