@@ -38,8 +38,14 @@
     color: #797070;
     font-size: 14px;
     text-align: center;
+    height: 400px;
 }
-
+#Grid .mix h1{
+    font-size: 18px;
+}
+#Grid .mix p a{
+    font-size: 24px;
+}
 #Grid .gap {
     display: inline-block;
     width: 200px;
