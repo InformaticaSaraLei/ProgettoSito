@@ -140,15 +140,15 @@ if ($_SESSION["odl_class"] == "local") {
 
     }
     // echo $_SESSION["admin_mode"];
-    if ($_SESSION["admin_mode"] == 0) {
+  /*  if (!isset($_SESSION['login'])) {
         $content .= "<br><a class=\"btn btn-warning\" type=\"button\" href=\"index.php?admin_mode=1\">ENTRA MODALITA' ADMIN</a>";
     } else {
         $content .= "<br><a class=\"btn btn-success\" type=\"button\" href=\"index.php?admin_mode=0\">TORNA MODALITA' UTENTE</a>";
-    }
+    } */
 
 
     // print "atd:".$action_to_do;
-    if (($_SESSION["action"] != "insert") && $_SESSION["admin_mode"]) {
+    if (($_SESSION["action"] != "insert") && isset($_SESSION['login']) {
         $content .= "<a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a>";
     }
 
@@ -180,7 +180,7 @@ if ($_SESSION["odl_class"] == "local") {
 						<div class=\"panel-body\"><span class=\"label label-success pull-right\">Offerta pubblicata su " . $result->source . "</span>
 							<h4>" . strtoupper($result->company) . "<br>" . $result->formattedLocation . "</h4><br>
 							" . $result->snippet . "<br>";
-            if ($_SESSION["admin_mode"])
+            if (isset($_SESSION['login'])
                 $content .= "
 						 <br>
 						 <a href=\"index.php?odl_from=local&action=update&jobkey=" . $offerta["ID"] . "\" class=\"btn btn-warning  \" role=\"button\">Modifica Annuncio</a>
@@ -233,7 +233,7 @@ if ($_SESSION["odl_class"] == "local") {
 					<div class=\"panel-body\">
 						<h4>" . strtoupper($jobOpportunity["AZIENDA_CITTA"]) . "(" . $jobOpportunity["AZIENDA_PROVINCIA"] . ") - " . $jobOpportunity["FK_NAZIONE"] . "</h4><br>
 						" . $jobOpportunity["SNIPPET_ANNUNCIO"] . "";
-            if ($_SESSION["admin_mode"])
+            if (isset($_SESSION['login'])
                 $content .= "
 						<br>
 						 <a href=\"index.php?odl_from=local&action=update&jobkey=" . $jobOpportunity["ID"] . "\" class=\"btn btn-warning  \" role=\"button\">Modifica Annuncio</a>
@@ -247,7 +247,7 @@ if ($_SESSION["odl_class"] == "local") {
     }
 
 
-    if ($action_to_do && $_SESSION["admin_mode"]) {
+    if ($action_to_do && isset($_SESSION['login']) {
         $map_action_string = array("insert" => "INSERIMENTO", "update" => "MODIFICA");
         $content .= "<br><br>
 					<div class=\"panel panel-default\">
