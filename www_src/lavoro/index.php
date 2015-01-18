@@ -4,6 +4,7 @@ session_start();
 include "IndeedAPI.php";
 include "db_pariopp_offertelavoro.php";
 
+
 $translations = array(
     "update" => "Modifica",
     "insert" => "Inserisci"
@@ -130,25 +131,17 @@ if ($_SESSION["odl_class"] == "local") {
     $stati = $db->getStatiOpportunita();
 
 
-    switch ($_GET["admin_mode"]) {
-        case "0" :
-            $_SESSION["admin_mode"] = 0;
-            break;
-        case "1" :
-            $_SESSION["admin_mode"] = 1;
-            break;
-
-    }
-    // echo $_SESSION["admin_mode"];
-  /*  if (!isset($_SESSION['login'])) {
-        $content .= "<br><a class=\"btn btn-warning\" type=\"button\" href=\"index.php?admin_mode=1\">ENTRA MODALITA' ADMIN</a>";
-    } else {
-        $content .= "<br><a class=\"btn btn-success\" type=\"button\" href=\"index.php?admin_mode=0\">TORNA MODALITA' UTENTE</a>";
-    } */
-
-
-    // print "atd:".$action_to_do;
-    if (($_SESSION["action"] != "insert") && isset($_SESSION['login'])) {
+	$_SESSION['login']=2;
+	
+	if (isset($_SESSION['login']))                
+		$loggato = true;
+		
+	if ($db->isAdmin($_SESSION['login'])!=""){
+		$isAdmin = true; 
+		$_SESSION["admin_mode"] = true;
+	}else unset($_SESSION["admin_mode"]);	 
+	
+    if (($_SESSION["action"] != "insert") && $_SESSION["admin_mode"]) {
         $content .= "<a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a>";
     }
 
@@ -180,7 +173,7 @@ if ($_SESSION["odl_class"] == "local") {
 						<div class=\"panel-body\"><span class=\"label label-success pull-right\">Offerta pubblicata su " . $result->source . "</span>
 							<h4>" . strtoupper($result->company) . "<br>" . $result->formattedLocation . "</h4><br>
 							" . $result->snippet . "<br>";
-            if (isset($_SESSION['login']))
+            if ($_SESSION['admin_mode'])
                 $content .= "
 						 <br>
 						 <a href=\"index.php?odl_from=local&action=update&jobkey=" . $offerta["ID"] . "\" class=\"btn btn-warning  \" role=\"button\">Modifica Annuncio</a>
@@ -233,7 +226,7 @@ if ($_SESSION["odl_class"] == "local") {
 					<div class=\"panel-body\">
 						<h4>" . strtoupper($jobOpportunity["AZIENDA_CITTA"]) . "(" . $jobOpportunity["AZIENDA_PROVINCIA"] . ") - " . $jobOpportunity["FK_NAZIONE"] . "</h4><br>
 						" . $jobOpportunity["SNIPPET_ANNUNCIO"] . "";
-            if (isset($_SESSION['login']))
+            if ($_SESSION['admin_mode'])
                 $content .= "
 						<br>
 						 <a href=\"index.php?odl_from=local&action=update&jobkey=" . $jobOpportunity["ID"] . "\" class=\"btn btn-warning  \" role=\"button\">Modifica Annuncio</a>
@@ -247,7 +240,7 @@ if ($_SESSION["odl_class"] == "local") {
     }
 
 
-    if ($action_to_do && isset($_SESSION['login'])) {
+    if ($action_to_do && $_SESSION['admin_mode']) {
         $map_action_string = array("insert" => "INSERIMENTO", "update" => "MODIFICA");
         $content .= "<br><br>
 					<div class=\"panel panel-default\">

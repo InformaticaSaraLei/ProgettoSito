@@ -106,6 +106,13 @@ class Database
         $res = $this->mysqli->query($sql);
     }
 
+	public function isAdmin($id=""){
+        if (is_numeric($id)) {
+			$res = $this->mysqli->query("SELECT ISADMIN FROM utenti WHERE ID='".$id."'");
+			$row = $res->fetch_array(MYSQLI_ASSOC);
+			return ($row["ISADMIN"]=="1");
+        } else return false;
+ 	}
 
 }
 
