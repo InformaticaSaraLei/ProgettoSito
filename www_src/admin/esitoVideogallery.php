@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -83,7 +84,7 @@
                 }
                 echo '</h1>';
             }
-
+                        include_once '../settings.php';
 			include_once "./lib/userscontroller.php";
 			include_once "./lib/database.php";
 			include_once "./lib/functions.php";
@@ -99,11 +100,10 @@
                 $isAdmin = true;
 
             if ($loggato && $isAdmin) {
-				$servername = "localhost";
-				$username = "pariopp-owner";
-				$password = "pariopp";
-				$dbname = "pariopp";
-
+                                $servername = SETTINGS_DBHOST;
+				$username = SETTINGS_USERNAME;
+				$password = SETTINGS_PASSWORD;
+				$dbname = SETTINGS_DATABASE;
 				// Create connection
 				$conn = mysqli_connect($servername, $username, $password, $dbname);
 				// Check connection

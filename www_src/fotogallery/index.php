@@ -69,10 +69,11 @@
     <hr>
     <!-- /.row -->
     <?php
-    $servername = "localhost";
-    $username = "pariopp-owner";
-    $password = "pariopp";
-    $dbname = "pariopp";
+    include_once '../settings.php';
+    $servername = SETTINGS_DBHOST;
+    $username = SETTINGS_USERNAME;
+    $password = SETTINGS_PASSWORD;
+    $dbname = SETTINGS_DATABASE;
 
     // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);

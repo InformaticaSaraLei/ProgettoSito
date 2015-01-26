@@ -1,8 +1,8 @@
-<?
-
-$servername = "localhost";
-$username = "root";
-$password = "parimenti";
+<?php
+include_once '../settings.php';
+$servername = SETTINGS_DBHOST;
+$username = SETTINGS_USERNAME;
+$password = SETTINGS_PASSWORD;
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, "alla_scoperta_dell_informatica");

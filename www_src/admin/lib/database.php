@@ -1,13 +1,13 @@
 <?php
-
+include_once '../../settings.php';
 class Database
 {
 
     // Parametri connessione database
-    private $host = "localhost";
-    private $username = "pariopp-owner";
-    private $pass = "";
-    private $dbname = "pariopp";
+    private $host = SETTINGS_DBHOST;
+    private $username = SETTINGS_USERNAME;
+    private $pass = SETTINGS_PASSWORD;
+    private $dbname = SETTINGS_DATABASE;
 
     private $dbconn = null;
 

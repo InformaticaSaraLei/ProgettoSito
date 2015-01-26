@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "connettore.php";
 
 class Evento
@@ -63,7 +64,8 @@ class EventiManager
             /* throw new Exception('Invalid arguments'); */
         }
         try {
-            return $this->conn->execAction("Insert INTO agendaeventi(TITOLO, DESCRIZIONE, CONTENUTO, INIZIO, FINE, PROVINCIA, COMUNE, INDIRIZZO, IMG_NOME, FK_INSERITO_DA)VALUES('" . $titolo . "','" . $descrizione . "','" . $contenuto . "','" . $inizio . "','" . $fine . "','" . $provincia . "','" . $comune . "','" . $indirizzo . "','" . $img_nomefile . "','" . $id_utente . "');");
+            $sql = "Insert INTO agendaeventi(TITOLO, DESCRIZIONE, CONTENUTO, INIZIO, FINE, PROVINCIA, COMUNE, INDIRIZZO, IMG_NOME, FK_INSERITO_DA)VALUES('" . $titolo . "','" . $descrizione . "','" . $contenuto . "','" . $inizio . "','" . $fine . "','" . $provincia . "','" . $comune . "','" . $indirizzo . "','" . $img_nomefile . "','" . $id_utente . "');";
+            return $this->conn->execAction($sql);
         } catch (Exception $e) {
             return false;
         }

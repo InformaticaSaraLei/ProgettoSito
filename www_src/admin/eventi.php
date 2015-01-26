@@ -1,3 +1,7 @@
+<?php
+
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -244,11 +248,6 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="../js/bootstrap.min.js"></script>
 
-<script>
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
-</script>
 </body>
 
 </html>

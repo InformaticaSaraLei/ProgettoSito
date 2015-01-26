@@ -54,7 +54,7 @@ hr.dashed {
 }
 
 .navbar {
-    background-color: #FEC9DD;
+    background-color: #FC4B8E;
 }
 
 .forabg {
@@ -400,7 +400,7 @@ Colours and backgrounds for content.css
 -------------------------------------------------------------- */
 
 ul.forums {
-    background-color: #FEC9DD;
+    background-color: #FC4B8E;
     background-image: url("{T_THEME_PATH}/images/gradient.gif");
 }
 

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -94,15 +95,15 @@
                 $op = $_GET['op'];
                 if ($op == 'add') {
                     // Aggiunta evento
-                    $titolo = $_POST['txtTitolo'];
-                    $descrizione = $_POST['txtDescrizione'];
-                    $linkImg = $_POST['txtLinkImmagine'];
-                    $inizio = $_POST['txtInizio'];
-                    $fine = $_POST['txtFine'];
-                    $provincia = $_POST['txtProvincia'];
-                    $comune = $_POST['txtComune'];
-                    $indirizzo = $_POST['txtIndirizzo'];
-                    $contenuto = $_POST['txaContenuto'];
+                    $titolo = mysql_escape_string($_POST['txtTitolo']);
+                    $descrizione = mysql_escape_string($_POST['txtDescrizione']);
+                    $linkImg = mysql_escape_string($_POST['txtLinkImmagine']);
+                    $inizio = mysql_escape_string($_POST['txtInizio']);
+                    $fine = mysql_escape_string($_POST['txtFine']);
+                    $provincia = mysql_escape_string($_POST['txtProvincia']);
+                    $comune = mysql_escape_string($_POST['txtComune']);
+                    $indirizzo = mysql_escape_string($_POST['txtIndirizzo']);
+                    $contenuto = mysql_escape_string($_POST['txaContenuto']);
                     $id_utente = 1; // Salvato da qualche parte in SESSION :D
 
                     $res = $em->creaEvento($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $linkImg, $id_utente);

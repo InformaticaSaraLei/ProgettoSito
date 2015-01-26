@@ -1,11 +1,11 @@
 <?php
-
+include_once '../settings.php';
 class Database
 {
-    public $db_host = "localhost";
-    public $db_user = "pariopp-owner";
-    public $db_password = "pariopp";
-    public $db_name = "pariopp";
+    public $db_host = SETTINGS_DBHOST;
+    public $db_user = SETTINGS_USERNAME;
+    public $db_password = SETTINGS_PASSWORD;
+    public $db_name = SETTINGS_DATABASE;
     public $table_offertelavoro = "offertelavoro";
     public $table_offertelavorostati = "offertelavorostati";
     public $table_offertelavorotags = "offertelavorotags";

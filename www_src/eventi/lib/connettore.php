@@ -1,5 +1,5 @@
 <?php
-
+include_once '../../settings.php';
 class Connettore
 {
     protected $host;
@@ -9,10 +9,10 @@ class Connettore
 
     public function __construct()
     {
-        $this->host = 'localhost';
-        $this->nome = 'pariopp';
-        $this->username = 'pariopp-owner';
-        $this->password = '123';
+        $this->host = SETTINGS_DBHOST;
+        $this->nome = SETTINGS_DATABASE;
+        $this->username = SETTINGS_USERNAME;
+        $this->password = SETTINGS_PASSWORD;
     }
 
     public function connect()
@@ -44,6 +44,7 @@ class Connettore
     { // Va usata per update/insert/delete !!!!!!!!!!!!!!!!!!
         $this->connect();
         if (!mysql_query($query)) {
+            echo "$query<hr>";
             echo mysql_error();
             $this->disconnect();
             return false;

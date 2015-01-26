@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -43,6 +44,7 @@
 <!-- Page Content -->
 <div class="container">
     <?php
+    include_once '../settings.php';
     include_once "./lib/userscontroller.php";
     include_once "./lib/database.php";
     include_once "./lib/functions.php";
@@ -217,11 +219,10 @@
 				<div class="controls input-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
 					<select name="txtTitoloDel" class="form-control" placeholder="Titolo della foto">
 					<?php 
-					$servername = "localhost";
-					$username = "pariopp-owner";
-					$password = "pariopp";
-					$dbname = "pariopp";
-
+                                        $servername = SETTINGS_DBHOST;
+                                        $username = SETTINGS_USERNAME;
+                                        $password = SETTINGS_PASSWORD;
+                                        $dbname = SETTINGS_DATABASE;
 					// Create connection
 					$conn = mysqli_connect($servername, $username, $password, $dbname);
 					// Check connection
