@@ -1,5 +1,4 @@
 <?php
-include_once '../../settings.php';
 class Database
 {
 
@@ -10,14 +9,12 @@ class Database
     private $dbname = SETTINGS_DATABASE;
 
     private $dbconn = null;
-
     // funzione per la connessione al databse
     public function connect()
     {
         if (empty($this->dbconn)) {
             try {
-                $this->dbconn = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbname, $this->username, $this->pass);
-
+                $this->dbconn = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->username, $this->pass);
                 $this->dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
                 die('Connessione al database non riuscita: <br>' . $e->getMessage());

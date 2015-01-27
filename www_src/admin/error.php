@@ -62,7 +62,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h2>Attenzione!</h2>
-            <?
+            <?php
             if (isset($_GET['error'])) {
                 $error = $_GET['error'];
                 if ($error == 1) {

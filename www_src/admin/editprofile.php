@@ -1,5 +1,5 @@
 <?php
-
+include_once '../settings.php';
 include_once("lib/userscontroller.php");
 include_once("lib/admincontroller.php");
 

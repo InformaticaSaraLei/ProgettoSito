@@ -1,6 +1,6 @@
 <?php
-
 session_start();
+include_once '../settings.php';
 ?>
 <!DOCTYPE html>
 <html lang="it">
