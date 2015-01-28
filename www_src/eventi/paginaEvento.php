@@ -60,13 +60,13 @@ $e = $em->getEventoById($id);
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Eventi
-                <small><? echo $e->titolo; ?></small>
+                <small><?php echo $e->titolo; ?></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
                 </li>
                 <li><a href="./">Eventi</a></li>
-                <li class="active"><? echo $e->titolo; ?></li>
+                <li class="active"><?php echo $e->titolo; ?></li>
             </ol>
         </div>
     </div>

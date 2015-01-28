@@ -84,25 +84,25 @@ if (isset($_SESSION['login'])) {
     <!-- Content Row -->
     <div class="row">
         <div class="col-lg-12">
-            <h2>Benvenuto <? echo "$name"; ?></h2>
+            <h2>Benvenuto <?php echo "$name"; ?></h2>
 
             <p>Qui puoi gestire le tue informazioni personali e modificarle.</p>
             <table>
                 <tr>
                     <td><b>Nome:</b></td>
-                    <td><? echo "$name"; ?></td>
+                    <td><?php echo "$name"; ?></td>
                 </tr>
                 <tr>
                     <td><b>Cognome:</b></td>
-                    <td><? echo "$surname"; ?></td>
+                    <td><?php echo "$surname"; ?></td>
                 </tr>
                 <tr>
                     <td><b>Email:</b></td>
-                    <td><? echo "$email"; ?></td>
+                    <td><?php echo "$email"; ?></td>
                 </tr>
                 <tr>
                     <td><b>Username:</b></td>
-                    <td><? echo "$username"; ?></td>
+                    <td><?php echo "$username"; ?></td>
                 </tr>
             </table>
             <p><a href="editprofile.php">Modifica</a> il tuo prifilo.</p>

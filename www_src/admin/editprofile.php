@@ -92,19 +92,19 @@ if (isset($_SESSION['login'])) {
                 <table>
                     <tr>
                         <td><b>Nome:</b></td>
-                        <td><input type="text" name="name" value="<? echo $name; ?>"></td>
+                        <td><input type="text" name="name" value="<?php echo $name; ?>"></td>
                     </tr>
                     <tr>
                         <td><b>Cognome:</b></td>
-                        <td><input type="text" name="surname" value="<? echo $surname; ?>"></td>
+                        <td><input type="text" name="surname" value="<?php echo $surname; ?>"></td>
                     </tr>
                     <tr>
                         <td><b>Email:</b></td>
-                        <td><input type="text" name="email" value="<? echo $email; ?>"></td>
+                        <td><input type="text" name="email" value="<?php echo $email; ?>"></td>
                     </tr>
                     <tr>
                         <td><b>Username:</b></td>
-                        <td><input type="text" name="username" value="<? echo $username; ?>"></td>
+                        <td><input type="text" name="username" value="<?php echo $username; ?>"></td>
                     </tr>
                     <tr>
                         <td><p>Modifica la password o lascia i campi vuoti:</p></td>
