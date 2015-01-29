@@ -4,6 +4,7 @@ session_start();
 include "IndeedAPI.php";
 include "db_pariopp_offertelavoro.php";
 
+// print_r($_SESSION);
 
 $translations = array(
     "update" => "Modifica",
@@ -130,19 +131,16 @@ if ($_SESSION["odl_class"] == "local") {
     $nazioni = $db->getNazioni();
     $stati = $db->getStatiOpportunita();
 
-
-	$_SESSION['login']=2;
-	
 	if (isset($_SESSION['login']))                
 		$loggato = true;
-		
+	
 	if ($db->isAdmin($_SESSION['login'])!=""){
 		$isAdmin = true; 
 		$_SESSION["admin_mode"] = true;
 	}else unset($_SESSION["admin_mode"]);	 
 	
     if (($_SESSION["action"] != "insert") && $_SESSION["admin_mode"]) {
-        $content .= "<a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a>";
+        $content .= "<br><a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a><br><br><br>";
     }
 
 
@@ -164,7 +162,7 @@ if ($_SESSION["odl_class"] == "local") {
             $result->longitude = $offerta["AZIENDA_LONGITUDINE"];
 
             $content .= "
-				<br>
+				
 					<div class=\"panel panel-default\">
 						<div class=\"panel-heading\">
 							<h3 class=\"panel-title\"><b>" . $result->jobtitle . " <small style=\"color: #ffffff;\">(" . $result->formattedRelativeTime . ")</small></b></h3>
@@ -173,6 +171,7 @@ if ($_SESSION["odl_class"] == "local") {
 						<div class=\"panel-body\"><span class=\"label label-success pull-right\">Offerta pubblicata su " . $result->source . "</span>
 							<h4>" . strtoupper($result->company) . "<br>" . $result->formattedLocation . "</h4><br>
 							" . $result->snippet . "<br>";
+							
             if ($_SESSION['admin_mode'])
                 $content .= "
 						 <br>
@@ -181,6 +180,7 @@ if ($_SESSION["odl_class"] == "local") {
 						 ";
             if ($offerta["FONTE_LINK"] != "")
                 $content .= "<a href=\"" . $offerta["FONTE_LINK"] . "\" class=\"btn btn-info pull-right\" role=\"button\" target=\"_blank\">Vedi Annuncio Originale pubblicato da " . $offerta["FONTE_DESCR"] . "</a><br><br>";
+			
             if ($result->latitude != "" && $result->longitude != "")
                 $content .= "<div id=\"map-canvas\" class=\"embed-responsive embed-responsive-4by3\"></div>";
             $content .= "
@@ -218,7 +218,6 @@ if ($_SESSION["odl_class"] == "local") {
         foreach ($offerte as $jobOpportunity) {
             // print_r($offerte);
             $content .= "
-				<br><br>
 				<div class=\"panel panel-default\">
 					<div class=\"panel-heading\">
 						<h3 class=\"panel-title\"><b>" . $jobOpportunity["TITOLO_LAVORO"] . " <small style=\"color: #ffffff;\">(" . $jobOpportunity["DATA_INSERIMENTO"] . ")</small></b></h3>
@@ -242,7 +241,7 @@ if ($_SESSION["odl_class"] == "local") {
 
     if ($action_to_do && $_SESSION['admin_mode']) {
         $map_action_string = array("insert" => "INSERIMENTO", "update" => "MODIFICA");
-        $content .= "<br><br>
+        $content .= "
 					<div class=\"panel panel-default\">
 						<div class=\"panel-heading\">
 							<h3 class=\"panel-title\">" . $map_action_string[$_SESSION["action"]] . " OPPORTUNITA'</h3>
