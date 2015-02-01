@@ -25,15 +25,18 @@ class Database
     }
 
 
-    public function getOfferteLavoro($start = 0, $limit = 30, $q = "", $admin_mode=true)
+    public function getOfferteLavoro($start = 0, $limit = 30, $q = "", $l="", $admin_mode=true)
     {
 		
 		$stato_pubblicato = $this->getStatiOpportunita("Pubblicato");
 		
 		$id_stato_pubblicato = $stato_pubblicato[0]["ID"];
 		if(!$admin_mode) $and_user_mode=" AND FK_STATO_OFFERTA=".$id_stato_pubblicato; else $and_user_mode=""; 
+		
         if ($q != "") $and = " AND (TITOLO_LAVORO LIKE '%" . $this->mysqli->real_escape_string($q) . "%' OR AZIENDA_NOME LIKE '%" . $this->mysqli->real_escape_string($q) . "%' OR SNIPPET_ANNUNCIO LIKE '%" . $this->mysqli->real_escape_string($q) . "%')";
+		if($l !="" ) $and .=" AND ( AZIENDA_PROVINCIA LIKE '%".$this->mysqli->real_escape_string($l)."%' OR AZIENDA_CITTA LIKE '%".$this->mysqli->real_escape_string($l)."%' )";
         $sql = "SELECT * FROM offertelavoro WHERE 1=1 " . $and . " ". $and_user_mode. " ORDER BY DATA_INSERIMENTO DESC LIMIT " . $start . "," . $limit;
+		
         $res = $this->mysqli->query($sql);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $return[] = $row;

@@ -87,7 +87,7 @@ if ($_SESSION["odl_class"] == "local") {
             $_GET["action"] = "";
             // $content.="<b>insert<br>";
             $db->insertOpportunita($_POST);
-            $offerte = $db->getOfferteLavoro($_SESSION["lstart"], $_SESSION["llimit"], $_SESSION["q"],$isAdmin);
+            $offerte = $db->getOfferteLavoro($_SESSION["lstart"], $_SESSION["llimit"], $_SESSION["q"], $_SESSION["l"],$isAdmin);
             $totalResults = $db->total_results;
             // print_r($_POST);
             break;
@@ -136,7 +136,7 @@ if ($_SESSION["odl_class"] == "local") {
     }
 
 
-    $offerte = $db->getOfferteLavoro($_SESSION["lstart"], $_SESSION["llimit"], $_SESSION["q"],$isAdmin);
+    $offerte = $db->getOfferteLavoro($_SESSION["lstart"], $_SESSION["llimit"], $_SESSION["q"], $_SESSION["l"],$isAdmin);
     $totalResults = $db->total_results;
     $nazioni = $db->getNazioni();
     $stati = $db->getStatiOpportunita();
@@ -164,6 +164,7 @@ if ($_SESSION["odl_class"] == "local") {
             $result->snippet = $offerta["SNIPPET_ANNUNCIO"];
             $result->latitude = $offerta["AZIENDA_LATITUDINE"];
             $result->longitude = $offerta["AZIENDA_LONGITUDINE"];
+			$result->source = $offerta["FONTE_DESCR"];
 
             $content .= "
 				
