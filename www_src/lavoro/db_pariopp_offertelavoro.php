@@ -33,7 +33,7 @@ class Database
 		$id_stato_pubblicato = $stato_pubblicato[0]["ID"];
 		if(!$admin_mode) $and_user_mode=" AND FK_STATO_OFFERTA=".$id_stato_pubblicato; else $and_user_mode=""; 
         if ($q != "") $and = " AND (TITOLO_LAVORO LIKE '%" . $this->mysqli->real_escape_string($q) . "%' OR AZIENDA_NOME LIKE '%" . $this->mysqli->real_escape_string($q) . "%' OR SNIPPET_ANNUNCIO LIKE '%" . $this->mysqli->real_escape_string($q) . "%')";
-        $sql = "SELECT * FROM offertelavoro WHERE 1=1 " . $and . " ". $and_user_mode. " LIMIT " . $start . "," . $limit;
+        $sql = "SELECT * FROM offertelavoro WHERE 1=1 " . $and . " ". $and_user_mode. " ORDER BY DATA_INSERIMENTO DESC LIMIT " . $start . "," . $limit;
         $res = $this->mysqli->query($sql);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $return[] = $row;
@@ -166,7 +166,6 @@ class Database
 			FONTE_DESCR='" . $this->mysqli->real_escape_string($values["FONTE_DESCR"]) . "',
 			FONTE_LINK='" . $this->mysqli->real_escape_string($values["FONTE_LINK"]) . "',
 			SNIPPET_ANNUNCIO='" . $this->mysqli->real_escape_string($values["SNIPPET_ANNUNCIO"]) . "',
-			DATA_INSERIMENTO=DATE(NOW()),
 			FK_STATO_OFFERTA='" . $this->mysqli->real_escape_string($values["FK_STATO_OFFERTA"]) . "',
 			FK_NAZIONE='" . $this->mysqli->real_escape_string($values["FK_NAZIONE"]) . "'
 		WHERE 
