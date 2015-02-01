@@ -4,7 +4,7 @@ session_start();
 include "IndeedAPI.php";
 include "db_pariopp_offertelavoro.php";
 
-// print_r($_SESSION);
+ // print_r($_SESSION);
 
 $translations = array(
     "update" => "Modifica",
@@ -48,6 +48,8 @@ if (($_GET["odl_from"] == "web") || ($_GET["odl_from"] == "local")) {
 $class = array("local" => "", "web" => "");
 $class[$_SESSION["odl_class"]] = "class=\"active\"";
 
+
+
 /* ------------------ LOCAL -------------------- */
 if ($_SESSION["odl_class"] == "local") {
 
@@ -70,6 +72,14 @@ if ($_SESSION["odl_class"] == "local") {
 
     $db = new Database();
 
+	if (isset($_SESSION['login']))                
+		$loggato = true;
+	
+	if ($db->isAdmin($_SESSION['login'])!=""){
+		$isAdmin = true; 
+		$_SESSION["admin_mode"] = true;
+	}else unset($_SESSION["admin_mode"]);		
+	
 
     switch ($_POST["action"]) {
         case "insert"  : // ---- insertOpportunita
@@ -77,7 +87,7 @@ if ($_SESSION["odl_class"] == "local") {
             $_GET["action"] = "";
             // $content.="<b>insert<br>";
             $db->insertOpportunita($_POST);
-            $offerte = $db->getOfferteLavoro($_SESSION["lstart"], $_SESSION["llimit"], $_SESSION["q"]);
+            $offerte = $db->getOfferteLavoro($_SESSION["lstart"], $_SESSION["llimit"], $_SESSION["q"],$isAdmin);
             $totalResults = $db->total_results;
             // print_r($_POST);
             break;
@@ -126,18 +136,12 @@ if ($_SESSION["odl_class"] == "local") {
     }
 
 
-    $offerte = $db->getOfferteLavoro($_SESSION["lstart"], $_SESSION["llimit"], $_SESSION["q"]);
+    $offerte = $db->getOfferteLavoro($_SESSION["lstart"], $_SESSION["llimit"], $_SESSION["q"],$isAdmin);
     $totalResults = $db->total_results;
     $nazioni = $db->getNazioni();
     $stati = $db->getStatiOpportunita();
 
-	if (isset($_SESSION['login']))                
-		$loggato = true;
-	
-	if ($db->isAdmin($_SESSION['login'])!=""){
-		$isAdmin = true; 
-		$_SESSION["admin_mode"] = true;
-	}else unset($_SESSION["admin_mode"]);	 
+ 
 	
     if (($_SESSION["action"] != "insert") && $_SESSION["admin_mode"]) {
         $content .= "<br><a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a><br><br><br>";
@@ -253,7 +257,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"TITOLO_LAVORO\" class=\"control-label\">TITOLO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"TITOLO_LAVORO\" type=\"text\" class=\"form-control\" id=\"TITOLO_LAVORO\" placeholder=\"Titolo opportunità\" value=\"" . $offerta["TITOLO_LAVORO"] . "\">
+									  <input name=\"TITOLO_LAVORO\" type=\"text\" class=\"form-control\" id=\"TITOLO_LAVORO\" placeholder=\"Titolo opportunità\" value=\"" . htmlentities($offerta["TITOLO_LAVORO"]) . "\">
 									</div>
 								  </div>
 								  <div class=\"form-group\" draggable=\"true\">
@@ -261,7 +265,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"TIPO_CONTRATTO\" class=\"control-label\">CONTRATTO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"TIPO_CONTRATTO\" type=\"text\" class=\"form-control\" id=\"TIPO_CONTRATTO\" placeholder=\"Tipo contratto\" value=\"" . $offerta["TIPO_CONTRATTO"] . "\">
+									  <input name=\"TIPO_CONTRATTO\" type=\"text\" class=\"form-control\" id=\"TIPO_CONTRATTO\" placeholder=\"Tipo contratto\" value=\"" . htmlentities($offerta["TIPO_CONTRATTO"]) . "\">
 									</div>
 								  </div>
 								  
@@ -270,7 +274,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"AZIENDA_NOME\" class=\"control-label\">AZIENDA</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"AZIENDA_NOME\" type=\"text\" class=\"form-control\" id=\"AZIENDA_NOME\" placeholder=\"Azienda proponente\" value=\"" . $offerta["AZIENDA_NOME"] . "\">
+									  <input name=\"AZIENDA_NOME\" type=\"text\" class=\"form-control\" id=\"AZIENDA_NOME\" placeholder=\"Azienda proponente\" value=\"" . htmlentities($offerta["AZIENDA_NOME"]) . "\">
 									</div>
 								  </div>								  
 								  
@@ -289,7 +293,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"AZIENDA_PROVINCIA\" class=\"control-label\">PROVINCIA</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"AZIENDA_PROVINCIA\" type=\"text\" class=\"form-control\" id=\"AZIENDA_PROVINCIA\" placeholder=\"Provincia\" value=\"" . $offerta["AZIENDA_PROVINCIA"] . "\">
+									  <input name=\"AZIENDA_PROVINCIA\" type=\"text\" class=\"form-control\" id=\"AZIENDA_PROVINCIA\" placeholder=\"Provincia\" value=\"" . htmlentities($offerta["AZIENDA_PROVINCIA"]) . "\">
 									</div>
 								  </div>									  
 						
@@ -298,7 +302,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"AZIENDA_CITTA\" class=\"control-label\">CITTA</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"AZIENDA_CITTA\" type=\"text\" class=\"form-control\" id=\"AZIENDA_CITTA\" placeholder=\"Città\" value=\"" . $offerta["AZIENDA_CITTA"] . "\">
+									  <input name=\"AZIENDA_CITTA\" type=\"text\" class=\"form-control\" id=\"AZIENDA_CITTA\" placeholder=\"Città\" value=\"" . htmlentities($offerta["AZIENDA_CITTA"]) . "\">
 									</div>
 								  </div>	
 						
@@ -307,7 +311,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"AZIENDA_LATITUDINE\" class=\"control-label\">LATITUDINE</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"AZIENDA_LATITUDINE\" type=\"text\" class=\"form-control\" id=\"AZIENDA_LATITUDINE\" placeholder=\"Latitudine\" value=\"" . $offerta["AZIENDA_LATITUDINE"] . "\">
+									  <input name=\"AZIENDA_LATITUDINE\" type=\"text\" class=\"form-control\" id=\"AZIENDA_LATITUDINE\" placeholder=\"Latitudine\" value=\"" . htmlentities($offerta["AZIENDA_LATITUDINE"]) . "\">
 									</div>
 								  </div>						
 						
@@ -316,7 +320,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"AZIENDA_LONGITUDINE\" class=\"control-label\">LONGITUDINE</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"AZIENDA_LONGITUDINE\" type=\"text\" class=\"form-control\" id=\"AZIENDA_LONGITUDINE\" placeholder=\"Longitudine\" value=\"" . $offerta["AZIENDA_LONGITUDINE"] . "\">
+									  <input name=\"AZIENDA_LONGITUDINE\" type=\"text\" class=\"form-control\" id=\"AZIENDA_LONGITUDINE\" placeholder=\"Longitudine\" value=\"" . htmlentities($offerta["AZIENDA_LONGITUDINE"]) . "\">
 									</div>
 								  </div>												
 						
@@ -325,7 +329,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"CONTATTO_TEL\" class=\"control-label\">TELEFONO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"CONTATTO_TEL\" type=\"tel\" class=\"form-control\" id=\"CONTATTO_TEL\" placeholder=\"Contatto telefonico\" value=\"" . $offerta["CONTATTO_TEL"] . "\">
+									  <input name=\"CONTATTO_TEL\" type=\"tel\" class=\"form-control\" id=\"CONTATTO_TEL\" placeholder=\"Contatto telefonico\" value=\"" . htmlentities($offerta["CONTATTO_TEL"]) . "\">
 									</div>
 								  </div>
 
@@ -334,7 +338,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"CONTATTO_FAX\" class=\"control-label\">CONTATTO FAX</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"CONTATTO_FAX\" type=\"text\" class=\"form-control\" id=\"CONTATTO_FAX\" placeholder=\"Contatto fax\" value=\"" . $offerta["CONTATTO_FAX"] . "\">
+									  <input name=\"CONTATTO_FAX\" type=\"text\" class=\"form-control\" id=\"CONTATTO_FAX\" placeholder=\"Contatto fax\" value=\"" . htmlentities($offerta["CONTATTO_FAX"]) . "\">
 									</div>
 								  </div>								  
 						
@@ -343,7 +347,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"CONTATTO_EMAIL\" class=\"control-label\">EMAIL</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"CONTATTO_EMAIL\" type=\"email\" class=\"form-control\" id=\"CONTATTO_EMAIL\" placeholder=\"Email di contatto\" value=\"" . $offerta["CONTATTO_EMAIL"] . "\">
+									  <input name=\"CONTATTO_EMAIL\" type=\"email\" class=\"form-control\" id=\"CONTATTO_EMAIL\" placeholder=\"Email di contatto\" value=\"" . htmlentities($offerta["CONTATTO_EMAIL"]) . "\">
 									</div>
 								  </div>
 								  
@@ -353,7 +357,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"FONTE_DESCR\" class=\"control-label\">FONTE</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"FONTE_DESCR\" type=\"text\" class=\"form-control\" id=\"FONTE_DESCR\" placeholder=\"Fonte\" value=\"" . $offerta["FONTE_DESCR"] . "\">
+									  <input name=\"FONTE_DESCR\" type=\"text\" class=\"form-control\" id=\"FONTE_DESCR\" placeholder=\"Fonte\" value=\"" . htmlentities($offerta["FONTE_DESCR"]) . "\">
 									</div>
 								  </div>
 								  
@@ -362,7 +366,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"FONTE_LINK\" class=\"control-label\">LINK ALLA FONTE</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"FONTE_LINK\" type=\"url\" class=\"form-control\" id=\"FONTE_LINK\" placeholder=\"Link alla fonte\" value=\"" . $offerta["FONTE_LINK"] . "\">
+									  <input name=\"FONTE_LINK\" type=\"url\" class=\"form-control\" id=\"FONTE_LINK\" placeholder=\"Link alla fonte\" value=\"" . htmlentities($offerta["FONTE_LINK"]) . "\">
 									</div>
 								  </div>							  
 								  
@@ -371,7 +375,7 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"SNIPPET_ANNUNCIO\" class=\"control-label\">ESTRATTO ANNUNCIO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"SNIPPET_ANNUNCIO\" type=\"text\" class=\"form-control\" id=\"SNIPPET_ANNUNCIO\" placeholder=\"Estratto dell'annuncio\" value=\"" . $offerta["SNIPPET_ANNUNCIO"] . "\">
+									  <input name=\"SNIPPET_ANNUNCIO\" type=\"text\" class=\"form-control\" id=\"SNIPPET_ANNUNCIO\" placeholder=\"Estratto dell'annuncio\" value=\"" . htmlentities($offerta["SNIPPET_ANNUNCIO"]) . "\">
 									</div>
 								  </div>							  
 								  
@@ -382,8 +386,16 @@ if ($_SESSION["odl_class"] == "local") {
 									<div class=\"col-sm-10\">
 									  <select name=\"FK_STATO_OFFERTA\" id=\"FK_STATO_OFFERTA\" class=\"form-control\" id=\"FK_STATO_OFFERTA\" placeholder=\"Stato offerta\">" . buildStatiOptions($stati, $offerta["FK_STATO_OFFERTA"]) . "</select>
 									</div>
-								  </div>								  
+								  </div>		
 								  
+								  <div class=\"form-group\" draggable=\"true\">
+									<div class=\"col-sm-2\">
+									  <label for=\"TAGS_OFFERTA\" class=\"control-label\">TAGS OFFERTA</label>
+									</div>
+									<div class=\"col-sm-10\">
+										<input name=\"TAG_LIST\"  for=\"TAG_LIST\" id=\"TAG_LIST\" class=\"form-control\" type=\"text\"  value=\"" . htmlentities($offerta["TAG_LIST"]) . "\" data-role=\"tagsinput\">
+								    </div>
+								  </div>	
 								  
 								  <div class=\"form-group\">
 									<div class=\"col-sm-offset-2 col-sm-10\">
@@ -543,6 +555,9 @@ if ($_SESSION["odl_class"] == "web") {
     <!-- Custom Fonts -->
     <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+	<!-- Boostrap Tags Input -->
+	<link href="./bootstrap-tagsinput.css" rel="stylesheet">
+	
     <!-- Google Maps -->
     <style>
         #map-canvas {
@@ -731,6 +746,10 @@ if ($_SESSION["odl_class"] == "web") {
 
 <!-- bootbox code -->
 <script src="./bootbox.min.js"></script>
+
+<!-- bootstrap tagsinput -->
+<script src="./bootstrap-tagsinput.min.js"></script>
+
 <script>
 
 
