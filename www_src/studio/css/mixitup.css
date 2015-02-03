@@ -38,7 +38,6 @@
     color: #797070;
     font-size: 14px;
     text-align: center;
-    height: 400px;
 }
 #Grid .mix h1{
     font-size: 18px;
@@ -58,4 +57,10 @@
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     -webkit-padding-start: 0px;
+}
+@media (min-width: 800px)
+{
+	#Grid .mix{
+		height: 400px;
+	}
 }
