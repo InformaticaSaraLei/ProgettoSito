@@ -298,7 +298,7 @@ CREATE TABLE IF NOT EXISTS `pariopp`.`offertelavorotags` (
 
 	PRIMARY KEY(FK_TAG, FK_OFFERTE),
 	FOREIGN KEY `FK_offertelavorotags_TAG`(`FK_TAG` )
-			REFERENCES `pariopp`.`media`(`id`)
+			REFERENCES `pariopp`.`offertelavoro`(`id`)
 			ON DELETE RESTRICT
 			ON UPDATE CASCADE,
 	FOREIGN KEY `FK_offertelavorotags_OFFERTE`(`FK_OFFERTE` )
