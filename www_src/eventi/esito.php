@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+include '../settings.php';
+?>
 <!DOCTYPE html>
 <html lang="it">
 

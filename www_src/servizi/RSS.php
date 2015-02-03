@@ -11,11 +11,10 @@ if (!$db_selected) {
     die ("Errore nella selezione del database: " . mysql_error());
 }
 
-echo 'connesso con successo';
+//echo 'connesso con successo';
 
-mysql_close($link);
-
-
+//mysql_close($link);
+    
 
 //seleziono i dati
 
@@ -27,23 +26,24 @@ $query = mysql_query($selezionedati) or die(mysql_error());
 header("Content-type: text/xml");
 
 // Eseguo le operazioni di scrittura sul "file xml"
-echo("<rss version=\"2.0\">");
-echo("<channel>");
-echo("<title>Notizie da Informatica Sarà Lei</title>");
-echo("<link>http://test01.dsi.unive.it</link>");
-echo("<description>Descrizione</description>");
-echo "<docs>http://test01.dsi.unive.it/servizi/RSS.php</docs>";
+echo("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+echo("<rss version=\"2.0\">\n\n");
+echo("<channel>\n");
+echo("<title>Notizie da Informatica Sarà Lei</title>\n");
+echo("<link>http://test01.dsi.unive.it</link>\n");
+echo("<description>Descrizione</description>\n");
+echo "<docs>http://test01.dsi.unive.it/servizi/RSS.php</docs>\n";
 
 echo("<language>IT-it</language>");
 while ($array = mysql_fetch_array($query)) {
     echo "
 		<item>
-			<title><![CDATA[<p>" . $array['news'] . "</p>]]></title>
-			<description><![CDATA[<p>" . $array['snippet'] . "</p>]]></description>
+			<title><![CDATA[\n<p>" . htmlentities($array['news']) . "</p>\n]]></title>
+			<description><![CDATA[\n<p>" . htmlentities($array['snippet']) . "</p>\n]]></description>
 			<pubDate>" . date('D, d M Y H:i:s O', $array['data']) . "</pubDate>
 		</item>";
 }
-echo "</channel></rss>";
+echo "</channel>\n</rss>\n";
 ?>
 
 <!-- Per Inserimento Feed
