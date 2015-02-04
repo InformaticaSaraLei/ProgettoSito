@@ -1,4 +1,5 @@
 <?php
+include_once '../../../settings.php';
 include_once "../../lib/evento.php";
 // Require our Event class and datetime utilities
 require dirname(__FILE__) . '/utils.php';

@@ -43,6 +43,7 @@
 
 
 <?php
+require_once '../settings.php';
 require 'lib/evento.php';
 $em = new EventiManager();
 $id = $_GET['id'];
