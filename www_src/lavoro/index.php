@@ -557,7 +557,7 @@ if ($_SESSION["odl_class"] == "web") {
     <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 	<!-- Boostrap Tags Input -->
-	<link href="./bootstrap-tagsinput.css" rel="stylesheet">
+	<link href="../css/bootstrap-tagsinput.css" rel="stylesheet">
 	
     <!-- Google Maps -->
     <style>
@@ -746,10 +746,10 @@ if ($_SESSION["odl_class"] == "web") {
 <script src="../js/bootstrap.min.js"></script>
 
 <!-- bootbox code -->
-<script src="./bootbox.min.js"></script>
+<script src="../js/bootbox.min.js"></script>
 
 <!-- bootstrap tagsinput -->
-<script src="./bootstrap-tagsinput.min.js"></script>
+<script src="../js/bootstrap-tagsinput.min.js"></script>
 
 <script>
 
