@@ -11,1822 +11,1905 @@
 
     <title>Gioco - Informatica sarà lei!</title>
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <style>
-            body {
-                padding-top: 45px;
-                padding-bottom: 20px;
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="css/bootstrap-theme.min.css">-->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Inizio codice sistemazione FOOTER-->
+    <!-- Custom CSS -->
+    <link href="../css/informaticasaralei.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Fine del codice di sistemazione FOOTER -->
+    <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+<body>
+<div id="navigation_bar"></div>
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="guscio" style="min-width:750; width: auto">
+        <div class="row"><h1 class="center">
+            <img id="Titolo_gioco"
+                 src="http://icons.iconarchive.com/icons/dapino/callcenter-girls/64/callcenter-girls-glasses-icon.png"
+                 style="margin: 0; padding: 0;"> Alla scoperta dell'informatica</h1>
+        </div>
+        <div class="row" id="campo_totale">
+            <div class="col-xs-12 marginpadding" id="contenitore_campo_console">
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Funziona che attiva pannelli di debug buono per sviluppo
+    <footer>
+      <p><A HREF="#" style="color:black; text-decoration: none;" tabindex=-1 onclick="attiva_disattiva_pannelli_nascosti()"> &copy; </A> Caroti Rubens e Daniel Vedovato 2014</p>
+    </footer>
+    -->
+
+</div>
+<!-- /container -->
+<div id="footer"></div>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+<script>window.jQuery || document.write('<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"><\/script>')</script>
+
+<script src="js/vendor/bootstrap.min.js"></script>
+
+<script src="js/main.js"></script>
+
+<script>
+    /*Variabili*/
+    {
+
+        /*Colori msg*/
+        {
+            var col_msg_opzioni = "#C0C0C0";
+
+            //obbiettivi
+            var col_msg_liv_completato = "yellow";
+            var col_msg_obb_raggiunto = "yellow";
+
+            //comandi
+            var col_msg_esec_comando = "blue";
+            var col_msg_err_comando = "red";
+
+            //presentazioni
+            var col_msg_inizio = "green";
+            var col_msg_avvio_gioco = "green";
+            var col_msg_pres_gioco = "green";
+            var col_msg_pres_regole = "green";
+            var col_msg_pres_gioco_completato = "green";
+            var col_msg_fine = "green";
+        }
+
+        /*console Gioco*/
+        {
+            //lingua testi visualizzati:
+            var default_lingua = "IT";
+
+            //Livello e mappa partenza/corrente:
+            var livello = null;
+            var mappa = null;
+
+            //non deve raggiungere tutti gli obbiettivi per passare di livello:
+            var var_obb_superflui = false;
+
+            //obbiettivi ripetibili
+            var var_obb_ripetibili = true;
+            var random_obb = true;
+            var num_tentativi_random_obb = 5;
+
+            //permetti di visualizzare sempre la griglia
+            var perm_ut_mod_vis_griglia = true;
+
+            /*Utility comando:*/
+            {
+                //default
+                var rimuovi_spazi_comando = false;
+                var comand_case_sensitive = true;
+
+                //temp utente
+                var temp_ut_normalizza = false;
+                var temp_ut_case_sensitive = false;
             }
-            .col-xs-12 {
-                border: 2px solid black;
-                border-radius: 5px 5px 5px 5px;
+        }
+
+        /*temp comando*/
+        {
+            var temp_comando = "";
+        }
+
+        /*Testi visualizzati*/
+        {
+            /*testi*/
+            {
+                var testi = [
+                    /*Presentazione Gioco*/
+                    {
+                        lingua: "IT", tipo: "Presentazione gioco",
+                        txt: (   "Questo gioco ha lo scopo di dimostrare come con poche righe di codice in un linguaggio di alto livello (linguaggio più viciono al programmatore/utente rispetto a quello macchina composto da 0 e 1) è possibile realizzare un gioco.<br /><br />"
+                        + "Inoltre abbiamo volutamente limitato le possibilità di spostamento del personaggio all'inserimento di comandi strutturati in un modo convenzionale (per dettagli visualizzare anche presentazione regole) per permettere al giocatore di sperimentare quanto per un programmatore sia facile incorrere in errori (una lettera sbagliata, ecc.. [per fortuna si è aiutati da software di sviluppo anche gratuiti]) ma come allo stesso modo di possano creare proprammi semplici/complessi/molto complessi semplicemente strutturando le operazioni basilari messe a disposizione dal linguaggio scelto."
+                        + "<br />"
+                        )
+                    },
+
+                    /*Regole*/
+                    {
+                        lingua: "IT", tipo: "Regole",
+                        txt: (   "Questo gioco ha l'obbiettivo di simulare l'importanza dei comandi nei linguaggi di programmazione, i comandi devono essere formattati nel seguente modo:"
+                        + ' <font color= #DE3163 size="5"><i><u>comando<b>(</b>spostamento<b>)</b></u></i></font>'
+                        + "<br />(Dove comando è uno dei seguenti e al posto di numero un numero intero)"
+                        + '<ol type="a" style="margin: 4px 4px 4px 100px;" align="left">'
+                        + '<li>("Nord", "N", "Su", "Sopra"),</li>'
+                        + '<li>("Nord-Est", "N-E"),</li>'
+                        + '<li>("Nord-Ovest", "N-O"),</li>'
+                        + '<li>("Sud", "S", "Giu", "Sotto"),</li>'
+                        + '<li>("Sud-Est", "S-E"),</li>'
+                        + '<li>("Sud-Ovest", "S-O"),</li>'
+                        + '<li>("Est", "E", "Destra", "Dx"),</li>'
+                        + '<li>("Ovest", "O", "Sinistra", "Sx")</li>'
+                        + "</ol><br />"
+                        + '<p style="margin: 4px 40px 4px 40px;" align="justify">nota:</p>'
+                        + '<p style="margin: 4px 70px 4px 70px;" align="justify"><font size="3"><i> non sono valide altre parole al di fuori del set indicato, a seconda delle opzioni scelte si può rendere il gioco casesensible (differenza tra maiuscoe e minuscole o meno) e tralasciare gli spazi nel comando. E\' molto importante che il comando rispetti la struttura precedentemente prsentata, il gioco accetta esclusivamente l\'inserimento/processamento di un comando alla volta.</i></font></p>'
+                        )
+                    },
+
+                    /*Fine Gioco*/
+                    {
+                        lingua: "IT", tipo: "Ringraziamenti",
+                        txt: (   "Congratulazioni... speriamo che questo piccolo gioco vi abbia coinvolto."
+                        )
+                    }
+                ]
             }
-			
-            .center {
-                text-align: center;
+
+            /*obbiettivi*/
+            {
+                var testi_obbiettivi = [
+                    //,{lingua: "IT", utilizzato: false, jpg: '<img id="bussola_00" src="./sprite/bussola.png" style="margin: 0; padding: 0;">', tipo: "ob1", txt: ("..testo.."+ "<br />")}
+
+                    {//"PHP"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/everaldo/crystal-clear/64/Mimetype-php-icon.png' />",
+                        tipo: "PHP",
+                        txt: (   "PHP (acronimo ricorsivo di \"PHP: Hypertext Preprocessor\", preprocessore di ipertesti; originariamente acronimo di \"Personal Home Page\") è un linguaggio di programmazione interpretato, originariamente concepito per la programmazione di pagine web dinamiche. L'interprete PHP è un software libero distribuito sotto la PHP License." + '<br />' )
+                    },
+
+                    {// "JAVA"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/tatice/cristal-intense/64/Java-icon.png' />",
+                        tipo: "JAVA",
+                        txt: (   "In informatica Java è un linguaggio di programmazione orientato agli oggetti, specificatamente progettato per essere il più possibile indipendente dalla piattaforma di esecuzione." + '<br />' )
+                    },
+
+                    {// "HTML"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/cornmanthe3rd/metronome/64/Other-html-5-icon.png' />",
+                        tipo: "HTML",
+                        txt: (   "L'HyperText Markup Language (HTML) (traduzione letterale: linguaggio a marcatori per ipertesti), in informatica è il linguaggio di markup solitamente usato per la formattazione di documenti ipertestuali disponibili nel World Wide Web sotto forma di pagine web." + '<br />' )
+                    },
+
+                    {// "CSS"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/graphics-vibe/developer/64/css-icon.png' />",
+                        tipo: "CSS",
+                        txt: (   "Il CSS (Cascading Style Sheets, in italiano fogli di stile), in informatica, è un linguaggio usato per definire la formattazione di documenti HTML, XHTML e XML ad esempio i siti web e relative pagine web. Le regole per comporre il CSS sono contenute in un insieme di direttive (Recommendations) emanate a partire dal 1996 dal W3C." + '<br />' )
+                    },
+
+                    {// "DELPHI"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://img.informer.com/icons/png/32/25/25501.png' style='height: 200%; width: 200%;'/>",
+                        tipo: "DELPHI",
+                        txt: (   "Delphi è sia un linguaggio di programmazione sia un ambiente di sviluppo. È stato creato dalla Borland (che per un certo periodo ha cambiato il suo nome in Inprise). Alla fine del 2006 Borland ha creato una divisione, CodeGear, alla quale sono stati trasferiti tutti gli ambienti di sviluppo, incluso Delphi. Il 7 maggio 2008 la divisione CodeGear è stata acquistata per 23 milioni di dollari dalla società Embarcadero Technologies rappresentata in Italia da bit Time Software." + '<br />' )
+                    },
+
+                    {// "F#"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icon.downv.com/32x32/16/342/3920736.84ca2674f34234711edf1b9ec1d55ef1.gif' style='height: 200%; width: 200%;' />",
+                        tipo: "F#",
+                        txt: (   "F# (si legge F Sharp) è un linguaggio di programmazione multi-paradigma, basato su .NET Framework, che permette la programmazione funzionale così come quella imperativa e quella ad oggetti. È una variante del linguaggio ML ed è largamente compatibile con l'implementazione di OCaml. F# è stato sviluppato inizialmente da Don Syme al Microsoft Research ed attualmente è implementato dalla divisione sviluppo di Microsoft per fornire un completo supporto del .NET Framework ed essere pienamente supportato in Visual Studio." + '<br />' )
+                    },
+
+                    {// "C#"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/azuresol/sketchy/64/Ms-visual-c-icon.png' />",
+                        tipo: "C#",
+                        txt: (   "Il C# (pronuncia: siː.ʃɑːp, come le parole inglesi \"see sharp\") è un linguaggio di programmazione orientato agli oggetti sviluppato da Microsoft all'interno dell'iniziativa .NET, e successivamente approvato come standard ECMA. <br />La sintassi del C# prende spunto sia da quella di Delphi (hanno il medesimo autore, ovvero Anders Hejlsberg), di C++, di Java e di Visual Basic per gli strumenti di programmazione visuale e per la sua semplicità. Il risultato è un linguaggio con meno simbolismo rispetto a C++, meno elementi decorativi rispetto a Java, ma comunque orientato agli oggetti in modo nativo." + '<br />' )
+                    },
+
+                    {// "C++"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/azuresol/sketchy/64/Hulu-icon.png' />",
+                        tipo: "C++",
+                        txt: (   "Il C++ è un linguaggio di programmazione orientato agli oggetti, con tipizzazione statica. È stato sviluppato (in origine col nome di \"C con classi\") da Bjarne Stroustrup ai Bell Labs nel 1983 come un miglioramento del linguaggio C." + '<br />' )
+                    },
+
+                    {// "C"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/mattahan/umicons/64/Letter-C-icon.png' />",
+                        tipo: "C",
+                        txt: (   "Il C è tecnicamente un linguaggio di programmazione ad alto livello sviluppato da Dennis Ritchie. Tuttavia, poiché esso mantiene evidenti relazioni semantiche con il linguaggio macchina e l'assembly, risulta molto meno astratto di linguaggi anche affini (appartenenti allo stesso paradigma di programmazione), come per esempio il Pascal. Per questo motivo, talvolta viene anche identificato con la locuzione (più ambigua) linguaggio di medio livello, se non addirittura (in modo certamente improprio) come macro-assembly, o assembly portabile." + '<br />' )
+                    },
+
+                    {// "JAVASCRIPT"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/graphics-vibe/developer/64/javascript-icon.png' />",
+                        tipo: "JAVASCRIPT",
+                        txt: (   "In informatica JavaScript è un linguaggio di scripting orientato agli oggetti e agli eventi, comunemente utilizzato nella programmazione Web lato client per la creazione, in siti web e applicazioni web, di effetti dinamici interattivi tramite funzioni di script invocate da eventi innescati a loro volta in vari modi dall'utente sulla pagina web in uso (mouse, tastiera ecc...)." + '<br />' )
+                    },
+
+                    {// "HARDWARE"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/Motherboard-icon.png' />",
+                        tipo: "HARDWARE",
+                        txt: (   "Con il termine hardware si indica la parte fisica di un computer, ovvero tutte quelle parti elettroniche, elettriche, meccaniche, magnetiche, ottiche che ne consentono il funzionamento (dette anche strumentario)." + '<br />' )
+                    },
+
+                    {// "SERVER"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/Home-Server-icon.png' />",
+                        tipo: "SERVER",
+                        txt: (   "Il termine server (dall'inglese, letteralmente serviente), indica genericamente un componente o sottosistema informatico di elaborazione che fornisce, a livello logico e a livello fisico, un qualunque tipo di servizio ad altre componenti (tipicamente chiamate client, cioè \"cliente\") che ne fanno richiesta attraverso una rete di computer, all'interno di un sistema informatico o direttamente in locale su un computer." + '<br />' )
+                    },
+
+                    {// "LINUX"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/tatice/operating-systems/64/Linux-icon.png' />",
+                        tipo: "LINUX",
+                        txt: (   "Linux è una famiglia di sistemi operativi di tipo Unix-like, rilasciati sotto varie possibili distribuzioni, aventi la caratteristica comune di utilizzare come nucleo il kernel Linux." + '<br />' )
+                    },
+
+                    {// "WINDOWS"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Folders-OS-Windows-8-Metro-icon.png' />",
+                        tipo: "WINDOWS",
+                        txt: (   "Microsoft Windows (abbreviazioni comunemente utilizzate: \"Windows\" o \"Win\") è una famiglia di ambienti operativi e sistemi operativi dedicati ai personal computer, alle workstation, ai server e agli smartphone. Il sistema operativo si chiama così per via della sua interfaccia di programmazione a finestre (dette \"windows\" in lingua inglese)." + '<br />' )
+                    },
+
+                    {// "APPLE"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/danleech/simple/64/apple-icon.png' />",
+                        tipo: "APPLE",
+                        txt: (   "Apple Inc. è un'azienda informatica statunitense che produce sistemi operativi, computer e dispositivi multimediali con sede a Cupertino, nello stato della California." + '<br />' )
+                    },
+
+                    {// "SOFTWARE"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/apathae/wren/64/Applications-icon.png' />",
+                        tipo: "SOFTWARE",
+                        txt: (   "Il software, in informatica, è l'informazione o le informazioni utilizzate da uno o più sistemi informatici e memorizzate su uno o più supporti informatici. Tali informazioni possono essere quindi rappresentate da uno o più programmi, oppure da uno o più dati, oppure da una combinazione delle due." + '<br />' )
+                    },
+
+                    {// "DESKTOP"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/delacro/id/64/Desktop-icon.png' />",
+                        tipo: "DESKTOP",
+                        txt: (   "Un ambiente desktop (in lingua inglese desktop environment che tradotto letteralmente significa \"ambiente della scrivania\", abbrev. DE, o anche desktop, in italiano scrivania), in informatica, è un'interfaccia grafica di un sistema operativo che permette ad un utente di utilizzare il computer o il software in maniera user-friendly tramite l'interazione con oggetti grafici come le icone, le finestre, le scrollbar, la barra delle applicazioni, il menù, ecc... disegnati sullo schermo del monitor in quella che è chiamata metafora della scrivania, in maniera del tutto simile a quanto accade con le interfacce grafiche delle applicazioni." + '<br />' )
+                    },
+
+                    {// "MOUSE"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/64/Apps-preferences-desktop-mouse-icon.png' />",
+                        tipo: "MOUSE",
+                        txt: (   "Il mouse è un dispositivo o periferica di input di un computer in grado di inviare in ingresso al sistema un comando da parte dell'utente in modo tale che ad un suo movimento su una base solida piana ne corrisponda uno analogo da parte di un indicatore sullo schermo del monitor detto puntatore. È inoltre dotato di uno o più tasti ai quali possono essere assegnate varie funzioni." + '<br />' )
+                    },
+
+                    {// "TASTIERA"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/64/Devices-input-keyboard-icon.png' />",
+                        tipo: "TASTIERA",
+                        txt: (   "La tastiera (in lingua inglese keyboard), nell'ambito dell'informatica, è un dispositivo (o periferica) di input di un computer atto all'inserimento manuale di dati nella memoria del computer e al controllo del computer stesso." + '<br />' )
+                    },
+
+                    {// "TABLET"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/adidadidu/ipad/64/iPad-Landscape-Blank-icon.png' />",
+                        tipo: "TABLET",
+                        txt: (   "Il tablet PC (lett. PC tavoletta) è un computer portatile che grazie alla presenza di uno o più digitalizzatori (digitizers, in inglese) permette all'utente di interfacciarsi con il sistema direttamente sullo schermo mediante una penna e, in particolari modelli, anche le dita. Il tablet PC è di fatto un normale Personal Computer portatile con capacità di input diverse." + '<br />' )
+                    },
+
+                    {// "APP"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/vargas21/aquave-metal/64/Apps-icon.png' />",
+                        tipo: "APP",
+                        txt: (   "Con il neologismo app s'intende una variante delle applicazioni informatiche dedicate ai dispositivi di tipo mobile, quali smartphone e tablet. Il termine deriva proprio dall'abbreviazione di \"applicazione\"." + '<br />' )
+                    },
+
+                    {// "IOS"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/musett/iphone-4/64/iPhone-Black-iOS-icon.png' />",
+                        tipo: "IOS",
+                        txt: (   "iOS (precedentemente iPhone OS) è un sistema operativo sviluppato da Apple per iPhone, iPod touch e iPad." + '<br />' )
+                    },
+
+                    {// "ANDROID"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Folders-OS-Android-Metro-icon.png' />",
+                        tipo: "ANDROID",
+                        txt: (   "In informatica Android è un sistema operativo per dispositivi mobili sviluppato da Google Inc. sulla base del kernel Linux. Android è stato progettato principalmente per smartphone e tablet, con interfacce utente specializzate per televisori (Android TV), automobili (Android Auto), orologi da polso (Android Wear), occhiali (Google Glass), e altri." + '<br />' )
+                    },
+
+                    {// "SIRI"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/pelfusion/folded-flat/64/Siri-icon.png' />",
+                        tipo: "SIRI",
+                        txt: (   "Siri è un software basato sul riconoscimento vocale integrato da Apple nell'iPhone 4S, nell'iPhone 5, nell iPad Air, nell'iPad (quarta generazione), nell'iPad (terza generazione), nell'iPad mini, nell'iPod Touch 5G, nell'iPhone 5s e nell'iPhone 5c, e pubblicizzato come \"assistente personale\". Siri è stato presentato da Tim Cook il 4 ottobre 2011 all'evento \"Let's talk iPhone\" e reso disponibile il 12 ottobre 2011 in versione beta. Siri, grazie all'uscita di iOS 6, è disponibile anche in italiano. Il nome 'siri' in norvegese significa \"bella donna che ti porta alla vittoria\"." + '<br />' )
+                    },
+
+                    {// "UBUNTU"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Folders-OS-Ubuntu-Metro-icon.png' />",
+                        tipo: "UBUNTU",
+                        txt: (   "Ubuntu ([uːˈbuːntuː], [ùbúntú] in zulu, una filosofia di origine sudafricana) è una distribuzione GNU/Linux, basata su Debian, nata nel 2004. La sua principale caratteristica è la focalizzazione sull'utente e la facilità di utilizzo. Essa viene pubblicata come software libero sotto licenza GNU GPL, è distribuita gratuitamente ed è liberamente modificabile. Ubuntu è orientata all'utilizzo desktop e pone una grande attenzione al supporto hardware. È prevista una nuova versione ogni sei mesi." + '<br />' )
+                    },
+
+                    {// "LAN"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/rimshotdesign/milkanodised/64/Internet-Connect-icon.png' />",
+                        tipo: "LAN",
+                        txt: (   "In informatica e telecomunicazioni una Local Area Network (LAN) (in italiano rete in area locale, o rete locale) è una rete informatica di collegamento tra più computer, estendibile anche a dispositivi periferici condivisi, che copre un'area limitata, come un'abitazione, una scuola, un'azienda o un complesso di edifici adiacenti. Si differenzia dalle Wide Area Network (WAN) non solo per l'estensione geografica più limitata ma anche perché consente migliori prestazioni in termini di velocità di trasferimento dei dati e non richiede di utilizzare circuiti dedicati su tratte telefoniche (leased line)." + '<br />' )
+                    },
+
+                    {// "ETHERNET"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/Ethernet-Cable-icon.png' />",
+                        tipo: "ETHERNET",
+                        txt: (   "Ethernet è una famiglia di tecnologie standardizzate per reti locali, sviluppato a livello sperimentale da Robert Metcalfe e David Boggs (suo assistente) allo Xerox PARC, che ne definisce le specifiche tecniche a livello fisico (connettori, cavi, tipologia di trasmissione, etc.) e a livello MAC del modello architetturale di rete ISO-OSI." + '<br />' )
+                    },
+
+                    {// "WIFI"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/custom-icon-design/mono-general-3/64/wifi-icon.png' />",
+                        tipo: "WIFI",
+                        txt: (   "Il termine Wi-Fi, nel campo delle telecomunicazioni, indica una tecnologia ed i relativi dispositivi che consentono a terminali di utenza di collegarsi tra loro attraverso una rete locale in modalità wireless (WLAN) basandosi sulle specifiche dello standard IEEE 802.11. <br />A sua volta la rete locale così ottenuta può essere allacciata alla rete Internet per il tramite di un router e usufruire di tutti i servizi di connettività offerti da un ISP. <br />Qualunque dispositivo o terminale di utenza (computer, cellulare, palmare, tablet ecc.) può connettersi a reti di questo tipo se integrato con le specifiche tecniche del protocollo Wi-Fi." + '<br />' )
+                    },
+
+                    {// "BLUETOOTH"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/simply-styled/64/Bluetooth-icon.png' />",
+                        tipo: "BLUETOOTH",
+                        txt: (   "Nelle telecomunicazioni Bluetooth è uno standard tecnico-industriale di trasmissione dati per reti personali senza fili (WPAN: Wireless Personal Area Network). Fornisce un metodo standard, economico e sicuro per scambiare informazioni tra dispositivi diversi attraverso una frequenza radio sicura a corto raggio." + '<br />' )
+                    },
+
+                    {// "DHCP"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/Modem-icon.png' />",
+                        tipo: "DHCP",
+                        txt: (   "In telecomunicazioni e informatica il Dynamic Host Configuration Protocol (DHCP) (protocollo di configurazione IP dinamica) è un protocollo di rete di livello applicativo che permette ai dispositivi o terminali di una certa rete locale di ricevere dinamicamente a ogni richiesta di accesso a una rete IP (quale Internet) la configurazione IP necessaria per stabilire una connessione e operare su una rete più ampia basata su Internet Protocol, cioè interoperare con tutte le altre sottoreti scambiandosi dati, purché anch'esse integrate allo stesso modo con il protocollo IP." + '<br />' )
+                    },
+
+                    {//"STAMPANTE"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/Inkjet-Printer-icon.png' />",
+                        tipo: "STAMPANTE",
+                        txt: (   "In informatica la stampante o unità di stampa è una periferica di output di un PC che si contraddistingue per svolgere l'operazione di stampa di dati scelti dall'utente. Attraverso la stampante il computer è quindi in grado di trasferire immagini e/o testi su carta." + '<br />' )
+                    },
+
+                    {//"DVD"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/HD-DVD-icon.png' />",
+                        tipo: "DVD",
+                        txt: (   "Il DVD, sigla di Digital Versatile Disc (in italiano Disco Versatile Digitale, originariamente Digital Video Disc, Disco Video Digitale) è un supporto di memoria di tipo ottico." + '<br />' )
+                    },
+
+                    {//"RCA"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/RCA-Connector-Plug-icon.png' />",
+                        tipo: "RCA",
+                        txt: (   "I connettori RCA sono connettori spesso utilizzati nel campo dell'audio semiprofessionale, amatoriale e anche nel video come connettore per il video composito, ma anche adibiti ad altri usi. Il nome \"RCA\" deriva dalla Radio Corporation of America, che progettò questo tipo di connettore negli anni quaranta per permettere la connessione dei giradischi agli amplificatori." + '<br />' )
+                    },
+
+                    {//"USB"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/USB-icon.png' />",
+                        tipo: "USB",
+                        txt: (   "In elettronica l'Universal Serial Bus (USB) è uno standard di comunicazione seriale che consente di collegare diverse periferiche a un computer. È stato progettato per consentire a più periferiche di essere connesse usando una sola interfaccia standardizzata e un solo tipo di connettore e per migliorare la funzionalità plug and play consentendo di collegare o scollegare i dispositivi senza dover riavviare il computer (hot swap)." + '<br />' )
+                    },
+
+                    {//"CAMERA"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/Security-Camera-icon.png' />",
+                        tipo: "CAMERA",
+                        txt: (   "La videocamera (in inglese camcorder) è l'unione tra una telecamera e un videoregistratore. Prima della sua invenzione, un operatore doveva portarsi dietro un registratore a nastro e impugnare con la mano una telecamera. Con la sua nascita gli apparecchi hanno cominciato a essere più piccoli e maneggevoli, e sono stati creati nuovi formati di nastri adatti per le dimensioni ridotte dell'apparecchio." + '<br />' )
+                    },
+
+                    {//"PHOTOSHOP"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Apps-Adobe-Photoshop-Metro-icon.png' />",
+                        tipo: "PHOTOSHOP",
+                        txt: (   "Adobe Photoshop è un software proprietario prodotto dalla Adobe Systems Incorporated specializzato nell'elaborazione di fotografie (fotoritocco) e, più in generale, di immagini digitali." + '<br />' )
+                    },
+
+                    {//"YOUTUBE"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Web-YouTube-Metro-icon.png' />",
+                        tipo: "YOUTUBE",
+                        txt: (   "YouTube è una piattaforma web, fondata nel 2005, che consente la condivisione e visualizzazione in rete di video (video sharing). Di proprietà di Google Inc. da ottobre 2006, è il terzo sito web più visitato al mondo dopo Google e Facebook]. L'azienda ha sede a San Jose (California) e utilizza Adobe Flash Video per visualizzare una vasta gamma di video che però viene sostituita da un'applicazione proprietaria del sito web nel caso l'utente abbia attivato la prova beta." + '<br />' )
+                    },
+
+                    {//"HP"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Web-HP-Metro-icon.png' />",
+                        tipo: "HP",
+                        txt: (   "La Hewlett-Packard Company (nota anche con la sola sigla HP) è una multinazionale statunitense dell'informatica attiva sia nel mercato dell'hardware (dai personal computer ai server e, nel mercato di massa, per le stampanti per le quali è uno dei maggiori produttori mondiali) quanto in quello del software e dei servizi collegati all'informatica. Ad inizio 2011 era il primo produttore mondiale di computer portatili per unità vendute." + '<br />' )
+                    },
+
+                    {//"RAM"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Drives-RAM-Metro-icon.png' />",
+                        tipo: "RAM",
+                        txt: (   "La RAM, acronimo dell'inglese Random Access Memory ovvero memoria ad accesso casuale, è un tipo di memoria informatica caratterizzata dal permettere l'accesso diretto a qualunque indirizzo di memoria con lo stesso tempo di accesso." + '<br />' )
+                    },
+
+                    {//"WIKIPEDIA"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Web-Wikipedia-alt-2-Metro-icon.png' />",
+                        tipo: "WIKIPEDIA",
+                        txt: (   "Wikipedia è una enciclopedia online, collaborativa multilingue e gratuita, nata nel gennaio del 2001, supportata dalla Wikimedia Foundation, una organizzazione non a scopo di lucro statunitense." + '<br />' )
+                    },
+
+                    {//"SYMANTEC"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/hopstarter/orb/64/Symantec-icon.png' />",
+                        tipo: "SYMANTEC",
+                        txt: (   "La Symantec è un'azienda statunitense, nata nel 1982 e nota principalmente per la produzione di software destinato a salvaguardare la sicurezza dei computer da attacchi informatici." + '<br />' )
+                    },
+
+                    {//"NFC"
+                        lingua: 'IT',
+                        utilizzato: false,
+                        jpg: "<img src='http://icons.iconarchive.com/icons/icons8/windows-8/64/Mobile-Nfc-Sign-icon.png' />",
+                        tipo: "NFC",
+                        txt: (   "Near Field Communication (NFC) (in italiano letteralmente \"Comunicazione in prossimità\") è una tecnologia che fornisce connettività wireless (RF) bidirezionale a corto raggio (fino a un massimo di 10 cm). È stata sviluppata congiuntamente da Philips, LG, Sony e Nokia."
+                        + '<br />' )
+                    }
+
+                ]
             }
-            .marginpadding {
-                margin: 0;
-                padding: 0;
+        }
+
+        /*Debug*/
+        {
+            //Tutti i Debug:
+            var var_debug_all = false;
+
+            //Specifica funzione:
+            var var_debug_pos_sprite_array = false;
+            var var_debug_spost_personaggio = false;
+            var var_debug_carica_sprite = false;
+            var var_debug_pos_utilizzata = false;
+            var var_debug_ostacoli_tragitto = false;
+            var var_debug_ragg_sprite = false;
+            var var_debug_obb_raggiunto = false;
+            var var_debug_liv_successivo = false;
+            var var_debug_carica_livello = false;
+            var var_debug_spost_comando_non_valido = false;
+            var var_debug_recupera_comando = false;
+
+            //utility debug:
+            var avvio_rapido = false;
+
+            //forzature visualizzazione
+            var var_vis_elm_celle = false; //contenuto cella
+            var var_vis_griglia = false;   //griglia
+            var panel_liv = false;         //panello per salvare livelli
+        }
+
+        /*Obbiettivi*/
+        {
+            var num_obbiettivi = 0;//num obb. mappa
+            var num_obbiettivi_disponibili = testi_obbiettivi.length; //num obb. utilizzabili
+            var num_obb_raggiunto = 0; //num obb. raggiunto se caricati in sequenza
+        }
+
+        /*Livelli*/
+        {
+            //Elementi livelli
+            var liv_min_obbiettivi = 2;
+            var liv_min_ostacoli = 3;
+
+            //numero livelli e mappe abbinate
+            var liv_map = [
+                {liv: 1, mp: 2}, //vuoto
+                {liv: 2, mp: 2}, //+ obbiettivi
+                {liv: 3, mp: 5}  //+ ostacoli
+            ];
+        }
+
+        /*posizioni*/
+        {
+            //array posizioni
+            var posizioni =
+                    [
+                        // {coordinate:"", oggetto:"Personaggio", number:0, completato:false, riga:0, colonna:0}, //personaggio
+                        // {coordinate:"", oggetto:"Exit",        number:0, completato:false, riga:0, colonna:0}, //exit
+                        // {coordinate:"", oggetto:'Ostacolo',    number:0, completato:false, riga:0, colonna:0}  //ostacolo
+                        // {coordinate:"", oggetto:'Obbiettivo',  number:0, completato:false, riga:0, colonna:0}  //obbiettivo
+
+                        // {coordinate:"", oggetto:'Percorso',    number:0, completato:false, riga:0, colonna:0}  //Percorso
+                    ];
+        }
+
+        /*campo*/
+        {
+            /*sfondo*/
+            {
+                var background_color_campo = '#ffcc00';
+                var colore_griglia_se_visualizzata = '#FFDEAD';
+                var colore_testo_campo = var_vis_elm_celle ? 'black' : background_color_campo;
             }
-			
-	.hidden {
-		position:absolute;
-		left:0px;
-		top:-500px;
-		width:1px;
-		height:1px;
-		overflow:hidden;
-	}
-	.logo {
-		height: 50px;
-		width: 200px;
-	}
-	.navbar-inverse{
-		background-color: #222;
-		border-color: #080808
-	}	
-	.footer-style{
-		margin: 0;
-		background-color: #d8d8d8;
-	}
-	.btn-social{
-		color: #951b91;
-	}
-        </style>
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="css/main.css">
-<!-- Inizio codice sistemazione FOOTER-->
-	<!-- Custom CSS -->
-	<link href="../css/informaticasaralei.css" rel="stylesheet">
 
-	<!-- Custom Fonts -->
-	<link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+            var sep_rig_col = "_"; //attenzione a caratteri accettati per id
 
-	<!-- Fine del codice di sistemazione FOOTER -->
-        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    </head>
-    <body>
-    <div id="navigation_bar"></div>  
+            //marcatore celle vuote
+            var rg_pos_vuota = ".......";
+            var pos_vuota = rg_pos_vuota
+                            + "<p>"
+                            + rg_pos_vuota
+                    ;
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="guscio" style="min-width:750; width: auto">
-		  <div class="row"><h1 class="center"> <img id="Titolo_gioco" src="http://icons.iconarchive.com/icons/dapino/callcenter-girls/64/callcenter-girls-glasses-icon.png" style="margin: 0; padding: 0;"> Alla scoperta dell'informatica</h1></div>
-		  <div class="row" id="campo_totale">
-			<div class="col-xs-12 marginpadding" id="contenitore_campo_console">     
-			</div>
-		  </div>
-	  </div>
+            //marcatore celle attraversate
+            var pos_attraversata = "<i style='color: " + colore_testo_campo + ";'>......</i>"
+                            + "<p>"
+                            + "<i style='color: " + colore_testo_campo + ";'>...</i>*<i style='color: " + colore_testo_campo + ";'>...</i>"
+                    ;
 
-      <hr>
+            //dimensioni:
+            var num_righe = 21; //ex16;
+            var num_colonne = 24; //ex14;
+        }
 
-      <!-- Funziona che attiva pannelli di debug buono per sviluppo
-      <footer>
-        <p><A HREF="#" style="color:black; text-decoration: none;" tabindex=-1 onclick="attiva_disattiva_pannelli_nascosti()"> &copy; </A> Caroti Rubens e Daniel Vedovato 2014</p>
-      </footer>
-      -->
-      
-    </div> <!-- /container -->  
-    <div id="footer"></div>
-    	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
-        <script>window.jQuery || document.write('<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"><\/script>')</script>
+        /*sprite*/
+        {
+            //opzioni:
+            var vuota_attrav_img = true;//cella vuota e percorso sono immagini
 
-        <script src="js/vendor/bootstrap.min.js"></script>
+            /*busola:*/
+            {
+                var bussola_img =
+                        '<img id="bussola_00" src="./sprite/bussola.png" style="margin: 0; padding: 0;">';
+            }
 
-        <script src="js/main.js"></script>
+            /*personaggio:*/
+            {
+                var personaggio_img =
+                    //'<img id="personaggio_01" src="http://icons.iconarchive.com/icons/itzikgur/my-seven/32/Girls-Blue-Dress-icon.png" style="margin: 0; padding: 0;">';
+                    //'<img id="personaggio_02" src="http://icons.iconarchive.com/icons/raindropmemory/harmonia-pastelis/32/hp-girl-icon.png" style="margin: 0; padding: 0;">';
+                        '<img id="personaggio_00" src="./sprite/personaggio.png" style="margin: 0; padding: 0;">';
+            }
 
-        <script>
-			/*Variabili*/{
-				
-				/*Colori msg*/{
-					var col_msg_opzioni = "#C0C0C0";
-					
-					//obbiettivi
-					var col_msg_liv_completato = "yellow";
-					var col_msg_obb_raggiunto = "yellow";
-					
-					//comandi
-					var col_msg_esec_comando = "blue";
-					var col_msg_err_comando = "red";
-				    
-					//presentazioni
-					var col_msg_inizio = "green";
-					var col_msg_avvio_gioco = "green";
-					var col_msg_pres_gioco = "green";
-					var col_msg_pres_regole = "green";
-					var col_msg_pres_gioco_completato = "green";
-					var col_msg_fine = "green";
-				}
-				
-				/*console Gioco*/{
-				    //lingua testi visualizzati:
-					var default_lingua = "IT";
-					
-					//Livello e mappa partenza/corrente:
-					var livello = null;
-					var mappa = null;
-					
-					//non deve raggiungere tutti gli obbiettivi per passare di livello:
-					var var_obb_superflui = false;
-					
-					//obbiettivi ripetibili
-					var var_obb_ripetibili = true;
-					var random_obb = true;
-					var num_tentativi_random_obb = 5;
-					
-					//permetti di visualizzare sempre la griglia
-					var perm_ut_mod_vis_griglia = true;
-					
-					/*Utility comando:*/{
-						//default
-						var rimuovi_spazi_comando = false;
-						var comand_case_sensitive = true;
-					
-						//temp utente
-						var temp_ut_normalizza = false;
-						var temp_ut_case_sensitive = false;
-					}
-				}
-				
-				/*temp comando*/{
-					var temp_comando = "";
-				}
-				
-				/*Testi visualizzati*/{
-					/*testi*/{
-						var testi = [
-								  /*Presentazione Gioco*/
-								  {lingua: "IT", tipo: "Presentazione gioco",
-								                 txt: (   "Questo gioco ha lo scopo di dimostrare come con poche righe di codice in un linguaggio di alto livello (linguaggio più viciono al programmatore/utente rispetto a quello macchina composto da 0 e 1) è possibile realizzare un gioco.<br /><br />"
-                                                        + "Inoltre abbiamo volutamente limitato le possibilità di spostamento del personaggio all'inserimento di comandi strutturati in un modo convenzionale (per dettagli visualizzare anche presentazione regole) per permettere al giocatore di sperimentare quanto per un programmatore sia facile incorrere in errori (una lettera sbagliata, ecc.. [per fortuna si è aiutati da software di sviluppo anche gratuiti]) ma come allo stesso modo di possano creare proprammi semplici/complessi/molto complessi semplicemente strutturando le operazioni basilari messe a disposizione dal linguaggio scelto."
-														+ "<br />"														
-												      )},
-																	  
-								  /*Regole*/
-								  {lingua: "IT", tipo: "Regole", 
-								                 txt: (   "Questo gioco ha l'obbiettivo di simulare l'importanza dei comandi nei linguaggi di programmazione, i comandi devono essere formattati nel seguente modo:"
-														+ ' <font color= #DE3163 size="5"><i><u>comando<b>(</b>spostamento<b>)</b></u></i></font>'
-														+ "<br />(Dove comando è uno dei seguenti e al posto di numero un numero intero)"
-														+ '<ol type="a" style="margin: 4px 4px 4px 100px;" align="left">'
-														   + '<li>("Nord", "N", "Su", "Sopra"),</li>'
-														   + '<li>("Nord-Est", "N-E"),</li>'
-														   + '<li>("Nord-Ovest", "N-O"),</li>'
-														   + '<li>("Sud", "S", "Giu", "Sotto"),</li>'
-														   + '<li>("Sud-Est", "S-E"),</li>'
-														   + '<li>("Sud-Ovest", "S-O"),</li>'
-                                                           + '<li>("Est", "E", "Destra", "Dx"),</li>'
-														   + '<li>("Ovest", "O", "Sinistra", "Sx")</li>'
-														+ "</ol><br />"
-														+ '<p style="margin: 4px 40px 4px 40px;" align="justify">nota:</p>'
-														+ '<p style="margin: 4px 70px 4px 70px;" align="justify"><font size="3"><i> non sono valide altre parole al di fuori del set indicato, a seconda delle opzioni scelte si può rendere il gioco casesensible (differenza tra maiuscoe e minuscole o meno) e tralasciare gli spazi nel comando. E\' molto importante che il comando rispetti la struttura precedentemente prsentata, il gioco accetta esclusivamente l\'inserimento/processamento di un comando alla volta.</i></font></p>'
-													  )},
-													  
-								  /*Fine Gioco*/
-								  {lingua: "IT", tipo: "Ringraziamenti", 
-								                 txt: (   "Congratulazioni... speriamo che questo piccolo gioco vi abbia coinvolto."
-												      )}
-								]
-					}
-					
-					/*obbiettivi*/{
-						var testi_obbiettivi = [
-								//,{lingua: "IT", utilizzato: false, jpg: '<img id="bussola_00" src="./sprite/bussola.png" style="margin: 0; padding: 0;">', tipo: "ob1", txt: ("..testo.."+ "<br />")}
-								
-								{//"PHP"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/everaldo/crystal-clear/64/Mimetype-php-icon.png' />",
-								 tipo: "PHP",
-								 txt: (   "PHP (acronimo ricorsivo di \"PHP: Hypertext Preprocessor\", preprocessore di ipertesti; originariamente acronimo di \"Personal Home Page\") è un linguaggio di programmazione interpretato, originariamente concepito per la programmazione di pagine web dinamiche. L'interprete PHP è un software libero distribuito sotto la PHP License." + '<br />' )
-								},
+            /*uscita:*/
+            {
+                var exit_img =
+                    //'<img id="exit_01" src="http://icons.iconarchive.com/icons/iconsmind/outline/32/Door-icon.png" style="margin: 0; padding: 0;">';
+                    //'<img id="exit_02" src="http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-6/32/logout-icon.png" style="margin: 0; padding: 0;">';
+                        '<img id="exit_00" src="./sprite/exit.png" style="margin: 0; padding: 0;">';
+            }
 
-								{// "JAVA"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/tatice/cristal-intense/64/Java-icon.png' />",
-								 tipo: "JAVA",
-								 txt: (   "In informatica Java è un linguaggio di programmazione orientato agli oggetti, specificatamente progettato per essere il più possibile indipendente dalla piattaforma di esecuzione." + '<br />' )
-								},
+            /*Ostacolo:*/
+            {
+                var ostacolo_img =
+                    //'<img id="ostacolo_01" src="http://icons.iconarchive.com/icons/hybridworks/yoritsuki/32/Shoji2-paper-sliding-door-icon.png" style="margin: 0; padding: 0;">';
+                    //'<img id="ostacolo_02" src="http://icons.iconarchive.com/icons/hybridworks/yoritsuki/32/Shoji1-paper-sliding-door-icon.png" style="margin: 0; padding: 0;">';
+                        '<img id="ostacolo_00" src="./sprite/wall.png" style="margin: 0; padding: 0;">';
+            }
 
-								{// "HTML"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/cornmanthe3rd/metronome/64/Other-html-5-icon.png' />",
-								 tipo: "HTML",
-								 txt: (   "L'HyperText Markup Language (HTML) (traduzione letterale: linguaggio a marcatori per ipertesti), in informatica è il linguaggio di markup solitamente usato per la formattazione di documenti ipertestuali disponibili nel World Wide Web sotto forma di pagine web." + '<br />' )
-								},
+            /*Obbiettivo:*/
+            {
+                var obbiettivo_img =
+                    //'<img id="obbiettivo_01" src="http://icons.iconarchive.com/icons/iconka/st-patricks-day/32/shamrock-lucky-icon.png" style="margin: 0; padding: 0;">';
+                        '<img id="obbiettivo_00" src="./sprite/quadrifoglio.png" style="margin: 0; padding: 0;">';
+            }
 
-								{// "CSS"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/graphics-vibe/developer/64/css-icon.png' />",
-								 tipo: "CSS",
-								 txt: (   "Il CSS (Cascading Style Sheets, in italiano fogli di stile), in informatica, è un linguaggio usato per definire la formattazione di documenti HTML, XHTML e XML ad esempio i siti web e relative pagine web. Le regole per comporre il CSS sono contenute in un insieme di direttive (Recommendations) emanate a partire dal 1996 dal W3C." + '<br />' )
-								},
+            /*Vuota:*/
+            {
+                var pos_vuota_img =
+                        '<img id="pos_vuota_00" src="./sprite/vuota.png" style="margin: 0; padding: 0;">';
+            }
 
-								{// "DELPHI"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://img.informer.com/icons/png/32/25/25501.png' style='height: 200%; width: 200%;'/>",
-								 tipo: "DELPHI",
-								 txt: (   "Delphi è sia un linguaggio di programmazione sia un ambiente di sviluppo. È stato creato dalla Borland (che per un certo periodo ha cambiato il suo nome in Inprise). Alla fine del 2006 Borland ha creato una divisione, CodeGear, alla quale sono stati trasferiti tutti gli ambienti di sviluppo, incluso Delphi. Il 7 maggio 2008 la divisione CodeGear è stata acquistata per 23 milioni di dollari dalla società Embarcadero Technologies rappresentata in Italia da bit Time Software." + '<br />' )
-								},
+            /*Percorso:*/
+            {
+                var pos_attraversata_img =
+                        '<img id="pos_attraversata_00" src="./sprite/attraversata.png" style="margin: 0; padding: 0;">';
+            }
+        }
 
-								{// "F#"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icon.downv.com/32x32/16/342/3920736.84ca2674f34234711edf1b9ec1d55ef1.gif' style='height: 200%; width: 200%;' />",
-								 tipo: "F#",
-								 txt: (   "F# (si legge F Sharp) è un linguaggio di programmazione multi-paradigma, basato su .NET Framework, che permette la programmazione funzionale così come quella imperativa e quella ad oggetti. È una variante del linguaggio ML ed è largamente compatibile con l'implementazione di OCaml. F# è stato sviluppato inizialmente da Don Syme al Microsoft Research ed attualmente è implementato dalla divisione sviluppo di Microsoft per fornire un completo supporto del .NET Framework ed essere pienamente supportato in Visual Studio." + '<br />' )
-								},
+        /*Log:*/
+        {
+            //orario avvio:
+            data_avvio_gioco = new Date();
 
-								{// "C#"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/azuresol/sketchy/64/Ms-visual-c-icon.png' />",
-								 tipo: "C#",
-								 txt: (   "Il C# (pronuncia: siː.ʃɑːp, come le parole inglesi \"see sharp\") è un linguaggio di programmazione orientato agli oggetti sviluppato da Microsoft all'interno dell'iniziativa .NET, e successivamente approvato come standard ECMA. <br />La sintassi del C# prende spunto sia da quella di Delphi (hanno il medesimo autore, ovvero Anders Hejlsberg), di C++, di Java e di Visual Basic per gli strumenti di programmazione visuale e per la sua semplicità. Il risultato è un linguaggio con meno simbolismo rispetto a C++, meno elementi decorativi rispetto a Java, ma comunque orientato agli oggetti in modo nativo." + '<br />' )
-								},
+            //Log:
+            var var_log = ((data_avvio_gioco.toTimeString()).split(' ')[0]) + " : <b style='color: " + col_msg_inizio + ";'> Start</b><br />";
+        }
 
-								{// "C++"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/azuresol/sketchy/64/Hulu-icon.png' />",
-								 tipo: "C++",
-								 txt: (   "Il C++ è un linguaggio di programmazione orientato agli oggetti, con tipizzazione statica. È stato sviluppato (in origine col nome di \"C con classi\") da Bjarne Stroustrup ai Bell Labs nel 1983 come un miglioramento del linguaggio C." + '<br />' )
-								},
+        /*Bottoni*/
+        {
+            var size_txt_bt_principali = 4;
+            var size_txt_bt_pan_opzioni_nascoste = 2;
 
-								{// "C"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/mattahan/umicons/64/Letter-C-icon.png' />",
-								 tipo: "C",
-								 txt: (   "Il C è tecnicamente un linguaggio di programmazione ad alto livello sviluppato da Dennis Ritchie. Tuttavia, poiché esso mantiene evidenti relazioni semantiche con il linguaggio macchina e l'assembly, risulta molto meno astratto di linguaggi anche affini (appartenenti allo stesso paradigma di programmazione), come per esempio il Pascal. Per questo motivo, talvolta viene anche identificato con la locuzione (più ambigua) linguaggio di medio livello, se non addirittura (in modo certamente improprio) come macro-assembly, o assembly portabile." + '<br />' )
-								},
+            var bottone_avvia_gioco = '<a class="btn btn-default" href="#" role="button" onclick="avvia_gioco()">'
+                    + '<font size="' + size_txt_bt_principali + '">Avvia il gioco</font></a>';
+            var bottone_pres_regole = '<a class="btn btn-default" href="#" role="button" onclick="presentazione_regole()">'
+                    + '<font size="' + size_txt_bt_principali + '">Presentazione delle regole</font></a>';
+            var bottone_chiudi = '<a class="btn btn-default" href="#" role="button" onclick="ricarica_partita()">'
+                    + '<font size="' + size_txt_bt_principali + '">Chiudi</font></a>';
+            var bottone_riavvia_gioco = '<a class="btn btn-default" href="index_gioco.html" role="button" onclick="index_gioco.html">'
+                    + '<font size="' + size_txt_bt_principali + '">Riavia gioco</font></a>';
 
-								{// "JAVASCRIPT"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/graphics-vibe/developer/64/javascript-icon.png' />",
-								 tipo: "JAVASCRIPT",
-								 txt: (   "In informatica JavaScript è un linguaggio di scripting orientato agli oggetti e agli eventi, comunemente utilizzato nella programmazione Web lato client per la creazione, in siti web e applicazioni web, di effetti dinamici interattivi tramite funzioni di script invocate da eventi innescati a loro volta in vari modi dall'utente sulla pagina web in uso (mouse, tastiera ecc...)." + '<br />' )
-								},
+            //pannello nascosto:
+            var bottone_Liv_successivo = '<a class="btn btn-default" href="#" role="button" onclick="carica_livello()">'
+                    + '<font size="' + size_txt_bt_pan_opzioni_nascoste + '">Liv. Successivo</font></a>';
 
-								{// "HARDWARE"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/Motherboard-icon.png' />",
-								 tipo: "HARDWARE",
-								 txt: (   "Con il termine hardware si indica la parte fisica di un computer, ovvero tutte quelle parti elettroniche, elettriche, meccaniche, magnetiche, ottiche che ne consentono il funzionamento (dette anche strumentario)." + '<br />' )
-								},
+            /*bottone_Vis_Nasc_griglia*/
+            var bottone_Vis_Nasc_griglia = null;
+        }
+    }
 
-								{// "SERVER"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/Home-Server-icon.png' />",
-								 tipo: "SERVER",
-								 txt: (   "Il termine server (dall'inglese, letteralmente serviente), indica genericamente un componente o sottosistema informatico di elaborazione che fornisce, a livello logico e a livello fisico, un qualunque tipo di servizio ad altre componenti (tipicamente chiamate client, cioè \"cliente\") che ne fanno richiesta attraverso una rete di computer, all'interno di un sistema informatico o direttamente in locale su un computer." + '<br />' )
-								},
+    /*MAIN:*/
+    {
+        $(document).ready(function () {
+            avvio_rapido ? avvia_gioco() : presentazione_gioco();
+        });
+    }
 
-								{// "LINUX"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/tatice/operating-systems/64/Linux-icon.png' />",
-								 tipo: "LINUX",
-								 txt: (   "Linux è una famiglia di sistemi operativi di tipo Unix-like, rilasciati sotto varie possibili distribuzioni, aventi la caratteristica comune di utilizzare come nucleo il kernel Linux." + '<br />' )
-								},
+    /*Funzioni:*/
+    {
+        /*Presentazioni*/
+        {
+            function presentazione_gioco() {//presentazione gioco
+                //log:
+                var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: " + col_msg_pres_gioco + ";'> Presentazione Gioco</b><br />";
 
-								{// "WINDOWS"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Folders-OS-Windows-8-Metro-icon.png' />",
-								 tipo: "WINDOWS",
-								 txt: (   "Microsoft Windows (abbreviazioni comunemente utilizzate: \"Windows\" o \"Win\") è una famiglia di ambienti operativi e sistemi operativi dedicati ai personal computer, alle workstation, ai server e agli smartphone. Il sistema operativo si chiama così per via della sua interfaccia di programmazione a finestre (dette \"windows\" in lingua inglese)." + '<br />' )
-								},
+                //bottoni:
+                var bottoni_finestra = bottone_avvia_gioco
+                        + " "
+                        + bottone_pres_regole;
 
-								{// "APPLE"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/danleech/simple/64/apple-icon.png' />",
-								 tipo: "APPLE",
-								 txt: (   "Apple Inc. è un'azienda informatica statunitense che produce sistemi operativi, computer e dispositivi multimediali con sede a Cupertino, nello stato della California." + '<br />' )
-								},
+                //carica contenitore:
+                /*margin: 4px  //sopra
+                 4px  //destra
+                 4px  //sotto
+                 4px; //sinistra*/
+                $('#contenitore_campo_console').html('<div id="div_pres_gioco" style="background-color: #7FFFD4; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
+                        + '<br /><br /><br />'
+                        + '<b><u><h1 class="center marginpadding"><font color=#5D8AA8>Presentazione del gioco</font></h1></u></b>'
+                        + '<br /><br /><br />'
+                        + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + recupera_testo(default_lingua, "Presentazione gioco") + '</font></p>'
+                        + '<br /><br />'
+                        + '<p>' + bottoni_finestra + '</p>'
+                        + '<br /><br />'
+                        + '</div>'
+                );
+                $('#div_pres_gioco').fadeIn(3500);
+            }
 
-								{// "SOFTWARE"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/apathae/wren/64/Applications-icon.png' />",
-								 tipo: "SOFTWARE",
-								 txt: (   "Il software, in informatica, è l'informazione o le informazioni utilizzate da uno o più sistemi informatici e memorizzate su uno o più supporti informatici. Tali informazioni possono essere quindi rappresentate da uno o più programmi, oppure da uno o più dati, oppure da una combinazione delle due." + '<br />' )
-								},
+            function presentazione_regole() {//presentazione regole
+                //log:
+                var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: " + col_msg_pres_regole + ";'> Presentazione Regole</b><br />";
 
-								{// "DESKTOP"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/delacro/id/64/Desktop-icon.png' />",
-								 tipo: "DESKTOP",
-								 txt: (   "Un ambiente desktop (in lingua inglese desktop environment che tradotto letteralmente significa \"ambiente della scrivania\", abbrev. DE, o anche desktop, in italiano scrivania), in informatica, è un'interfaccia grafica di un sistema operativo che permette ad un utente di utilizzare il computer o il software in maniera user-friendly tramite l'interazione con oggetti grafici come le icone, le finestre, le scrollbar, la barra delle applicazioni, il menù, ecc... disegnati sullo schermo del monitor in quella che è chiamata metafora della scrivania, in maniera del tutto simile a quanto accade con le interfacce grafiche delle applicazioni." + '<br />' )
-								},
+                //bottoni:
+                var bottoni_finestra = bottone_avvia_gioco;
 
-								{// "MOUSE"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/64/Apps-preferences-desktop-mouse-icon.png' />",
-								 tipo: "MOUSE",
-								 txt: (   "Il mouse è un dispositivo o periferica di input di un computer in grado di inviare in ingresso al sistema un comando da parte dell'utente in modo tale che ad un suo movimento su una base solida piana ne corrisponda uno analogo da parte di un indicatore sullo schermo del monitor detto puntatore. È inoltre dotato di uno o più tasti ai quali possono essere assegnate varie funzioni." + '<br />' )
-								},
+                //carica contenitore
+                $('#contenitore_campo_console').html('<div id="div_pres_regole" style="background-color: #FFBF00; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
+                        + '<br /><br />'
+                        + '<b><u><h1 class="center marginpadding"><font color=#A98307>Descrizione regole gioco</font></h1></u></b>'
+                        + '<br />'
+                        + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + recupera_testo(default_lingua, "Regole") + '</font></p><br />'
+                        + '<p>' + bottoni_finestra + '</p>'
+                        + '<br /><br />'
+                        + '</div>'
+                );
+                $('#div_pres_regole').fadeIn(3500);
+            }
 
-								{// "TASTIERA"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/64/Devices-input-keyboard-icon.png' />",
-								 tipo: "TASTIERA",
-								 txt: (   "La tastiera (in lingua inglese keyboard), nell'ambito dell'informatica, è un dispositivo (o periferica) di input di un computer atto all'inserimento manuale di dati nella memoria del computer e al controllo del computer stesso." + '<br />' )
-								},
+            function presentazione_obbiettivo_raggiunto(pos_obb) {//presentazione obbiettivo
+                //memorizza comando presente nella barra comando:
+                temp_comando = $("#comando").val();
 
-								{// "TABLET"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/adidadidu/ipad/64/iPad-Landscape-Blank-icon.png' />",
-								 tipo: "TABLET",
-								 txt: (   "Il tablet PC (lett. PC tavoletta) è un computer portatile che grazie alla presenza di uno o più digitalizzatori (digitizers, in inglese) permette all'utente di interfacciarsi con il sistema direttamente sullo schermo mediante una penna e, in particolari modelli, anche le dita. Il tablet PC è di fatto un normale Personal Computer portatile con capacità di input diverse." + '<br />' )
-								},
+                //bottoni:
+                var bottoni_finestra = bottone_chiudi;
 
-								{// "APP"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/vargas21/aquave-metal/64/Apps-icon.png' />",
-								 tipo: "APP",
-								 txt: (   "Con il neologismo app s'intende una variante delle applicazioni informatiche dedicate ai dispositivi di tipo mobile, quali smartphone e tablet. Il termine deriva proprio dall'abbreviazione di \"applicazione\"." + '<br />' )
-								},
+                //testo obbiettivo
+                var txt_obb = recupera_testo_obbiettivo(default_lingua);
 
-								{// "IOS"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/musett/iphone-4/64/iPhone-Black-iOS-icon.png' />",
-								 tipo: "IOS",
-								 txt: (   "iOS (precedentemente iPhone OS) è un sistema operativo sviluppato da Apple per iPhone, iPod touch e iPad." + '<br />' )
-								},
+                //visualizza testo
+                $('#contenitore_campo_console').html('<div id="div_obbiettivi" style="background-color: yellow; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
+                        + '<br /><br />'
+                        + '<b><h1 class="center marginpadding">' + txt_obb.jpg + ' <u><font color=#A98307>Presentazione obbiettivo: ' + txt_obb.tit + '</font></u></h1></b>'
+                        + '<br />'
+                        + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + txt_obb.txt + '</font></p><br />'
+                        + '<p>' + bottoni_finestra + '</p>'
+                        + '<br /><br />'
+                        + '</div>'
+                );
 
-								{// "ANDROID"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Folders-OS-Android-Metro-icon.png' />",
-								 tipo: "ANDROID",
-								 txt: (   "In informatica Android è un sistema operativo per dispositivi mobili sviluppato da Google Inc. sulla base del kernel Linux. Android è stato progettato principalmente per smartphone e tablet, con interfacce utente specializzate per televisori (Android TV), automobili (Android Auto), orologi da polso (Android Wear), occhiali (Google Glass), e altri." + '<br />' )
-								},
 
-								{// "SIRI"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/pelfusion/folded-flat/64/Siri-icon.png' />",
-								 tipo: "SIRI",
-								 txt: (   "Siri è un software basato sul riconoscimento vocale integrato da Apple nell'iPhone 4S, nell'iPhone 5, nell iPad Air, nell'iPad (quarta generazione), nell'iPad (terza generazione), nell'iPad mini, nell'iPod Touch 5G, nell'iPhone 5s e nell'iPhone 5c, e pubblicizzato come \"assistente personale\". Siri è stato presentato da Tim Cook il 4 ottobre 2011 all'evento \"Let's talk iPhone\" e reso disponibile il 12 ottobre 2011 in versione beta. Siri, grazie all'uscita di iOS 6, è disponibile anche in italiano. Il nome 'siri' in norvegese significa \"bella donna che ti porta alla vittoria\"." + '<br />' )
-								},
+                $('#div_obbiettivi').fadeIn(3500);
+            }
 
-								{// "UBUNTU"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Folders-OS-Ubuntu-Metro-icon.png' />",
-								 tipo: "UBUNTU",
-								 txt: (   "Ubuntu ([uːˈbuːntuː], [ùbúntú] in zulu, una filosofia di origine sudafricana) è una distribuzione GNU/Linux, basata su Debian, nata nel 2004. La sua principale caratteristica è la focalizzazione sull'utente e la facilità di utilizzo. Essa viene pubblicata come software libero sotto licenza GNU GPL, è distribuita gratuitamente ed è liberamente modificabile. Ubuntu è orientata all'utilizzo desktop e pone una grande attenzione al supporto hardware. È prevista una nuova versione ogni sei mesi." + '<br />' )
-								},
+            function presentazione_gioco_completato() {//presentazione fine gioco
+                /*log:*/
+                {
+                    //creo testo per log
+                    var temp_log = (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: " + col_msg_pres_gioco_completato + ";'> Presentazione fine Gioco </b><br />"
+                            + (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: " + col_msg_fine + ";'> Gioco completato </b><br />";
+                    //agg. variabile
+                    var_log += temp_log;
+                    //agg. div
+                    $("#log_eventi").append(temp_log);
+                }
 
-								{// "LAN"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/rimshotdesign/milkanodised/64/Internet-Connect-icon.png' />",
-								 tipo: "LAN",
-								 txt: (   "In informatica e telecomunicazioni una Local Area Network (LAN) (in italiano rete in area locale, o rete locale) è una rete informatica di collegamento tra più computer, estendibile anche a dispositivi periferici condivisi, che copre un'area limitata, come un'abitazione, una scuola, un'azienda o un complesso di edifici adiacenti. Si differenzia dalle Wide Area Network (WAN) non solo per l'estensione geografica più limitata ma anche perché consente migliori prestazioni in termini di velocità di trasferimento dei dati e non richiede di utilizzare circuiti dedicati su tratte telefoniche (leased line)." + '<br />' )
-								},
+                //bottoni:
+                var bottoni_finestra = bottone_riavvia_gioco;
 
-								{// "ETHERNET"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/Ethernet-Cable-icon.png' />",
-								 tipo: "ETHERNET",
-								 txt: (   "Ethernet è una famiglia di tecnologie standardizzate per reti locali, sviluppato a livello sperimentale da Robert Metcalfe e David Boggs (suo assistente) allo Xerox PARC, che ne definisce le specifiche tecniche a livello fisico (connettori, cavi, tipologia di trasmissione, etc.) e a livello MAC del modello architetturale di rete ISO-OSI." + '<br />' )
-								},
+                //"Ringraziamenti"
 
-								{// "WIFI"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/custom-icon-design/mono-general-3/64/wifi-icon.png' />",
-								 tipo: "WIFI",
-								 txt: (   "Il termine Wi-Fi, nel campo delle telecomunicazioni, indica una tecnologia ed i relativi dispositivi che consentono a terminali di utenza di collegarsi tra loro attraverso una rete locale in modalità wireless (WLAN) basandosi sulle specifiche dello standard IEEE 802.11. <br />A sua volta la rete locale così ottenuta può essere allacciata alla rete Internet per il tramite di un router e usufruire di tutti i servizi di connettività offerti da un ISP. <br />Qualunque dispositivo o terminale di utenza (computer, cellulare, palmare, tablet ecc.) può connettersi a reti di questo tipo se integrato con le specifiche tecniche del protocollo Wi-Fi." + '<br />' )
-								},
+                //carica contenitore
+                $('#contenitore_campo_console').html('<div id="div_gioco_completato" style="background-color: #CCFF00; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
+                        + '<br /><br /><br />'
+                        + '<b><u><h1 class="center marginpadding"><font color=#6B8E23 size="8">Gioco completato</font></h1></u></b>'
+                        + '<br /><br /><br />'
+                        + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="center"><font size="4">' + recupera_testo(default_lingua, "Ringraziamenti") + '</font></p><br />'
+                        + '<br /><br />'
+                        + '<p>' + bottoni_finestra + '</p>'
+                        + '<br /><br />'
+                        + '</div>'
+                );
 
-								{// "BLUETOOTH"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/simply-styled/64/Bluetooth-icon.png' />",
-								 tipo: "BLUETOOTH",
-								 txt: (   "Nelle telecomunicazioni Bluetooth è uno standard tecnico-industriale di trasmissione dati per reti personali senza fili (WPAN: Wireless Personal Area Network). Fornisce un metodo standard, economico e sicuro per scambiare informazioni tra dispositivi diversi attraverso una frequenza radio sicura a corto raggio." + '<br />' )
-								},
+                $('#div_gioco_completato').fadeIn(3500);
+            }
+        }
 
-								{// "DHCP"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/Modem-icon.png' />",
-								 tipo: "DHCP",
-								 txt: (   "In telecomunicazioni e informatica il Dynamic Host Configuration Protocol (DHCP) (protocollo di configurazione IP dinamica) è un protocollo di rete di livello applicativo che permette ai dispositivi o terminali di una certa rete locale di ricevere dinamicamente a ogni richiesta di accesso a una rete IP (quale Internet) la configurazione IP necessaria per stabilire una connessione e operare su una rete più ampia basata su Internet Protocol, cioè interoperare con tutte le altre sottoreti scambiandosi dati, purché anch'esse integrate allo stesso modo con il protocollo IP." + '<br />' )
-								},
+        function Struttura_campo() {//crea struttura pagina gioco
+            return cmp_completo =
+                    '	<div class="col-xs-9" style="height: 100%; min-height: 598px; min-width:850; width: auto;" class="center" id="Utility">'
+                    + '		<h2 class="center">Campo di gioco <font size="2">[ Liv. <i id="dett_liv">' + livello + '</i> Mappa <i id="dett_mappa">' + mappa + '</i> ]</font></h2>'
+                    + '		<div class="campo" id="Campo_di_gioco" overflow: scroll;> </div>'
+                    + '	</div>'
 
-								{//"STAMPANTE"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/Inkjet-Printer-icon.png' />",
-								 tipo: "STAMPANTE",
-								 txt: (   "In informatica la stampante o unità di stampa è una periferica di output di un PC che si contraddistingue per svolgere l'operazione di stampa di dati scelti dall'utente. Attraverso la stampante il computer è quindi in grado di trasferire immagini e/o testi su carta." + '<br />' )
-								},
+                    + '	<div class="col-xs-3" style="height: 100%; min-height: 598px; width: auto;" class="center" id="Console">'
 
-								{//"DVD"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/HD-DVD-icon.png' />",
-								 tipo: "DVD",
-								 txt: (   "Il DVD, sigla di Digital Versatile Disc (in italiano Disco Versatile Digitale, originariamente Digital Video Disc, Disco Video Digitale) è un supporto di memoria di tipo ottico." + '<br />' )
-								},
+                    + '		<div id="Comando">'
+                    + '			<h2 class="center">Console ' + bussola_img + '</h2>'
+                    + '          <p>Inserisci comando</p>'
+                    + '		    <p class="center">'
+                    + '				<input type="text" value="' + temp_comando + '" class="form-control" id="comando"> <br />'
+                    + '			    <a class="btn btn-default" href="#" role="button" onclick="esegui_comando()">Esegui</a>'
+                    + '			    <a class="btn btn-default" href="#" role="button">Cancella</a>'
+                    + '			</p>'
+                    + '	    </div>'
 
-								{//"RCA"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/RCA-Connector-Plug-icon.png' />",
-								 tipo: "RCA",
-								 txt: (   "I connettori RCA sono connettori spesso utilizzati nel campo dell'audio semiprofessionale, amatoriale e anche nel video come connettore per il video composito, ma anche adibiti ad altri usi. Il nome \"RCA\" deriva dalla Radio Corporation of America, che progettò questo tipo di connettore negli anni quaranta per permettere la connessione dei giradischi agli amplificatori." + '<br />' )
-								},
+                    + '		<div class="center" id="Opzioni">'
+                    + '      	<form action="">'
+                    + '  			<fieldset>'
+                    + '   				<legend>Opzioni:</legend>'
+                    + '					<p style="margin: 1px 1px 1px 15px;" align="justify">'
+                    + '   					<input id="normalize" onclick="mem_opz_ut_normalizza()" type="checkbox" name="Normalizza" ' + (temp_ut_normalizza ? 'checked="checked"' : "") + ' value="1"/> Non considerare gli spazi <br /> '
+                    + '   					<input id="casesensible" onclick="mem_opz_ut_case_sensitive()" type="checkbox" name="Caseseinsible" ' + (temp_ut_case_sensitive ? 'checked="checked"' : "") + ' value="1"/> Non considerare maiuscole minuscole <br /> '
+                    + '   					<input id="vis_griglia" onclick="visualizza_nascondi_griglia_sempre()" type="checkbox" name="vis_griglia" ' + (var_vis_griglia ? 'checked="checked"' : "") + ' value="1" ' + (perm_ut_mod_vis_griglia ? '' : 'disabled=”disabled”' ) + '/> Visualizza sempre la griglia<br /> '
+                    + '                  </p>'
+                    + '  			</fieldset>'
+                    + '  		</form>'
+                    + '      </div>'
 
-								{//"USB"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/USB-icon.png' />",
-								 tipo: "USB",
-								 txt: (   "In elettronica l'Universal Serial Bus (USB) è uno standard di comunicazione seriale che consente di collegare diverse periferiche a un computer. È stato progettato per consentire a più periferiche di essere connesse usando una sola interfaccia standardizzata e un solo tipo di connettore e per migliorare la funzionalità plug and play consentendo di collegare o scollegare i dispositivi senza dover riavviare il computer (hot swap)." + '<br />' )
-								},
+                    + '		<div class="' + (panel_liv ? "center" : "hidden") + '" id="Livello">'
+                    + '      <h2 class="center">Liv.</h2>'
+                    + '      	<p class="center">'
+                    + bottone_Liv_successivo + ' <u id="bt_vis_griglia">' + bottone_Vis_Nasc_griglia + '</u>'
+                    + '          </p>'
+                    + '      </div>'
 
-								{//"CAMERA"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/64/Security-Camera-icon.png' />",
-								 tipo: "CAMERA",
-								 txt: (   "La videocamera (in inglese camcorder) è l'unione tra una telecamera e un videoregistratore. Prima della sua invenzione, un operatore doveva portarsi dietro un registratore a nastro e impugnare con la mano una telecamera. Con la sua nascita gli apparecchi hanno cominciato a essere più piccoli e maneggevoli, e sono stati creati nuovi formati di nastri adatti per le dimensioni ridotte dell'apparecchio." + '<br />' )
-								},
+                    + '		<div id="Log_eventi">'
+                    + '		    <h2 class="center">Log eventi</h2>'
+                    + '		    <div id="log_eventi" style="height: 330px; overflow: scroll;">'
+                    + '		    	<p>Elenco avvenimenti e comandi errati:</p>'
+                    + '		    </div>'
+                    + '		</div>'
 
-								{//"PHOTOSHOP"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Apps-Adobe-Photoshop-Metro-icon.png' />",
-								 tipo: "PHOTOSHOP",
-								 txt: (   "Adobe Photoshop è un software proprietario prodotto dalla Adobe Systems Incorporated specializzato nell'elaborazione di fotografie (fotoritocco) e, più in generale, di immagini digitali." + '<br />' )
-								},
+                    + '      <br />'
+                    + '	</div>'
+        }
 
-								{//"YOUTUBE"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Web-YouTube-Metro-icon.png' />",
-								 tipo: "YOUTUBE",
-								 txt: (   "YouTube è una piattaforma web, fondata nel 2005, che consente la condivisione e visualizzazione in rete di video (video sharing). Di proprietà di Google Inc. da ottobre 2006, è il terzo sito web più visitato al mondo dopo Google e Facebook]. L'azienda ha sede a San Jose (California) e utilizza Adobe Flash Video per visualizzare una vasta gamma di video che però viene sostituita da un'applicazione proprietaria del sito web nel caso l'utente abbia attivato la prova beta." + '<br />' )
-								},
+        function attiva_disattiva_pannelli_nascosti() {//nascondi/visualizza il panello
+            panel_liv = panel_liv ? false : true;
 
-								{//"HP"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Web-HP-Metro-icon.png' />",
-								 tipo: "HP",
-								 txt: (   "La Hewlett-Packard Company (nota anche con la sola sigla HP) è una multinazionale statunitense dell'informatica attiva sia nel mercato dell'hardware (dai personal computer ai server e, nel mercato di massa, per le stampanti per le quali è uno dei maggiori produttori mondiali) quanto in quello del software e dei servizi collegati all'informatica. Ad inizio 2011 era il primo produttore mondiale di computer portatili per unità vendute." + '<br />' )
-								},
+            if (livello != null) {
+                $('#contenitore_campo_console').html();
 
-								{//"RAM"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Drives-RAM-Metro-icon.png' />",
-								 tipo: "RAM",
-								 txt: (   "La RAM, acronimo dell'inglese Random Access Memory ovvero memoria ad accesso casuale, è un tipo di memoria informatica caratterizzata dal permettere l'accesso diretto a qualunque indirizzo di memoria con lo stesso tempo di accesso." + '<br />' )
-								},
+                ricarica_partita();
+            }
+        }
 
-								{//"WIKIPEDIA"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/64/Web-Wikipedia-alt-2-Metro-icon.png' />",
-								 tipo: "WIKIPEDIA",
-								 txt: (   "Wikipedia è una enciclopedia online, collaborativa multilingue e gratuita, nata nel gennaio del 2001, supportata dalla Wikimedia Foundation, una organizzazione non a scopo di lucro statunitense." + '<br />' )
-								},
+        function mem_opz_ut_case_sensitive() {//memorizza opzione normalize utente
+            //memorizza opzione:
+            temp_ut_case_sensitive = (document.getElementById("casesensible")).checked;
 
-								{//"SYMANTEC"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/hopstarter/orb/64/Symantec-icon.png' />",
-								 tipo: "SYMANTEC",
-								 txt: (   "La Symantec è un'azienda statunitense, nata nel 1982 e nota principalmente per la produzione di software destinato a salvaguardare la sicurezza dei computer da attacchi informatici." + '<br />' )
-								},
-								
-								{//"NFC"
-								 lingua: 'IT',
-								 utilizzato: false,
-								 jpg: "<img src='http://icons.iconarchive.com/icons/icons8/windows-8/64/Mobile-Nfc-Sign-icon.png' />",
-								 tipo: "NFC",
-								 txt: (   "Near Field Communication (NFC) (in italiano letteralmente \"Comunicazione in prossimità\") è una tecnologia che fornisce connettività wireless (RF) bidirezionale a corto raggio (fino a un massimo di 10 cm). È stata sviluppata congiuntamente da Philips, LG, Sony e Nokia."
-								 + '<br />' )
-								}
-								
-							]	
-					}
-				}
-				
-				/*Debug*/{
-					//Tutti i Debug:
-					var var_debug_all = false;
-					
-					//Specifica funzione:
-					var var_debug_pos_sprite_array = false;
-					var var_debug_spost_personaggio = false;
-					var var_debug_carica_sprite = false;
-					var var_debug_pos_utilizzata = false;
-					var var_debug_ostacoli_tragitto = false;
-					var var_debug_ragg_sprite = false;
-					var var_debug_obb_raggiunto = false;
-					var var_debug_liv_successivo = false;
-					var var_debug_carica_livello = false;
-					var var_debug_spost_comando_non_valido = false;
-					var var_debug_recupera_comando = false;
-					
-					//utility debug:
-					var avvio_rapido = false;
-					
-					//forzature visualizzazione
-					var var_vis_elm_celle = false; //contenuto cella
-					var var_vis_griglia = false;   //griglia
-					var panel_liv = false;         //panello per salvare livelli
-				}
-				
-				/*Obbiettivi*/{
-					var num_obbiettivi = 0;//num obb. mappa
-					var num_obbiettivi_disponibili = testi_obbiettivi.length; //num obb. utilizzabili
-					var num_obb_raggiunto = 0; //num obb. raggiunto se caricati in sequenza
-				}
-				
-				/*Livelli*/{
-					//Elementi livelli
-					var liv_min_obbiettivi = 2;
-					var liv_min_ostacoli = 3;
-					
-					//numero livelli e mappe abbinate
-					var liv_map = [
-									{liv: 1, mp: 2}, //vuoto
-									{liv: 2, mp: 2}, //+ obbiettivi
-									{liv: 3, mp: 5}  //+ ostacoli
-								  ];
-				}
-				
-				/*posizioni*/{
-					//array posizioni
-						var posizioni = 
-							[
-								// {coordinate:"", oggetto:"Personaggio", number:0, completato:false, riga:0, colonna:0}, //personaggio
-								// {coordinate:"", oggetto:"Exit",        number:0, completato:false, riga:0, colonna:0}, //exit
-								// {coordinate:"", oggetto:'Ostacolo',    number:0, completato:false, riga:0, colonna:0}  //ostacolo
-								// {coordinate:"", oggetto:'Obbiettivo',  number:0, completato:false, riga:0, colonna:0}  //obbiettivo
-								
-								// {coordinate:"", oggetto:'Percorso',    number:0, completato:false, riga:0, colonna:0}  //Percorso
-							];
-					}
-				
-				/*campo*/{
-					/*sfondo*/{
-						var background_color_campo = '#ffcc00';
-						var colore_griglia_se_visualizzata = '#FFDEAD';
-						var colore_testo_campo = var_vis_elm_celle ? 'black' : background_color_campo;
-					}
-					 
-					var sep_rig_col = "_"; //attenzione a caratteri accettati per id
-					  
-					//marcatore celle vuote
-						var rg_pos_vuota = ".......";
-						var pos_vuota =   rg_pos_vuota
-										+ "<p>"
-										+ rg_pos_vuota
-									  ;
-									  
-					//marcatore celle attraversate
-						var pos_attraversata =   "<i style='color: " + colore_testo_campo + ";'>......</i>"
-											   + "<p>"
-											   + "<i style='color: " + colore_testo_campo + ";'>...</i>*<i style='color: " + colore_testo_campo + ";'>...</i>"
-											 ;
-					
-					//dimensioni:
-						var num_righe = 21; //ex16;
-						var num_colonne = 24; //ex14;	
-				}
-				
-				/*sprite*/{
-					//opzioni:
-					var vuota_attrav_img = true;//cella vuota e percorso sono immagini
-					
-					/*busola:*/{
-						var bussola_img =
-							'<img id="bussola_00" src="./sprite/bussola.png" style="margin: 0; padding: 0;">';
-					}
-					
-					/*personaggio:*/{
-						var personaggio_img = 
-							//'<img id="personaggio_01" src="http://icons.iconarchive.com/icons/itzikgur/my-seven/32/Girls-Blue-Dress-icon.png" style="margin: 0; padding: 0;">';
-							//'<img id="personaggio_02" src="http://icons.iconarchive.com/icons/raindropmemory/harmonia-pastelis/32/hp-girl-icon.png" style="margin: 0; padding: 0;">';
-							'<img id="personaggio_00" src="./sprite/personaggio.png" style="margin: 0; padding: 0;">';
-					}
-					
-					/*uscita:*/{
-						var exit_img = 
-							//'<img id="exit_01" src="http://icons.iconarchive.com/icons/iconsmind/outline/32/Door-icon.png" style="margin: 0; padding: 0;">';
-							//'<img id="exit_02" src="http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-6/32/logout-icon.png" style="margin: 0; padding: 0;">';
-							'<img id="exit_00" src="./sprite/exit.png" style="margin: 0; padding: 0;">';
-					}
-					
-					/*Ostacolo:*/{
-						var ostacolo_img =
-							//'<img id="ostacolo_01" src="http://icons.iconarchive.com/icons/hybridworks/yoritsuki/32/Shoji2-paper-sliding-door-icon.png" style="margin: 0; padding: 0;">';
-							//'<img id="ostacolo_02" src="http://icons.iconarchive.com/icons/hybridworks/yoritsuki/32/Shoji1-paper-sliding-door-icon.png" style="margin: 0; padding: 0;">';
-							'<img id="ostacolo_00" src="./sprite/wall.png" style="margin: 0; padding: 0;">';
-					}
-					
-					/*Obbiettivo:*/{
-						var obbiettivo_img =
-							//'<img id="obbiettivo_01" src="http://icons.iconarchive.com/icons/iconka/st-patricks-day/32/shamrock-lucky-icon.png" style="margin: 0; padding: 0;">';
-							'<img id="obbiettivo_00" src="./sprite/quadrifoglio.png" style="margin: 0; padding: 0;">';
-					}
-					
-					/*Vuota:*/{
-						var pos_vuota_img =
-						    '<img id="pos_vuota_00" src="./sprite/vuota.png" style="margin: 0; padding: 0;">';
-					}
-					
-					/*Percorso:*/{
-						var pos_attraversata_img =
-						    '<img id="pos_attraversata_00" src="./sprite/attraversata.png" style="margin: 0; padding: 0;">';
-					}
-				}
-				
-				/*Log:*/{
-					//orario avvio:
-					data_avvio_gioco = new Date();
-					  
-					//Log:
-					var var_log = ((data_avvio_gioco.toTimeString()).split(' ')[0]) + " : <b style='color: "+ col_msg_inizio +";'> Start</b><br />";
-				}
-				
-				/*Bottoni*/{
-					var size_txt_bt_principali = 4;
-					var size_txt_bt_pan_opzioni_nascoste = 2;
-				
-					var bottone_avvia_gioco      =   '<a class="btn btn-default" href="#" role="button" onclick="avvia_gioco()">'
-					                               + '<font size="'+size_txt_bt_principali+'">Avvia il gioco</font></a>';
-					var bottone_pres_regole      =   '<a class="btn btn-default" href="#" role="button" onclick="presentazione_regole()">'
-					                               + '<font size="'+size_txt_bt_principali+'">Presentazione delle regole</font></a>';
-					var bottone_chiudi           =   '<a class="btn btn-default" href="#" role="button" onclick="ricarica_partita()">'
-					                               + '<font size="'+size_txt_bt_principali+'">Chiudi</font></a>';
-				    var bottone_riavvia_gioco    =   '<a class="btn btn-default" href="index_gioco.html" role="button" onclick="index_gioco.html">'
-					                               + '<font size="'+size_txt_bt_principali+'">Riavia gioco</font></a>';
-					
-					//pannello nascosto:
-					var bottone_Liv_successivo   =   '<a class="btn btn-default" href="#" role="button" onclick="carica_livello()">'
-                                                   + '<font size="'+size_txt_bt_pan_opzioni_nascoste+'">Liv. Successivo</font></a>';	
-					
-					/*bottone_Vis_Nasc_griglia*/
-					var bottone_Vis_Nasc_griglia = null;
-				}
-			}  
-			  
-			/*MAIN:*/{
-				$(document).ready(function(){
-					avvio_rapido ? avvia_gioco() : presentazione_gioco();
-				});
-			}
-			
-			/*Funzioni:*/{			
-				/*Presentazioni*/{
-					function presentazione_gioco(){//presentazione gioco
-						//log:
-						var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: "+ col_msg_pres_gioco +";'> Presentazione Gioco</b><br />";
-					  
-						//bottoni:
-						var bottoni_finestra =   bottone_avvia_gioco
-						                       + " "
-											   + bottone_pres_regole;
-						
-						//carica contenitore: 
-						        /*margin: 4px  //sopra
-								          4px  //destra 
-										  4px  //sotto 
-										  4px; //sinistra*/
-						$('#contenitore_campo_console').html(   '<div id="div_pres_gioco" style="background-color: #7FFFD4; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
-						                                      + '<br /><br /><br />'
-															  + '<b><u><h1 class="center marginpadding"><font color=#5D8AA8>Presentazione del gioco</font></h1></u></b>'
-															  + '<br /><br /><br />'
-															  + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + recupera_testo(default_lingua, "Presentazione gioco") + '</font></p>'
-															  + '<br /><br />'
-															  + '<p>'+bottoni_finestra+'</p>'
-															  + '<br /><br />'
-															  + '</div>'
-															);
-						$('#div_pres_gioco').fadeIn(3500);
-					}
-					  
-					function presentazione_regole(){//presentazione regole
-						//log:
-						var_log += (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: "+ col_msg_pres_regole +";'> Presentazione Regole</b><br />";
-					  
-						//bottoni:
-						var bottoni_finestra = bottone_avvia_gioco;
-						
-						//carica contenitore
-						$('#contenitore_campo_console').html(   '<div id="div_pres_regole" style="background-color: #FFBF00; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
-						                                      + '<br /><br />'
-															  + '<b><u><h1 class="center marginpadding"><font color=#A98307>Descrizione regole gioco</font></h1></u></b>'
-															  + '<br />'
-															  + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + recupera_testo(default_lingua, "Regole") + '</font></p><br />'
-															  + '<p>'+bottoni_finestra+'</p>'
-															  + '<br /><br />'
-															  + '</div>'
-															);
-						$('#div_pres_regole').fadeIn(3500);
-					}
+            /*log:*/
+            {
+                //genera elemento log
+                var temp_log = (((new Date()).toTimeString()).split(' ')[0])
+                                + " : <b style='color: " + col_msg_opzioni + ";'>"
+                                + (!temp_ut_case_sensitive ? "Disattivata CaseSensible" : "Attivato CaseSensible")
+                                + "</b><br />"
+                        ;
 
-					function presentazione_obbiettivo_raggiunto(pos_obb){//presentazione obbiettivo
-						//memorizza comando presente nella barra comando:
-						temp_comando = $("#comando").val();
-						
-						//bottoni:
-						var bottoni_finestra = bottone_chiudi;
-						
-						//testo obbiettivo
-						var txt_obb = recupera_testo_obbiettivo(default_lingua);
-						
-						//visualizza testo
-						$('#contenitore_campo_console').html(   '<div id="div_obbiettivi" style="background-color: yellow; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
-						                                      + '<br /><br />'
-															  + '<b><h1 class="center marginpadding">'+txt_obb.jpg+' <u><font color=#A98307>Presentazione obbiettivo: '+txt_obb.tit+'</font></u></h1></b>'
-															  + '<br />'
-															  + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="justify"><font size="4">' + txt_obb.txt + '</font></p><br />'
-															  + '<p>'+bottoni_finestra+'</p>'
-															  + '<br /><br />'
-															  + '</div>'
-															);
-						
-						
-						$('#div_obbiettivi').fadeIn(3500);
-					}
-					
-					function presentazione_gioco_completato(){//presentazione fine gioco
-						/*log:*/{
-							//creo testo per log
-							var temp_log =   (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: "+ col_msg_pres_gioco_completato +";'> Presentazione fine Gioco </b><br />"
-							               + (((new Date()).toTimeString()).split(' ')[0]) + " : <b style='color: "+ col_msg_fine +";'> Gioco completato </b><br />";
-							//agg. variabile
-							var_log += temp_log;
-							//agg. div
-							$("#log_eventi").append(temp_log);
-						}
-						
-						//bottoni:
-						var bottoni_finestra = bottone_riavvia_gioco;
-						
-						//"Ringraziamenti"
-						
-						//carica contenitore
-						$('#contenitore_campo_console').html(   '<div id="div_gioco_completato" style="background-color: #CCFF00; height: 100%; min-height: 598px; width: 100%; display: none;" class="center">'
-						                                      + '<br /><br /><br />'
-															  + '<b><u><h1 class="center marginpadding"><font color=#6B8E23 size="8">Gioco completato</font></h1></u></b>'
-															  + '<br /><br /><br />'
-															  + '<p style="padding: 10; margin: 4px 40px 4px 40px;" align="center"><font size="4">' + recupera_testo(default_lingua, "Ringraziamenti") + '</font></p><br />'
-															  + '<br /><br />'
-															  + '<p>'+bottoni_finestra+'</p>'
-															  + '<br /><br />'
-															  + '</div>'
-															);
-						
-						$('#div_gioco_completato').fadeIn(3500);                                     
-					}
-				}
-				
-				function Struttura_campo(){//crea struttura pagina gioco
-					return cmp_completo =	 
-					                 '	<div class="col-xs-9" style="height: 100%; min-height: 598px; min-width:850; width: auto;" class="center" id="Utility">'
-									+'		<h2 class="center">Campo di gioco <font size="2">[ Liv. <i id="dett_liv">'+livello+'</i> Mappa <i id="dett_mappa">'+mappa+'</i> ]</font></h2>'
-									+'		<div class="campo" id="Campo_di_gioco" overflow: scroll;> </div>'
-									+'	</div>'
-									
-									+'	<div class="col-xs-3" style="height: 100%; min-height: 598px; width: auto;" class="center" id="Console">'
-									
-									+'		<div id="Comando">'
-									+'			<h2 class="center">Console '+bussola_img+'</h2>'
-									+'          <p>Inserisci comando</p>'
-									+'		    <p class="center">'
-									+'				<input type="text" value="'+temp_comando+'" class="form-control" id="comando"> <br />'
-									+'			    <a class="btn btn-default" href="#" role="button" onclick="esegui_comando()">Esegui</a>'
-									+'			    <a class="btn btn-default" href="#" role="button">Cancella</a>'
-									+'			</p>'
-									+'	    </div>'
-									
-									+'		<div class="center" id="Opzioni">'
-									+'      	<form action="">'
-									+'  			<fieldset>'
-									+'   				<legend>Opzioni:</legend>'
-									+'					<p style="margin: 1px 1px 1px 15px;" align="justify">'
-									+'   					<input id="normalize" onclick="mem_opz_ut_normalizza()" type="checkbox" name="Normalizza" '+(temp_ut_normalizza ? 'checked="checked"':"")+' value="1"/> Non considerare gli spazi <br /> '
-									+'   					<input id="casesensible" onclick="mem_opz_ut_case_sensitive()" type="checkbox" name="Caseseinsible" '+(temp_ut_case_sensitive ? 'checked="checked"':"")+' value="1"/> Non considerare maiuscole minuscole <br /> '
-									+'   					<input id="vis_griglia" onclick="visualizza_nascondi_griglia_sempre()" type="checkbox" name="vis_griglia" '+(var_vis_griglia ? 'checked="checked"':"")+' value="1" '+(perm_ut_mod_vis_griglia? '' : 'disabled=”disabled”' )+'/> Visualizza sempre la griglia<br /> '
-									+'                  </p>'
-									+'  			</fieldset>'
-									+'  		</form>'
-									+'      </div>'
-									
-									+'		<div class="'+(panel_liv?"center":"hidden")+'" id="Livello">'
-									+'      <h2 class="center">Liv.</h2>'
-									+'      	<p class="center">'
-									                + bottone_Liv_successivo + ' <u id="bt_vis_griglia">' + bottone_Vis_Nasc_griglia + '</u>'
-									+'          </p>'
-									+'      </div>'
-									
-									+'		<div id="Log_eventi">'
-									+'		    <h2 class="center">Log eventi</h2>'
-									+'		    <div id="log_eventi" style="height: 330px; overflow: scroll;">'
-									+'		    	<p>Elenco avvenimenti e comandi errati:</p>'
-									+'		    </div>'
-									+'		</div>'
-									
-									+'      <br />'
-									+'	</div>'
-				}
+                //agg var. log
+                var_log += temp_log;
 
-				function attiva_disattiva_pannelli_nascosti(){//nascondi/visualizza il panello
-					panel_liv = panel_liv ? false : true;
-					
-					if (livello!=null) {
-						$('#contenitore_campo_console').html();
-						
-						ricarica_partita();
-					}
-				}
-				
-				function mem_opz_ut_case_sensitive(){//memorizza opzione normalize utente
-					//memorizza opzione:
-					temp_ut_case_sensitive = (document.getElementById("casesensible")).checked;
-				
-					/*log:*/{
-						//genera elemento log
-						var temp_log = (((new Date()).toTimeString()).split(' ')[0]) 
-										+ " : <b style='color: "+col_msg_opzioni+";'>"
-										+ (!temp_ut_case_sensitive ? "Disattivata CaseSensible" : "Attivato CaseSensible")
-										+ "</b><br />"
-									;
-						
-						//agg var. log
-						var_log += temp_log;
-						
-						//scrive il log
-						$("#log_eventi").append(""+ temp_log);
-					}
-				}
-				
-				function mem_opz_ut_normalizza(){//memorizza opzione normalize utente
-					//memorizza opzione:
-					temp_ut_normalizza = (document.getElementById("normalize")).checked;
-				
-					/*log:*/{
-						//genera elemento log
-						var temp_log = (((new Date()).toTimeString()).split(' ')[0]) 
-										+ " : <b style='color: "+col_msg_opzioni+";'>"
-										+ (!temp_ut_normalizza ? "Disattivata Normalize" : "Attivato Normalize")
-										+ "</b><br />"
-									;
-						
-						//agg var. log
-						var_log += temp_log;
-						
-						//scrive il log
-						$("#log_eventi").append(""+ temp_log);
-					}
-				}
-				
-				function reset_obbiettivi_raggiunti(){//reset obbiettivi raggiunti
-					for(var i=0; i<testi_obbiettivi.length; i++){
-						testi_obbiettivi[i].utilizzato = true;
-					}
-				}
-				
-				function recupera_testo_obbiettivo(lingua){//recupera il testo dell'obbiettivo da visualizzare
-					/*Trova testo:*/{
-						//indice ciclo
-						var pos_obbiettivo = null;
-						var txt_non_trovato = true;
-						
-						if (random_obb) {
-							var i = 0;
-					
-							while ((i < num_tentativi_random_obb) && txt_non_trovato){
-								//propongo obbiettivo
-								pos_obbiettivo = (Math.floor(Math.random() * num_obbiettivi_disponibili) + 0);
-								
-								//aggiorno testo se trovato
-								if ((var_obb_ripetibili ? true : !(testi_obbiettivi[pos_obbiettivo].utilizzato)) && (testi_obbiettivi[pos_obbiettivo].lingua == lingua)) {
-									   txt_non_trovato = false;
-									 }	
-								else i++;
-							}
-						}
-						
-						if (txt_non_trovato){
-							for(var i=num_obb_raggiunto; i<testi_obbiettivi.length; i++){
-								if ((var_obb_ripetibili ? true : !(testi_obbiettivi[pos_obbiettivo].utilizzato)) && (testi_obbiettivi[pos_obbiettivo].lingua == lingua)) {
-								   pos_obbiettivo = i;
-								   num_obb_raggiunto++;
-								}	
-							}
-						}
-					}
-					
-					//agg. dati obbiettivi:
-					testi_obbiettivi[pos_obbiettivo].utilizzato = true;
-					num_obbiettivi_disponibili--;
-					
-					//torna info obbiettivo:
-					return {tit: testi_obbiettivi[pos_obbiettivo].tipo,
-							txt: testi_obbiettivi[pos_obbiettivo].txt,
-							jpg: testi_obbiettivi[pos_obbiettivo].jpg
-						   };
-				}
-				
-				function recupera_testo(lingua, tipo){//recupera il testo da visualizzare
-					//dove memorizzo il testo
-					var testo = "";
-					
-					/*Trova testo:*/{
-						//indice ciclo
-						var i = 0;
-						var txt_non_trovato = true;
+                //scrive il log
+                $("#log_eventi").append("" + temp_log);
+            }
+        }
 
-						while ((i < testi.length) && txt_non_trovato){
-							//aggiorno testo se trovato
-							if ((testi[i].lingua == lingua) && (testi[i].tipo == tipo)) {
-								testo = testi[i].txt;
-								txt_non_trovato = false;
-							}
-							
-							//aggiorno indice ciclo
-							i++;
-						}
-					}
-					
-					return testo;
-				}
-				
-				function avvia_gioco(){//avvia gioco
-					//aggiorna livello
-					livello = (livello == null) ? 1: livello;
-					mappa = (mappa == null) ? 1: mappa;
-					
-					//genera bottone griglia
-					crea_agg_bottone_vis_griglia();
-					
-					//crea il campo
-					$('#contenitore_campo_console').html(Struttura_campo());
-					//$('#campo_totale').html(codice_campo_console);
-					posizioni=[];
-					crea_griglia();
-					
-					/*log:*/{
-						//agg var. log
-						var_log += (((new Date()).toTimeString()).split(' ')[0]) 
-										+ " : <b style='color: "+ col_msg_avvio_gioco +";'>"
-										+ "  Avvio Gioco"
-										+ "</b><br />"
-									;
-						
-						//scrive il log
-						$("#log_eventi").append(""+ var_log);
-					}
-					
-					//carica la mappa
-					carica_livello(livello, mappa);		
-				}
-				
-				function crea_agg_bottone_vis_griglia(){
-					//aggiorna bottone:
-					bottone_Vis_Nasc_griglia =   '<a class="btn btn-default" href="#" role="button" onclick="visualizza_nascondi_griglia_sempre()">'
-									           + '<font size="'+size_txt_bt_pan_opzioni_nascoste+'">'
-											   + (var_vis_griglia? 'Nascondi Griglia' : 'Visualizza Griglia')
-											   + '</font></a>';
-				}
-				
-				function visualizza_nascondi_griglia_sempre(){//visualizza nascondi griglia missioni
-				    //verifica che sia avviato
-					var_vis_griglia = var_vis_griglia ? false : true;
-					
-					crea_agg_bottone_vis_griglia();
-					
-					/*log:*/{
-						//agg var. log
-						var_log += (((new Date()).toTimeString()).split(' ')[0]) 
-										+ " : <b style='color: "+col_msg_opzioni+";'>"
-										+ (!var_vis_griglia ? "Disattivato vis. griglia" : "Attivato vis. griglia")
-										+ "</b><br />"
-									;
-					}
-					
-					//memorizza comando presente nella barra comando:
-					temp_comando = $("#comando").val();
-					
-					//ricarica partita
-					ricarica_partita();
-				}
-				
-				function crea_griglia(){//crea la griglia del campo				
-					/*ricarica struttura*/{
-						$('#contenitore_campo_console').html(Struttura_campo());
-					}
-					
-					/*crea griglia*/{
-						//imposto che la griglia si veda solo se primo livello o impostato in debug
-						var spes_griglia_campo = ((mappa == 1) || (var_vis_griglia)) ? colore_griglia_se_visualizzata /*visualizza*/ : background_color_campo /*nascondi*/;
-						
-						//stile della tabella
-						var table_style =   'class="main-story-image" '
-										  + 'style='
-											+ '"background-color:' + background_color_campo + '; '
-											+ 'line-height: 19px; '
-											+ 'margin: 4px 4px 4px 4px;'
-											+ '" '
-										  + 'border="1px"'
-										  + 'bordercolor="'+spes_griglia_campo + '"'
-										;
-					
-						//inserisce tag inizio tabella
-						var content = '<div class="table-responsive"><table id="tabella_campo" ' + table_style + '>';
-						
-						//inserisce le varie celle
-						for (var i = 0; i < num_righe; i++) {
-							content += "<tr></tr>";
-							for (var j = 0; j < num_colonne; j++) {			  
-								content += "<td id='" + i + sep_rig_col + j + "'><b style='color: " + colore_testo_campo + ";'>" + (vuota_attrav_img? pos_vuota_img : pos_vuota) + "</b></td>";
-							}
-						}
-						
-						//inserisce tag fine tabella
-						content += "</table></div>";
-					}
-					
-					/*visulizza griglia*/{
-					    $("#Campo_di_gioco").append(content);
-						//$('.campo').append(content);
-					}
-				}
+        function mem_opz_ut_normalizza() {//memorizza opzione normalize utente
+            //memorizza opzione:
+            temp_ut_normalizza = (document.getElementById("normalize")).checked;
 
-				function random_posizione(){//genera random una posizione
-					return (   (Math.floor(Math.random() * num_righe) + 0)   //riga 
-							 + sep_rig_col 
-							 + (Math.floor(Math.random() * num_colonne) + 0) //colonna
-							);
-				}
-				  
-				function posizione_sprite_array(ogg_sprite){//ritorna la posizione nell'array dello sprite indicato
-					//memorizza l'indice della posizione del personaggio/indice ricorsione
-					var loc_arr_pos = 0;
-					
-					while ((posizioni[loc_arr_pos].oggetto) != ogg_sprite){//trova la posizione del personaggio nell'array
-						/*Debug*/{
-							if (var_debug_pos_sprite_array || var_debug_all)
-								alert("Posizione: " + loc_arr_pos + " Valore: " + posizioni[loc_arr_pos].oggetto);
-						}
-						
-						//aggiorna indice
-						loc_arr_pos += 1;
-					}
-					
-					return loc_arr_pos;
-				}
-				  
-				function spostamento_personaggio(azione, spostamento, simula){//simula o effettua lo spostamento del msg	    		
-					/*posizione personaggio*/{
-						//nell'array
-						var loc_arr_pos = posizione_sprite_array("Personaggio");
-						
-						//var temp:
-						var pos_teorica_pers_riga    = posizioni[loc_arr_pos].riga;
-						var pos_teorica_pers_colonna = posizioni[loc_arr_pos].colonna;
-					}
-					
-					/*Debug*/{
-						if(var_debug_spost_personaggio || var_debug_all){
-							alert("Sim spost Personaggio - situazione iniziale \n"
-								  + azione +", "+ spostamento +", "+ simula + "\n"
-								  + "pers.riga: "    + posizioni[loc_arr_pos].riga + " | " + pos_teorica_pers_riga + "\n"
-								  + "pers.colonna: " + posizioni[loc_arr_pos].colonna + " | " + pos_teorica_pers_colonna
-								);
-						}
-					}
-					
-					/*calcola nuova posizione*/{
-						switch(azione){//calcola le nuove coordinate
-							case "N"          :
-							case "Nord"       :
-							case "Su"         :
-							case "Sopra"      :					   
-											   pos_teorica_pers_riga -= spostamento; 
-								break;
-							case "S"          :
-							case "Sud"        :
-							case "Giu"        :
-							case "Sotto"      :					   
-											   pos_teorica_pers_riga += spostamento; 
-								break;
-							case "E"          :
-							case "Est"        :
-							case "Destra"     :
-							case "Dx"         :
-											   pos_teorica_pers_colonna += spostamento; 
-								break;
-							case "O"          :
-							case "Ovest"      :
-							case "Sinistra"   :
-                            case "Sx"         :							
-											   pos_teorica_pers_colonna -= spostamento; 
-								break;
-							case "N-O"         :
-							case "Nord-Ovest" :
-											   pos_teorica_pers_riga -= spostamento;
-											   pos_teorica_pers_colonna -= spostamento;
-								break;
-							case "S-O"         :
-							case "Sud-Ovest"  : 
-											   pos_teorica_pers_riga += spostamento;
-											   pos_teorica_pers_colonna -= spostamento;
-								break;
-							case "N-E"         :
-							case "Nord-Est"   :
-											   pos_teorica_pers_riga -= spostamento;
-											   pos_teorica_pers_colonna += spostamento;
-								break;
-							case "S-E"         :
-							case "Sud-Est"    : 
-											   pos_teorica_pers_riga += spostamento;
-											   pos_teorica_pers_colonna += spostamento;
-								break;
-						}
-					}
-					
-					/*Agg. posizione personaggio se non simulato*/{
-						if (simula != "si"){
-							posizioni[loc_arr_pos].riga = pos_teorica_pers_riga;
-							posizioni[loc_arr_pos].colonna = pos_teorica_pers_colonna;
-							posizioni[loc_arr_pos].coordinate = pos_teorica_pers_riga + sep_rig_col + pos_teorica_pers_colonna;
-						}
-					}
-					
-					/*Debug*/{
-						if(var_debug_spost_personaggio || var_debug_all){
-							alert("Sim spost Personaggio - situazione finale" + "\n"
-								  + "pos: " + posizioni[loc_arr_pos].coordinate + "|" + pos_teorica_pers_riga + sep_rig_col + pos_teorica_pers_colonna + "\n"
-								  + "riga: " + posizioni[loc_arr_pos].riga + " | " + pos_teorica_pers_riga + "\n"
-								  + "colonna: " + posizioni[loc_arr_pos].colonna + " | " + pos_teorica_pers_colonna + "\n"
-								);
-						}
-					}
-					
-					return (pos_teorica_pers_riga + sep_rig_col + pos_teorica_pers_colonna);
-				  }
-				 
-				function posizione_vuota(){//ritorna la prima posizione vuota trovata con random
-					//memorizza possibili posizioni
-					var temp_pos_input = "";
-					
-					//verifica se posizione utilizzata
-					while (posizione_utilizzata(temp_pos_input = random_posizione()));//cicla finche non trova una posizione valida
-					
-					return temp_pos_input;
-				}
-				 
-				function carica_sprite(var_oggetto, var_number, var_completato, sprite, temp_posizione){//carica l'oggetto
-					//carica sprite nella griglia
-					$("#"+temp_posizione).html(sprite);
-					
-					/*carica sprite nell'array:*/{
-						//posizione vuota array:
-						var temp_pos_vettore = posizioni.length;
-						
-						//coordinate sprite:
-						var temp_riga = parseInt(temp_posizione.substring(0, temp_posizione.indexOf(sep_rig_col)));
-						var temp_colonna = parseInt(temp_posizione.substring(temp_posizione.indexOf(sep_rig_col) + 1));
-						
-						//aggiungo elemento all'array
-						posizioni[temp_pos_vettore]= {coordinate:temp_posizione, oggetto: var_oggetto, number: var_number, completato: var_completato, riga: temp_riga, colonna: temp_colonna};
-					}
-							
-					/*Debug*/{
-						if(var_debug_carica_sprite || var_debug_all){
-							alert("Array agg:" + "\n"
-								  + "coordinate: " + posizioni[temp_pos_vettore].coordinate + ", "
-								  + "oggetto: " +  posizioni[temp_pos_vettore].oggetto + ", "
-								  + "number: " +  posizioni[temp_pos_vettore].number + ", "
-								  + "completato: " +  posizioni[temp_pos_vettore].completato + ", "
-								  + "riga: " +  posizioni[temp_pos_vettore].riga + ", "
-								  + "colonna: " +  posizioni[temp_pos_vettore].colonna + ", "
-							);
-						}
-					}
-					
-					return temp_posizione;
-				  }
-		 
-				function verifica_comando(comando, azione, passi, errore_nel_comando){//verifica validità comando
-					
-					var err_sintassi = (    errore_nel_comando 
-					                     || sintassi_comando_errata(comando, azione, passi) 
-									   );
-					var err_spostamento = (    spostamento_comando_non_valido(comando, azione, passi) 
-					                        || ostacoli_nel_tragitto(comando, azione, passi)
-										  );
-					
-					
-					return {err_com:( err_sintassi || err_spostamento ),
-							err_sint: err_sintassi,
-							err_spost: err_spostamento							
-						   };    
-				}
-					  
-				function spostamento_comando_non_valido(comando, azione, passi){//spostamento valido
-					
-					//se numero pazzi validi
-					if (passi > 0) { 
-						//calcola spostamento - simulazione
-						var sim_agg_pos = spostamento_personaggio(azione, passi, 'si');
-						
-						//riga
-						var sim_riga_pers = sim_agg_pos.substring(0,sim_agg_pos.indexOf(sep_rig_col));
-						
-						//colonna
-						var sim_colonna_pers = sim_agg_pos.substring(sim_agg_pos.indexOf(sep_rig_col)+1);
-					}
-					
-					/*Debug*/{
-						if(var_debug_spost_comando_non_valido || var_debug_all){
-							alert( "comando: "+comando+", azione: "+ azione +", passi: " + passi + "\n"
-								   + "val pasi " + ((passi < 1) || (passi == null) || (passi == undefined) || (passi == "") || (isNaN(passi))) + "\n"
-								   + "Sim riga "+ ( sim_riga_pers < 0 || sim_riga_pers > (num_righe -1) ) + "\n"
-								   + "Sim colonna "+ ( sim_colonna_pers < 0 || sim_colonna_pers > (num_colonne -1)) +"\n"
-								 );
-						}
-					}
-					
-					return (     //valore negativo
-								 ((passi < 1) || (passi == null) || (passi == undefined) || (passi == "") || (isNaN(passi)))
-							  || //riga
-								 ( sim_riga_pers < 0 || sim_riga_pers > (num_righe -1) )
-								 //colonna
-							  || ( sim_colonna_pers < 0 || sim_colonna_pers > (num_colonne -1) )
-							);
-				  }
-				
-				function restituisce_time(){//restituisce orario
-					//per log indica orario comando:
-					var data_ora = new Date();
-					var date_ora_text = (data_ora.toTimeString()).split(' ')[0];
-					
-					//tempo trascorso:
-					var tempo_elapsed_text = "";//" [" + (data_avvio_gioco - data_ora) +"]";
-					
-					return {ora_txt: date_ora_text, time_elapsed: tempo_elapsed_text};
-				}
-				
-				function posizione_utilizzata(test_posizione){//verifica se la posizione indicata contiene uno sprite
-					//variabile controllo ciclo risultato
-					posizione_occupata = false;	
-					
-					/*verifica se la coordinata è presente nell'array*/{
-						for (var i = 0; i < posizioni.length; i++){
-							if (posizioni[i].coordinate == test_posizione) {
-								posizione_occupata = true;
-							}
-							
-							/*Debug*/{
-								if(var_debug_pos_utilizzata || var_debug_all){
-									alert("Ver posizione (" + i + ")\n"
-										  + "utilizzata: " + posizioni[i].coordinate 
-										  + " | " 
-										  + "proposta:   " + test_posizione
-										 );
-								}
-							}
-						}
-					}
-					
-					return posizione_occupata;
-				}
-				
-				function ostacoli_nel_tragitto(comando, azione, passi){//verifica presenza ostacoli lungo il tragitto
-					//variabile controllo ciclo risultato
-					var ostacolo_presente = false;
-					
-					/*verifica tutte le posizioni del tragitto*/{
-						for (var step_ver_perc_ost = 0; step_ver_perc_ost < passi; step_ver_perc_ost++){
-							
-							//verifica se nella posizione "n" è presente un'ostacolo
-							if (raggiunto_sprite(spostamento_personaggio(azione, step_ver_perc_ost+1, "si"), 'Ostacolo').bool) {
-								ostacolo_presente = true;
-							}
-							
-							/*Debug*/{
-								if(var_debug_ostacoli_tragitto || var_debug_all){
-									alert(   "comando: "+comando + ", azione: " + azione + ", passi: " + passi +"\n"
-										   + "sim - posizione attuale " + step_ver_perc_ost + "\n"
-										   + "sim - nuova posizione   " + spostamento_personaggio(azione, step_ver_perc_ost+1, "si") + "\n"
-										   + "ostacolo percorso       " + (raggiunto_sprite(spostamento_personaggio(azione, step_ver_perc_ost+1, "si"), 'Ostacolo').bool)   
-										  )
-								}
-							}
-						}
-					}
-					
-					return ostacolo_presente;
-				}
-				
-				function raggiunto_sprite(test_posizione, tipo_sprite_ragg){//verifica se la posizione indicata contiene un determinato sprite
-					//controllo ciclo - risultato
-					var sprite_presente = {bool:false, posizione: -1};	
-					
-					/*verifica se la posizione è nell'array delle posizioni:*/{
-						for (var i = 0; i < posizioni.length; i++){
-							if ((posizioni[i].coordinate == test_posizione) && (posizioni[i].oggetto == tipo_sprite_ragg )) {//controlla la posizoine i dell'array
-								sprite_presente = {bool:true, posizione: i};
-							}
-							
-							/*Debug*/{
-								if(var_debug_ragg_sprite || var_debug_all){//Debug
-									alert(  "Verifica se presente spryte di tipo: "+tipo_sprite_ragg+":" + "\n"
-										  + "Esito controllo If: "((posizioni[i].coordinate == test_posizione) && (posizioni[i].oggetto == tipo_sprite_ragg )) +"\n"
-										  + "Verifica pos array("+i+"): " + posizioni[i].coordinate  
-										  + " | "  + "tipo: " + posizioni[i].oggetto + "\n"
-										  + "posizione cercata:   " + test_posizione
-										 );
-								}
-							}
-						}
-					}
-					
-					return sprite_presente;
-				}
-		
-				function pulisci_campo(){//pulisce il campo per caricare il nuovo livello
-					/*pulisci griglia*/{
-						for (var i = 0; i < num_righe; i++) {
-							for (var j = 0; j < num_colonne; j++) {			  
-								$("#"+(i + sep_rig_col + j)).html("<b style='color: " + colore_testo_campo + ";'>" + (vuota_attrav_img? pos_vuota_img : pos_vuota) + "</b>");
-							}
-						}
-					}
-					
-					/*Agg. livello indicato pres. testo*/{
-						$('#dett_liv').html(livello);
-						$('#dett_mappa').html(mappa);
-					}
-					
-					/*pulisci array posizioni*/{
-						posizioni=[];
-					}
-				}
-				
-				function ricarica_partita(){//ripristina partita sospesa
-					/*Griglia*/{
-						crea_griglia();	
-					}
-					 
-					/*ricarica oggetti da array nella griglia*/{
-						for (var k = 0; k < posizioni.length; k++){
-							switch(posizioni[k].oggetto){//in base all'oggetto lo ricarica nella sua posizione
-								case "Personaggio" : $("#"+posizioni[k].coordinate).html(personaggio_img);
-									break;
-								case "Exit"        : $("#"+posizioni[k].coordinate).html(exit_img);
-									break;
-								case "Ostacolo"    : $("#"+posizioni[k].coordinate).html(ostacolo_img);
-									break;
-								case "Obbiettivo"  : if (posizioni[k].completato == false) $("#"+posizioni[k].coordinate).html(obbiettivo_img);
-									break;
-								case "Percorso"    : $("#"+posizioni[k].coordinate).html((vuota_attrav_img ? pos_attraversata_img : pos_attraversata));
-									break;
-							}
-						}
-					}
-					/*aggiorna log*/{
-						ricarica_log();
-					}
-				}
-				
-				function ricarica_log(){//ricarica i log
-					/*aggiorna log*/{
-						$("#log_eventi").append(""+ var_log);
-					}
-				}
-				
-				function sintassi_comando_errata(comando, azione, passi){//sintassi comando valida
-					return (//comando validi:
-								(azione != "Nord")          && (azione != "N")       && (azione != "Su")        && (azione != "Sopra")
-							 && (azione != "Nord-Est")      && (azione != "N-E")
-							 && (azione != "Nord-Ovest")    && (azione != "N-O")
-							 
-							 && (azione != "Sud")           && (azione != "S")       && (azione != "Giu")       && (azione != "Sotto")
-							 && (azione != "Sud-Est")       && (azione != "S-E")
-							 && (azione != "Sud-Ovest")     && (azione != "S-O")
-							 
-							 && (azione != "Est")           && (azione != "E")       && (azione != "Dx")        && (azione != "Destra")       
-							 && (azione != "Ovest")         && (azione != "O")       && (azione != "Sx")        && (azione != "Sinistra")  
-						   );
-				}
-				  
-				function completato_livello(){//verifica se è stato completato il livello
-					if(    ((num_obbiettivi != 0) && (var_obb_superflui == false))
-						&& (posizioni[posizione_sprite_array("Personaggio")].coordinate == posizioni[posizione_sprite_array("Exit")].coordinate))
-						 alert("Devi prima raggiungere tutti gli obbiettivi, il personaggio è uscito dalla porta ma è in attesa di rientrare.\nDigita un comando.");
-					
-					return (    ((num_obbiettivi == 0) || (var_obb_superflui))
-							 && (posizioni[posizione_sprite_array("Personaggio")].coordinate == posizioni[posizione_sprite_array("Exit")].coordinate)
-							);
-				}
-				
-				function livello_successivo(){//prossimo livello
-					/*Debug*/{
-						if(var_debug_liv_successivo || var_debug_all){
-							alert("liv attuale: "+livello+", mappa: "+mappa);
-						}
-					}
-					
-					return ((mappa == liv_map[livello-1].mp) ? {liv: (livello == (liv_map.length)? -1 : livello+1), map: 1,       fin: (livello == (liv_map.length)? true : false)} 
-															 : {liv: livello ,                                      map: mappa+1, fin: false});
-				}
+            /*log:*/
+            {
+                //genera elemento log
+                var temp_log = (((new Date()).toTimeString()).split(' ')[0])
+                                + " : <b style='color: " + col_msg_opzioni + ";'>"
+                                + (!temp_ut_normalizza ? "Disattivata Normalize" : "Attivato Normalize")
+                                + "</b><br />"
+                        ;
 
-				function obbiettivo_raggiunto(posizione_pot_obb){//verifica se è stato raggiunto un obbiettivo
-					//c'è un obbiettivo nella posizione
-					var obb_pres = raggiunto_sprite(posizione_pot_obb, 'Obbiettivo');
-					
-					//risultato
-					var obb_ragg = false;
-					
-					/*Debug*/{
-						if(var_debug_obb_raggiunto || var_debug_all){
-						   alert("controllo: "+(obb_pres.bool && (posizioni[obb_pres.posizione].completato == false)));
-						}
-					}
-					
-					/*verifica se obbiettivo presente e completato*/{
-						if (obb_pres.bool && (posizioni[obb_pres.posizione].completato == false)){
-							//ritorna che l'obbiettivo è stato raggiunto
-							obb_ragg = true;
-							//aggiorna obbiettivo
-							posizioni[obb_pres.posizione].completato = true;
-							//agg. numero obbiettivi
-							--num_obbiettivi;
-						  
-							//visualizzo descrizione obbiettivo						
-							presentazione_obbiettivo_raggiunto(obb_pres.posizione);
-							
-							/*log:*/{
-								var temp_or = restituisce_time();
-								
-								var temp_log =   ""
-									   + temp_or.ora_txt 
-									   + temp_or.time_elapsed
-									   + " : <b style='color: "+col_msg_obb_raggiunto+";'>"
-									   +" [" + posizione_pot_obb + "] : "
-									   + "Obbiettivo completato"
-									   +"</b><br />";
-								
-								//aggiorna log:
-								var_log += temp_log;
-								$("#log_eventi").append(temp_log);
-							}
+                //agg var. log
+                var_log += temp_log;
 
-						}
-					}
-					
-					return obb_ragg;
-				}
+                //scrive il log
+                $("#log_eventi").append("" + temp_log);
+            }
+        }
 
-				function recupera_comando(){//recupera il comando inserito dal giocatore
-					/*Recupera comando*/{					
-						//{com: comando, az: azione, ps: passi}
-						var comando = {com: $("#comando").val(),az: null, sp: null, err: null};
-						//rimuove gli spazi dal comando						
-						if (rimuovi_spazi_comando || temp_ut_normalizza) {comando.com = (comando.com).replace(/ /g, '');}
-						//formatta secondo lo standard del comando
-						if ((!comand_case_sensitive) || temp_ut_case_sensitive) {
-							var tem_string = ((comando.com).toLowerCase());
-							comando.com = (tem_string = tem_string.charAt(0).toUpperCase() + tem_string.slice(1));
-							
-							if(tem_string.indexOf("-") != -1){//comandi composti da più parole?
-								comando.com =   tem_string.substring(0,tem_string.indexOf("-"))
-											  + "-" 
-											  + (tem_string.substring(tem_string.indexOf("-")+1)).charAt(0).toUpperCase() 
-											  + (tem_string.substring(tem_string.indexOf("-")+1)).slice(1);
-							}
-						}
-					}
-					
-					/*Scompone comando*/{
-						if (comando != ""){
-							comando.az = (comando.com).substring(0,(comando.com).indexOf("("));
-							comando.sp = parseInt((comando.com).substring((comando.com).indexOf("(")+1,(comando.com).indexOf(")")));
-							comando.err = (((comando.com).substring((comando.com).indexOf(")")+1)).length != 0);
-						}
-					}
-					
-					/*Debug*/{
-						if(var_debug_recupera_comando || var_debug_all){
-							alert(   "comando: " + comando.com + "\n"
-								   + "azione: " + comando.az + "\n"
-								   + "spostamento: " + comando.sp + "\n"
-								   + "errore: " + comando.err +" \n"
-								 );
-						}
-					}
-					
-					return comando;
-				}
-				
-				function esegui_comando(){//esegue lo spostamento
-					//recupera comando
-					var comando = recupera_comando();
-					
-					/*presente un comando*/{
-						if (comando.com != "")//comando inserito?
-								 {//Si
-									/*var per log:*/{
-										//orario lancio comando
-										var data_inizio = restituisce_time();
-										
-										//var temp log
-										var temp_log ="";
-									}
-								
-									/*comando valido + esecuzione*/{
-									    var ver_comando = null;
-										if ((ver_comando=verifica_comando(comando.com, comando.az, comando.sp, comando.err)).err_com) 
-												 {//comando errato
-												  //tipo errore:
-												  var tp_err = (ver_comando.err_sint && ver_comando.err_spost)? 
-												                      "Comando errato"
-												                    : (ver_comando.err_sint? 
-																	          "Sintassi comando errata" 
-																			: "Spostamento richiesto con il comando non valido")
-												  /*temp log:*/{
-													temp_log =   ""
-															   + data_inizio.ora_txt 
-															   + data_inizio.time_elapsed
-															   + " : <b style='color: "+col_msg_err_comando+";'>"
-															   + "<u>"   
-															   + comando.com
-															   + " <BIG>*</BIG>"
-															   + "</u> "
-															   + "</b><br />";
-												  } 
-												  
-												  alert("ERRORE: "+tp_err+".");
-												 } 
-											else {//comando valido
-													/*Recupera posizione personaggio*/{
-														var loc_arr_pos = posizione_sprite_array("Personaggio");
-													}
-											
-													/*Esegue spostamento*/{
-														for (var shift = 0; shift < comando.sp; shift++) {
-															/*Agg. posizione personaggio*/{
-																//nasconde personaggio
-																$("#personaggio").fadeOut(1500);
-																//evidenzia percorso
-																if ((raggiunto_sprite(posizioni[loc_arr_pos].coordinate, 'Exit').bool) == false){
-																		carica_sprite("Percorso", 0, false, (vuota_attrav_img ? pos_attraversata_img : pos_attraversata), posizioni[loc_arr_pos].coordinate);
-																	}
-																//aggiorna riferimenti personaggio
-																spostamento_personaggio(comando.az, 1, 'no');
-																//rivisualizza il personaggio
-																if ((raggiunto_sprite(posizioni[loc_arr_pos].coordinate, 'Exit').bool) == false){
-																		$("#"+posizioni[loc_arr_pos].coordinate).html(personaggio_img).fadeIn(1000);
-																	}
-															}
-															
-															/*raggiunto obbiettivo*/{
-																obbiettivo_raggiunto(posizioni[loc_arr_pos].coordinate);
-															}
-														}
-													}
-											
-													/*agg log in var temp:*/{
-														temp_log =   ""
-																   + data_inizio.ora_txt 
-																   + data_inizio.time_elapsed
-																   + " : <b style='color: "+col_msg_esec_comando+";'>"
-																   + " [" + (posizioni[loc_arr_pos].coordinate) + "] : "
-																   + comando.com
-																   + "</b><br />";
-													}
-											
-													/*livello completato*/{							
-														if(completato_livello()){//completato livello
-															/*agg log in var temp:*/{
-																var temp_or = restituisce_time();
-																
-																temp_log +=  ""
-																		   + temp_or.ora_txt 
-																		   + temp_or.time_elapsed
-																		   + " : <b style='color: +"+col_msg_liv_completato+";'>"
-																		   +" [" + (posizioni[loc_arr_pos].coordinate) + "] : "
-																		   + "Livello completato"
-																		   +"</b><br />";
-															}
-															
-															var liv_comp = true;
-														
-														}
-													}
-												 }
-									}
-									
-									/*agg log*/{
-										var_log += temp_log;
-										$("#log_eventi").append(temp_log);
-									}
-									
-									/*carica livello successivo*/{
-										if(liv_comp == true) carica_livello();
-									}							
-								 }
-							else {//No
-								  alert("Inserire un comando nell'input box");
-								 }
-					}
-				}
-					  
-				function carica_livello(num_livello, num_mappa){//carica il livello
-					/*livello da caricare*/{
-						/*variabile in cui memorizza il prossimo livello*/{
-							var liv_succ = "";
-							
-							if(      ((num_livello == null) || (num_livello == undefined)) 
-								  && ((num_mappa == null)   || (num_mappa == undefined))
-							   )
-									 {//informazioni non passate
-										liv_succ = livello_successivo();
-									 }
-								else {//informazioni passate
-										liv_succ = {liv: num_livello, map: num_mappa, fin: (livello == -1? true : false)};
-									 }
-						}
-						
-						/*agg. variabili livello*/{
-							livello = liv_succ.liv;
-							mappa = liv_succ.map;
-						}	
+        function reset_obbiettivi_raggiunti() {//reset obbiettivi raggiunti
+            for (var i = 0; i < testi_obbiettivi.length; i++) {
+                testi_obbiettivi[i].utilizzato = true;
+            }
+        }
 
-						/*Debug*/{
-							if(var_debug_carica_livello || var_debug_all){
-								alert(   "num_livello: " + num_livello + ", num_mappa: "+num_mappa+"\n"
-									   + "(num_livello = null): " + (num_livello == null) +  ", (num_livello = undefined): " + (num_livello == undefined) + "\n"
-									   + "(num_mappa = null): " + (num_mappa == null) + ", (num_mappa = undefined): " + (num_mappa == undefined) + "\n"
-									   + "liv succ: "+livello+" | "+liv_succ.liv+", mappa: "+mappa+" | "+liv_succ.map + "\n"
-									   + "Gioco completato? "+ liv_succ.fin
-									 );
-							}
-						}	
-					}
-					
-					/*reset obbiettivi*/{
-						if (var_obb_ripetibili){
-							reset_obbiettivi_raggiunti();
-						}
-					}
-					
-					/*carica livello*/{
-						if (liv_succ.fin == false) 
-							   {//gioco non concluso
-								/*pulisci campo*/{
-									if (mappa > 2) //primi due livelli? 
-											 {//si
-											  pulisci_campo();
-											 }
-										else {//no
-											  //pulisce array posizioni
-											  posizioni=[];
-											  //ricarica griglia
-											  crea_griglia();
-											  //ricarica log
-											  ricarica_log();
-											 }
-								}		 
-							
-								/*Carica oggetti*/{
-									if (livello > (liv_min_ostacoli-1)) {/*Ostacoli*/
-										var num_ost = (10 + livello ) * mappa;
-										for (var num_ost_car=0; num_ost_car<((10+livello)*mappa); num_ost_car++){//Random ostacoli
-											carica_sprite("Ostacolo", num_ost_car, false, ostacolo_img, posizione_vuota());    
-										}	
-									
-										/*Debug*/{
-											if(var_debug_carica_livello || var_debug_all){
-												alert(   "Liv. "+livello+", Map. "+mappa+"\n"
-													   + "caricati "+num_ost+" ostacoli."
-													 );
-											}
-										}
-									}
-									
-									if (livello > (liv_min_obbiettivi-1)){/*Obbiettivi*/
-										var numero_obbiettivi_da_inserire = Math.min(num_obbiettivi_disponibili, (Math.floor(Math.random() * 5) + 6));
-									
-										for (var num_obb_car=0; num_obb_car < numero_obbiettivi_da_inserire ; num_obb_car++){//Random obbiettivi
-											carica_sprite("Obbiettivo", num_obb_car, false, obbiettivo_img, posizione_vuota());
-											
-											//agg. numero obbiettivi
-											++num_obbiettivi;
-										}
-										
-										/*Debug*/{
-											if(var_debug_carica_livello || var_debug_all){
-												alert(   "Liv. "+livello+", Map. "+mappa+"\n"
-													   + "caricati "+num_obbiettivi+" obbiettivi."
-													 );
-											}
-										}
-									}
-									
-									/*personaggio*/{
-										carica_sprite("Personaggio", 0, false, personaggio_img, posizione_vuota());
-									}
-									
-									/*exit*/{
-										carica_sprite("Exit", 0, false, exit_img, posizione_vuota());
-									}
-								}
-							
-								/*verifico posizioni Personaggio e Exit nell'array*/{
-									var temp_pos_pers = posizione_sprite_array("Personaggio");
-									var temp_pos_exit = posizione_sprite_array("Exit");
-								}
-							
-								/*log:*/{
-									var temp_or = restituisce_time();
-											
-									var temp_log = ""
-										+ temp_or.ora_txt 
-										+ temp_or.time_elapsed
-										+ " : <b style='color: orange;'>"
-										+ "Caricato Liv."+livello+" Mappa "+mappa
-										+ "</b><br />                 { " 
-										+ "Personaggio [" + (posizioni[temp_pos_pers].coordinate) + "] - "
-										+ "Exit [" + (posizioni[temp_pos_exit].coordinate) + "]"
-										+" }"
-										+"<br />"
-										;
+        function recupera_testo_obbiettivo(lingua) {//recupera il testo dell'obbiettivo da visualizzare
+            /*Trova testo:*/
+            {
+                //indice ciclo
+                var pos_obbiettivo = null;
+                var txt_non_trovato = true;
 
-									/*aggiorna log:*/{
-										//variabile
-										var_log += temp_log;
-										//campo a video
-										$("#log_eventi").append(temp_log);
-									}
-								}
-							
-								/*Debug*/{
-									if(var_debug_carica_livello || var_debug_all){
-										alert("Personaggio " + "\n"
-											  + "pos: " + posizioni[temp_pos_pers].coordinate + "\n"
-											  + "riga: " + posizioni[temp_pos_pers].riga + "\n"
-											  + "colonna: " + posizioni[temp_pos_pers].colonna + "\n"
-											  
-											  +"\nExit " + "\n"
-											  + "pos: " + posizioni[temp_pos_exit].coordinate + "\n"
-											  + "riga: " + posizioni[temp_pos_exit].riga + "\n"
-											  + "colonna: " + posizioni[temp_pos_exit].colonna + "\n"
-											 );
-									}
-								}
-							
-							   }
-						  else {//gioco finito
-								/*Debug*/{
-									if(var_debug_carica_livello || var_debug_all){
-									   alert("Fine gioco");
-									}
-								}
-							 
-								presentazione_gioco_completato();
-							   }
-					}
-				}  
-			}
+                if (random_obb) {
+                    var i = 0;
 
-		</script>
-		<script>;
-        	$( document ).ready(function() {
-			    $("#navigation_bar").load("../navigation_bar.html");
-            	$("#footer").load("../footer.html");
-			});
-    	</script>
-    </body>
+                    while ((i < num_tentativi_random_obb) && txt_non_trovato) {
+                        //propongo obbiettivo
+                        pos_obbiettivo = (Math.floor(Math.random() * num_obbiettivi_disponibili) + 0);
+
+                        //aggiorno testo se trovato
+                        if ((var_obb_ripetibili ? true : !(testi_obbiettivi[pos_obbiettivo].utilizzato)) && (testi_obbiettivi[pos_obbiettivo].lingua == lingua)) {
+                            txt_non_trovato = false;
+                        }
+                        else i++;
+                    }
+                }
+
+                if (txt_non_trovato) {
+                    for (var i = num_obb_raggiunto; i < testi_obbiettivi.length; i++) {
+                        if ((var_obb_ripetibili ? true : !(testi_obbiettivi[pos_obbiettivo].utilizzato)) && (testi_obbiettivi[pos_obbiettivo].lingua == lingua)) {
+                            pos_obbiettivo = i;
+                            num_obb_raggiunto++;
+                        }
+                    }
+                }
+            }
+
+            //agg. dati obbiettivi:
+            testi_obbiettivi[pos_obbiettivo].utilizzato = true;
+            num_obbiettivi_disponibili--;
+
+            //torna info obbiettivo:
+            return {
+                tit: testi_obbiettivi[pos_obbiettivo].tipo,
+                txt: testi_obbiettivi[pos_obbiettivo].txt,
+                jpg: testi_obbiettivi[pos_obbiettivo].jpg
+            };
+        }
+
+        function recupera_testo(lingua, tipo) {//recupera il testo da visualizzare
+            //dove memorizzo il testo
+            var testo = "";
+
+            /*Trova testo:*/
+            {
+                //indice ciclo
+                var i = 0;
+                var txt_non_trovato = true;
+
+                while ((i < testi.length) && txt_non_trovato) {
+                    //aggiorno testo se trovato
+                    if ((testi[i].lingua == lingua) && (testi[i].tipo == tipo)) {
+                        testo = testi[i].txt;
+                        txt_non_trovato = false;
+                    }
+
+                    //aggiorno indice ciclo
+                    i++;
+                }
+            }
+
+            return testo;
+        }
+
+        function avvia_gioco() {//avvia gioco
+            //aggiorna livello
+            livello = (livello == null) ? 1 : livello;
+            mappa = (mappa == null) ? 1 : mappa;
+
+            //genera bottone griglia
+            crea_agg_bottone_vis_griglia();
+
+            //crea il campo
+            $('#contenitore_campo_console').html(Struttura_campo());
+            //$('#campo_totale').html(codice_campo_console);
+            posizioni = [];
+            crea_griglia();
+
+            /*log:*/
+            {
+                //agg var. log
+                var_log += (((new Date()).toTimeString()).split(' ')[0])
+                + " : <b style='color: " + col_msg_avvio_gioco + ";'>"
+                + "  Avvio Gioco"
+                + "</b><br />"
+                ;
+
+                //scrive il log
+                $("#log_eventi").append("" + var_log);
+            }
+
+            //carica la mappa
+            carica_livello(livello, mappa);
+        }
+
+        function crea_agg_bottone_vis_griglia() {
+            //aggiorna bottone:
+            bottone_Vis_Nasc_griglia = '<a class="btn btn-default" href="#" role="button" onclick="visualizza_nascondi_griglia_sempre()">'
+            + '<font size="' + size_txt_bt_pan_opzioni_nascoste + '">'
+            + (var_vis_griglia ? 'Nascondi Griglia' : 'Visualizza Griglia')
+            + '</font></a>';
+        }
+
+        function visualizza_nascondi_griglia_sempre() {//visualizza nascondi griglia missioni
+            //verifica che sia avviato
+            var_vis_griglia = var_vis_griglia ? false : true;
+
+            crea_agg_bottone_vis_griglia();
+
+            /*log:*/
+            {
+                //agg var. log
+                var_log += (((new Date()).toTimeString()).split(' ')[0])
+                + " : <b style='color: " + col_msg_opzioni + ";'>"
+                + (!var_vis_griglia ? "Disattivato vis. griglia" : "Attivato vis. griglia")
+                + "</b><br />"
+                ;
+            }
+
+            //memorizza comando presente nella barra comando:
+            temp_comando = $("#comando").val();
+
+            //ricarica partita
+            ricarica_partita();
+        }
+
+        function crea_griglia() {//crea la griglia del campo
+            /*ricarica struttura*/
+            {
+                $('#contenitore_campo_console').html(Struttura_campo());
+            }
+
+            /*crea griglia*/
+            {
+                //imposto che la griglia si veda solo se primo livello o impostato in debug
+                var spes_griglia_campo = ((mappa == 1) || (var_vis_griglia)) ? colore_griglia_se_visualizzata /*visualizza*/ : background_color_campo /*nascondi*/;
+
+                //stile della tabella
+                var table_style = 'class="main-story-image" '
+                                + 'style='
+                                + '"background-color:' + background_color_campo + '; '
+                                + 'line-height: 19px; '
+                                + 'margin: 4px 4px 4px 4px;'
+                                + '" '
+                                + 'border="1px"'
+                                + 'bordercolor="' + spes_griglia_campo + '"'
+                        ;
+
+                //inserisce tag inizio tabella
+                var content = '<div class="table-responsive"><table id="tabella_campo" ' + table_style + '>';
+
+                //inserisce le varie celle
+                for (var i = 0; i < num_righe; i++) {
+                    content += "<tr></tr>";
+                    for (var j = 0; j < num_colonne; j++) {
+                        content += "<td id='" + i + sep_rig_col + j + "'><b style='color: " + colore_testo_campo + ";'>" + (vuota_attrav_img ? pos_vuota_img : pos_vuota) + "</b></td>";
+                    }
+                }
+
+                //inserisce tag fine tabella
+                content += "</table></div>";
+            }
+
+            /*visulizza griglia*/
+            {
+                $("#Campo_di_gioco").append(content);
+                //$('.campo').append(content);
+            }
+        }
+
+        function random_posizione() {//genera random una posizione
+            return (   (Math.floor(Math.random() * num_righe) + 0)   //riga
+            + sep_rig_col
+            + (Math.floor(Math.random() * num_colonne) + 0) //colonna
+            );
+        }
+
+        function posizione_sprite_array(ogg_sprite) {//ritorna la posizione nell'array dello sprite indicato
+            //memorizza l'indice della posizione del personaggio/indice ricorsione
+            var loc_arr_pos = 0;
+
+            while ((posizioni[loc_arr_pos].oggetto) != ogg_sprite) {//trova la posizione del personaggio nell'array
+                /*Debug*/
+                {
+                    if (var_debug_pos_sprite_array || var_debug_all)
+                        alert("Posizione: " + loc_arr_pos + " Valore: " + posizioni[loc_arr_pos].oggetto);
+                }
+
+                //aggiorna indice
+                loc_arr_pos += 1;
+            }
+
+            return loc_arr_pos;
+        }
+
+        function spostamento_personaggio(azione, spostamento, simula) {//simula o effettua lo spostamento del msg
+            /*posizione personaggio*/
+            {
+                //nell'array
+                var loc_arr_pos = posizione_sprite_array("Personaggio");
+
+                //var temp:
+                var pos_teorica_pers_riga = posizioni[loc_arr_pos].riga;
+                var pos_teorica_pers_colonna = posizioni[loc_arr_pos].colonna;
+            }
+
+            /*Debug*/
+            {
+                if (var_debug_spost_personaggio || var_debug_all) {
+                    alert("Sim spost Personaggio - situazione iniziale \n"
+                            + azione + ", " + spostamento + ", " + simula + "\n"
+                            + "pers.riga: " + posizioni[loc_arr_pos].riga + " | " + pos_teorica_pers_riga + "\n"
+                            + "pers.colonna: " + posizioni[loc_arr_pos].colonna + " | " + pos_teorica_pers_colonna
+                    );
+                }
+            }
+
+            /*calcola nuova posizione*/
+            {
+                switch (azione) {//calcola le nuove coordinate
+                    case "N"          :
+                    case "Nord"       :
+                    case "Su"         :
+                    case "Sopra"      :
+                        pos_teorica_pers_riga -= spostamento;
+                        break;
+                    case "S"          :
+                    case "Sud"        :
+                    case "Giu"        :
+                    case "Sotto"      :
+                        pos_teorica_pers_riga += spostamento;
+                        break;
+                    case "E"          :
+                    case "Est"        :
+                    case "Destra"     :
+                    case "Dx"         :
+                        pos_teorica_pers_colonna += spostamento;
+                        break;
+                    case "O"          :
+                    case "Ovest"      :
+                    case "Sinistra"   :
+                    case "Sx"         :
+                        pos_teorica_pers_colonna -= spostamento;
+                        break;
+                    case "N-O"         :
+                    case "Nord-Ovest" :
+                        pos_teorica_pers_riga -= spostamento;
+                        pos_teorica_pers_colonna -= spostamento;
+                        break;
+                    case "S-O"         :
+                    case "Sud-Ovest"  :
+                        pos_teorica_pers_riga += spostamento;
+                        pos_teorica_pers_colonna -= spostamento;
+                        break;
+                    case "N-E"         :
+                    case "Nord-Est"   :
+                        pos_teorica_pers_riga -= spostamento;
+                        pos_teorica_pers_colonna += spostamento;
+                        break;
+                    case "S-E"         :
+                    case "Sud-Est"    :
+                        pos_teorica_pers_riga += spostamento;
+                        pos_teorica_pers_colonna += spostamento;
+                        break;
+                }
+            }
+
+            /*Agg. posizione personaggio se non simulato*/
+            {
+                if (simula != "si") {
+                    posizioni[loc_arr_pos].riga = pos_teorica_pers_riga;
+                    posizioni[loc_arr_pos].colonna = pos_teorica_pers_colonna;
+                    posizioni[loc_arr_pos].coordinate = pos_teorica_pers_riga + sep_rig_col + pos_teorica_pers_colonna;
+                }
+            }
+
+            /*Debug*/
+            {
+                if (var_debug_spost_personaggio || var_debug_all) {
+                    alert("Sim spost Personaggio - situazione finale" + "\n"
+                            + "pos: " + posizioni[loc_arr_pos].coordinate + "|" + pos_teorica_pers_riga + sep_rig_col + pos_teorica_pers_colonna + "\n"
+                            + "riga: " + posizioni[loc_arr_pos].riga + " | " + pos_teorica_pers_riga + "\n"
+                            + "colonna: " + posizioni[loc_arr_pos].colonna + " | " + pos_teorica_pers_colonna + "\n"
+                    );
+                }
+            }
+
+            return (pos_teorica_pers_riga + sep_rig_col + pos_teorica_pers_colonna);
+        }
+
+        function posizione_vuota() {//ritorna la prima posizione vuota trovata con random
+            //memorizza possibili posizioni
+            var temp_pos_input = "";
+
+            //verifica se posizione utilizzata
+            while (posizione_utilizzata(temp_pos_input = random_posizione()));//cicla finche non trova una posizione valida
+
+            return temp_pos_input;
+        }
+
+        function carica_sprite(var_oggetto, var_number, var_completato, sprite, temp_posizione) {//carica l'oggetto
+            //carica sprite nella griglia
+            $("#" + temp_posizione).html(sprite);
+
+            /*carica sprite nell'array:*/
+            {
+                //posizione vuota array:
+                var temp_pos_vettore = posizioni.length;
+
+                //coordinate sprite:
+                var temp_riga = parseInt(temp_posizione.substring(0, temp_posizione.indexOf(sep_rig_col)));
+                var temp_colonna = parseInt(temp_posizione.substring(temp_posizione.indexOf(sep_rig_col) + 1));
+
+                //aggiungo elemento all'array
+                posizioni[temp_pos_vettore] = {
+                    coordinate: temp_posizione,
+                    oggetto: var_oggetto,
+                    number: var_number,
+                    completato: var_completato,
+                    riga: temp_riga,
+                    colonna: temp_colonna
+                };
+            }
+
+            /*Debug*/
+            {
+                if (var_debug_carica_sprite || var_debug_all) {
+                    alert("Array agg:" + "\n"
+                            + "coordinate: " + posizioni[temp_pos_vettore].coordinate + ", "
+                            + "oggetto: " + posizioni[temp_pos_vettore].oggetto + ", "
+                            + "number: " + posizioni[temp_pos_vettore].number + ", "
+                            + "completato: " + posizioni[temp_pos_vettore].completato + ", "
+                            + "riga: " + posizioni[temp_pos_vettore].riga + ", "
+                            + "colonna: " + posizioni[temp_pos_vettore].colonna + ", "
+                    );
+                }
+            }
+
+            return temp_posizione;
+        }
+
+        function verifica_comando(comando, azione, passi, errore_nel_comando) {//verifica validità comando
+
+            var err_sintassi = (    errore_nel_comando
+            || sintassi_comando_errata(comando, azione, passi)
+            );
+            var err_spostamento = (    spostamento_comando_non_valido(comando, azione, passi)
+            || ostacoli_nel_tragitto(comando, azione, passi)
+            );
+
+
+            return {
+                err_com: ( err_sintassi || err_spostamento ),
+                err_sint: err_sintassi,
+                err_spost: err_spostamento
+            };
+        }
+
+        function spostamento_comando_non_valido(comando, azione, passi) {//spostamento valido
+
+            //se numero pazzi validi
+            if (passi > 0) {
+                //calcola spostamento - simulazione
+                var sim_agg_pos = spostamento_personaggio(azione, passi, 'si');
+
+                //riga
+                var sim_riga_pers = sim_agg_pos.substring(0, sim_agg_pos.indexOf(sep_rig_col));
+
+                //colonna
+                var sim_colonna_pers = sim_agg_pos.substring(sim_agg_pos.indexOf(sep_rig_col) + 1);
+            }
+
+            /*Debug*/
+            {
+                if (var_debug_spost_comando_non_valido || var_debug_all) {
+                    alert("comando: " + comando + ", azione: " + azione + ", passi: " + passi + "\n"
+                            + "val pasi " + ((passi < 1) || (passi == null) || (passi == undefined) || (passi == "") || (isNaN(passi))) + "\n"
+                            + "Sim riga " + ( sim_riga_pers < 0 || sim_riga_pers > (num_righe - 1) ) + "\n"
+                            + "Sim colonna " + ( sim_colonna_pers < 0 || sim_colonna_pers > (num_colonne - 1)) + "\n"
+                    );
+                }
+            }
+
+            return (     //valore negativo
+            ((passi < 1) || (passi == null) || (passi == undefined) || (passi == "") || (isNaN(passi)))
+            || //riga
+            ( sim_riga_pers < 0 || sim_riga_pers > (num_righe - 1) )
+                //colonna
+            || ( sim_colonna_pers < 0 || sim_colonna_pers > (num_colonne - 1) )
+            );
+        }
+
+        function restituisce_time() {//restituisce orario
+            //per log indica orario comando:
+            var data_ora = new Date();
+            var date_ora_text = (data_ora.toTimeString()).split(' ')[0];
+
+            //tempo trascorso:
+            var tempo_elapsed_text = "";//" [" + (data_avvio_gioco - data_ora) +"]";
+
+            return {ora_txt: date_ora_text, time_elapsed: tempo_elapsed_text};
+        }
+
+        function posizione_utilizzata(test_posizione) {//verifica se la posizione indicata contiene uno sprite
+            //variabile controllo ciclo risultato
+            posizione_occupata = false;
+
+            /*verifica se la coordinata è presente nell'array*/
+            {
+                for (var i = 0; i < posizioni.length; i++) {
+                    if (posizioni[i].coordinate == test_posizione) {
+                        posizione_occupata = true;
+                    }
+
+                    /*Debug*/
+                    {
+                        if (var_debug_pos_utilizzata || var_debug_all) {
+                            alert("Ver posizione (" + i + ")\n"
+                                    + "utilizzata: " + posizioni[i].coordinate
+                                    + " | "
+                                    + "proposta:   " + test_posizione
+                            );
+                        }
+                    }
+                }
+            }
+
+            return posizione_occupata;
+        }
+
+        function ostacoli_nel_tragitto(comando, azione, passi) {//verifica presenza ostacoli lungo il tragitto
+            //variabile controllo ciclo risultato
+            var ostacolo_presente = false;
+
+            /*verifica tutte le posizioni del tragitto*/
+            {
+                for (var step_ver_perc_ost = 0; step_ver_perc_ost < passi; step_ver_perc_ost++) {
+
+                    //verifica se nella posizione "n" è presente un'ostacolo
+                    if (raggiunto_sprite(spostamento_personaggio(azione, step_ver_perc_ost + 1, "si"), 'Ostacolo').bool) {
+                        ostacolo_presente = true;
+                    }
+
+                    /*Debug*/
+                    {
+                        if (var_debug_ostacoli_tragitto || var_debug_all) {
+                            alert("comando: " + comando + ", azione: " + azione + ", passi: " + passi + "\n"
+                                    + "sim - posizione attuale " + step_ver_perc_ost + "\n"
+                                    + "sim - nuova posizione   " + spostamento_personaggio(azione, step_ver_perc_ost + 1, "si") + "\n"
+                                    + "ostacolo percorso       " + (raggiunto_sprite(spostamento_personaggio(azione, step_ver_perc_ost + 1, "si"), 'Ostacolo').bool)
+                            )
+                        }
+                    }
+                }
+            }
+
+            return ostacolo_presente;
+        }
+
+        function raggiunto_sprite(test_posizione, tipo_sprite_ragg) {//verifica se la posizione indicata contiene un determinato sprite
+            //controllo ciclo - risultato
+            var sprite_presente = {bool: false, posizione: -1};
+
+            /*verifica se la posizione è nell'array delle posizioni:*/
+            {
+                for (var i = 0; i < posizioni.length; i++) {
+                    if ((posizioni[i].coordinate == test_posizione) && (posizioni[i].oggetto == tipo_sprite_ragg )) {//controlla la posizoine i dell'array
+                        sprite_presente = {bool: true, posizione: i};
+                    }
+
+                    /*Debug*/
+                    {
+                        if (var_debug_ragg_sprite || var_debug_all) {//Debug
+                            alert("Verifica se presente spryte di tipo: " + tipo_sprite_ragg + ":" + "\n"
+                                    + "Esito controllo If: "((posizioni[i].coordinate == test_posizione) && (posizioni[i].oggetto == tipo_sprite_ragg )) + "\n"
+                                    + "Verifica pos array(" + i + "): " + posizioni[i].coordinate
+                                    + " | " + "tipo: " + posizioni[i].oggetto + "\n"
+                                    + "posizione cercata:   " + test_posizione
+                            );
+                        }
+                    }
+                }
+            }
+
+            return sprite_presente;
+        }
+
+        function pulisci_campo() {//pulisce il campo per caricare il nuovo livello
+            /*pulisci griglia*/
+            {
+                for (var i = 0; i < num_righe; i++) {
+                    for (var j = 0; j < num_colonne; j++) {
+                        $("#" + (i + sep_rig_col + j)).html("<b style='color: " + colore_testo_campo + ";'>" + (vuota_attrav_img ? pos_vuota_img : pos_vuota) + "</b>");
+                    }
+                }
+            }
+
+            /*Agg. livello indicato pres. testo*/
+            {
+                $('#dett_liv').html(livello);
+                $('#dett_mappa').html(mappa);
+            }
+
+            /*pulisci array posizioni*/
+            {
+                posizioni = [];
+            }
+        }
+
+        function ricarica_partita() {//ripristina partita sospesa
+            /*Griglia*/
+            {
+                crea_griglia();
+            }
+
+            /*ricarica oggetti da array nella griglia*/
+            {
+                for (var k = 0; k < posizioni.length; k++) {
+                    switch (posizioni[k].oggetto) {//in base all'oggetto lo ricarica nella sua posizione
+                        case "Personaggio" :
+                            $("#" + posizioni[k].coordinate).html(personaggio_img);
+                            break;
+                        case "Exit"        :
+                            $("#" + posizioni[k].coordinate).html(exit_img);
+                            break;
+                        case "Ostacolo"    :
+                            $("#" + posizioni[k].coordinate).html(ostacolo_img);
+                            break;
+                        case "Obbiettivo"  :
+                            if (posizioni[k].completato == false) $("#" + posizioni[k].coordinate).html(obbiettivo_img);
+                            break;
+                        case "Percorso"    :
+                            $("#" + posizioni[k].coordinate).html((vuota_attrav_img ? pos_attraversata_img : pos_attraversata));
+                            break;
+                    }
+                }
+            }
+            /*aggiorna log*/
+            {
+                ricarica_log();
+            }
+        }
+
+        function ricarica_log() {//ricarica i log
+            /*aggiorna log*/
+            {
+                $("#log_eventi").append("" + var_log);
+            }
+        }
+
+        function sintassi_comando_errata(comando, azione, passi) {//sintassi comando valida
+            return (//comando validi:
+            (azione != "Nord") && (azione != "N") && (azione != "Su") && (azione != "Sopra")
+            && (azione != "Nord-Est") && (azione != "N-E")
+            && (azione != "Nord-Ovest") && (azione != "N-O")
+
+            && (azione != "Sud") && (azione != "S") && (azione != "Giu") && (azione != "Sotto")
+            && (azione != "Sud-Est") && (azione != "S-E")
+            && (azione != "Sud-Ovest") && (azione != "S-O")
+
+            && (azione != "Est") && (azione != "E") && (azione != "Dx") && (azione != "Destra")
+            && (azione != "Ovest") && (azione != "O") && (azione != "Sx") && (azione != "Sinistra")
+            );
+        }
+
+        function completato_livello() {//verifica se è stato completato il livello
+            if (((num_obbiettivi != 0) && (var_obb_superflui == false))
+                    && (posizioni[posizione_sprite_array("Personaggio")].coordinate == posizioni[posizione_sprite_array("Exit")].coordinate))
+                alert("Devi prima raggiungere tutti gli obbiettivi, il personaggio è uscito dalla porta ma è in attesa di rientrare.\nDigita un comando.");
+
+            return (    ((num_obbiettivi == 0) || (var_obb_superflui))
+            && (posizioni[posizione_sprite_array("Personaggio")].coordinate == posizioni[posizione_sprite_array("Exit")].coordinate)
+            );
+        }
+
+        function livello_successivo() {//prossimo livello
+            /*Debug*/
+            {
+                if (var_debug_liv_successivo || var_debug_all) {
+                    alert("liv attuale: " + livello + ", mappa: " + mappa);
+                }
+            }
+
+            return ((mappa == liv_map[livello - 1].mp) ? {
+                liv: (livello == (liv_map.length) ? -1 : livello + 1),
+                map: 1,
+                fin: (livello == (liv_map.length) ? true : false)
+            }
+                    : {liv: livello, map: mappa + 1, fin: false});
+        }
+
+        function obbiettivo_raggiunto(posizione_pot_obb) {//verifica se è stato raggiunto un obbiettivo
+            //c'è un obbiettivo nella posizione
+            var obb_pres = raggiunto_sprite(posizione_pot_obb, 'Obbiettivo');
+
+            //risultato
+            var obb_ragg = false;
+
+            /*Debug*/
+            {
+                if (var_debug_obb_raggiunto || var_debug_all) {
+                    alert("controllo: " + (obb_pres.bool && (posizioni[obb_pres.posizione].completato == false)));
+                }
+            }
+
+            /*verifica se obbiettivo presente e completato*/
+            {
+                if (obb_pres.bool && (posizioni[obb_pres.posizione].completato == false)) {
+                    //ritorna che l'obbiettivo è stato raggiunto
+                    obb_ragg = true;
+                    //aggiorna obbiettivo
+                    posizioni[obb_pres.posizione].completato = true;
+                    //agg. numero obbiettivi
+                    --num_obbiettivi;
+
+                    //visualizzo descrizione obbiettivo
+                    presentazione_obbiettivo_raggiunto(obb_pres.posizione);
+
+                    /*log:*/
+                    {
+                        var temp_or = restituisce_time();
+
+                        var temp_log = ""
+                                + temp_or.ora_txt
+                                + temp_or.time_elapsed
+                                + " : <b style='color: " + col_msg_obb_raggiunto + ";'>"
+                                + " [" + posizione_pot_obb + "] : "
+                                + "Obbiettivo completato"
+                                + "</b><br />";
+
+                        //aggiorna log:
+                        var_log += temp_log;
+                        $("#log_eventi").append(temp_log);
+                    }
+
+                }
+            }
+
+            return obb_ragg;
+        }
+
+        function recupera_comando() {//recupera il comando inserito dal giocatore
+            /*Recupera comando*/
+            {
+                //{com: comando, az: azione, ps: passi}
+                var comando = {com: $("#comando").val(), az: null, sp: null, err: null};
+                //rimuove gli spazi dal comando
+                if (rimuovi_spazi_comando || temp_ut_normalizza) {
+                    comando.com = (comando.com).replace(/ /g, '');
+                }
+                //formatta secondo lo standard del comando
+                if ((!comand_case_sensitive) || temp_ut_case_sensitive) {
+                    var tem_string = ((comando.com).toLowerCase());
+                    comando.com = (tem_string = tem_string.charAt(0).toUpperCase() + tem_string.slice(1));
+
+                    if (tem_string.indexOf("-") != -1) {//comandi composti da più parole?
+                        comando.com = tem_string.substring(0, tem_string.indexOf("-"))
+                        + "-"
+                        + (tem_string.substring(tem_string.indexOf("-") + 1)).charAt(0).toUpperCase()
+                        + (tem_string.substring(tem_string.indexOf("-") + 1)).slice(1);
+                    }
+                }
+            }
+
+            /*Scompone comando*/
+            {
+                if (comando != "") {
+                    comando.az = (comando.com).substring(0, (comando.com).indexOf("("));
+                    comando.sp = parseInt((comando.com).substring((comando.com).indexOf("(") + 1, (comando.com).indexOf(")")));
+                    comando.err = (((comando.com).substring((comando.com).indexOf(")") + 1)).length != 0);
+                }
+            }
+
+            /*Debug*/
+            {
+                if (var_debug_recupera_comando || var_debug_all) {
+                    alert("comando: " + comando.com + "\n"
+                            + "azione: " + comando.az + "\n"
+                            + "spostamento: " + comando.sp + "\n"
+                            + "errore: " + comando.err + " \n"
+                    );
+                }
+            }
+
+            return comando;
+        }
+
+        function esegui_comando() {//esegue lo spostamento
+            //recupera comando
+            var comando = recupera_comando();
+
+            /*presente un comando*/
+            {
+                if (comando.com != "")//comando inserito?
+                {//Si
+                    /*var per log:*/
+                    {
+                        //orario lancio comando
+                        var data_inizio = restituisce_time();
+
+                        //var temp log
+                        var temp_log = "";
+                    }
+
+                    /*comando valido + esecuzione*/
+                    {
+                        var ver_comando = null;
+                        if ((ver_comando = verifica_comando(comando.com, comando.az, comando.sp, comando.err)).err_com) {//comando errato
+                            //tipo errore:
+                            var tp_err = (ver_comando.err_sint && ver_comando.err_spost) ?
+                                    "Comando errato"
+                                    : (ver_comando.err_sint ?
+                                    "Sintassi comando errata"
+                                    : "Spostamento richiesto con il comando non valido")
+                            /*temp log:*/
+                            {
+                                temp_log = ""
+                                + data_inizio.ora_txt
+                                + data_inizio.time_elapsed
+                                + " : <b style='color: " + col_msg_err_comando + ";'>"
+                                + "<u>"
+                                + comando.com
+                                + " <BIG>*</BIG>"
+                                + "</u> "
+                                + "</b><br />";
+                            }
+
+                            alert("ERRORE: " + tp_err + ".");
+                        }
+                        else {//comando valido
+                            /*Recupera posizione personaggio*/
+                            {
+                                var loc_arr_pos = posizione_sprite_array("Personaggio");
+                            }
+
+                            /*Esegue spostamento*/
+                            {
+                                for (var shift = 0; shift < comando.sp; shift++) {
+                                    /*Agg. posizione personaggio*/
+                                    {
+                                        //nasconde personaggio
+                                        $("#personaggio").fadeOut(1500);
+                                        //evidenzia percorso
+                                        if ((raggiunto_sprite(posizioni[loc_arr_pos].coordinate, 'Exit').bool) == false) {
+                                            carica_sprite("Percorso", 0, false, (vuota_attrav_img ? pos_attraversata_img : pos_attraversata), posizioni[loc_arr_pos].coordinate);
+                                        }
+                                        //aggiorna riferimenti personaggio
+                                        spostamento_personaggio(comando.az, 1, 'no');
+                                        //rivisualizza il personaggio
+                                        if ((raggiunto_sprite(posizioni[loc_arr_pos].coordinate, 'Exit').bool) == false) {
+                                            $("#" + posizioni[loc_arr_pos].coordinate).html(personaggio_img).fadeIn(1000);
+                                        }
+                                    }
+
+                                    /*raggiunto obbiettivo*/
+                                    {
+                                        obbiettivo_raggiunto(posizioni[loc_arr_pos].coordinate);
+                                    }
+                                }
+                            }
+
+                            /*agg log in var temp:*/
+                            {
+                                temp_log = ""
+                                + data_inizio.ora_txt
+                                + data_inizio.time_elapsed
+                                + " : <b style='color: " + col_msg_esec_comando + ";'>"
+                                + " [" + (posizioni[loc_arr_pos].coordinate) + "] : "
+                                + comando.com
+                                + "</b><br />";
+                            }
+
+                            /*livello completato*/
+                            {
+                                if (completato_livello()) {//completato livello
+                                    /*agg log in var temp:*/
+                                    {
+                                        var temp_or = restituisce_time();
+
+                                        temp_log += ""
+                                        + temp_or.ora_txt
+                                        + temp_or.time_elapsed
+                                        + " : <b style='color: +" + col_msg_liv_completato + ";'>"
+                                        + " [" + (posizioni[loc_arr_pos].coordinate) + "] : "
+                                        + "Livello completato"
+                                        + "</b><br />";
+                                    }
+
+                                    var liv_comp = true;
+
+                                }
+                            }
+                        }
+                    }
+
+                    /*agg log*/
+                    {
+                        var_log += temp_log;
+                        $("#log_eventi").append(temp_log);
+                    }
+
+                    /*carica livello successivo*/
+                    {
+                        if (liv_comp == true) carica_livello();
+                    }
+                }
+                else {//No
+                    alert("Inserire un comando nell'input box");
+                }
+            }
+        }
+
+        function carica_livello(num_livello, num_mappa) {//carica il livello
+            /*livello da caricare*/
+            {
+                /*variabile in cui memorizza il prossimo livello*/
+                {
+                    var liv_succ = "";
+
+                    if (((num_livello == null) || (num_livello == undefined))
+                            && ((num_mappa == null) || (num_mappa == undefined))
+                    ) {//informazioni non passate
+                        liv_succ = livello_successivo();
+                    }
+                    else {//informazioni passate
+                        liv_succ = {liv: num_livello, map: num_mappa, fin: (livello == -1 ? true : false)};
+                    }
+                }
+
+                /*agg. variabili livello*/
+                {
+                    livello = liv_succ.liv;
+                    mappa = liv_succ.map;
+                }
+
+                /*Debug*/
+                {
+                    if (var_debug_carica_livello || var_debug_all) {
+                        alert("num_livello: " + num_livello + ", num_mappa: " + num_mappa + "\n"
+                                + "(num_livello = null): " + (num_livello == null) + ", (num_livello = undefined): " + (num_livello == undefined) + "\n"
+                                + "(num_mappa = null): " + (num_mappa == null) + ", (num_mappa = undefined): " + (num_mappa == undefined) + "\n"
+                                + "liv succ: " + livello + " | " + liv_succ.liv + ", mappa: " + mappa + " | " + liv_succ.map + "\n"
+                                + "Gioco completato? " + liv_succ.fin
+                        );
+                    }
+                }
+            }
+
+            /*reset obbiettivi*/
+            {
+                if (var_obb_ripetibili) {
+                    reset_obbiettivi_raggiunti();
+                }
+            }
+
+            /*carica livello*/
+            {
+                if (liv_succ.fin == false) {//gioco non concluso
+                    /*pulisci campo*/
+                    {
+                        if (mappa > 2) //primi due livelli?
+                        {//si
+                            pulisci_campo();
+                        }
+                        else {//no
+                            //pulisce array posizioni
+                            posizioni = [];
+                            //ricarica griglia
+                            crea_griglia();
+                            //ricarica log
+                            ricarica_log();
+                        }
+                    }
+
+                    /*Carica oggetti*/
+                    {
+                        if (livello > (liv_min_ostacoli - 1)) {/*Ostacoli*/
+                            var num_ost = (10 + livello ) * mappa;
+                            for (var num_ost_car = 0; num_ost_car < ((10 + livello) * mappa); num_ost_car++) {//Random ostacoli
+                                carica_sprite("Ostacolo", num_ost_car, false, ostacolo_img, posizione_vuota());
+                            }
+
+                            /*Debug*/
+                            {
+                                if (var_debug_carica_livello || var_debug_all) {
+                                    alert("Liv. " + livello + ", Map. " + mappa + "\n"
+                                            + "caricati " + num_ost + " ostacoli."
+                                    );
+                                }
+                            }
+                        }
+
+                        if (livello > (liv_min_obbiettivi - 1)) {/*Obbiettivi*/
+                            var numero_obbiettivi_da_inserire = Math.min(num_obbiettivi_disponibili, (Math.floor(Math.random() * 5) + 6));
+
+                            for (var num_obb_car = 0; num_obb_car < numero_obbiettivi_da_inserire; num_obb_car++) {//Random obbiettivi
+                                carica_sprite("Obbiettivo", num_obb_car, false, obbiettivo_img, posizione_vuota());
+
+                                //agg. numero obbiettivi
+                                ++num_obbiettivi;
+                            }
+
+                            /*Debug*/
+                            {
+                                if (var_debug_carica_livello || var_debug_all) {
+                                    alert("Liv. " + livello + ", Map. " + mappa + "\n"
+                                            + "caricati " + num_obbiettivi + " obbiettivi."
+                                    );
+                                }
+                            }
+                        }
+
+                        /*personaggio*/
+                        {
+                            carica_sprite("Personaggio", 0, false, personaggio_img, posizione_vuota());
+                        }
+
+                        /*exit*/
+                        {
+                            carica_sprite("Exit", 0, false, exit_img, posizione_vuota());
+                        }
+                    }
+
+                    /*verifico posizioni Personaggio e Exit nell'array*/
+                    {
+                        var temp_pos_pers = posizione_sprite_array("Personaggio");
+                        var temp_pos_exit = posizione_sprite_array("Exit");
+                    }
+
+                    /*log:*/
+                    {
+                        var temp_or = restituisce_time();
+
+                        var temp_log = ""
+                                        + temp_or.ora_txt
+                                        + temp_or.time_elapsed
+                                        + " : <b style='color: orange;'>"
+                                        + "Caricato Liv." + livello + " Mappa " + mappa
+                                        + "</b><br />                 { "
+                                        + "Personaggio [" + (posizioni[temp_pos_pers].coordinate) + "] - "
+                                        + "Exit [" + (posizioni[temp_pos_exit].coordinate) + "]"
+                                        + " }"
+                                        + "<br />"
+                                ;
+
+                        /*aggiorna log:*/
+                        {
+                            //variabile
+                            var_log += temp_log;
+                            //campo a video
+                            $("#log_eventi").append(temp_log);
+                        }
+                    }
+
+                    /*Debug*/
+                    {
+                        if (var_debug_carica_livello || var_debug_all) {
+                            alert("Personaggio " + "\n"
+                                    + "pos: " + posizioni[temp_pos_pers].coordinate + "\n"
+                                    + "riga: " + posizioni[temp_pos_pers].riga + "\n"
+                                    + "colonna: " + posizioni[temp_pos_pers].colonna + "\n"
+
+                                    + "\nExit " + "\n"
+                                    + "pos: " + posizioni[temp_pos_exit].coordinate + "\n"
+                                    + "riga: " + posizioni[temp_pos_exit].riga + "\n"
+                                    + "colonna: " + posizioni[temp_pos_exit].colonna + "\n"
+                            );
+                        }
+                    }
+
+                }
+                else {//gioco finito
+                    /*Debug*/
+                    {
+                        if (var_debug_carica_livello || var_debug_all) {
+                            alert("Fine gioco");
+                        }
+                    }
+
+                    presentazione_gioco_completato();
+                }
+            }
+        }
+    }
+
+</script>
+<script>;
+$(document).ready(function () {
+    $("#navigation_bar").load("../navigation_bar.html");
+    $("#footer").load("../footer.html");
+});
+</script>
+</body>
 </html>

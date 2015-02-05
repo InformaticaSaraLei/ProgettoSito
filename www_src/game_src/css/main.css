@@ -1,22 +1,46 @@
+body {
+    padding-top: 45px;
+    padding-bottom: 20px;
+}
 
+.col-xs-12 {
+    border: 2px solid black;
+    border-radius: 5px 5px 5px 5px;
+}
 
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
+.center {
+    text-align: center;
+}
 
+.marginpadding {
+    margin: 0;
+    padding: 0;
+}
 
+.hidden {
+    position: absolute;
+    left: 0px;
+    top: -500px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
 
+.logo {
+    height: 50px;
+    width: 200px;
+}
 
+.navbar-inverse {
+    background-color: #222;
+    border-color: #080808
+}
 
+.footer-style {
+    margin: 0;
+    background-color: #d8d8d8;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.btn-social {
+    color: #951b91;
+}
