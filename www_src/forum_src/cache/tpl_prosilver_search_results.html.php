@@ -107,7 +107,7 @@ if ($this->_rootref['S_SHOW_TOPICS']) {
 
                                         <?php if ($_searchresults_val['S_TOPIC_UNAPPROVED'] || $_searchresults_val['S_POSTS_UNAPPROVED']) { ?>
                                             <a
-                                            href="<?php echo $_searchresults_val['U_MCP_QUEUE']; ?>"><?php echo $_searchresults_val['UNAPPROVED_IMG']; ?></a> <?php }
+                                                href="<?php echo $_searchresults_val['U_MCP_QUEUE']; ?>"><?php echo $_searchresults_val['UNAPPROVED_IMG']; ?></a> <?php }
                                         if ($_searchresults_val['S_TOPIC_REPORTED']) { ?><a
                                             href="<?php echo $_searchresults_val['U_MCP_REPORT']; ?>"><?php echo (isset($this->_rootref['REPORTED_IMG'])) ? $this->_rootref['REPORTED_IMG'] : ''; ?></a><?php } ?>
                                         <br/>

@@ -39,12 +39,15 @@
     font-size: 14px;
     text-align: center;
 }
-#Grid .mix h1{
+
+#Grid .mix h1 {
     font-size: 18px;
 }
-#Grid .mix p a{
+
+#Grid .mix p a {
     font-size: 24px;
 }
+
 #Grid .gap {
     display: inline-block;
     width: 200px;
@@ -58,9 +61,9 @@
     -webkit-margin-end: 0px;
     -webkit-padding-start: 0px;
 }
-@media (min-width: 800px)
-{
-	#Grid .mix{
-		height: 400px;
-	}
+
+@media (min-width: 800px) {
+    #Grid .mix {
+        height: 400px;
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 class Database
 {
 
@@ -9,6 +10,7 @@ class Database
     private $dbname = SETTINGS_DATABASE;
 
     private $dbconn = null;
+
     // funzione per la connessione al databse
     public function connect()
     {

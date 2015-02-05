@@ -19,7 +19,7 @@ class UsersController
             $database->connect();
             $username = $_POST['username'];
             $password = sha1($_POST['password']);
-            
+
             $count = $database->QueryCountResults("SELECT ID FROM utenti WHERE USERNAME='$username' AND PASSWORD='$password'");
             if ($count != 0) {
                 // prendo l'id utente dal database e avvio una SESSIONE
@@ -53,12 +53,12 @@ class UsersController
     {
         $database = new Database();
         $password = sha1($_POST['pass1']);
-        foreach(array("name","surname","email","username") as $campoForm){
-            $$campoForm=  mysql_escape_string($_POST[$campoForm]);
+        foreach (array("name", "surname", "email", "username") as $campoForm) {
+            $$campoForm = mysql_escape_string($_POST[$campoForm]);
         }
         $database->connect();
-        $query = $database->Query("INSERT INTO utenti (NOME, COGNOME, EMAIL, USERNAME, PASSWORD) ".
-                "VALUES ('$name','$surname','$email',$username','$password')");
+        $query = $database->Query("INSERT INTO utenti (NOME, COGNOME, EMAIL, USERNAME, PASSWORD) " .
+            "VALUES ('$name','$surname','$email',$username','$password')");
         $database->disconnect();
     }
 
@@ -71,10 +71,10 @@ class UsersController
             // Le due query possibili modificano i campi utenti nel database, una però non modifica la password
             if (IsEditPassword()) {
                 $password = sha1($_POST['pass1']);
-                $query = $database->Query("UPDATE utenti SET NOME='".mysql_escape_string($_POST[name]).
-                        "', COGNOME='".mysql_escape_string($_POST[surname]).
-                        "', EMAIL='".mysql_escape_string($_POST[email]).
-                        "', USERNAME='".mysql_escape_string($_POST[username])."', PASSWORD='$password' WHERE ID='$id'");
+                $query = $database->Query("UPDATE utenti SET NOME='" . mysql_escape_string($_POST[name]) .
+                    "', COGNOME='" . mysql_escape_string($_POST[surname]) .
+                    "', EMAIL='" . mysql_escape_string($_POST[email]) .
+                    "', USERNAME='" . mysql_escape_string($_POST[username]) . "', PASSWORD='$password' WHERE ID='$id'");
 
             } else if (empty($_POST['pass1']) && empty($_POST['pass1'])) {
                 $query = $database->Query("UPDATE utenti SET NOME='$_POST[name]', COGNOME='$_POST[surname]', EMAIL='$_POST[email]', USERNAME='$_POST[username]' WHERE ID='$id'");

@@ -4,7 +4,7 @@ session_start();
 include "IndeedAPI.php";
 include "db_pariopp_offertelavoro.php";
 
- // print_r($_SESSION);
+// print_r($_SESSION);
 
 $translations = array(
     "update" => "Modifica",
@@ -49,7 +49,6 @@ $class = array("local" => "", "web" => "");
 $class[$_SESSION["odl_class"]] = "class=\"active\"";
 
 
-
 /* ------------------ LOCAL -------------------- */
 if ($_SESSION["odl_class"] == "local") {
 
@@ -72,14 +71,14 @@ if ($_SESSION["odl_class"] == "local") {
 
     $db = new Database();
 
-	if (isset($_SESSION['login']))                
-		$loggato = true;
-	
-	if ($db->isAdmin($_SESSION['login'])!=""){
-		$isAdmin = true; 
-		$_SESSION["admin_mode"] = true;
-	}else unset($_SESSION["admin_mode"]);		
-	
+    if (isset($_SESSION['login']))
+        $loggato = true;
+
+    if ($db->isAdmin($_SESSION['login']) != "") {
+        $isAdmin = true;
+        $_SESSION["admin_mode"] = true;
+    } else unset($_SESSION["admin_mode"]);
+
 
     switch ($_POST["action"]) {
         case "insert"  : // ---- insertOpportunita
@@ -87,7 +86,7 @@ if ($_SESSION["odl_class"] == "local") {
             $_GET["action"] = "";
             // $content.="<b>insert<br>";
             $db->insertOpportunita($_POST);
-            $offerte = $db->getOfferteLavoro($_SESSION["lstart"], $_SESSION["llimit"], $_SESSION["q"], $_SESSION["l"],$isAdmin);
+            $offerte = $db->getOfferteLavoro($_SESSION["lstart"], $_SESSION["llimit"], $_SESSION["q"], $_SESSION["l"], $isAdmin);
             $totalResults = $db->total_results;
             // print_r($_POST);
             break;
@@ -136,13 +135,12 @@ if ($_SESSION["odl_class"] == "local") {
     }
 
 
-    $offerte = $db->getOfferteLavoro($_SESSION["lstart"], $_SESSION["llimit"], $_SESSION["q"], $_SESSION["l"],$isAdmin);
+    $offerte = $db->getOfferteLavoro($_SESSION["lstart"], $_SESSION["llimit"], $_SESSION["q"], $_SESSION["l"], $isAdmin);
     $totalResults = $db->total_results;
     $nazioni = $db->getNazioni();
     $stati = $db->getStatiOpportunita();
 
- 
-	
+
     if (($_SESSION["action"] != "insert") && $_SESSION["admin_mode"]) {
         $content .= "<br><a class=\"btn btn-success pull-right\" type=\"button\" href=\"index.php?action=insert\">+ INSERISCI OPPORTUNITA'</a><br><br><br>";
     }
@@ -164,7 +162,7 @@ if ($_SESSION["odl_class"] == "local") {
             $result->snippet = $offerta["SNIPPET_ANNUNCIO"];
             $result->latitude = $offerta["AZIENDA_LATITUDINE"];
             $result->longitude = $offerta["AZIENDA_LONGITUDINE"];
-			$result->source = $offerta["FONTE_DESCR"];
+            $result->source = $offerta["FONTE_DESCR"];
 
             $content .= "
 				
@@ -176,7 +174,7 @@ if ($_SESSION["odl_class"] == "local") {
 						<div class=\"panel-body\"><span class=\"label label-success pull-right\">Offerta pubblicata su " . $result->source . "</span>
 							<h4>" . strtoupper($result->company) . "<br>" . $result->formattedLocation . "</h4><br>
 							" . $result->snippet . "<br>";
-							
+
             if ($_SESSION['admin_mode'])
                 $content .= "
 						 <br>
@@ -185,7 +183,7 @@ if ($_SESSION["odl_class"] == "local") {
 						 ";
             if ($offerta["FONTE_LINK"] != "")
                 $content .= "<a href=\"" . $offerta["FONTE_LINK"] . "\" class=\"btn btn-info pull-right\" role=\"button\" target=\"_blank\">Vedi Annuncio Originale pubblicato da " . $offerta["FONTE_DESCR"] . "</a><br><br>";
-			
+
             if ($result->latitude != "" && $result->longitude != "")
                 $content .= "<div id=\"map-canvas\" class=\"embed-responsive embed-responsive-4by3\"></div>";
             $content .= "
@@ -556,9 +554,9 @@ if ($_SESSION["odl_class"] == "web") {
     <!-- Custom Fonts -->
     <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-	<!-- Boostrap Tags Input -->
-	<link href="./bootstrap-tagsinput.css" rel="stylesheet">
-	
+    <!-- Boostrap Tags Input -->
+    <link href="../css/bootstrap-tagsinput.css" rel="stylesheet">
+
     <!-- Google Maps -->
     <style>
         #map-canvas {
@@ -746,10 +744,10 @@ if ($_SESSION["odl_class"] == "web") {
 <script src="../js/bootstrap.min.js"></script>
 
 <!-- bootbox code -->
-<script src="./bootbox.min.js"></script>
+<script src="../js/bootbox.min.js"></script>
 
 <!-- bootstrap tagsinput -->
-<script src="./bootstrap-tagsinput.min.js"></script>
+<script src="../js/bootstrap-tagsinput.min.js"></script>
 
 <script>
 

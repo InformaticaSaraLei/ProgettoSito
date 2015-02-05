@@ -1,5 +1,6 @@
 <?php
 include_once '../../settings.php';
+
 class Connettore
 {
     protected $host;
