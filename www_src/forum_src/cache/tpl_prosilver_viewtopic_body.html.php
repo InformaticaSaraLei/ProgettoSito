@@ -141,9 +141,9 @@ if ($this->_rootref['S_FORUM_RULES']) { ?>
                                         </dd><?php }
                                     if ($this->_rootref['S_DISPLAY_RESULTS']) { ?>
                                         <dd class="resultbar">
-                                        <div
-                                            class="<?php if ($_poll_option_val['POLL_OPTION_PCT'] < (20)) { ?>pollbar1<?php } else if ($_poll_option_val['POLL_OPTION_PCT'] < (40)) { ?>pollbar2<?php } else if ($_poll_option_val['POLL_OPTION_PCT'] < (60)) { ?>pollbar3<?php } else if ($_poll_option_val['POLL_OPTION_PCT'] < (80)) { ?>pollbar4<?php } else { ?>pollbar5<?php } ?>"
-                                            style="width:<?php echo $_poll_option_val['POLL_OPTION_PERCENT']; ?>;"><?php echo $_poll_option_val['POLL_OPTION_RESULT']; ?></div>
+                                            <div
+                                                class="<?php if ($_poll_option_val['POLL_OPTION_PCT'] < (20)) { ?>pollbar1<?php } else if ($_poll_option_val['POLL_OPTION_PCT'] < (40)) { ?>pollbar2<?php } else if ($_poll_option_val['POLL_OPTION_PCT'] < (60)) { ?>pollbar3<?php } else if ($_poll_option_val['POLL_OPTION_PCT'] < (80)) { ?>pollbar4<?php } else { ?>pollbar5<?php } ?>"
+                                                style="width:<?php echo $_poll_option_val['POLL_OPTION_PERCENT']; ?>;"><?php echo $_poll_option_val['POLL_OPTION_RESULT']; ?></div>
                                         </dd>
                                         <dd><?php if ($_poll_option_val['POLL_OPTION_RESULT'] == 0) {
                                             echo((isset($this->_rootref['L_NO_VOTES'])) ? $this->_rootref['L_NO_VOTES'] : ((isset($user->lang['NO_VOTES'])) ? $user->lang['NO_VOTES'] : '{ NO_VOTES }'));
@@ -249,10 +249,10 @@ if ($_postrow_count) {
 
                         <h3 <?php if ($_postrow_val['S_FIRST_ROW']) { ?>class="first"<?php } ?>><?php if ($_postrow_val['POST_ICON_IMG']) { ?>
                                 <img
-                                src="<?php echo (isset($this->_rootref['T_ICONS_PATH'])) ? $this->_rootref['T_ICONS_PATH'] : '';
-                                echo $_postrow_val['POST_ICON_IMG']; ?>"
-                                width="<?php echo $_postrow_val['POST_ICON_IMG_WIDTH']; ?>"
-                                height="<?php echo $_postrow_val['POST_ICON_IMG_HEIGHT']; ?>" alt="" /> <?php } ?><a
+                                    src="<?php echo (isset($this->_rootref['T_ICONS_PATH'])) ? $this->_rootref['T_ICONS_PATH'] : '';
+                                    echo $_postrow_val['POST_ICON_IMG']; ?>"
+                                    width="<?php echo $_postrow_val['POST_ICON_IMG_WIDTH']; ?>"
+                                    height="<?php echo $_postrow_val['POST_ICON_IMG_HEIGHT']; ?>" alt=""/> <?php } ?><a
                                 href="#p<?php echo $_postrow_val['POST_ID']; ?>"><?php echo $_postrow_val['POST_SUBJECT']; ?></a>
                         </h3>
                         <p class="author"><?php if ($this->_rootref['S_IS_BOT']) {
@@ -354,9 +354,9 @@ if ($_postrow_count) {
                             <strong><?php echo((isset($this->_rootref['L_JOINED'])) ? $this->_rootref['L_JOINED'] : ((isset($user->lang['JOINED'])) ? $user->lang['JOINED'] : '{ JOINED }')); ?>
                                 :</strong> <?php echo $_postrow_val['POSTER_JOINED']; ?></dd><?php }
                         if ($_postrow_val['POSTER_FROM']) { ?>
-                    <dd>
-                    <strong><?php echo((isset($this->_rootref['L_LOCATION'])) ? $this->_rootref['L_LOCATION'] : ((isset($user->lang['LOCATION'])) ? $user->lang['LOCATION'] : '{ LOCATION }')); ?>
-                        :</strong> <?php echo $_postrow_val['POSTER_FROM']; ?></dd>
+                        <dd>
+                            <strong><?php echo((isset($this->_rootref['L_LOCATION'])) ? $this->_rootref['L_LOCATION'] : ((isset($user->lang['LOCATION'])) ? $user->lang['LOCATION'] : '{ LOCATION }')); ?>
+                                :</strong> <?php echo $_postrow_val['POSTER_FROM']; ?></dd>
                         <?php } if ($_postrow_val['S_PROFILE_FIELD1']) { ?><!-- Use a construct like this to include admin defined profile fields. Replace FIELD1 with the name of your field. -->
                         <dd><strong><?php echo $_postrow_val['PROFILE_FIELD1_NAME']; ?>
                                 :</strong> <?php echo $_postrow_val['PROFILE_FIELD1_VALUE']; ?></dd>

@@ -91,7 +91,7 @@ $this->_tpl_include('ucp_header.html'); ?>
                                                class="topictitle"><?php echo $_topicrow_val['TOPIC_TITLE']; ?></a>
                                             <?php if ($_topicrow_val['S_TOPIC_UNAPPROVED'] || $_topicrow_val['S_POSTS_UNAPPROVED']) { ?>
                                                 <a
-                                                href="<?php echo $_topicrow_val['U_MCP_QUEUE']; ?>"><?php echo $_topicrow_val['UNAPPROVED_IMG']; ?></a> <?php }
+                                                    href="<?php echo $_topicrow_val['U_MCP_QUEUE']; ?>"><?php echo $_topicrow_val['UNAPPROVED_IMG']; ?></a> <?php }
                                             if ($_topicrow_val['S_TOPIC_REPORTED']) { ?><a
                                                 href="<?php echo $_topicrow_val['U_MCP_REPORT']; ?>"><?php echo (isset($this->_rootref['REPORTED_IMG'])) ? $this->_rootref['REPORTED_IMG'] : ''; ?></a><?php } ?>
                                             <br/>

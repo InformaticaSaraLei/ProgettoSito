@@ -35,7 +35,7 @@
             $("#navigation_bar").load("../navigation_bar.html");
             $("#footer").load("../footer.html");
         });
-						
+
     </script>
 </head>
 <body>
@@ -58,12 +58,15 @@
     </div>
     <div class="row">
         <h3> Slideshow </h3>
-		
+
         <div class="embed-responsive embed-responsive-16by9">
             <div style='position: relative; padding-bottom: 51%; height: 0; overflow: hidden;'>
-				<iframe id='iframe' src='http://flickrit.com/slideshowholder.php?height=50&size=big&userId=128846442@N03&click=true&thumbnails=0&transition=0&layoutType=responsive&sort=0' scrolling='no' frameborder='0'style='width:100%; height:100%; position: absolute; top:0; left:0;' >
-				</iframe>
-			</div>
+                <iframe id='iframe'
+                        src='http://flickrit.com/slideshowholder.php?height=50&size=big&userId=128846442@N03&click=true&thumbnails=0&transition=0&layoutType=responsive&sort=0'
+                        scrolling='no' frameborder='0'
+                        style='width:100%; height:100%; position: absolute; top:0; left:0;'>
+                </iframe>
+            </div>
         </div>
     </div>
     <hr>

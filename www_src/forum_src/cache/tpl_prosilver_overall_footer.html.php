@@ -12,13 +12,13 @@
                 </li>
                 <?php if (!$this->_rootref['S_IS_BOT']) {
                     if ($this->_rootref['S_WATCH_FORUM_LINK']) { ?>
-                        <li <?php if ($this->_rootref['S_WATCHING_FORUM']) { ?>class="icon-unsubscribe"
+                    <li <?php if ($this->_rootref['S_WATCHING_FORUM']) { ?>class="icon-unsubscribe"
                         <?php } else { ?>class="icon-subscribe"<?php } ?>><a
                             href="<?php echo (isset($this->_rootref['S_WATCH_FORUM_LINK'])) ? $this->_rootref['S_WATCH_FORUM_LINK'] : ''; ?>"
                             title="<?php echo (isset($this->_rootref['S_WATCH_FORUM_TITLE'])) ? $this->_rootref['S_WATCH_FORUM_TITLE'] : ''; ?>"><?php echo (isset($this->_rootref['S_WATCH_FORUM_TITLE'])) ? $this->_rootref['S_WATCH_FORUM_TITLE'] : ''; ?></a>
                         </li><?php }
                     if ($this->_rootref['U_WATCH_TOPIC']) { ?>
-                        <li <?php if ($this->_rootref['S_WATCHING_TOPIC']) { ?>class="icon-unsubscribe"
+                    <li <?php if ($this->_rootref['S_WATCHING_TOPIC']) { ?>class="icon-unsubscribe"
                         <?php } else { ?>class="icon-subscribe"<?php } ?>><a
                             href="<?php echo (isset($this->_rootref['U_WATCH_TOPIC'])) ? $this->_rootref['U_WATCH_TOPIC'] : ''; ?>"
                             title="<?php echo((isset($this->_rootref['L_WATCH_TOPIC'])) ? $this->_rootref['L_WATCH_TOPIC'] : ((isset($user->lang['WATCH_TOPIC'])) ? $user->lang['WATCH_TOPIC'] : '{ WATCH_TOPIC }')); ?>"><?php echo((isset($this->_rootref['L_WATCH_TOPIC'])) ? $this->_rootref['L_WATCH_TOPIC'] : ((isset($user->lang['WATCH_TOPIC'])) ? $user->lang['WATCH_TOPIC'] : '{ WATCH_TOPIC }')); ?></a>

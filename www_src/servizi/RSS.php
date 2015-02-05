@@ -1,7 +1,7 @@
 <?php
 include_once '../settings.php';
 
-    $link = mysql_connect(SETTINGS_DBHOST, SETTINGS_USERNAME, SETTINGS_PASSWORD);
+$link = mysql_connect(SETTINGS_DBHOST, SETTINGS_USERNAME, SETTINGS_PASSWORD);
 if (!$link) {
     die ('Non riesco a connettermi: ' . mysql_error());
 }
@@ -14,7 +14,7 @@ if (!$db_selected) {
 //echo 'connesso con successo';
 
 //mysql_close($link);
-    
+
 
 //seleziono i dati
 

@@ -43,36 +43,43 @@ $this->_tpl_include('overall_header.html'); ?>
                     <?php if (!$this->_rootref['AVATAR_IMG']) {
                         if ($this->_rootref['RANK_TITLE']) { ?>
                             <dt><?php echo((isset($this->_rootref['L_RANK'])) ? $this->_rootref['L_RANK'] : ((isset($user->lang['RANK'])) ? $user->lang['RANK'] : '{ RANK }')); ?>
-                            :</dt>
+                                :
+                            </dt>
                             <dd><?php echo (isset($this->_rootref['RANK_TITLE'])) ? $this->_rootref['RANK_TITLE'] : ''; ?></dd><?php }
                         if ($this->_rootref['RANK_IMG']) { ?>
                             <dt><?php if ($this->_rootref['RANK_TITLE']) { ?>&nbsp;<?php } else {
-                                echo((isset($this->_rootref['L_RANK'])) ? $this->_rootref['L_RANK'] : ((isset($user->lang['RANK'])) ? $user->lang['RANK'] : '{ RANK }')); ?>:<?php } ?></dt>
+                                    echo((isset($this->_rootref['L_RANK'])) ? $this->_rootref['L_RANK'] : ((isset($user->lang['RANK'])) ? $user->lang['RANK'] : '{ RANK }')); ?>:<?php } ?></dt>
                             <dd><?php echo (isset($this->_rootref['RANK_IMG'])) ? $this->_rootref['RANK_IMG'] : ''; ?></dd><?php }
                     }
                     if ($this->_rootref['S_USER_INACTIVE']) { ?>
                         <dt><?php echo((isset($this->_rootref['L_USER_IS_INACTIVE'])) ? $this->_rootref['L_USER_IS_INACTIVE'] : ((isset($user->lang['USER_IS_INACTIVE'])) ? $user->lang['USER_IS_INACTIVE'] : '{ USER_IS_INACTIVE }')); ?>
-                        :</dt>
+                            :
+                        </dt>
                         <dd><?php echo (isset($this->_rootref['USER_INACTIVE_REASON'])) ? $this->_rootref['USER_INACTIVE_REASON'] : ''; ?></dd><?php }
                     if ($this->_rootref['LOCATION']) { ?>
                         <dt><?php echo((isset($this->_rootref['L_LOCATION'])) ? $this->_rootref['L_LOCATION'] : ((isset($user->lang['LOCATION'])) ? $user->lang['LOCATION'] : '{ LOCATION }')); ?>
-                        :</dt>
+                            :
+                        </dt>
                         <dd><?php echo (isset($this->_rootref['LOCATION'])) ? $this->_rootref['LOCATION'] : ''; ?></dd><?php }
                     if ($this->_rootref['AGE'] !== ('')) { ?>
                         <dt><?php echo((isset($this->_rootref['L_AGE'])) ? $this->_rootref['L_AGE'] : ((isset($user->lang['AGE'])) ? $user->lang['AGE'] : '{ AGE }')); ?>
-                        :</dt>
+                            :
+                        </dt>
                         <dd><?php echo (isset($this->_rootref['AGE'])) ? $this->_rootref['AGE'] : ''; ?></dd><?php }
                     if ($this->_rootref['OCCUPATION']) { ?>
                         <dt><?php echo((isset($this->_rootref['L_OCCUPATION'])) ? $this->_rootref['L_OCCUPATION'] : ((isset($user->lang['OCCUPATION'])) ? $user->lang['OCCUPATION'] : '{ OCCUPATION }')); ?>
-                        :</dt>
+                            :
+                        </dt>
                         <dd><?php echo (isset($this->_rootref['OCCUPATION'])) ? $this->_rootref['OCCUPATION'] : ''; ?></dd><?php }
                     if ($this->_rootref['INTERESTS']) { ?>
                         <dt><?php echo((isset($this->_rootref['L_INTERESTS'])) ? $this->_rootref['L_INTERESTS'] : ((isset($user->lang['INTERESTS'])) ? $user->lang['INTERESTS'] : '{ INTERESTS }')); ?>
-                        :</dt>
+                            :
+                        </dt>
                         <dd><?php echo (isset($this->_rootref['INTERESTS'])) ? $this->_rootref['INTERESTS'] : ''; ?></dd><?php }
                     if ($this->_rootref['S_GROUP_OPTIONS']) { ?>
                         <dt><?php echo((isset($this->_rootref['L_USERGROUPS'])) ? $this->_rootref['L_USERGROUPS'] : ((isset($user->lang['USERGROUPS'])) ? $user->lang['USERGROUPS'] : '{ USERGROUPS }')); ?>
-                        :</dt>
+                            :
+                        </dt>
                         <dd><select
                             name="g"><?php echo (isset($this->_rootref['S_GROUP_OPTIONS'])) ? $this->_rootref['S_GROUP_OPTIONS'] : ''; ?></select>
                         <input type="submit" name="submit"
@@ -131,26 +138,30 @@ $this->_tpl_include('overall_header.html'); ?>
                     <dl class="details">
                         <?php if ($this->_rootref['U_EMAIL']) { ?>
                             <dt><?php echo((isset($this->_rootref['L_EMAIL_ADDRESS'])) ? $this->_rootref['L_EMAIL_ADDRESS'] : ((isset($user->lang['EMAIL_ADDRESS'])) ? $user->lang['EMAIL_ADDRESS'] : '{ EMAIL_ADDRESS }')); ?>
-                            :</dt>
+                                :
+                            </dt>
                             <dd><a
                                 href="<?php echo (isset($this->_rootref['U_EMAIL'])) ? $this->_rootref['U_EMAIL'] : ''; ?>"><?php echo((isset($this->_rootref['L_SEND_EMAIL_USER'])) ? $this->_rootref['L_SEND_EMAIL_USER'] : ((isset($user->lang['SEND_EMAIL_USER'])) ? $user->lang['SEND_EMAIL_USER'] : '{ SEND_EMAIL_USER }')); ?> <?php echo (isset($this->_rootref['USERNAME'])) ? $this->_rootref['USERNAME'] : ''; ?></a>
                             </dd><?php }
                         if ($this->_rootref['U_WWW']) { ?>
                             <dt><?php echo((isset($this->_rootref['L_WEBSITE'])) ? $this->_rootref['L_WEBSITE'] : ((isset($user->lang['WEBSITE'])) ? $user->lang['WEBSITE'] : '{ WEBSITE }')); ?>
-                            :</dt>
+                                :
+                            </dt>
                             <dd><a
                                 href="<?php echo (isset($this->_rootref['U_WWW'])) ? $this->_rootref['U_WWW'] : ''; ?>"
                                 title="<?php echo((isset($this->_rootref['L_VISIT_WEBSITE'])) ? $this->_rootref['L_VISIT_WEBSITE'] : ((isset($user->lang['VISIT_WEBSITE'])) ? $user->lang['VISIT_WEBSITE'] : '{ VISIT_WEBSITE }')); ?>: <?php echo (isset($this->_rootref['U_WWW'])) ? $this->_rootref['U_WWW'] : ''; ?>"><?php echo (isset($this->_rootref['U_WWW'])) ? $this->_rootref['U_WWW'] : ''; ?></a>
                             </dd><?php }
                         if ($this->_rootref['U_PM']) { ?>
                             <dt><?php echo((isset($this->_rootref['L_PM'])) ? $this->_rootref['L_PM'] : ((isset($user->lang['PM'])) ? $user->lang['PM'] : '{ PM }')); ?>
-                            :</dt>
+                                :
+                            </dt>
                             <dd><a
                                 href="<?php echo (isset($this->_rootref['U_PM'])) ? $this->_rootref['U_PM'] : ''; ?>"><?php echo((isset($this->_rootref['L_SEND_PRIVATE_MESSAGE'])) ? $this->_rootref['L_SEND_PRIVATE_MESSAGE'] : ((isset($user->lang['SEND_PRIVATE_MESSAGE'])) ? $user->lang['SEND_PRIVATE_MESSAGE'] : '{ SEND_PRIVATE_MESSAGE }')); ?></a>
                             </dd><?php }
                         if ($this->_rootref['U_MSN'] || $this->_rootref['USER_MSN']) { ?>
                             <dt><?php echo((isset($this->_rootref['L_MSNM'])) ? $this->_rootref['L_MSNM'] : ((isset($user->lang['MSNM'])) ? $user->lang['MSNM'] : '{ MSNM }')); ?>
-                            :</dt>
+                                :
+                            </dt>
                             <dd><?php if ($this->_rootref['U_MSN']) { ?><a
                                 href="<?php echo (isset($this->_rootref['U_MSN'])) ? $this->_rootref['U_MSN'] : ''; ?>"
                                 onclick="popup(this.href, 550, 320); return false;"><?php echo((isset($this->_rootref['L_SEND_MSNM_MESSAGE'])) ? $this->_rootref['L_SEND_MSNM_MESSAGE'] : ((isset($user->lang['SEND_MSNM_MESSAGE'])) ? $user->lang['SEND_MSNM_MESSAGE'] : '{ SEND_MSNM_MESSAGE }')); ?></a><?php } else {
@@ -158,7 +169,8 @@ $this->_tpl_include('overall_header.html'); ?>
                             } ?></dd><?php }
                         if ($this->_rootref['U_YIM'] || $this->_rootref['USER_YIM']) { ?>
                             <dt><?php echo((isset($this->_rootref['L_YIM'])) ? $this->_rootref['L_YIM'] : ((isset($user->lang['YIM'])) ? $user->lang['YIM'] : '{ YIM }')); ?>
-                            :</dt>
+                                :
+                            </dt>
                             <dd><?php if ($this->_rootref['U_YIM']) { ?><a
                                 href="<?php echo (isset($this->_rootref['U_YIM'])) ? $this->_rootref['U_YIM'] : ''; ?>"
                                 onclick="popup(this.href, 780, 550); return false;"><?php echo((isset($this->_rootref['L_SEND_YIM_MESSAGE'])) ? $this->_rootref['L_SEND_YIM_MESSAGE'] : ((isset($user->lang['SEND_YIM_MESSAGE'])) ? $user->lang['SEND_YIM_MESSAGE'] : '{ SEND_YIM_MESSAGE }')); ?></a><?php } else {
@@ -166,7 +178,8 @@ $this->_tpl_include('overall_header.html'); ?>
                             } ?></dd><?php }
                         if ($this->_rootref['U_AIM'] || $this->_rootref['USER_AIM']) { ?>
                             <dt><?php echo((isset($this->_rootref['L_AIM'])) ? $this->_rootref['L_AIM'] : ((isset($user->lang['AIM'])) ? $user->lang['AIM'] : '{ AIM }')); ?>
-                            :</dt>
+                                :
+                            </dt>
                             <dd><?php if ($this->_rootref['U_AIM']) { ?><a
                                 href="<?php echo (isset($this->_rootref['U_AIM'])) ? $this->_rootref['U_AIM'] : ''; ?>"
                                 onclick="popup(this.href, 550, 320); return false;"><?php echo((isset($this->_rootref['L_SEND_AIM_MESSAGE'])) ? $this->_rootref['L_SEND_AIM_MESSAGE'] : ((isset($user->lang['SEND_AIM_MESSAGE'])) ? $user->lang['SEND_AIM_MESSAGE'] : '{ SEND_AIM_MESSAGE }')); ?></a><?php } else {
@@ -174,7 +187,8 @@ $this->_tpl_include('overall_header.html'); ?>
                             } ?></dd><?php }
                         if ($this->_rootref['U_ICQ'] || $this->_rootref['USER_ICQ']) { ?>
                             <dt><?php echo((isset($this->_rootref['L_ICQ'])) ? $this->_rootref['L_ICQ'] : ((isset($user->lang['ICQ'])) ? $user->lang['ICQ'] : '{ ICQ }')); ?>
-                            :</dt>
+                                :
+                            </dt>
                             <dd><?php if ($this->_rootref['U_ICQ']) { ?><a
                                 href="<?php echo (isset($this->_rootref['U_ICQ'])) ? $this->_rootref['U_ICQ'] : ''; ?>"
                                 onclick="popup(this.href, 550, 320); return false;"><?php echo((isset($this->_rootref['L_SEND_ICQ_MESSAGE'])) ? $this->_rootref['L_SEND_ICQ_MESSAGE'] : ((isset($user->lang['SEND_ICQ_MESSAGE'])) ? $user->lang['SEND_ICQ_MESSAGE'] : '{ SEND_ICQ_MESSAGE }')); ?></a><?php } else {
@@ -182,14 +196,16 @@ $this->_tpl_include('overall_header.html'); ?>
                             } ?></dd><?php }
                         if ($this->_rootref['U_JABBER'] && $this->_rootref['S_JABBER_ENABLED']) { ?>
                             <dt><?php echo((isset($this->_rootref['L_JABBER'])) ? $this->_rootref['L_JABBER'] : ((isset($user->lang['JABBER'])) ? $user->lang['JABBER'] : '{ JABBER }')); ?>
-                            :</dt>
+                                :
+                            </dt>
                             <dd><a
                                 href="<?php echo (isset($this->_rootref['U_JABBER'])) ? $this->_rootref['U_JABBER'] : ''; ?>"
                                 onclick="popup(this.href, 550, 320); return false;"><?php echo((isset($this->_rootref['L_SEND_JABBER_MESSAGE'])) ? $this->_rootref['L_SEND_JABBER_MESSAGE'] : ((isset($user->lang['SEND_JABBER_MESSAGE'])) ? $user->lang['SEND_JABBER_MESSAGE'] : '{ SEND_JABBER_MESSAGE }')); ?></a>
                             </dd><?php } else if ($this->_rootref['USER_JABBER']) { ?>
-                    <dt><?php echo((isset($this->_rootref['L_JABBER'])) ? $this->_rootref['L_JABBER'] : ((isset($user->lang['JABBER'])) ? $user->lang['JABBER'] : '{ JABBER }')); ?>
-                    :</dt>
-                    <dd><?php echo (isset($this->_rootref['USER_JABBER'])) ? $this->_rootref['USER_JABBER'] : ''; ?></dd>
+                        <dt><?php echo((isset($this->_rootref['L_JABBER'])) ? $this->_rootref['L_JABBER'] : ((isset($user->lang['JABBER'])) ? $user->lang['JABBER'] : '{ JABBER }')); ?>
+                            :
+                        </dt>
+                        <dd><?php echo (isset($this->_rootref['USER_JABBER'])) ? $this->_rootref['USER_JABBER'] : ''; ?></dd>
                         <?php } if ($this->_rootref['S_PROFILE_FIELD1']) { ?><!-- NOTE: Use a construct like this to include admin defined profile fields. Replace FIELD1 with the name of your field. -->
                         <dt><?php echo (isset($this->_rootref['PROFILE_FIELD1_NAME'])) ? $this->_rootref['PROFILE_FIELD1_NAME'] : ''; ?>
                             :
