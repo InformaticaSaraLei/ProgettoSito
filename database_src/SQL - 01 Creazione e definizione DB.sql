@@ -294,15 +294,15 @@ CREATE TABLE IF NOT EXISTS `pariopp`.`mediatags` (
 
 CREATE TABLE IF NOT EXISTS `pariopp`.`offertelavorotags` (
 	FK_TAG INT UNSIGNED NOT NULL,
-    FK_OFFERTE INT UNSIGNED NOT NULL,
-
+	FK_OFFERTE INT UNSIGNED NOT NULL,
+	
 	PRIMARY KEY(FK_TAG, FK_OFFERTE),
 	FOREIGN KEY `FK_offertelavorotags_TAG`(`FK_TAG` )
-			REFERENCES `pariopp`.`offertelavoro`(`id`)
+			REFERENCES `pariopp`.`tags`(`id`)
 			ON DELETE RESTRICT
 			ON UPDATE CASCADE,
 	FOREIGN KEY `FK_offertelavorotags_OFFERTE`(`FK_OFFERTE` )
-			REFERENCES `pariopp`.`tags`(`id`)
+			REFERENCES `pariopp`.`offertelavoro`(`id`)
 			ON DELETE RESTRICT
 			ON UPDATE CASCADE
 
