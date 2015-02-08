@@ -45,14 +45,12 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
-            <a href="#">
-                <button type="button" class="btn btn-default">Bottone</button>
-            </a>
-            <button type="button" class="btn btn-default">Bottone</button>
-            <button type="button" class="btn btn-default">Bottone</button>
-            <button type="button" class="btn btn-default">Bottone</button>
-            <button type="button" class="btn btn-default">Bottone</button>
-            <button type="button" class="btn btn-default">Bottone</button>
+            <a href="#" class="btn btn-default">Bottone</a>
+            <a href="#" class="btn btn-default">Bottone</a>
+            <a href="#" class="btn btn-default">Bottone</a>
+            <a href="#" class="btn btn-default">Bottone</a>
+            <a href="#" class="btn btn-default">Bottone</a>
+            <a href="#" class="btn btn-default">Bottone</a>
         </div>
     </div>
 </div>
