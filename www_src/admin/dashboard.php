@@ -81,7 +81,6 @@
                 Breve descrizione
                 <a href="#" class="btn btn-default">Bottone</a>
             </div>
-
         </div>
     </div>
 </div>
