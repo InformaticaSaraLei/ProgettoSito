@@ -110,16 +110,16 @@ if (isset($_SESSION['login'])) {
     </div>
     <!-- /.row -->
 
-    <hr>
-
-    <!-- Footer -->
-    <div id="footer"></div>
-    <!--- Inserimento navbar ---->
-
-    <!-- End Footer -->
-
 </div>
 <!-- /.container -->
+
+<hr>
+
+<!-- Footer -->
+<div id="footer"></div>
+<!--- Inserimento navbar ---->
+
+<!-- End Footer -->
 
 <!-- jQuery -->
 <script src="../js/jquery.js"></script>
