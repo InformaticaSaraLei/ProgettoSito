@@ -45,12 +45,43 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
-            <a href="#" class="btn btn-default">Bottone</a>
-            <a href="#" class="btn btn-default">Bottone</a>
-            <a href="#" class="btn btn-default">Bottone</a>
-            <a href="#" class="btn btn-default">Bottone</a>
-            <a href="#" class="btn btn-default">Bottone</a>
-            <a href="#" class="btn btn-default">Bottone</a>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                Breve descrizione
+                <a href="#" class="btn btn-default">Bottone</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                Breve descrizione
+                <a href="#" class="btn btn-default">Bottone</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                Breve descrizione
+                <a href="#" class="btn btn-default">Bottone</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                Breve descrizione
+                <a href="#" class="btn btn-default">Bottone</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                Breve descrizione
+                <a href="#" class="btn btn-default">Bottone</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                Breve descrizione
+                <a href="#" class="btn btn-default">Bottone</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                Breve descrizione
+                <a href="#" class="btn btn-default">Bottone</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                Breve descrizione
+                <a href="#" class="btn btn-default">Bottone</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                Breve descrizione
+                <a href="#" class="btn btn-default">Bottone</a>
+            </div>
+
         </div>
     </div>
 </div>
