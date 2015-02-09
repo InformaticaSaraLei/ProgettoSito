@@ -546,7 +546,7 @@ if ($_SESSION["odl_class"] == "web") {
     <title>Lavoro - Informatica sarà lei!</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../css/informaticasaralei.css" rel="stylesheet">
@@ -555,7 +555,7 @@ if ($_SESSION["odl_class"] == "web") {
     <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- Boostrap Tags Input -->
-    <link href="../css/bootstrap-tagsinput.css" rel="stylesheet">
+    <link href="../css/lavoro.css" rel="stylesheet">
 
     <!-- Google Maps -->
     <style>
