@@ -1,11 +1,20 @@
 $(document).ready(function () {
+    caller()
+});
+
+$(window).onresize = caller();
+
+// TODO: Cercare di far funzionare questa riga di codice
+// window.onresize = caller()
+
+function caller() {
     elaborator(".box1");
     elaborator(".box2");
     elaborator(".box3");
     elaborator(".box4");
     elaborator(".box5");
     elaborator(".box6");
-});
+}
 
 function elaborator(class_string) {
     var newheight = 0 //impostiamo un'altezza iniziale
