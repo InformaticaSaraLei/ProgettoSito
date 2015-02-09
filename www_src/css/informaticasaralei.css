@@ -171,7 +171,7 @@ footer {
     width: 100%;
     height: 100%;
     opacity: 0;
-    background: none repeat scroll 0% 0% rgba(255, 0, 226, 0.63); /* colore hover */
+    background: none repeat scroll 0 0 rgba(255, 0, 226, 0.63); /* colore hover */
     transition: all 0.5s ease 0s;
 }
 
@@ -180,32 +180,30 @@ footer {
     width: 100%;
     height: 100%;
     opacity: 10;
-    background: none repeat scroll 0% 0% rgba(255, 138, 233, 0.84); /* colore hover */
+    background: none repeat scroll 0 0 rgba(255, 138, 233, 0.84); /* colore hover */
     transition: all 0.5s ease 0s;
 }
 
 #portfolio .portfolio-item .portfolio-link {
     display: block;
     position: relative;
-    margin: 0px auto;
+    margin: 0 auto;
     max-width: 400px;
 }
 
 #portfolio .portfolio-item {
-    margin: 30px 0px 30px;
+    margin: 30px 0 30px;
 }
 
 .img-centered {
     margin: 0 auto;
 }
 
-#logo_unive_quadrato {
-}
-
-#logo_unive_scritta {
-}
-
+#logo_unive_quadrato,
+#logo_unive_scritta,
 #logo_pari_opportunita {
+    height: 10%;
+    width: 10%;
 }
 
 .row {
