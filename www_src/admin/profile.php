@@ -35,7 +35,7 @@ if (isset($_SESSION['login'])) {
     <title>Login - Informatica sarà lei!</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../css/informaticasaralei.css" rel="stylesheet">

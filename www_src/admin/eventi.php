@@ -16,7 +16,7 @@ include_once '../settings.php';
     <title>Amministra Eventi</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../css/informaticasaralei.css" rel="stylesheet">
