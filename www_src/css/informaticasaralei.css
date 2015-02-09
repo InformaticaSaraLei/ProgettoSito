@@ -210,3 +210,13 @@ footer {
     margin-left: 0;
     margin-right: 0;
 }
+
+.testTeo {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.altroTeo {
+    border-color: black;
+    border-style: solid;
+}
