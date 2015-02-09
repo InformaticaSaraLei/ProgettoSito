@@ -12,6 +12,8 @@
 
     <title>Esito operazione - Informatica sarà lei!</title>
 
+    <link rel="icon" href="../img/logo_icona.ico"/>
+
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
 

@@ -12,6 +12,7 @@
     <title>Eventi - Informatica sar� lei!</title>
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
+    <link rel="icon" href="../img/logo_icona.ico"/>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">

@@ -36,6 +36,7 @@ if (isset($_SESSION['login'])) {
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
+    <link rel="icon" href="../img/logo_icona.ico"/>
 
     <!-- Custom CSS -->
     <link href="../css/informaticasaralei.css" rel="stylesheet">

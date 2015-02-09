@@ -12,6 +12,7 @@
     <meta name="author" content="">
 
     <title>Dettagli evento</title>
+    <link rel="icon" href="../img/logo_icona.ico"/>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">

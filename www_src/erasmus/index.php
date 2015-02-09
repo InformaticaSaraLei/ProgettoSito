@@ -18,6 +18,7 @@ $_SESSION['actual-page'] = $page;
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
     <link href="../css/erasmus.css" rel="stylesheet">
+    <link rel="icon" href="../img/logo_icona.ico"/>
 
     <!-- Custom CSS -->
     <link href="../css/informaticasaralei.css" rel="stylesheet">

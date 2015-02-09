@@ -11,6 +11,7 @@
     <meta name="author" content="">
 
     <title>Gestione Fotogallery</title>
+    <link rel="icon" href="../img/logo_icona.ico"/>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
