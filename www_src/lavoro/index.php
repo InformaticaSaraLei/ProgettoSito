@@ -4,12 +4,12 @@ session_start();
 include "IndeedAPI.php";
 include "db_pariopp_offertelavoro.php";
 
-// print_r($_SESSION);
-
+ 
 $translations = array(
     "update" => "Modifica",
     "insert" => "Inserisci"
 );
+
 
 function buildNationOptions($elenco = "", $selectedValue = "")
 {
@@ -38,6 +38,22 @@ function buildStatiOptions($elenco = "", $selectedValue = "")
     return $options;
 }
 
+function buildProvinceOptions($selectedValue = "")
+{
+
+   $province = array ("%"=>"TUTTE","VE"=>"VE","VR"=>"VR","PD"=>"PD","BL"=>"BL","RO"=>"RO","TV"=>"TV","VI"=>"VI");
+   while(list($value,$label)=each($province)){
+
+     if($value==$selectedValue)
+		$options.="<option selected value=\"".$value."\">".$label;
+	 else
+      	$options.="<option value=\"".$value."\">".$label;
+   }
+   
+   return $options;
+
+}
+
 $pagination_prefix = "";
 
 if ($_SESSION["odl_class"] == "") $_SESSION["odl_class"] = "local";
@@ -47,7 +63,7 @@ if (($_GET["odl_from"] == "web") || ($_GET["odl_from"] == "local")) {
 }
 $class = array("local" => "", "web" => "");
 $class[$_SESSION["odl_class"]] = "class=\"active\"";
-
+$_SESSION["odl_from"] = $_SESSION["odl_class"];
 
 /* ------------------ LOCAL -------------------- */
 if ($_SESSION["odl_class"] == "local") {
@@ -60,7 +76,7 @@ if ($_SESSION["odl_class"] == "local") {
     } else {
     }
     if ($_SESSION["l"] == "") {
-        $_SESSION["l"] = "Venezia";
+        $_SESSION["l"] = "%"; //
         $ll_placeholder = "città, regione o codice postale";
     } else {
     }
@@ -227,7 +243,7 @@ if ($_SESSION["odl_class"] == "local") {
 					</div>
 					<div class=\"panel-body\">
 						<h4>" . strtoupper($jobOpportunity["AZIENDA_CITTA"]) . "(" . $jobOpportunity["AZIENDA_PROVINCIA"] . ") - " . $jobOpportunity["FK_NAZIONE"] . "</h4><br>
-						" . $jobOpportunity["SNIPPET_ANNUNCIO"] . "";
+						" . str_replace("\n","<br>",$jobOpportunity["SNIPPET_ANNUNCIO"]) . "<br>";
             if ($_SESSION['admin_mode'])
                 $content .= "
 						<br>
@@ -374,7 +390,8 @@ if ($_SESSION["odl_class"] == "local") {
 									  <label for=\"SNIPPET_ANNUNCIO\" class=\"control-label\">ESTRATTO ANNUNCIO</label>
 									</div>
 									<div class=\"col-sm-10\">
-									  <input name=\"SNIPPET_ANNUNCIO\" type=\"text\" class=\"form-control\" id=\"SNIPPET_ANNUNCIO\" placeholder=\"Estratto dell'annuncio\" value=\"" . htmlentities($offerta["SNIPPET_ANNUNCIO"]) . "\">
+									   <textarea  name=\"SNIPPET_ANNUNCIO\"  id=\"SNIPPET_ANNUNCIO\"   class=\"form-control\" rows=\"3\">" . htmlentities($offerta["SNIPPET_ANNUNCIO"]) . "</textarea>
+									  <!-- <input name=\"SNIPPET_ANNUNCIO\" type=\"text\" class=\"form-control\" id=\"SNIPPET_ANNUNCIO\" placeholder=\"Estratto dell'annuncio\" value=\"" . htmlentities($offerta["SNIPPET_ANNUNCIO"]) . "\"> -->
 									</div>
 								  </div>							  
 								  
@@ -479,9 +496,10 @@ if ($_SESSION["odl_class"] == "web") {
             ));
             // print_r($_POST);
             // Pass in more options
+			if($_SESSION["l"]=="%") $param_l="VENETO"; else $param_l=$_SESSION["l"];
             $output = $indeedAPI->query(array(
                 'q' => '' . $_SESSION["q"] . '',
-                'l' => '' . $_SESSION["l"] . '',
+                'l' => '' . $param_l . '',
                 'start' => $_SESSION["start"],
                 'limit' => $_SESSION["limit"],
                 'sort' => 'date'
@@ -558,7 +576,8 @@ if ($_SESSION["odl_class"] == "web") {
 
     <!-- Boostrap Tags Input -->
     <link href="../css/lavoro.css" rel="stylesheet">
-
+	
+		
     <!-- Google Maps -->
     <style>
         #map-canvas {
@@ -594,7 +613,7 @@ if ($_SESSION["odl_class"] == "web") {
             }
             var myLatlng = new google.maps.LatLng(<?php echo $result->latitude; ?>, <?php echo $result->longitude; ?>);
             var map = new google.maps.Map(mapCanvas, mapOptions);
-            var image = 'marker.png';
+            var image = 'img/marker.png';
             var marker = new google.maps.Marker({
                 position: myLatlng,
                 map: map,
@@ -628,19 +647,35 @@ if ($_SESSION["odl_class"] == "web") {
     <!-- /.row -->
     <!-- Content Row -->
     <div class="row">
+	
+	
+	
         <div class="col-lg-12">
-            <form class="navbar-form navbar-left" role="search" method="POST">
+            <form class="navbar-form navbar-left" role="search" method="POST" action="index.php">
+				<div class="input-group">
+				  <span class="input-group-btn"><button class="btn btn-default" ><b>Cerca</b></button></span>
+				  <input id="q" name="q" type="text" class="form-control" placeholder="<?php echo $q_placeholder; ?>" value="<?php echo $_SESSION["q"]; ?>">
+				  <span class="input-group-btn"><button type="submit"   class="btn btn-default" >nella provincia di </button></span>
+				  <select id="l" name="l" class="form-control"><?php echo buildProvinceOptions($_SESSION["l"]);  ?></select>
+				  <span class="input-group-btn"><button type="submit"   class="btn btn-default" > <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></span>
+				  <!-- <input id="l" name="l" type="text" class="form-control" placeholder="Provincia" value="<?php echo $_SESSION["l"]; ?>"> -->
+				  <input id="action" name="action" type="hidden" value="search" class="form-control">
+				  <!-- nella Provincia di <select><option>VE<option>VR<option>VI</select> -->
+				</div><!-- /input-group -->			
+			
+			<!--
                 <div class="form-group">
-                    <input id="q" name="q" type="text" class="form-control" placeholder="<?php echo $q_placeholder; ?>"
-                           value="<?php echo $_SESSION["q"]; ?>">
-                    <input id="l" name="l" type="text" class="form-control" placeholder="<?php echo $l_placeholder; ?>"
-                           value="<?php echo $_SESSION["l"]; ?>">
+                   <input id="q" name="q" type="text" class="form-control" placeholder="<?php echo $q_placeholder; ?>" value="<?php echo $_SESSION["q"]; ?>">
+                    <input id="l" name="l" type="text" class="form-control" placeholder="<?php echo $l_placeholder; ?>" value="<?php echo $_SESSION["l"]; ?>">
                     <input id="action" name="action" type="hidden" value="search" class="form-control">
-                </div>
+                </div> 
 
-                <button type="submit" class="btn btn-default">Cerca</button>
+                <button type="submit" class="btn btn-default">Cerca</button>-->
             </form>
         </div>
+		
+		
+		
     </div>
     <!-- /.row -->
     <!-- Content Row -->
@@ -751,6 +786,11 @@ if ($_SESSION["odl_class"] == "web") {
 <!-- bootstrap tagsinput -->
 <script src="../js/bootstrap-tagsinput.min.js"></script>
 
+<script src="../js/editor.js"></script>
+
+
+
+
 <script>
 
 
@@ -769,7 +809,10 @@ if ($_SESSION["odl_class"] == "web") {
         }
     );
 
+	
 </script>
+
+
 
 </body>
 
