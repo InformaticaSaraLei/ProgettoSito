@@ -786,7 +786,6 @@ if ($_SESSION["odl_class"] == "web") {
 <!-- bootstrap tagsinput -->
 <script src="../js/bootstrap-tagsinput.min.js"></script>
 
-<script src="../js/editor.js"></script>
 
 
 
