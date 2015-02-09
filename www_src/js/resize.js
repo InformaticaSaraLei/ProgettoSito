@@ -2,8 +2,6 @@ $(document).ready(function () {
     caller()
 });
 
-$(window).onresize = caller();
-
 // TODO: Cercare di far funzionare questa riga di codice
 // window.onresize = caller()
 
