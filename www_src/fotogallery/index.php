@@ -86,7 +86,7 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $sql = "select * from media where tipomedia=\"foto\";";
+    $sql = "select * from media where tipomedia=\"foto\" order by data_realizzazione desc;";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
