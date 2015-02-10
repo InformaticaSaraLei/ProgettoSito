@@ -1,9 +1,7 @@
 $(document).ready(function () {
     caller()
 });
-
-// TODO: Cercare di far funzionare questa riga di codice
-// window.onresize = caller()
+$(window).addEventListener("resize", caller());
 
 function caller() {
     elaborator(".box1");
@@ -15,28 +13,13 @@ function caller() {
 }
 
 function elaborator(class_string) {
-    var newheight = 0 //impostiamo un'altezza iniziale
-
-    var padding = ($(class_string).css("padding")).split('px');
-    //estraggo, se c'è, il padding della classe, dividendolo dall'unità di misura 'px'
-
-    $(class_string).each(function () { // Per ogni div con la classe .single_box
-
-        if ($(this).height() > newheight)
-        // se l'altezza di questo div è maggiore dell'attuale
-        //valore di NEWHEIGHT, reimposto il valore di questa variabile
-
-        {
+    var newheight = 0;
+    var padding = ($(class_string).css("padding")).split("px");
+    $(class_string).each(function () {
+        if ($(this).height() > newheight) {
             newheight = $(this).height();
         }
-
-
-        //aggiungo all'altezza del più alto il padding estratto,
-        //moltiplicato per 2 , per avere un leggero margine in piu
-
-
     });
     var compHeight = newheight + 10 + "px";
-
-    $(class_string).css("height", compHeight); //imposto al volo il valore 'height' nel CSS, con il nuovo valore trovato.
+    $(class_string).css("height", compHeight);
 }

@@ -46,40 +46,28 @@
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
             <div class="col-lg-4 col-md-6 col-xs-12">
-                Breve descrizione
-                <a href="#" class="btn btn-default">Bottone</a>
+                Dettagli del profilo
+                <a href="/admin/profile.php" class="btn btn-default">Profilo</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                Gestione degli eventi
+                <a href="/admin/eventi.php" class="btn btn-default">Eventi</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                Gestione della fotogallery
+                <a href="/admin/fotogallery.php" class="btn btn-default">Fotogallery</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                Gestione della videogallery
+                <a href="/admin/videogallery.php" class="btn btn-default">Videogallery</a>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-12">
                 Breve descrizione
                 <a href="#" class="btn btn-default">Bottone</a>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-12">
-                Breve descrizione
-                <a href="#" class="btn btn-default">Bottone</a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                Breve descrizione
-                <a href="#" class="btn btn-default">Bottone</a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                Breve descrizione
-                <a href="#" class="btn btn-default">Bottone</a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                Breve descrizione
-                <a href="#" class="btn btn-default">Bottone</a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                Breve descrizione
-                <a href="#" class="btn btn-default">Bottone</a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                Breve descrizione
-                <a href="#" class="btn btn-default">Bottone</a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                Breve descrizione
-                <a href="#" class="btn btn-default">Bottone</a>
+                Logout
+                <a href="/admin/logout.php" class="btn btn-default">Logout</a>
             </div>
         </div>
     </div>
