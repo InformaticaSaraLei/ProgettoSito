@@ -199,10 +199,14 @@ footer {
     margin: 0 auto;
 }
 
-#logo_unive_quadrato,
 #logo_pari_opportunita {
     height: 100%;
     width: 100%;
+}
+
+#logo_unive_quadrato {
+    width: 100%;
+    margin-top: -30%;
 }
 
 .row {
