@@ -213,3 +213,9 @@ footer {
     margin-left: 0;
     margin-right: 0;
 }
+
+.link-bottom {
+@media(max-width : 768 px) {
+    text-align: center;
+}
+}
