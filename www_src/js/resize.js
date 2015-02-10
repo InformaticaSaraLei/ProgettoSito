@@ -14,12 +14,14 @@ function caller() {
 
 function elaborator(class_string) {
     var newheight = 0;
-    var padding = ($(class_string).css("padding")).split("px");
-    $(class_string).each(function () {
+    var element = $(class_string);
+    var padding = parseInt(element.css("padding-top").split("px")[0]) + 
+            parseInt(element.css("padding-bottom").split("px")[0]);
+    element.each(function () {
         if ($(this).height() > newheight) {
             newheight = $(this).height();
         }
     });
-    var compHeight = newheight + 10 + "px";
+    var compHeight = newheight + padding + "px";
     $(class_string).css("height", compHeight);
 }
