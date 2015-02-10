@@ -25,7 +25,7 @@ class UsersController
                 // prendo l'id utente dal database e avvio una SESSIONE
                 $query = $database->QuerySingleResults("SELECT ID FROM utenti WHERE USERNAME='$username' AND PASSWORD='$password'");
                 $this->SetSession($query);
-                header("Location: profile.php");
+                header("Location: dashboard.php");
                 die();
             } else {
                 header("Location: error.php?error=4");
@@ -36,6 +36,13 @@ class UsersController
     }
 
     // Funzione che registra un nuovo utente
+
+    private function SetSession($id)
+    {
+        session_start();
+        $_SESSION['login'] = $id;
+    }
+
     public function AddUser()
     {
         if (IsEmptyRegister()) {
@@ -48,6 +55,8 @@ class UsersController
             $this->RegisterUser();
         }
     }
+
+    // Funzione che serve per modificare un profilo utente
 
     private function RegisterUser()
     {
@@ -62,7 +71,9 @@ class UsersController
         $database->disconnect();
     }
 
-    // Funzione che serve per modificare un profilo utente
+
+    // Funzione che avvia la sessione di un utente
+
     public function EditProfile($id)
     {
         if (!IsEmptyEdit()) {
@@ -87,15 +98,8 @@ class UsersController
         }
     }
 
-
-    // Funzione che avvia la sessione di un utente
-    private function SetSession($id)
-    {
-        session_start();
-        $_SESSION['login'] = $id;
-    }
-
     // Funzione che ritorna il nome dell'utente
+
     public function GetName($id)
     {
         $database = new Database();
