@@ -3,7 +3,7 @@
 <div>
     <h3>What is Erasmus?</h3>
 
-    <p>The <a href="http://ec.europa.eu/education/lifelong-learning-programme/doc80_en.htm">ERASMUS programme</a> is a
+    <p>The <a href="http://ec.europa.eu/education/lifelong-learning-programme/doc80_en.htm" target="_blank">ERASMUS programme</a> is a
         European student exchange programme established in 1987 offering university students a possibility of studying
         or working abroad in another European country for a period of at least 3 months and maximum 12 months. The name
         of the project refers to Dutch Renaissance humanist and theologian Desiderius Erasmus of Rotterdam. He studied
@@ -11,7 +11,7 @@
 
     <p/>
 
-    <p>Since 2007 the Erasmus project is a part of <a href="The Lifelong Learning Programme">The Lifelong Learning
+    <p>Since 2007 the Erasmus project is a part of <a href="http://ec.europa.eu/education/tools/llp_en.htm" target="_blank">The Lifelong Learning
             Programme</a> (other projects: Comenius, Grundtvig and Leonardo da Vinci), which is determined for the years
         2007-2013.</p>
 </div>
@@ -32,3 +32,4 @@
             university</b>.
     </p>
 </div>
+
