@@ -82,6 +82,10 @@ footer {
     header.carousel .carousel {
         height: 70%;
     }
+
+    .link-bottom {
+        text-align: center;
+    }
 }
 
 .logo {
@@ -212,10 +216,4 @@ footer {
 .row {
     margin-left: 0;
     margin-right: 0;
-}
-
-.link-bottom {
-@media(max-width : 768 px) {
-    text-align: center;
-}
 }
