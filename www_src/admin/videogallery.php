@@ -276,7 +276,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h3>Torna alla <a href="../videogallery/">videogallery</a></h3></div>
+            <h3>Torna alla <a href="index.php">Home</a></h3></div>
     </div>
 <?php } ?>
 
