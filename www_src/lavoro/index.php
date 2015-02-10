@@ -563,7 +563,7 @@ if ($_SESSION["odl_class"] == "web") {
 
     <title>Lavoro - Informatica sarà lei!</title>
 
-    <link rel="icon" href="../img/logo_icona.ico"/>
+	<link rel="icon" href="../img/loghi-ufficiali/logo_icona.ico"/>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">

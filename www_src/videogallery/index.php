@@ -12,7 +12,7 @@
 
     <title>Videogallery - Informatica sarà lei!</title>
 
-    <link rel="icon" href="../img/logo_icona.ico"/>
+    <link rel="icon" href="../img/loghi-ufficiali/logo_icona.ico"/>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
