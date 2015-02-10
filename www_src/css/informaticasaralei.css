@@ -84,6 +84,7 @@ footer {
     }
 
     .link-bottom {
+        padding-left: 0%;
         text-align: center;
     }
 }
