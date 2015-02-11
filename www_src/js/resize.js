@@ -8,8 +8,9 @@ function caller() {
 }
 function elaborator(class_string) {
     try {
-        var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-        if (!is_chrome) {
+        $.browser.chrome = $.browser.webkit && !!window.chrome;
+        $.browser.safari = $.browser.webkit && !window.chrome;
+        if (!$.browser.chrome || !$.browser.chrome) {
             var newheight = 0;
             var padding = $(class_string).css("padding").split("px");
             $(class_string).each(function () {
