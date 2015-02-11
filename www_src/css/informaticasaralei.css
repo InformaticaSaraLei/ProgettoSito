@@ -218,3 +218,7 @@ footer {
     margin-left: 0;
     margin-right: 0;
 }
+
+.no_border {
+    border: 0;
+}
