@@ -83,10 +83,19 @@ footer {
         height: 70%;
     }
 
-    .link-bottom {
-        padding-left: 0%;
+    #menu_footer > li {
+        padding-left: 0;
         text-align: center;
     }
+}
+
+@media (min-width: 768px) {
+
+    #menu_footer > li {
+        padding-left: 40%;
+        text-align: left;
+    }
+
 }
 
 .logo {
@@ -221,4 +230,8 @@ footer {
 
 .no_border {
     border: 0;
+}
+
+.white {
+    background-color: white;
 }
