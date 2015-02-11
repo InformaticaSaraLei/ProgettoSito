@@ -4,7 +4,8 @@ $servername = SETTINGS_DBHOST;        /*da completare con i dati corretti del db
 $username = SETTINGS_USERNAME;
 $password = SETTINGS_PASSWORD;
 $dbname = SETTINGS_DATABASE;
-$email = $_GET["formEmail"];        /*il form dovrà avere il campo dove l'utente inserisce l'email con name="FormEmail"*/
+$emailNE = $_GET["formEmail"];        /*il form dovrà avere il campo dove l'utente inserisce l'email con name="FormEmail"*/
+$email= mysql_real_escape_string($emailNE);
 
 /*connessione al db, da sistemare*/
 
