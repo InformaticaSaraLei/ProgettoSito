@@ -7,25 +7,18 @@ function caller() {
     elaborator(".box6");
 }
 function elaborator(class_string) {
-    try {
-        $.browser.chrome = $.browser.webkit && !!window.chrome;
-        $.browser.safari = $.browser.webkit && !window.chrome;
-        if (!$.browser.chrome || !$.browser.chrome) {
-            var newheight = 0;
-            var padding = $(class_string).css("padding").split("px");
-            $(class_string).each(function () {
-                if ($(this).height() > newheight) {
-                    newheight = $(this).height();
-                }
-            });
-            var compHeight = newheight + 10 + "px";
-            $(class_string).css("height", compHeight);
+    var newheight = 0;
+    var padding = $(class_string).css("padding").split("px");
+    $(class_string).each(function () {
+        if ($(this).height() > newheight) {
+            newheight = $(this).height();
         }
-    }
-    catch (e) {
-    }
+    });
+    var compHeight = newheight + 10 + "px";
+    $(class_string).css("height", compHeight);
+
 }
 
-$(document).ready(function () {
+$(window).load(function () {
     caller()
 });
