@@ -85,14 +85,14 @@ footer {
 
     #menu_footer > li {
         padding-left: 0;
-        text-align: center;
+        text-align: left;
     }
 }
 
 @media (min-width: 768px) {
 
     #menu_footer > li {
-        padding-left: 37%;
+        padding-left: 40%;
         text-align: left;
     }
 
