@@ -38,7 +38,7 @@ echo("<language>IT-it</language>");
 while ($array = mysql_fetch_array($query)) {
     echo "
 		<item>
-			<title><![CDATA[\n<p>" . htmlentities($array['news']) . "</p>\n]]></title>
+			<title><![CDATA[\n" . htmlentities($array['news']) . "\n]]></title>
 			<description><![CDATA[\n<p>" . htmlentities($array['snippet']) . "</p>\n]]></description>
 			<pubDate>" . date('D, d M Y H:i:s O', $array['data']) . "</pubDate>
 		</item>";
