@@ -97,7 +97,7 @@
             echo '<div class="col-md-4 img-portfolio">';
             echo '<a href="' . $row['LINK'] . '" title="' . $row['NOME'] . '" target="_blank"><img class="img-responsive img-hover" src="' . $row['LINK'] . '" alt="' . $row['NOME'] . '"></a>' . "<h3><a href=\"" . $row['LINK'] . "\" target=\"_blank\" >" . $row['NOME'] . "</a></h3>";
             echo '</div>';
-			$i++;
+	    $i++;
             if ($i % 3 == 0)
                 echo '</div>';
         }
