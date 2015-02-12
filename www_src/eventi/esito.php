@@ -52,7 +52,6 @@ include '../settings.php';
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Esito operazione
-                <small>Sottotitolo</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
@@ -72,7 +71,7 @@ include '../settings.php';
                 if ($esito) {
                     echo 'Azione riuscita';
                     echo '<h3><a href="index.php">Torna agli eventi</a></h3>';
-                    echo '<h3><a href="addEvento.php.php">Aggiungi altro evento</a></h3>';
+                    echo '<h3><a href="../admin/evento.php">Aggiungi altro evento</a></h3>';
                 } else {
                     echo 'Azione Fallita';
                     echo '<h3><a href="index.php">Torna agli eventi</a></h3>';
@@ -101,7 +100,7 @@ include '../settings.php';
                     // Aggiunta evento
                     $titolo = mysql_escape_string($_POST['txtTitolo']);
                     $descrizione = mysql_escape_string($_POST['txtDescrizione']);
-                    $linkImg = mysql_escape_string($_POST['txtLinkImmagine']);
+                    $linkImg = mysql_escape_string($_FILES['txtLinkImmagine']['name']);
                     $inizio = mysql_escape_string($_POST['txtInizio']);
                     $fine = mysql_escape_string($_POST['txtFine']);
                     $provincia = mysql_escape_string($_POST['txtProvincia']);
@@ -110,7 +109,15 @@ include '../settings.php';
                     $contenuto = mysql_escape_string($_POST['txaContenuto']);
                     $id_utente = 1; // Salvato da qualche parte in SESSION :D
 
-                    $res = $em->creaEvento($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $linkImg, $id_utente);
+                    //Gestione immagine
+                    $allowed_filetypes = array('.jpg','.gif','.bmp','.png');
+                    $upload_path = 'img/'; 
+                    $filename = round(microtime(true));
+                    if(move_uploaded_file($_FILES['txtLinkImmagine']['tmp_name'],$upload_path . $filename))
+                      $res = $em->creaEvento($titolo, $descrizione, $contenuto, $inizio, $fine, $provincia, $comune, $indirizzo, $upload_path . $filename, $id_utente);
+                    else
+                      $res = false;
+
                     stampaEsito($res);
                 } elseif ($op == 'canc') {
                     // Cancellazione evento

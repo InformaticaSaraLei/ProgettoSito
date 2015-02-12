@@ -22,6 +22,8 @@ include_once "lib/evento.php";
 
     <!-- Custom CSS -->
     <link href="../css/informaticasaralei.css" rel="stylesheet">
+    <!-- Same Height CSS - NON TOCCARE !!! -->
+    <link href="../css/eventi.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -87,10 +89,12 @@ include_once "lib/evento.php";
         }
         ?>
         <div class="pull-right col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-            <a href="calendario.php"><button type="button" class="btn btn-default">Calendario</button</a>
+            <a href="calendario.php"><button type="button" class="btn btn-default">Calendario</button></a>
         </div>
     </div>
-
+    <div>
+    &nbsp;
+    </div>
     <!-- Content Row -->
     <?php
     $i = 0;
@@ -99,31 +103,36 @@ include_once "lib/evento.php";
     if (isset($eventi) && count($eventi) != 0) {
         foreach ($eventi as $e) {
             $i = $i + 1;
-            if ($i % 2 != 0) echo '<div class="row">';
-            echo '<div class="pull-left col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-default">';
-            echo '<div class="panel-heading">';
-            echo '<h4><i class="fa fa-fw fa-users"></i>' . ($e->titolo) . '</h4>';
+            if ($i % 2 != 0) echo '<div class="row"><div class="row-same-height">';
+            echo '<div class="pull-left col-lg-6 col-md-6 col-sm-12 col-xs-12 panel panel-default col-md-height">';
+              echo '<div class="panel-heading">';
+              echo '<h4><i class="fa fa-fw fa-users"></i>' . ($e->titolo) . '</h4>';
+              echo '</div>';
+              echo '<div class="panel-body">';
+                echo '<div class="row">';
+                  echo '<div class="pull-left col-md-6 col-lg-6 col-sm-6 col-xs-6">';
+                    if(strlen($e->descrizione) > 200) {
+                      $e->descrizione = substr($e->descrizione,0, 200) . '...(continua)';
+                    }
+                    echo $e->descrizione;
+                  echo '</div>';
+                  echo '<div class="pull-left col-md-6 col-lg-6 col-sm-6 col-xs-6">';
+                    echo '<img src="' . $e->link_img . '" class="img-responsive" alt="Immagine Evento">';
+                  echo '</div>';
+                echo '</div>';
+                echo '<br>';
+                echo '<div class="text-center">';
+                echo '<a href="paginaEvento.php?id=' . $e->id . '" class="btn btn-default text-center">Altre informazioni</a>';
+                echo '</div>';
+              /* echo '<div class="row">'; */
+              /* echo '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4"></div>'; */
+              /* echo '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">'; */
+              /* echo '</div>'; */
+              /* echo '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4"></div>'; */
+              /* echo '</div>'; */
+              echo '</div>';
             echo '</div>';
-            echo '<div class="panel-body">';
-            echo '<div class="row">';
-            echo '<div class="pull-left col-md-6 col-lg-6 col-sm-6 col-xs-6">';
-            echo $e->descrizione;
-            echo '</div>';
-            echo '<div class="pull-left col-md-6 col-lg-6 col-sm-6 col-xs-6">';
-            echo '<img src="' . $e->link_img . '" class="img-responsive" alt="Immagine Evento">';
-            echo '</div>';
-            echo '</div>';
-            echo '<br>';
-            echo '<div class="row">';
-            echo '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4"></div>';
-            echo '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">';
-            echo '<a href="paginaEvento.php?id=' . $e->id . '" class="btn btn-default text-center">Altre informazioni</a>';
-            echo '</div>';
-            echo '<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4"></div>';
-            echo '</div>';
-            echo '</div>';
-            echo '</div>';
-            if ($i % 2 == 0) echo '</div>';
+            if ($i % 2 == 0) echo '</div></div>';
         }
     } else {
         echo '<div class="row"><div class="pull-left col-md-4 col-lg-4"></div>';
@@ -135,7 +144,6 @@ include_once "lib/evento.php";
     ?>
 
     <!-- /.row -->
-    <hr>
 
 </div>
 <!-- /.container -->

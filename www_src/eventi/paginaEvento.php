@@ -99,7 +99,7 @@ $e = $em->getEventoById($id);
         }
         ?>
         <div class="pull-right col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-            <h4><a href="calendario.php">Calendario</a></h4>
+            <a href="calendario.php"><button type="button" class="btn btn-default">Calendario</button></a>
         </div>
     </div>
 
