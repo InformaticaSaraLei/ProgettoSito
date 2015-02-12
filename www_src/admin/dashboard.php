@@ -92,6 +92,7 @@
         <br>
     </div>
 </div>
+    </div>
 
 <!-- /.container -->
 
