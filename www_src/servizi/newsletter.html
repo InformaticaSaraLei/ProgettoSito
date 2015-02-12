@@ -11,7 +11,7 @@
 
     <title>Newsletter</title>
 
-    <link rel="icon" href="../img/logo_icona.ico"/>
+    <link rel="icon" href="../img/loghi-ufficiali/logo_icona.ico"/>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -44,7 +44,25 @@
 
 <!-- Page Content -->
 
-<!-- Inserite qui il vostro codice -->
+    <div class="container">
+    	<div class="row">
+            <div class="col-sm-12">
+        		<div class="thumbnail center well well-small text-center">
+                    <h2>Newsletter</h2>
+                    
+                    <p>Iscriviti alla nostra newsletter per rimanere informato sulle ultime notizie!</p>
+                    
+                    <form action="insertNewsletter.php" method="post">
+                        <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
+                            <input type="text" id="formEmail" name="formEmail" placeholder="latua@email.com">
+                        </div>
+                        <br />
+                        <input type="submit" value="Iscriviti!" class="btn btn-large" />
+                  </form>
+                </div>    
+            </div>
+    	</div>
+    </div>
 
 <!-- /.container -->
 

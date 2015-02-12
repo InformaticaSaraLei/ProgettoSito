@@ -1,27 +1,25 @@
 <?php
 ?>
 
-<script>
-    var images = new Array();
-    images.push({img: 'https://scontent-a-mxp.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/10302272_752401401474436_4469052670059194585_n.jpg?oh=9b60ef13d1e57f758688590e88215171&oe=550C4C62'},
-        {img: 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xpa1/v/t1.0-9/10846395_750948074953102_779647762239347670_n.jpg?oh=60251fba0d16670d382c94000e015e53&oe=54F962EA&__gda__=1426024151_9c790b58a24fab90f1f3b30c7e1dda14'})
-</script>
-
 <div class="row">
     <div class="row">
-        <div class="col-xs-3"><a href="#" title="Image 1"><img src="/ProgettoSito/www_src/erasmus/img/esn1.jpg"
+        <div class="col-xs-3"><a href="#" title="Image 1"><img src="http://i.imgur.com/Rz6xPzf.jpg"
                                                                class="thumbnail img-responsive"></a></div>
-        <div class="col-xs-3"><a href="#" title="Image 2"><img src="/ProgettoSito/www_src/erasmus/img/esn2.jpg"
+        <div class="col-xs-3"><a href="#" title="Image 2"><img src="http://i.imgur.com/66GvL4m.jpg"
                                                                class="thumbnail img-responsive"></a></div>
-        <div class="col-xs-3"><a href="#" title="Image 3"><img src="/ProgettoSito/www_src/erasmus/img/esn3.jpg"
+        <div class="col-xs-3"><a href="#" title="Image 3"><img src="http://i.imgur.com/XxQGBHD.jpg"
                                                                class="thumbnail img-responsive"></a></div>
-        <div class="col-xs-3"><a href="#" title="Image 4"><img src="/ProgettoSito/www_src/erasmus/img/esn4.jpg"
+        <div class="col-xs-3"><a href="#" title="Image 4"><img src="http://i.imgur.com/vD1Eb8b.jpg"
                                                                class="thumbnail img-responsive"></a></div>
-        <div class="col-xs-3"><a href="#" title="Image 5"><img src="/ProgettoSito/www_src/erasmus/img/esn5.jpg"
+    </div>
+    <div class="row">
+        <div class="col-xs-3"><a href="#" title="Image 5"><img src="http://i.imgur.com/EXALhNg.jpg"
                                                                class="thumbnail img-responsive"></a></div>
-        <div class="col-xs-3"><a href="#" title="Image 6"><img src="/ProgettoSito/www_src/erasmus/img/esn6.jpg"
+        <div class="col-xs-3"><a href="#" title="Image 6"><img src="http://i.imgur.com/euOgoIV.jpg"
                                                                class="thumbnail img-responsive"></a></div>
-        <div class="col-xs-3"><a href="#" title="Image 7"><img src="/ProgettoSito/www_src/erasmus/img/esn7.jpg"
+        <div class="col-xs-3"><a href="#" title="Image 7"><img src="http://i.imgur.com/nqvak01.jpg"
+                                                               class="thumbnail img-responsive"></a></div>
+        <div class="col-xs-3"><a href="#" title="Image 8"><img src="http://i.imgur.com/5OFR8F5.jpg"
                                                                class="thumbnail img-responsive"></a></div>
     </div>
 </div>

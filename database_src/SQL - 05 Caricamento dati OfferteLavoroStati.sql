@@ -1,1 +1,1 @@
-INSERT INTO `offertelavorostati` (STATO) VALUES ('Bozza'), ('Pubblicato'), ('Cancellato');
+INSERT INTO `pariopp`.`offertelavorostati` (STATO) VALUES ('Bozza'), ('Pubblicato'), ('Cancellato');

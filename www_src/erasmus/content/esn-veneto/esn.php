@@ -11,8 +11,8 @@
         cannot access a period abroad ("internationalisation at home").</p>
 
     <p>In Veneto there are only 3 sections of ESN:</p>
-    <li><a href="http://www.esnpadova.it">Padova (AEP-ESN Padova)</a></li>
-    <li><a href="http://www.esnvenezia.it">Venezia (ESN Venezia Meet a Mate)</a></li>
-    <li><a href="http://www.ase-esnverona.it">Verona (ASE ESN Verona)</a></li>
+    <li><a href="http://www.esnpadova.it" target="_blank">Padova (AEP-ESN Padova)</a></li>
+    <li><a href="http://www.esnvenezia.it" target="_blank">Venezia (ESN Venezia Meet a Mate)</a></li>
+    <li><a href="http://www.ase-esnverona.it" target="_blank">Verona (ASE ESN Verona)</a></li>
 </div>
 

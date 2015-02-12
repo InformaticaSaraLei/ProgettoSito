@@ -1,6 +1,6 @@
-DROP VIEW IF EXISTS vRSSFEEDS;
+DROP VIEW IF EXISTS `pariopp`.vRSSFEEDS;
 
-CREATE VIEW vRSSFEEDS
+CREATE VIEW `pariopp`.vRSSFEEDS
 AS
 /*
 	SELECT
@@ -9,7 +9,7 @@ AS
 		"Nuova esperienza di una donna" AS news,
 		concat(nome, ' ', cognome, ": donna da ", RETRIBUZIONE, " - La sua storia: ", MOTIVO_NOTORIETA) AS snippet
 	FROM
-		esperienzedonne
+		`pariopp`.esperienzedonne
 UNION
 */
 	SELECT
@@ -19,7 +19,7 @@ UNION
 		concat(nome, ' ', cognome, ' - ', RUOLO_ATTUALE, ' presso ', AZIENDA_ATTUALE) as snippet,
 		DATA_INSERIMENTO AS data
 	FROM
-		opportunitaculturalipersone
+		`pariopp`.opportunitaculturalipersone
 UNION
 	SELECT
 		ol.ID,
@@ -28,8 +28,8 @@ UNION
         concat(ol.AZIENDA_NOME, ' ricerca: ', ol.TITOLO_LAVORO, ' per sede di ', ol.AZIENDA_CITTA, '(', ol.AZIENDA_PROVINCIA, ') - ', n.DESCRIZIONE) as snippet,
 		DATA_INSERIMENTO AS data
 	FROM
-		offertelavoro ol
-        LEFT JOIN nazioni n ON ol.FK_NAZIONE = n.ID;
+		`pariopp`.offertelavoro ol
+        LEFT JOIN `pariopp`.nazioni n ON ol.FK_NAZIONE = n.ID;
 
 
 /*

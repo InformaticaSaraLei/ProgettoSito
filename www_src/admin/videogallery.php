@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <title>Gestione Videogallery</title>
 
-    <link rel="icon" href="../img/logo_icona.ico"/>
+    <link rel="icon" href="../img/loghi-ufficiali/logo_icona.ico"/>
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
 
@@ -276,7 +276,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h3>Torna alla <a href="../videogallery/">videogallery</a></h3></div>
+            <h3>Torna alla <a href="../index.html">Home</a></h3></div>
     </div>
 <?php } ?>
 

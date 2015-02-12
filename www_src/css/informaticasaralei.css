@@ -82,6 +82,20 @@ footer {
     header.carousel .carousel {
         height: 70%;
     }
+
+    #menu_footer > li {
+        padding-left: 0;
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) {
+
+    #menu_footer > li {
+        padding-left: 40%;
+        text-align: left;
+    }
+
 }
 
 .logo {
@@ -199,11 +213,14 @@ footer {
     margin: 0 auto;
 }
 
-#logo_unive_quadrato,
-#logo_unive_scritta,
 #logo_pari_opportunita {
-    height: 10%;
-    width: 10%;
+    height: 100%;
+    width: 100%;
+}
+
+#logo_unive_quadrato {
+    width: 80%;
+    margin-top: 0;
 }
 
 .row {
@@ -211,12 +228,10 @@ footer {
     margin-right: 0;
 }
 
-.testTeo {
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
+.no_border {
+    border: 0;
 }
 
-.altroTeo {
-    border-color: black;
-    border-style: solid;
+.white {
+    background-color: white;
 }

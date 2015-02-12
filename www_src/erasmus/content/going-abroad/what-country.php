@@ -11,7 +11,7 @@
     <p>
         Apart from the students, the mobility offered by the Erasmus programme is dedicated to professors and
         universities’ staff as well.
-        The programme is open to <a href="http://ec.europa.eu/education/lifelong-learning-programme/doc1208_en.htm">33
+        The programme is open to <a href="http://ec.europa.eu/education/lifelong-learning-programme/doc1208_en.htm" target="_blank">33
             countries</a>: </p>
     <ul class="f32">
 
@@ -155,7 +155,7 @@
     </ul>
 
 
-    <p>and for the member States of the European Union, EU candidate countries and <a href="http://www.efta.int/">EFTA /
+    <p>and for the member States of the European Union, EU candidate countries and <a href="http://www.efta.int/" target="_blank">EFTA /
             EEA members</a>.
     </p>
 
