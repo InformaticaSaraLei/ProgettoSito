@@ -1,4 +1,6 @@
+﻿
 <?php
+
 include_once '../settings.php';
 require_once("lib/userscontroller.php");
 
