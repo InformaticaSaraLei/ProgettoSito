@@ -44,6 +44,7 @@
 
 <div class="container">
     <div class="row">
+        <br>
         <div class="col-lg-6 col-lg-offset-3">
             <div class="col-lg-4 col-md-6 col-xs-12">
                 Dettagli del profilo
@@ -70,6 +71,7 @@
                 <a href="/admin/logout.php" class="btn btn-default">Logout</a>
             </div>
         </div>
+        <br>
     </div>
 </div>
 
