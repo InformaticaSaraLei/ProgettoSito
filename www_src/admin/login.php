@@ -67,7 +67,6 @@ session_start();
         </div>
     </div>
     <!-- /.row -->
-
     <!-- Content Row -->
     <div class="row">
         <div class="col-lg-12">
@@ -79,16 +78,16 @@ session_start();
             <form action="login.php" method="POST">
                 <table>
                     <tr>
-                        <td>Username:</td>
+                        <td>Username:&emsp;</td>
                         <td><input type="text" name="username"></td>
                     </tr>
                     <tr>
-                        <td>Password:</td>
-                        <td><input type="password" name="password"></td>
+                        <td><br>Password:&emsp;</td>
+                        <td><br><input type="password" name="password"></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" name="login" value="login"></td>
-                        <td><input type="reset" value="reset"></td>
+                        <td><br><br><input type="submit" name="login" value="login"></td>
+                        <td><br><br><input type="reset" value="reset"></td>
                     </tr>
                 </table>
             </form>
