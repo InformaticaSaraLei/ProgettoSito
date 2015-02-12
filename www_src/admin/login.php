@@ -93,11 +93,9 @@ session_start();
             </form>
             ';
             } else {
-                $user = new UsersController();
-                // prelevo il nome dell'utente
-                $name = $user->GetName($_SESSION['login']);
-                echo "<h2>Benvenuto $name</h2><br>";
-                echo "Accedi al tuo <a href='profile.php'>profilo</a> oppure effettua il <a href='logout.php'>logout</a>";
+                // Redirect al pannello di amministrazione
+                header("Location: dashboard.php");
+                die();
             }
 
             ?>
