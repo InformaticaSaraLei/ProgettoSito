@@ -36,83 +36,83 @@
         });
     </script>
 </head>
+
 <body>
-<div id="navigation_bar"></div>
-<!--- Inserimento navbar ---->
+    <div id="navigation_bar"></div>
+    <!--- Inserimento navbar ---->
 
-<!-- Page Content -->
+    <!-- Page Content -->
 
-<div class="container">
-    <div class="row">
-        <br>
-        <div class="col-lg-6 col-lg-offset-3">
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                <div class="col-xs-12">Dettagli del profilo</div>
-                <div class="col-xs-12">
-                    <a href="/admin/profile.php" class="btn btn-default">Profilo</a>
+    <div class="container">
+        <div class="row">
+            <br>
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="col-xs-12">Dettagli del profilo</div>
+                    <div class="col-xs-12">
+                        <a href="/admin/profile.php" class="btn btn-default">Profilo</a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                <div class="col-xs-12">Gestione degli eventi</div>
-                <div class="col-xs-12">
-                    <a href="/admin/eventi.php" class="btn btn-default">Eventi</a>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="col-xs-12">Gestione degli eventi</div>
+                    <div class="col-xs-12">
+                        <a href="/admin/eventi.php" class="btn btn-default">Eventi</a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                <div class="col-xs-12">Gestione della fotogallery</div>
-                <div class="col-xs-12">
-                    <a href="/admin/fotogallery.php" class="btn btn-default">Fotogallery</a></div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                <div class="col-xs-12">Gestione della videogalery</div>
-                <div class="col-xs-12">
-                    <a href="/admin/videogallery.php" class="btn btn-default">Videogallery</a>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="col-xs-12">Gestione della fotogallery</div>
+                    <div class="col-xs-12">
+                        <a href="/admin/fotogallery.php" class="btn btn-default">Fotogallery</a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                <div class="col-xs-12">Gestione della sezione lavoro</div>
-                <div class="col-xs-12">
-                    <a href="../lavoro/index.php" class="btn btn-default">Lavoro</a>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="col-xs-12">Gestione della videogalery</div>
+                    <div class="col-xs-12">
+                        <a href="/admin/videogallery.php" class="btn btn-default">Videogallery</a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                <div class="col-xs-12">Breve descrizione</div>
-                <div class="col-xs-12">
-                    <a href="#" class="btn btn-default">Bottone</a></div
-            </div>
-            <div class="col-lg-4 col-md-6 col-xs-12">
-                <div class="col-xs-12">
-                    Logout
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="col-xs-12">Gestione della sezione lavoro</div>
+                    <div class="col-xs-12">
+                        <a href="../lavoro/index.php" class="btn btn-default">Lavoro</a>
+                    </div>
                 </div>
-                <div class="col-xs-12">
-                    <a href="/admin/logout.php" class="btn btn-default">Logout</a>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="col-xs-12">Breve descrizione</div>
+                    <div class="col-xs-12">
+                        <a href="#" class="btn btn-default">Bottone</a>
+                    </div </div>
+                    <div class="col-lg-4 col-md-6 col-xs-12">
+                        <div class="col-xs-12">Logout</div>
+                        <div class="col-xs-12">
+                            <a href="/admin/logout.php" class="btn btn-default">Logout</a>
+                        </div>
+                    </div>
                 </div>
+                <br>
             </div>
         </div>
-        <br>
-    </div>
-</div>
     </div>
 
-<!-- /.container -->
+    <!-- /.container -->
 
-<!-- Footer -->
-<div id="footer"></div>
-<!--- Inserimento navbar ---->
+    <!-- Footer -->
+    <div id="footer"></div>
+    <!--- Inserimento navbar ---->
 
-<!-- End Footer -->
+    <!-- End Footer -->
 
-<!-- jQuery -->
-<script src="../js/jquery.js"></script>
+    <!-- jQuery -->
+    <script src="../js/jquery.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="../js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
 
-<script>
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
-</script>
+    <script>
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>
 </body>
 
 </html>
