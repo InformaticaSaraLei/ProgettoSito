@@ -264,3 +264,7 @@ footer {
 .testo-home {
     font-size: 18px;
 }
+.align-center {
+    text-align: center;
+    font-weight: 900;
+}

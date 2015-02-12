@@ -45,56 +45,56 @@
 
     <div class="container">
         <div class="row">
-            <br>
-            <div class="col-lg-6 col-lg-offset-3">
+            <br><br>
+            <div class="col-lg-12  align-center">
                 <div class="col-lg-4 col-md-6 col-xs-12">
                     <div class="col-xs-12">Dettagli del profilo</div>
                     <div class="col-xs-12">
-                        <a href="/admin/profile.php" class="btn btn-default">Profilo</a>
+                        <a href="/admin/profile.php" class="btn btn-default">Profilo</a><br><br>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-xs-12">
                     <div class="col-xs-12">Gestione degli eventi</div>
                     <div class="col-xs-12">
-                        <a href="/admin/eventi.php" class="btn btn-default">Eventi</a>
+                        <a href="/admin/eventi.php" class="btn btn-default">Eventi</a><br><br>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-xs-12">
                     <div class="col-xs-12">Gestione della fotogallery</div>
                     <div class="col-xs-12">
-                        <a href="/admin/fotogallery.php" class="btn btn-default">Fotogallery</a>
+                        <a href="/admin/fotogallery.php" class="btn btn-default">Fotogallery</a><br><br>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-xs-12">
                     <div class="col-xs-12">Gestione della videogalery</div>
                     <div class="col-xs-12">
-                        <a href="/admin/videogallery.php" class="btn btn-default">Videogallery</a>
+                        <a href="/admin/videogallery.php" class="btn btn-default">Videogallery</a><br><br>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-xs-12">
                     <div class="col-xs-12">Gestione della sezione lavoro</div>
                     <div class="col-xs-12">
-                        <a href="../lavoro/index.php" class="btn btn-default">Lavoro</a>
+                        <a href="../lavoro/index.php" class="btn btn-default">Lavoro</a><br><br>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-xs-12">
                     <div class="col-xs-12">Breve descrizione</div>
                     <div class="col-xs-12">
-                        <a href="#" class="btn btn-default">Bottone</a>
+                        <a href="#" class="btn btn-default">Bottone</a><br><br>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-xs-12">
                     <div class="col-xs-12">Logout</div>
                     <div class="col-xs-12">
-                        <a href="/admin/logout.php" class="btn btn-default">Logout</a>
+                        <a href="/admin/logout.php" class="btn btn-default">Logout</a><br><br>
                     </div>
                 </div>
+                <br><br>
             </div>
             <br>
         </div>
     </div>
-    </div>
-
+<br><br>
     <!-- /.container -->
 
     <!-- Footer -->
