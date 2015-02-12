@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include_once '../settings.php';
 include_once "lib/evento.php";
 ?>
@@ -83,11 +83,11 @@ include_once "lib/evento.php";
 
         if ($loggato && $isAdmin) {
             echo '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left">
-                  <h3><a href="../admin/eventi.php">Aggiungi evento</a></h3></div>';
+                  <a href="../admin/eventi.php"><button type="button" class="btn btn-default">Aggiungi evento</button></a></div>';
         }
         ?>
         <div class="pull-right col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-            <h3><a href="calendario.php">Calendario</a></h3>
+            <a href="calendario.php"><button type="button" class="btn btn-default">Calendario</button</a>
         </div>
     </div>
 
