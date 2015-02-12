@@ -81,17 +81,18 @@
                     <div class="col-xs-12">Breve descrizione</div>
                     <div class="col-xs-12">
                         <a href="#" class="btn btn-default">Bottone</a>
-                    </div </div>
-                    <div class="col-lg-4 col-md-6 col-xs-12">
-                        <div class="col-xs-12">Logout</div>
-                        <div class="col-xs-12">
-                            <a href="/admin/logout.php" class="btn btn-default">Logout</a>
-                        </div>
                     </div>
                 </div>
-                <br>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="col-xs-12">Logout</div>
+                    <div class="col-xs-12">
+                        <a href="/admin/logout.php" class="btn btn-default">Logout</a>
+                    </div>
+                </div>
             </div>
+            <br>
         </div>
+    </div>
     </div>
 
     <!-- /.container -->
