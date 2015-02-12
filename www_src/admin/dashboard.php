@@ -16,7 +16,7 @@
 
     <!-- Custom CSS -->
     <link href="../css/informaticasaralei.css" rel="stylesheet">
-    
+
     <!-- Custom Fonts -->
     <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -47,32 +47,46 @@
         <br>
         <div class="col-lg-6 col-lg-offset-3">
             <div class="col-lg-4 col-md-6 col-xs-12">
-                Dettagli del profilo
-                <a href="/admin/profile.php" class="btn btn-default">Profilo</a>
+                <div class="col-xs-12">Dettagli del profilo</div>
+                <div class="col-xs-12">
+                    <a href="/admin/profile.php" class="btn btn-default">Profilo</a>
+                </div>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-12">
-                Gestione degli eventi
-                <a href="/admin/eventi.php" class="btn btn-default">Eventi</a>
+                <div class="col-xs-12">Gestione degli eventi</div>
+                <div class="col-xs-12">
+                    <a href="/admin/eventi.php" class="btn btn-default">Eventi</a>
+                </div>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-12">
-                Gestione della fotogallery
-                <a href="/admin/fotogallery.php" class="btn btn-default">Fotogallery</a>
+                <div class="col-xs-12">Gestione della fotogallery</div>
+                <div class="col-xs-12">
+                    <a href="/admin/fotogallery.php" class="btn btn-default">Fotogallery</a></div>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-12">
-                Gestione della videogallery
-                <a href="/admin/videogallery.php" class="btn btn-default">Videogallery</a>
+                <div class="col-xs-12">Gestione della videogalery</div>
+                <div class="col-xs-12">
+                    <a href="/admin/videogallery.php" class="btn btn-default">Videogallery</a>
+                </div>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-12">
-                Gestione della sezione lavoro
-                <a href="../lavoro/index.php" class="btn btn-default">Lavoro</a>
+                <div class="col-xs-12">Gestione della sezione lavoro</div>
+                <div class="col-xs-12">
+                    <a href="../lavoro/index.php" class="btn btn-default">Lavoro</a>
+                </div>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-12">
-                Breve descrizione
-                <a href="#" class="btn btn-default">Bottone</a>
+                <div class="col-xs-12">Breve descrizione</div>
+                <div class="col-xs-12">
+                    <a href="#" class="btn btn-default">Bottone</a></div
             </div>
             <div class="col-lg-4 col-md-6 col-xs-12">
-                Logout
-                <a href="/admin/logout.php" class="btn btn-default">Logout</a>
+                <div class="col-xs-12">
+                    Logout
+                </div>
+                <div class="col-xs-12">
+                    <a href="/admin/logout.php" class="btn btn-default">Logout</a>
+                </div>
             </div>
         </div>
         <br>
