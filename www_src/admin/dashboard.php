@@ -16,8 +16,6 @@
 
     <!-- Custom CSS -->
     <link href="../css/informaticasaralei.css" rel="stylesheet">
-    <!-- Dashboard CSS -->
-    <link href="../css/dashboard.css" rel="stylesheet">
     
     <!-- Custom Fonts -->
     <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
