@@ -64,7 +64,7 @@
             </div>
             <div class="col-lg-4 col-md-6 col-xs-12">
                 Gestione della sezione lavoro
-                <a href="../lavoro/index.php" class="btn btn-default">Videogallery</a>
+                <a href="../lavoro/index.php" class="btn btn-default">Lavoro</a>
             </div>
             <div class="col-lg-4 col-md-6 col-xs-12">
                 Breve descrizione
