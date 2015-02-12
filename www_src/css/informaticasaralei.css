@@ -62,7 +62,7 @@ header.carousel .fill {
 /* Footer Styles */
 
 footer {
-    margin: 50px 0;
+    margin: 50px;
 }
 
 /* Responsive Styles */
@@ -70,7 +70,7 @@ footer {
 @media (max-width: 991px) {
     .customer-img,
     .img-related {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
 }
 
@@ -92,7 +92,7 @@ footer {
 @media (min-width: 768px) {
 
     #menu_footer > li {
-        padding-left: 40%;
+        padding-left: 37%;
         text-align: left;
     }
 
