@@ -44,6 +44,13 @@
     <!-- Page Content -->
 
     <div class="container">
+        
+        <div class="page-header">
+        <h1>Area riservata
+            <small> Dashboard</small>
+        </h1>
+        </div>
+        
         <div class="row">
             <br><br>
             <div class="col-lg-12  align-center">
