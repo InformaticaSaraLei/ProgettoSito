@@ -638,8 +638,10 @@ if ($_SESSION["odl_class"] == "web") {
                 <small>Opportunità e annunci a portata di mano ...</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../index.html">Home</a>
-                </li>
+                <li><a href="../index.html">Home</a></li>
+                <?php if ($_SESSION['admin_mode']==true):?>
+                <li><a href="index.php">Dashboard</a></li>
+                <?php endif;?>
                 <li class="active">Lavoro</li>
             </ol>
         </div>
