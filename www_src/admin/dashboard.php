@@ -54,7 +54,7 @@
         <div class="row">
             <br><br>
             
-        <div class="col-lg-4">
+        <div class="col-md-4 col-sm-6">
                 <div class="row-fluid user-infos cyruxx">
                     <div class="span10 offset1">
                         <div class="panel panel-default">
@@ -73,7 +73,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4">
+            <div class="col-md-4 col-sm-6">
                 <div class="row-fluid user-infos cyruxx">
                     <div class="span10 offset1">
                         <div class="panel panel-default">
@@ -92,7 +92,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4">
+            <div class="col-md-4 col-sm-6">
                 <div class="row-fluid user-infos cyruxx">
                     <div class="span10 offset1">
                         <div class="panel panel-default">
@@ -111,7 +111,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4">
+            <div class="col-md-4 col-sm-6">
                 <div class="row-fluid user-infos cyruxx">
                     <div class="span10 offset1">
                         <div class="panel panel-default">
@@ -130,7 +130,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4">
+            <div class="col-md-4 col-sm-6">
                 <div class="row-fluid user-infos cyruxx">
                     <div class="span10 offset1">
                         <div class="panel panel-default">
@@ -149,7 +149,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4">
+            <div class="col-md-4 col-sm-6">
                 <div class="row-fluid user-infos cyruxx">
                     <div class="span10 offset1">
                         <div class="panel panel-default">
