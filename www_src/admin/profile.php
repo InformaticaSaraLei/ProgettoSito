@@ -76,6 +76,7 @@ if (isset($_SESSION['login'])) {
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
                 </li>
+                <li><a href="index.php">Dashboard</a></li>
                 <li class="active">Login</li>
             </ol>
         </div>

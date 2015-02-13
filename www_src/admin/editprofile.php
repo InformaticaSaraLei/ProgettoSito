@@ -73,8 +73,8 @@ if (isset($_SESSION['login'])) {
                 <small>modifica profilo</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../index.html">Home</a>
-                </li>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="index.php">Dashboard</a></li>
                 <li class="active">Modifica profilo</li>
             </ol>
         </div>

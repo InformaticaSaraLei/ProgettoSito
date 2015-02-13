@@ -70,6 +70,7 @@
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
                 </li>
+                <li><a href="index.php">Dashboard</a></li>
                 <li><a href="../videogallery/">Videogallery</a></li>
                 <li class="active">Gestione video</li>
             </ol>

@@ -70,6 +70,7 @@
                 <ol class="breadcrumb">
                     <li><a href="../index.html">Home</a>
                     </li>
+                    <li><a href="index.php">Dashboard</a></li>
                     <li><a href="../eventi/index.php">Eventi</a>
                     </li>
                     <li class="active">Aggiungi evento</li>

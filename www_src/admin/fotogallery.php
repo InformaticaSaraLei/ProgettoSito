@@ -71,6 +71,7 @@
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a>
                 </li>
+                <li><a href="index.php">Dashboard</a></li>
                 <li><a href="../fotogallery">Fotogallery</a></li>
                 <li class="active">Aggiungi foto</li>
             </ol>

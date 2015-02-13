@@ -44,11 +44,15 @@
     <!-- Page Content -->
 
     <div class="container">
-        
         <div class="page-header">
         <h1>Area riservata
             <small> Dashboard</small>
         </h1>
+        <ol class="breadcrumb">
+            <li><a href="../index.html">Home</a>
+            </li>
+            <li class="active">Dashboard</li>
+        </ol>
         </div>
         
         <div class="row">
