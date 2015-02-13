@@ -53,6 +53,46 @@
         
         <div class="row">
             <br><br>
+            
+        <div class="col-lg-4">
+                <div class="row-fluid user-infos cyruxx">
+                    <div class="span10 offset1">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-user"></i> Dettagli del profilo</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row-fluid">
+                                    <div class="col-xs-12">
+                        <a href="/admin/profile.php" class="btn btn-default">Accedi al Profilo</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="row-fluid user-infos cyruxx">
+                    <div class="span10 offset1">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-calendar"></i> Gestione degli eventi</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row-fluid">
+                                    <div class="col-xs-12">
+                        <a href="/admin/eventi.php" class="btn btn-default">Accedi agli Eventi</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                            
+            
             <div class="col-lg-12  align-center">
                 <div class="col-lg-4 col-md-6 col-xs-12">
                     <div class="col-xs-12">Dettagli del profilo</div>
