@@ -91,8 +91,84 @@
                     </div>
                 </div>
             </div>
-                            
             
+            <div class="col-lg-4">
+                <div class="row-fluid user-infos cyruxx">
+                    <div class="span10 offset1">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-photo"></i> Gestione della fotogallery</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row-fluid">
+                                    <div class="col-xs-12">
+                        <a href="/admin/fotogallery.php" class="btn btn-default">Accedi alla Fotogallery</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="row-fluid user-infos cyruxx">
+                    <div class="span10 offset1">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-film"></i> Gestione della videogallery</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row-fluid">
+                                    <div class="col-xs-12">
+                        <a href="/admin/videogallery.php" class="btn btn-default">Accedi alla Videogallery</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="row-fluid user-infos cyruxx">
+                    <div class="span10 offset1">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-user-md"></i> Gestione della sezione lavoro</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row-fluid">
+                                    <div class="col-xs-12">
+                        <a href="../lavoro/index.php" class="btn btn-default">Accedi alla sezione Lavoro</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="row-fluid user-infos cyruxx">
+                    <div class="span10 offset1">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-sign-out"></i> Logout</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row-fluid">
+                                    <div class="col-xs-12">
+                        <a href="/admin/logout.php" class="btn btn-default">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                            
+            <!-- vecchio pannello
             <div class="col-lg-12  align-center">
                 <div class="col-lg-4 col-md-6 col-xs-12">
                     <div class="col-xs-12">Dettagli del profilo</div>
@@ -113,7 +189,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-xs-12">
-                    <div class="col-xs-12">Gestione della videogalery</div>
+                    <div class="col-xs-12">Gestione della videogallery</div>
                     <div class="col-xs-12">
                         <a href="/admin/videogallery.php" class="btn btn-default">Videogallery</a><br><br>
                     </div>
@@ -125,12 +201,6 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-xs-12">
-                    <div class="col-xs-12">Breve descrizione</div>
-                    <div class="col-xs-12">
-                        <a href="#" class="btn btn-default">Bottone</a><br><br>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-xs-12">
                     <div class="col-xs-12">Logout</div>
                     <div class="col-xs-12">
                         <a href="/admin/logout.php" class="btn btn-default">Logout</a><br><br>
@@ -138,6 +208,8 @@
                 </div>
                 <br><br>
             </div>
+            -->
+            
             <br>
         </div>
     </div>
