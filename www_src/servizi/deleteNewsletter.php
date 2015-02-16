@@ -13,9 +13,12 @@ die("Connection failed: " . $conn->connect_error);
 }
 $sql = "DELETE FROM newsletterusers WHERE email= ('$email')";
 if ($conn->query($sql) === TRUE) {
-echo "New record created successfully";
+  header( "refresh:5;url=newsletter.html" );
+  echo "Utente cancellato con successo!";
 } else {
-echo "Error: " . $sql . "<br>" . $conn->error;
+  header( "refresh:5;url=newsletter.html" );
+  echo "errore: controlla di avere inserito correttamente la mail da rimuovere, o di non esserti già cancellato!";
+//echo "Error: " . $sql . "<br>" . $conn->error;
 }
 $conn->close();
 ?> 
