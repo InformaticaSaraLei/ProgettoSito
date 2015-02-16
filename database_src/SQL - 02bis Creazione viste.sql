@@ -2,16 +2,6 @@ DROP VIEW IF EXISTS `pariopp`.vRSSFEEDS;
 
 CREATE VIEW `pariopp`.vRSSFEEDS
 AS
-/*
-	SELECT
-		ID,
-        "esperienzedonne" AS nometab,
-		"Nuova esperienza di una donna" AS news,
-		concat(nome, ' ', cognome, ": donna da ", RETRIBUZIONE, " - La sua storia: ", MOTIVO_NOTORIETA) AS snippet
-	FROM
-		`pariopp`.esperienzedonne
-UNION
-*/
 	SELECT
 		ID,
 		"opportunitaculturalipersone" AS nometab,
