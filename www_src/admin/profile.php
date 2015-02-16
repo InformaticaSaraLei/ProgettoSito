@@ -33,7 +33,7 @@ if (isset($_SESSION['login'])) {
     <meta name="author" content="">
 
     <title>Login - Informatica sarà lei!</title>
-
+    <link rel="icon" href="../img/loghi-ufficiali/logo_icona.ico" />
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
     <link rel="icon" href="../img/loghi-ufficiali/logo_icona.ico"/>

@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Dashbord</title>
-
+    <link rel="icon" href="../img/loghi-ufficiali/logo_icona.ico" />
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
 
