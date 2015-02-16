@@ -14,7 +14,7 @@ die("Connection failed: " . $conn->connect_error);
 $sql = "DELETE FROM newsletterusers WHERE email= ('$email')";
 if ($conn->query($sql) === TRUE) {
   header( "refresh:5;url=newsletter.html" );
-  echo "Utente cancellato con successo!";
+  echo "Utente cancellato con successo! Tra 5 secondi verrai reindirizzato alla pagina precedente!";
 } else {
   header( "refresh:5;url=newsletter.html" );
   echo "errore: controlla di avere inserito correttamente la mail da rimuovere, o di non esserti già cancellato!";
