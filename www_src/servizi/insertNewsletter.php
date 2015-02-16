@@ -19,11 +19,11 @@ $sql = "INSERT INTO newsletterusers (email) VALUES ('$email')";
 
 if ($conn->query($sql) === TRUE) {
   header( "refresh:5;url=newsletter.html" );
-  echo "Iscrizione effettuata con successo!";
+  echo "Iscrizione effettuata con successo! Tra 5 secondi verrai reindirizzato alla pagina precedente!";
 } else {
   header( "refresh:5;url=newsletter.html" );
   echo "errore: controlla di avere inserito correttamente la tua mail, o di non esserti già iscritto!";
 //echo "Error: " . $sql . "<br>" . $conn->error;
-
+}
 $conn->close();
 ?> 
