@@ -94,7 +94,7 @@ $e = $em->getEventoById($id);
 
         if ($loggato && $isAdmin) {
             echo '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left">
-                         <a href="esito.php?op=canc&id=' . $e->id . '" onclick="return confirm(\'Sei sicuro di voler cancellare questo evento?\');">Elimina evento</a>
+                         <a href="esito.php?op=canc&id=' . $e->id . '" onclick="return confirm(\'Sei sicuro di voler cancellare questo evento?\');"><button type="button" class="btn btn-default">Elimina evento</button></a>
                      </div>';
         }
         ?>
