@@ -1,6 +1,6 @@
 /*
 
-### Se il DB esiste già, cancellare quello esistente (ATTENZIONE):
+### Se il DB esiste già, cancellare quello esistente (CON ATTENZIONE):
 DROP DATABASE IF EXISTS pariopp;
 
 ### Se il DB non esiste, prima dovrò crearlo:
@@ -10,7 +10,7 @@ CREATE DATABASE pariopp
 ### Una volta creato il DB, eseguire in una volta sola TUTTO il codice
 ### presente in questo file (in MySql Workbench, selezionare tutto e poi
 ### immettere da tastiera la combinazione CTRL+SHIFT+ENTER).
-### Il codice commentato ovviamente non verrà eseguito, e la cosa è voluta.
+### Il codice commentato ovviamente non verrà eseguito, e la cosa è deliberatamente voluta.
 */
 
 USE pariopp;
@@ -27,15 +27,6 @@ CREATE TABLE IF NOT EXISTS `pariopp`.`nazioni` (
     
     PRIMARY KEY(ID),
     UNIQUE INDEX nazioni_descrizione (DESCRIZIONE ASC)
-    
-) ENGINE=InnoDB;
-
-
-CREATE TABLE IF NOT EXISTS `pariopp`.`lingue` (
-	ID CHAR(3) NOT NULL,
-    DESCRIZIONE VARCHAR(100) NOT NULL,
-    
-    PRIMARY KEY(ID)
     
 ) ENGINE=InnoDB;
 
@@ -218,24 +209,6 @@ CREATE TABLE IF NOT EXISTS `pariopp`.`media` (
     LASTMOD TIMESTAMP NOT NULL DEFAULT now() ON UPDATE now(),
     
     PRIMARY KEY(ID)
-    
-) ENGINE=InnoDB;
-
-
-CREATE TABLE IF NOT EXISTS `pariopp`.`mediatags` (
-	FK_MEDIA INT UNSIGNED NOT NULL,
-    FK_TAG INT UNSIGNED NOT NULL,
-    
-	PRIMARY KEY(FK_MEDIA, FK_TAG),
-	FOREIGN KEY `FK_mediatags_MEDIA`(`FK_MEDIA` )
-			REFERENCES `pariopp`.`media`(`id`)
-			ON DELETE RESTRICT
-			ON UPDATE CASCADE,
-	FOREIGN KEY `FK_mediatags_TAG`(`FK_TAG` )
-			REFERENCES `pariopp`.`tags`(`id`)
-			ON DELETE RESTRICT
-			ON UPDATE CASCADE
-    
     
 ) ENGINE=InnoDB;
 

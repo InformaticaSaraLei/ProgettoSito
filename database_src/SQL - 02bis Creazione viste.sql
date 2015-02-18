@@ -23,6 +23,7 @@ UNION
 
 
 /*
+//ESEMPIO:
 
 select * from vRSSFEEDS;
 

@@ -35,6 +35,8 @@ COMMIT;
 
 
 /*
+//ESEMPIO:
+
 INSERT INTO `pariopp`.`utenti`
 (`USERNAME`,`PASSWORD`,`NOME`,`COGNOME`,`EMAIL`)
 VALUES ("buc", "aeiou", "Antonio","Bucciol","a@b.c");
