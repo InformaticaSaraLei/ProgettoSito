@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Eventi - Informatica sar� lei!</title>
+    <title>Eventi - Informatica sarà lei!</title>
     <!-- jQuery -->
     <script src="../js/jquery.js"></script>
     <link rel="icon" href="../img/loghi-ufficiali/logo_icona.ico"/>
