@@ -124,7 +124,7 @@ $e = $em->getEventoById($id);
                 <h4><i class="fa fa-fw fa-clock-o"></i>Luogo e date</h4>
             </div>
             <div class="panel-body">
-                Luogo: <?php echo $e->provincia . " " . $e->comune . " " . $e->indirizzo; ?>
+                Luogo: <?php echo $e->comune . " (" . $e->provincia . ") " . $e->indirizzo; ?>
                 <br>
                 Data inizio evento: <?php echo substr($e->inizio, 0, 10); ?> alle
                 ore: <?php echo substr($e->inizio, 10, 6); ?>
