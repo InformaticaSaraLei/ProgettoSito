@@ -18,7 +18,8 @@ if (!$db_selected) {
 
 //seleziono i dati
 
-$selezionedati = "SELECT * FROM vRSSFEEDS ORDER BY data";
+$selezionedati = "SELECT id, nometab, news, snippet, date_format(`data`, '%a, %d %b %Y %H:%i:%s +0100') 
+as `data` FROM vRSSFEEDS";
 
 $query = mysql_query($selezionedati) or die(mysql_error());
 
@@ -40,7 +41,7 @@ while ($array = mysql_fetch_array($query)) {
 		<item>
 			<title><![CDATA[\n" . htmlentities($array['news']) . "\n]]></title>
 			<description><![CDATA[\n<p>" . htmlentities($array['snippet']) . "</p>\n]]></description>
-			<pubDate>" . date('D, d M Y H:i:s O', $array['data']) . "</pubDate>
+			<pubDate>" . $array['data'] . "</pubDate>
 		</item>";
 }
 echo "</channel>\n</rss>\n";
