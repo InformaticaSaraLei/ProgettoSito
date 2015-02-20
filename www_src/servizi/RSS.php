@@ -18,8 +18,8 @@ if (!$db_selected) {
 
 //seleziono i dati
 
-$selezionedati = "SELECT id, nometab, news, snippet, date_format(`data`, '%a, %d %b %Y %H:%i:%s +0100') 
-as `data1` FROM vRSSFEEDS ORDER BY data";
+$selezionedati = "SELECT id, nometab, news, snippet, data, date_format(`data`, '%a, %d %b %Y %H:%i:%s +0100') 
+as `data1` FROM vRSSFEEDS ORDER BY data DESC";
 
 $query = mysql_query($selezionedati) or die(mysql_error());
 
