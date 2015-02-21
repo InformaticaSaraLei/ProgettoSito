@@ -19,8 +19,8 @@ UNION
 		ev.ID,
 		"eventi" AS nometab,
 		"Nuovo evento" AS news,
-		ev.TITOLO AS snippet,
-		date_format(INSERITO_IL, "%Y-%m-%d") AS giorno
+		ev.TITOLO AS snippet
+		DATE_FORMAT(INSERITO_IL, "%Y-%m-%d") AS giorno
 	FROM
 		`pariopp`.agendaeventi ev;
 
