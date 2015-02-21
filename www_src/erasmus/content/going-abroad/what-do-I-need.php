@@ -1,6 +1,6 @@
 <?php
 ?>
-<div class="container modal-body">
+<div class="container">
     <div class="col-xs-12">
         <p>If you are interested in doing Erasmus, contact the international relations office of your home university
             and
