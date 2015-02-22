@@ -195,6 +195,7 @@ if ($_SESSION["odl_class"] == "local") {
 						<div class=\"panel-body\"><span class=\"label label-success pull-right\">Offerta pubblicata su " . $result->source . "</span>
 							<h4>" . strtoupper($result->company) . "<br>" . $result->formattedLocation . "</h4><br>
 							" . $result->snippet . "<br><br>";
+							
 						if($result->contatto_email!="") $content.="
 						<div class=\"input-group\">
 						  <span class=\"input-group-addon label-detail\" id=\"label-detail1\">CONTATTO EMAIL</span>
@@ -281,6 +282,13 @@ if ($_SESSION["odl_class"] == "local") {
 				</div>
 				";
         }
+		if(!$totalResults){
+		  $content.="<br><br><button type=\"button\" class=\"btn btn-warning btn-lg center-block\">
+  <span class=\"glyphicon glyphicon-alert\" aria-hidden=\"true\"></span> Spiacenti: la ricerca effettuata non ha prodotto risultati.
+</button>";
+		}
+		
+		
     }
 
 
