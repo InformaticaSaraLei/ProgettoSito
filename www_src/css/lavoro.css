@@ -52,4 +52,12 @@
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 
+.label-detail { 
+	min-width: 160px;
+	text-align: left;
+	background: #fc4b8e;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
  #SNIPPET_ANNUNCIO {overflow:scroll; max-height:300px}

@@ -179,7 +179,12 @@ if ($_SESSION["odl_class"] == "local") {
             $result->latitude = $offerta["AZIENDA_LATITUDINE"];
             $result->longitude = $offerta["AZIENDA_LONGITUDINE"];
             $result->source = $offerta["FONTE_DESCR"];
-
+			
+			$result->source_link = $offerta["FONTE_LINK"];
+			$result->contatto_tel = $offerta["CONTATTO_TEL"];
+			$result->contatto_fax = $offerta["CONTATTO_FAX"];
+			$result->contatto_email = $offerta["CONTATTO_EMAIL"];
+								
             $content .= "
 				
 					<div class=\"panel panel-default\">
@@ -189,8 +194,29 @@ if ($_SESSION["odl_class"] == "local") {
 						</div>
 						<div class=\"panel-body\"><span class=\"label label-success pull-right\">Offerta pubblicata su " . $result->source . "</span>
 							<h4>" . strtoupper($result->company) . "<br>" . $result->formattedLocation . "</h4><br>
-							" . $result->snippet . "<br>";
-
+							" . $result->snippet . "<br><br>";
+						if($result->contatto_email!="") $content.="
+						<div class=\"input-group\">
+						  <span class=\"input-group-addon label-detail\" id=\"label-detail1\">CONTATTO EMAIL</span>
+						  
+						  <a href=\"mailto:".$result->contatto_email."\"><button type=\"button\" class=\"btn btn-default\">".$result->contatto_email."</button></a>
+						</div>
+						";
+						if($result->contatto_tel!="") $content.="
+						<div class=\"input-group\">
+						  <span class=\"input-group-addon label-detail\" id=\"label-detail2\">CONTATTO TEL.</span>
+						  <button type=\"button\" class=\"btn btn-default\">".$result->contatto_tel."</button>
+						</div>
+						";
+						if($result->contatto_fax!="") $content.="
+						<div class=\"input-group\">
+						  <span class=\"input-group-addon label-detail\" id=\"label-detail3\">CONTATTO FAX</span>
+						  <button type=\"button\" class=\"btn btn-default\">".$result->contatto_fax."</button>
+						</div>
+						";
+				
+				
+				
             if ($_SESSION['admin_mode'])
                 $content .= "
 						 <br>
