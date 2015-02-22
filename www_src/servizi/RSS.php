@@ -42,7 +42,7 @@ while ($array = mysql_fetch_array($query)) {
 			<title><![CDATA[\n" . htmlentities($array['news']) . "\n]]></title>
 			<description><![CDATA[\n<p>" . htmlentities($array['snippet']) . "</p>\n]]></description>
 			<pubDate>" . $array['data1'] . "</pubDate>
-			<link>" . htmlentities($array['Link']) . "</link>
+                        <link><![CDATA[" . $array['Link'] . "]]></link>
 		</item>";
 }
 echo "</channel>\n</rss>\n";
@@ -55,3 +55,4 @@ echo "</channel>\n</rss>\n";
 </a>
 
 -->
+<!--<link><![CDATA[" . str_replace( '[SRV_ADDR]',$_SERVER['HTTP_HOST'],$array['Link']) . "]]</link> -->
