@@ -18,7 +18,7 @@ AS
         ol.DATA_INSERIMENTO AS data,
 	ol.FONTE_LINK as Link
     from
-        pariopp.offertelavoro ol
+	pariopp.offertelavoro ol
         left join pariopp.nazioni n ON ol.FK_NAZIONE = n.ID 
     union select 
         ev.ID AS ID,
@@ -26,7 +26,7 @@ AS
         concat('Nuovo evento: ',TITOLO) AS news,
         ev.CONTENUTO AS snippet,
         date_format(ev.INSERITO_IL, '%Y-%m-%d') AS giorno,
-	concat('http://[SRV_ADDR]/eventi/paginaEvento.php?id=',ev.ID) as Link
+		concat((SELECT GET_WEBSITE_URI()), '/eventi/paginaEvento.php?id=',ev.ID) as Link
     from
         pariopp.agendaeventi ev;
 
