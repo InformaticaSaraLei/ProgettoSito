@@ -4,8 +4,14 @@ require_once("lib/userscontroller.php");
 
 session_start();
 
-?>
+if (isset($_POST['login'])) {
+    $newuser = new UsersController();
+    $newuser->LoginUser();
+}
 
+
+if (!isset($_SESSION['login'])) { 
+?>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -70,11 +76,7 @@ session_start();
     <!-- Content Row -->
     <div class="row">
         <div class="col-lg-12">
-            <?php
-            if (!isset($_SESSION['login'])) {
-                echo '
             <h2>Effettua il login:</h2>
- 
             <form action="login.php" method="POST">
                 <table>
                     <tr>
@@ -91,14 +93,6 @@ session_start();
                     </tr>
                 </table>
             </form>
-            ';
-            } else {
-                // Redirect al pannello di amministrazione
-                header("Location: dashboard.php");
-                die();
-            }
-
-            ?>
         </div>
     </div>
     <!-- /.row -->
@@ -123,14 +117,11 @@ session_start();
 </body>
 
 </html>
-
-
-<?php
-
-if (isset($_POST['login'])) {
-    $newuser = new UsersController();
-    $newuser->LoginUser();
-}
-
+<?php           
+    } else {
+        // Redirect al pannello di amministrazione
+        header("Location: dashboard.php");
+        die();
+    }
 ?>
 
